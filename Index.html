@@ -112,7 +112,7 @@
 
                 <div id="card" class="card">
                     <div id="back" class="face"><img src="imagens/pngkit_pokemon-card-png_2416981.png" class="back_card"></div>
-                    <div id="front" class="face"><img src="imagens/Lycanroc_GX.png" class="Lycanroc_GX"></div>
+                    <div id="front" class="face"><img src="imagens/Lycanroc_GX.png" class="Lycanroc_GX" id="poke_card"></div>
                 </div>
             </section>
             <img src="imagens/raridades.png" alt="" class="raridades">
@@ -178,8 +178,25 @@
         window.location.href = "https://tcg.pokemon.com/pt-br/top-deck-academy/"
     }
     const card = document.querySelector("#card")
-    function girar_carta() {
-    card.classList.toggle("flip")
-    }
-    setInterval(girar_carta, 5000)
+    var contador = 0
+
+    setInterval(function() {
+        card.classList.toggle("flip")
+        setTimeout(function() {
+            if (contador % 4 == 1 ) {
+                poke_card.setAttribute('src', 'imagens/Lycanroc_GX.png')
+                poke_card.setAttribute('class', 'Lycanroc_GX')
+            } else if (contador % 4 == 2) {
+                poke_card.setAttribute('src', 'imagens/Tapu_lele.png')
+                poke_card.setAttribute('class', 'outra_carta')
+            } else if (contador % 4 == 3) {
+                poke_card.setAttribute('src', 'imagens/Cynthia_full_art.png')
+                poke_card.setAttribute('class', 'outra_carta')
+            } else {
+                poke_card.setAttribute('src', 'imagens/Mewtwo_GX.png')
+                poke_card.setAttribute('class', 'Lycanroc_GX')
+            }
+            contador++  
+        }, 1000)
+    }, 3000)
 </script>
