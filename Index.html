@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My CardDex | Home</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <div class="menu_log">
+        <ul class="lista_log">
+            <li><a href="">ENTRAR</a></li>
+            <li>|</li>
+            <li><a href="">CADASTRAR</a></li>
+        </ul>
+    </div>
+    <header>
+        <div class="container">
+            <img src="imagens/Logo_pokemon.png" alt="" onclick="redirecionar_home()">
+            <ul class="navbar">
+                <li><a href="#div_secao_sobre">Sobre</a></li>
+                <li><a href="#div_secao_ferramenta">Como funciona</a></li>
+                <li><a href="#div_secao_raridade">Cartas raras</a></li>
+                <li><a href="#div_secao_colecoes">Coleções lançadas</a></li>
+            </ul>
+        </div>
+    </header>
+    <div class="banner">
+        <div class="container">
+            <h1>Conheça a sua nova ferramenta para gerenciar sua coleção de cartas</h1>
+            <h3>Com o nosso gerenciador ficou muito mais fácil colecionar e montar decks fortes para jogar com seus
+                amigos e competitivamente!</h3>
+            <button onclick="redirecionar_ferramenta()">Saiba mais</button>
+        </div>
+    </div>
+    <div class="secao_sobre cima" id="div_secao_sobre">
+        <div class="container">
+            <img src="imagens/pokebola_carta.png" alt="">
+            <div class="conteudo_lateral">
+                <h1>O que é Pokémon TCG?</h1>
+                <hr>
+                <h4>Nullam mollis urna sed nibh dignissim, quis rhoncus erat interdum. Etiam eget elit dolor. Integer et
+                    enim dolor. Mauris tempor at tellus at congue. Proin vel pellentesque quam, at tincidunt dui.
+                    Vestibulum
+                    blandit nibh ipsum, ut malesuada ante tincidunt a. Sed et posuere sapien. Quisque feugiat ante non
+                    semper ultricies. Sed auctor turpis arcu, vitae volutpat nisi volutpat at. Nulla id nulla ac quam
+                    scelerisque pretium. Suspendisse sit amet turpis consectetur, sagittis nulla ac, vehicula purus.
+                    Etiam
+                    non convallis felis. Aenean fringilla maximus libero, at lobortis justo tempus eget. Vestibulum a
+                    augue
+                    sit amet dolor mattis consequat. </h4>
+            </div>
+        </div>
+    </div>
+    <div class="secao_sobre baixo">
+        <div class="container">
+            <div class="conteudo_lateral">
+                <h1>Aprenda a jogar
+                    com a Academia de Baralho Campeão</h1>
+                <hr>
+                <h4>Assista aos vídeos para aprender os fundamentos do pokemon TCG. Não importa se você é um jogador
+                    iniciante ou um jogador mais avançado. Sempre a muito a aprender!</h4>
+                <button onclick="redirecionar_aulas()">
+                    ASSISTA AGORA!
+                </button>
+            </div>
+            <img src="imagens/pikachu_giz.png" alt="">
+        </div>
+    </div>
+    <div class="secao_ferramenta" id="div_secao_ferramenta">
+        <img src="imagens/Pokemons_pixels.png" alt="">
+        <div class="texto_lateral">
+            <h1>Gerenciador de coleções e decks</h1>
+            <hr>
+            <p> Devido ao grande volume a variedade de cartas existentes e ao acúmulo de cartas repetidas nas coleções
+                fica difícil para os jogadores se organizarem e acharem cartas específicas que estão procurando. A
+                situação piora pois pela falta de organização fica difícil montar decks bons e eficientes para jogar</p>
+            <p>
+                Portando nós criamos uma ferramenta gratúita onde o jogador pode registrar suas cartas, montar decks,
+                visualizar a progreção da quantidade de cartas restantes em um set/geração e procurar por cartas
+                específicas
+            </p>
+            <button onclick="redirecionar_cadastro()">Cadastre-se e experimente!</button>
+        </div>
+    </div>
+
+    <div class="secao_raridade" id="div_secao_raridade">
+        <div class="container">
+            <section class="texto_e_carta">
+                <div class="texto_raridade">
+                    <h1>Raridade das cartas</h1>
+                    <hr>
+                    <p>Nullam mollis urna sed nibh dignissim, quis rhoncus erat interdum. Etiam eget elit dolor. Integer
+                        et
+                        enim dolor. Mauris tempor at tellus at congue. Proin vel pellentesque quam, at tincidunt dui.
+                        Vestibulum
+                        blandit nibh ipsum, ut malesuada ante tincidunt a. Sed et posuere sapien. Quisque feugiat ante
+                        non
+                        semper ultricies. Sed auctor turpis arcu, vitae volutpat nisi volutpat at. Nulla id nulla ac
+                        quam
+                        scelerisque pretium. Suspendisse sit amet turpis consectetur, sagittis nulla ac, vehicula purus.
+                        Etiam
+                        non convallis felis. Aenean fringilla maximus libero, at lobortis justo tempus eget. Vestibulum
+                        a
+                        augue
+                        sit amet dolor mattis consequat. </p>
+                    <img src="" alt="">
+                </div>
+
+                <div id="card" class="card">
+                    <div id="back" class="face"><img src="imagens/pngkit_pokemon-card-png_2416981.png" class="back_card"></div>
+                    <div id="front" class="face"><img src="imagens/Lycanroc_GX.png" class="Lycanroc_GX"></div>
+                </div>
+            </section>
+            <img src="imagens/raridades.png" alt="" class="raridades">
+        </div>
+    </div>
+    <div class="secao_colecoes" id="div_secao_colecoes">
+        <div class="container">
+            <h1>Gerações, séries e sets</h1>
+            <div class="select_img">
+                <img src="imagens/sun&moon.png" alt="">
+                <h2>Sun & Moon</h2>
+            </div>
+            <img src="imagens/Linha do tempo.png" alt="" class="linha_do_tempo">
+            <div class="icones_colecoes">
+                <img src="imagens/icone_s&m.png" alt="" id="isunmoon">
+                <img src="imagens/icone_prisma.png" alt="" id="iprisma">
+                <img src="imagens/icone_burning.png" alt="" id="iburning">
+                <img src="imagens/icone_v.png" alt="" id="iv">
+                <img src="imagens/asa_icone.png" alt="" id="iasa">
+                <img src="imagens/icone_prismatico.png" alt="" id="iprismatico">
+                <img src="imagens/icone_crisis.png" alt="" id="icrisis">
+                <img src="imagens/icone_bola.png" alt="" id="ibola">
+                <img src="imagens/icone_dragao.png" alt="" id="idragao">
+                <img src="imagens/icone_thunder.png" alt="" id="ithunder">
+                <img src="imagens/icone_bonds.png" alt="" id="ibonds">
+                <img src="imagens/icone_planta.png" alt="" id="iplanta">
+                <img src="imagens/icone_bonds_2.png" alt="" id="ibonds_2">
+                <img src="imagens/icone_shiny.png" alt="" id="ishiny">
+                <img src="imagens/icone_hexagono.png" alt="" id="ihexagono">
+            </div>
+            <div class="colecao_detalhe">
+                <img src="imagens/icone_s&m.png" alt="">
+                <h2>Coleção Sun & Moon - Estampas Ilustradas</h2>
+            </div>
+            <div class="texto_detalhe">
+                <p>Nullam mollis urna sed nibh dignissim, quis rhoncus erat interdum. Etiam eget elit dolor. Integer et
+                    enim dolor. Mauris tempor at tellus at congue. Proin vel pellentesque quam, at tincidunt dui.
+                    Vestibulum blandit nibh ipsum, ut malesuada ante tincidunt a. Sed et posuere sapien. Quisque feugiat
+                    ante non semper ultricies. Sed auctor turpis arcu, vitae volutpat nisi volutpat at. Nulla id nulla
+                    ac quam scelerisque pretium. Suspendisse sit amet turpis consectetur, sagittis nulla ac, vehicula
+                    purus. Etiam non convallis felis. Aenean fringilla maximus libero, at lobortis justo tempus eget.
+                    Vestibulum a augue sit amet dolor mattis consequat. </p>
+                    <img src="imagens/Banner_S&M.png" alt="">
+            </div>
+        </div>
+    </div>
+    <footer>
+    </footer>
+</body>
+
+</html>
+<script>
+    function redirecionar_home() {
+        window.location.href = "index.html"
+    }
+    function redirecionar_cadastro() {
+        window.location.href = "Login_Cadastro.html"
+    }
+    function redirecionar_ferramenta() {
+        Window.location.href = "#secao_ferramenta"
+    }
+    function redirecionar_aulas() {
+        window.location.href = "https://tcg.pokemon.com/pt-br/top-deck-academy/"
+    }
+    const card = document.querySelector("#card")
+    function girar_carta() {
+    card.classList.toggle("flip")
+    }
+    setInterval(girar_carta, 5000)
+</script>
