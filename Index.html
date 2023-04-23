@@ -111,8 +111,10 @@
                 </div>
 
                 <div id="card" class="card">
-                    <div id="back" class="face"><img src="imagens/pngkit_pokemon-card-png_2416981.png" class="back_card"></div>
-                    <div id="front" class="face"><img src="imagens/Lycanroc_GX.png" class="Lycanroc_GX" id="poke_card"></div>
+                    <div id="back" class="face"><img src="imagens/pngkit_pokemon-card-png_2416981.png"
+                            class="back_card"></div>
+                    <div id="front" class="face"><img src="imagens/Lycanroc_GX.png" class="Lycanroc_GX" id="poke_card">
+                    </div>
                 </div>
             </section>
             <img src="imagens/raridades.png" alt="" class="raridades">
@@ -127,35 +129,34 @@
             </div>
             <img src="imagens/Linha do tempo.png" alt="" class="linha_do_tempo">
             <div class="icones_colecoes">
-                <img src="imagens/icone_s&m.png" alt="" id="isunmoon">
-                <img src="imagens/icone_prisma.png" alt="" id="iprisma">
-                <img src="imagens/icone_burning.png" alt="" id="iburning">
-                <img src="imagens/icone_v.png" alt="" id="iv">
-                <img src="imagens/asa_icone.png" alt="" id="iasa">
-                <img src="imagens/icone_prismatico.png" alt="" id="iprismatico">
-                <img src="imagens/icone_crisis.png" alt="" id="icrisis">
-                <img src="imagens/icone_bola.png" alt="" id="ibola">
-                <img src="imagens/icone_dragao.png" alt="" id="idragao">
-                <img src="imagens/icone_thunder.png" alt="" id="ithunder">
-                <img src="imagens/icone_bonds.png" alt="" id="ibonds">
-                <img src="imagens/icone_planta.png" alt="" id="iplanta">
-                <img src="imagens/icone_bonds_2.png" alt="" id="ibonds_2">
-                <img src="imagens/icone_shiny.png" alt="" id="ishiny">
-                <img src="imagens/icone_hexagono.png" alt="" id="ihexagono">
+                <img src="imagens/icone_s&m.png" alt="" id="isunmoon" onmouseover="sun_moon()">
+                <img src="imagens/icone_prisma.png" alt="" id="iprisma" onmouseover="guardians_risng()">
+                <img src="imagens/icone_burning.png" alt="" id="iburning" onmouseover="burning_shadows()">
+                <img src="imagens/icone_v.png" alt="" id="iv" onmouseover="shining_legends()">
+                <img src="imagens/asa_icone.png" alt="" id="iasa" onmouseover="crimson_invasion()">
+                <img src="imagens/icone_prismatico.png" alt="" id="iprismatico" onmouseover="ultra_prism()">
+                <img src="imagens/icone_crisis.png" alt="" id="icrisis" onmouseover="forbidden_light()">
+                <img src="imagens/icone_bola.png" alt="" id="ibola" onmouseover="celestial_storm()">
+                <img src="imagens/icone_dragao.png" alt="" id="idragao" onmouseover="dragon_majesty()">
+                <img src="imagens/icone_thunder.png" alt="" id="ithunder" onmouseover="lost_thunder()">
+                <img src="imagens/icone_bonds.png" alt="" id="ibonds" onmouseover="team_up()">
+                <img src="imagens/icone_planta.png" alt="" id="iplanta" onmouseover="unbroken_bonds()">
+                <img src="imagens/icone_bonds_2.png" alt="" id="ibonds_2" onmouseover="unified_minds()">
+                <img src="imagens/icone_shiny.png" alt="" id="ishiny" onmouseover="shiny_vault()">
+                <img src="imagens/icone_hexagono.png" alt="" id="ihexagono" onmouseover="cosmic_eclipse()">
             </div>
-            <div class="colecao_detalhe">
+            <div class="colecao_detalhe" id="div_colecao_detalhe">
                 <img src="imagens/icone_s&m.png" alt="">
-                <h2>Coleção Sun & Moon - Estampas Ilustradas</h2>
+                <h2>Coleção Sun & Moon - SM1</h2>
             </div>
-            <div class="texto_detalhe">
-                <p>Nullam mollis urna sed nibh dignissim, quis rhoncus erat interdum. Etiam eget elit dolor. Integer et
-                    enim dolor. Mauris tempor at tellus at congue. Proin vel pellentesque quam, at tincidunt dui.
-                    Vestibulum blandit nibh ipsum, ut malesuada ante tincidunt a. Sed et posuere sapien. Quisque feugiat
-                    ante non semper ultricies. Sed auctor turpis arcu, vitae volutpat nisi volutpat at. Nulla id nulla
-                    ac quam scelerisque pretium. Suspendisse sit amet turpis consectetur, sagittis nulla ac, vehicula
-                    purus. Etiam non convallis felis. Aenean fringilla maximus libero, at lobortis justo tempus eget.
-                    Vestibulum a augue sit amet dolor mattis consequat. </p>
-                    <img src="imagens/Banner_S&M.png" alt="">
+            <div class="texto_detalhe" id="div_texto_detalhe">
+                <p id="ptxt">The battles heat up with Pokémon from the tropical Alola region in the Pokémon TCG: Sun & Moon
+                    expansion. Start your journey with Rowlet, Litten, and Popplio, then seek out the Legendary Pokémon
+                    Solgaleo-GX and Lunala-GX to witness the awesome power of a new kind of Pokémon: each Pokémon-GX
+                    brings an attack so devastating that you can use only one of them per game. Discover dozens of
+                    never-before-seen Pokémon, Alola forms of some familiar favorites, and new ways to battle in the
+                    Pokémon TCG: Sun & Moon expansion. </p>
+                <img src="imagens/Banner_S&M.png" alt="" id="img_banner_detalhe">
             </div>
         </div>
     </div>
@@ -180,10 +181,10 @@
     const card = document.querySelector("#card")
     var contador = 0
 
-    setInterval(function() {
+    setInterval(function () {
         card.classList.toggle("flip")
-        setTimeout(function() {
-            if (contador % 4 == 1 ) {
+        setTimeout(function () {
+            if (contador % 4 == 1) {
                 poke_card.setAttribute('src', 'imagens/Lycanroc_GX.png')
                 poke_card.setAttribute('class', 'Lycanroc_GX')
             } else if (contador % 4 == 2) {
@@ -196,7 +197,125 @@
                 poke_card.setAttribute('src', 'imagens/Mewtwo_GX.png')
                 poke_card.setAttribute('class', 'Lycanroc_GX')
             }
-            contador++  
+            contador++
         }, 1000)
-    }, 3000)
+    }, 5000)
+    var sm1 = div_colecao_detalhe.innerHTML
+    function sun_moon() {
+        div_colecao_detalhe.innerHTML = sm1
+        img_banner_detalhe.setAttribute('src', 'imagens/Banner_S&M.png')
+        ptxt.innerHTML = `The battles heat up with Pokémon from the tropical Alola region in the Pokémon TCG: Sun & Moon
+                    expansion. Start your journey with Rowlet, Litten, and Popplio, then seek out the Legendary Pokémon
+                    Solgaleo-GX and Lunala-GX to witness the awesome power of a new kind of Pokémon: each Pokémon-GX
+                    brings an attack so devastating that you can use only one of them per game. Discover dozens of
+                    never-before-seen Pokémon, Alola forms of some familiar favorites, and new ways to battle in the
+                    Pokémon TCG: Sun & Moon expansion.
+            `
+    }
+    function guardians_risng() {
+        div_colecao_detalhe.innerHTML = `
+        <img src="imagens/icone_prisma.png">
+        <h2>Coleção Guardiões Ascendentes - SM2</h2>
+        `
+        img_banner_detalhe.setAttribute('src', 'https://cdn-cardmavin.mavin.io/wp-content/uploads/2018/07/pokemon-sun-and-moon-guardians-rising-set-list-1024x171.jpg')
+        ptxt.innerHTML = `Visit Alola for Pokémon fun, from the beaches to the mountain
+             peaks—and discover new traditions and new challenges! Meet the island guardians Tapu Koko-GX
+            and Tapu Lele-GX , and sharpen your skills with Kahuna Hala and Captain Mallow! Be amazed by the
+             secret powers of Kommo-o-GX , Lycanroc-GX , Metagross-GX , Sylveon-GX , Toxapex-GX , Vikavolt-GX ,
+              and many more! Come to the islands, and seize the power of the Pokémon TCG: Sun & Moon—Guardians Rising 
+              expansion!
+            `
+    }
+    function burning_shadows() {
+        div_colecao_detalhe.innerHTML = `
+        <img src="imagens/icone_burning.png">
+        <h2>Coleção Sombras ardentes - SM3</h2>
+        `
+        img_banner_detalhe.setAttribute('src', 'https://cdn-cardmavin.mavin.io/wp-content/uploads/2018/07/pokemon-sun-and-moon-burning-shadows-set-list-1024x171.jpg')
+    }
+    function shining_legends() {
+        div_colecao_detalhe.innerHTML = `
+        <img src="imagens/icone_v.png">
+        <h2>Coleção Lendas Luminecentes - SM4</h2>
+        `
+        img_banner_detalhe.setAttribute('src', 'https://cdn-cardmavin.mavin.io/wp-content/uploads/2018/07/pokemon-sun-and-moon-shining-legends-set-list-1024x171.jpg')
+    }
+    function crimson_invasion() {
+        div_colecao_detalhe.innerHTML = `
+        <img src="imagens/asa_icone.png">
+        <h2>Coleção Invasão Carmesin - SM5</h2>
+        `
+        img_banner_detalhe.setAttribute('src', 'https://cdn-cardmavin.mavin.io/wp-content/uploads/2018/07/pokemom-sun-and-moon-crimson-invasion-set-1024x171.jpg')
+    }
+    function ultra_prism() {
+        div_colecao_detalhe.innerHTML = `
+        <img src="imagens/icone_prismatico.png">
+        <h2>Coleção Ultra Prisma - SM6</h2>
+        `
+        img_banner_detalhe.setAttribute('src', 'https://cdn-cardmavin.mavin.io/wp-content/uploads/2018/07/pokemom-sun-and-moon-ultra-prism-set-1024x171.jpg')
+    }
+    function forbidden_light() {
+        div_colecao_detalhe.innerHTML = `
+        <img src="imagens/icone_crisis.png">
+        <h2>Coleção Luz Proibida - SM7</h2>
+        `
+        img_banner_detalhe.setAttribute('src', 'https://cdn-cardmavin.mavin.io/wp-content/uploads/2018/07/pokemom-sun-and-moon-forbidden-light-expansion-set-1024x171.jpg')
+    }
+    function celestial_storm() {
+        div_colecao_detalhe.innerHTML = `
+        <img src="imagens/icone_bola.png">
+        <h2>Coleção Tempestade Celestial - SM8</h2>
+        `
+        img_banner_detalhe.setAttribute('src', 'https://cdn-cardmavin.mavin.io/wp-content/uploads/2018/08/pokemon-sun-moon-celestial-storm-set-list-1024x171.jpg')
+    }
+    function dragon_majesty() {
+        div_colecao_detalhe.innerHTML = `
+        <img src="imagens/icone_dragao.png">
+        <h2>Coleção Dragões Soberanos- SM9</h2>
+        `
+        img_banner_detalhe.setAttribute('src', 'https://cdn-cardmavin.mavin.io/wp-content/uploads/2018/09/pokemon-dragon-majesty-set-1024x171.jpg')
+    }
+    function lost_thunder() {
+        div_colecao_detalhe.innerHTML = `
+        <img src="imagens/icone_thunder.png">
+        <h2>Coleção Trovões Perdidos - SM10</h2>
+        `
+        img_banner_detalhe.setAttribute('src', 'https://cdn-cardmavin.mavin.io/wp-content/uploads/2018/10/pokemon-lost-thunder-set-1024x171.jpg')
+    }
+    function team_up() {
+        div_colecao_detalhe.innerHTML = `
+        <img src="imagens/icone_bonds.png">
+        <h2>Coleção União de Aliados - SM11</h2>
+        `
+        img_banner_detalhe.setAttribute('src', 'https://cdn-cardmavin.mavin.io/wp-content/uploads/2019/01/pokemon-team-up-set-1024x171.jpg')
+    }
+    function unbroken_bonds() {
+        div_colecao_detalhe.innerHTML = `
+        <img src="imagens/icone_planta.png">
+        <h2>Coleção Elos Inquebráveis - SM12</h2>
+        `
+        img_banner_detalhe.setAttribute('src', 'https://cdn-cardmavin.mavin.io/wp-content/uploads/2019/04/pokemon-unbroken-bonds-set-list-1024x171.jpg')
+    }
+    function unified_minds() {
+        div_colecao_detalhe.innerHTML = `
+        <img src="imagens/icone_bonds_2.png">
+        <h2>Coleção Sintonia Mental - SM13</h2>
+        `
+        img_banner_detalhe.setAttribute('src', 'https://cdn-cardmavin.mavin.io/wp-content/uploads/2019/07/pokemon-unified-minds-set-list-and-set-symbol-1024x171.jpg')
+
+    }
+    function shiny_vault() {
+        div_colecao_detalhe.innerHTML = `
+        <img src="imagens/icone_shiny.png">
+        <h2>Coleção Destinos Ocultos - SM14</h2>
+        `
+        img_banner_detalhe.setAttribute('src', 'https://cdn-cardmavin.mavin.io/wp-content/uploads/2019/09/pokemon-hidden-fates-set-list-1024x171.jpg')
+    }
+    function cosmic_eclipse() {
+        div_colecao_detalhe.innerHTML = `
+        <img src="imagens/icone_hexagono.png">
+        <h2>Coleção Eclípse Cósmico- SM15</h2>
+        `
+        img_banner_detalhe.setAttribute('src', 'https://cdn-cardmavin.mavin.io/wp-content/uploads/2019/12/pokemon-cosmic-eclipse-set-1024x171.jpg')
+    }
 </script>
