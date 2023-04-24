@@ -111,9 +111,10 @@
                 </div>
 
                 <div id="card" class="card">
-                    <div id="back" class="face"><img src="imagens/pngkit_pokemon-card-png_2416981.png"
+                    <div id="back" class="face sumiu" data-tilt><img src="imagens/pngkit_pokemon-card-png_2416981.png"
                             class="back_card"></div>
-                    <div id="front" class="face"><img src="imagens/Lycanroc_GX.png" class="Lycanroc_GX" id="poke_card">
+                    <div id="front" class="face" data-tilt ><img
+                            src="imagens/Lycanroc_GX.png" class="Lycanroc_GX" id="poke_card">
                     </div>
                 </div>
             </section>
@@ -150,7 +151,8 @@
                 <h2>Coleção Sun & Moon - SM1</h2>
             </div>
             <div class="texto_detalhe" id="div_texto_detalhe">
-                <p id="ptxt">The battles heat up with Pokémon from the tropical Alola region in the Pokémon TCG: Sun & Moon
+                <p id="ptxt">The battles heat up with Pokémon from the tropical Alola region in the Pokémon TCG: Sun &
+                    Moon
                     expansion. Start your journey with Rowlet, Litten, and Popplio, then seek out the Legendary Pokémon
                     Solgaleo-GX and Lunala-GX to witness the awesome power of a new kind of Pokémon: each Pokémon-GX
                     brings an attack so devastating that you can use only one of them per game. Discover dozens of
@@ -165,7 +167,9 @@
 </body>
 
 </html>
+<script type="text/javascript" src="js/vanilla-tilt.js"></script>
 <script>
+
     function redirecionar_home() {
         window.location.href = "index.html"
     }
@@ -178,11 +182,23 @@
     function redirecionar_aulas() {
         window.location.href = "https://tcg.pokemon.com/pt-br/top-deck-academy/"
     }
+
+
+    VanillaTilt.init(document.querySelectorAll(".face"), {
+        max: 25,
+        speed: 400,
+    });
+
     const card = document.querySelector("#card")
+
     var contador = 0
 
     setInterval(function () {
+        setTimeout(function() {
+            back.classList.toggle("sumiu")
+        }, 500)
         card.classList.toggle("flip")
+        
         setTimeout(function () {
             if (contador % 4 == 1) {
                 poke_card.setAttribute('src', 'imagens/Lycanroc_GX.png')
@@ -199,7 +215,12 @@
             }
             contador++
         }, 1000)
+        setTimeout(function() {
+            back.classList.toggle("sumiu")
+        }, 1400)
     }, 5000)
+
+
     var sm1 = div_colecao_detalhe.innerHTML
     function sun_moon() {
         div_colecao_detalhe.innerHTML = sm1
@@ -318,4 +339,5 @@
         `
         img_banner_detalhe.setAttribute('src', 'https://cdn-cardmavin.mavin.io/wp-content/uploads/2019/12/pokemon-cosmic-eclipse-set-1024x171.jpg')
     }
+
 </script>

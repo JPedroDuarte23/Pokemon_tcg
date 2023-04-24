@@ -316,7 +316,6 @@ button {
   position: fixed;
   width: auto;
   height: auto;
-  max-width: 70%;
 }
 .Lycanroc_GX {
   width: 292.5px;
@@ -328,11 +327,14 @@ button {
   padding-top: 4.8%;
 }
 #front {
+  transform: translateY(0deg);
   backface-visibility: hidden;
 }
 #back {
   transform: rotateY(180deg);
-
+}
+.sumiu {
+  opacity: 0;
 }
 .flip {
   transform: rotateY(360deg);
@@ -340,6 +342,9 @@ button {
 .outra_carta {
   width: 292.5px;
   height: 380px;
+}
+.card:hover {
+  animation-play-state: paused;
 }
 /*Seção colecões*/
 
