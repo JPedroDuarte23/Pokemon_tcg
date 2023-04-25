@@ -15,6 +15,14 @@ html {
 button {
   cursor: pointer;
 }
+.botao_especial:hover {
+  background-color: #FFCB05;
+  transition: background-color 0.5s;
+  color: black;
+}
+.botao_especial i {
+  margin-left: 2%;
+}
 .container {
     display: flex;
     width: 80%;
@@ -96,7 +104,7 @@ button {
   
   .navbar li a {
     display: block;
-    color: white;
+    color: #FFCB05;
     text-decoration: none;
     font-size: 1.5vw;
     font-weight: 500;
@@ -298,13 +306,14 @@ button {
 }
 .raridades {
   width: 50%;
+  margin-top: 5%;
 }
 
 #card {
   display: flex;
   justify-content: center;
   transform-style: preserve-3d;
-  transition: all 3s;
+  transition: all 1.5s;
   width: 40%;
   margin-top: 5%;
 }
@@ -314,24 +323,36 @@ button {
   align-items: center;
   color: white;
   position: fixed;
-  width: auto;
-  height: auto;
+  width: 270px;
+  height: 370px;
+  border-radius: 20px;
 }
 .Lycanroc_GX {
   width: 292.5px;
   height: 380px;
 }
+.Tapu_lele_GX {
+  width: 330px;
+  height: 380px;
+}
+.Mewtwo_GX {
+  width: 282.5px;
+  height: 370px;
+}
+.Cynthia {
+  width: 292.5px;
+  height: 380px;
+}
+
 .back_card {
   width: 262.5px;
   height: 367.5px;
   padding-top: 4.8%;
+  transform: rotateY(180deg);
 }
 #front {
   transform: translateY(0deg);
   backface-visibility: hidden;
-}
-#back {
-  transform: rotateY(180deg);
 }
 .sumiu {
   opacity: 0;
@@ -339,10 +360,7 @@ button {
 .flip {
   transform: rotateY(360deg);
 }
-.outra_carta {
-  width: 292.5px;
-  height: 380px;
-}
+
 .card:hover {
   animation-play-state: paused;
 }
@@ -435,6 +453,7 @@ button {
   align-items: center;
   width: 100%;
   margin: 10% 0 3% 0;
+  overflow: hidden;
 }
 .colecao_detalhe img {
   width: 65px;
@@ -448,12 +467,25 @@ button {
   width: 80%;
   font-size: 1.8vw;
   font-weight: lighter;
+  overflow: hidden;
 }
 .texto_detalhe img {
   margin-top: 8%;
   width: 100%;
 }
-
+.transicao {
+  animation: subir 0.8s ease-in-out forwards;
+}
+@keyframes subir {
+  0% {
+    transform: translateY(200px);
+    opacity: 0
+  }
+  100% {
+    transform: translateY(0px);
+    opacity: 1;
+  }
+}
 /* Footer */
 
 footer {
