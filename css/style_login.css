@@ -1,0 +1,235 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    width: 100%;
+    height: 100vh;
+    font-family: Inter;
+    background: linear-gradient(180deg, #0F0E3C 0.52%, #111129 35.11%, #110421 72.4%, #1C0539 97.4%) fixed;
+}
+html {
+  scroll-behavior: smooth;
+}
+button {
+  cursor: pointer;
+}
+.botao_especial:hover {
+  background-color: #FFCB05;
+  transition: background-color 0.5s;
+  color: black;
+}
+.container {
+    display: flex;
+    width: 80%;
+    padding: auto;
+    margin: auto;
+    box-sizing: border-box;
+  }
+  
+  .menu_log {
+    display: flex;
+    background-color: black;
+    height: 3.5vh;
+    
+  }
+  header {
+    height: auto;
+    display: flex;
+    align-items: center;
+    padding-bottom: 0.5%;
+    background-color: white;
+    border-bottom: 3px solid #4639DB;
+  }
+  
+  header .container {
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .navbar {
+    position: relative;
+    list-style-type: none;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: auto;
+    max-height: 100px;
+    gap: 1.5vw;
+    overflow: hidden;
+    margin: 0;
+    text-align: center;
+
+  }
+  
+  @media only screen and (min-width: 768px) {
+    .navbar {
+      flex-direction: row;
+      align-items: center;
+      width: auto;
+    }
+  }
+  
+  .navbar li {
+    height: 100%;
+    min-height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 180px;
+    padding: 4% 0%;
+  }
+  
+  .navbar li a {
+    display: block;
+    color: black;
+    text-decoration: none;
+    font-size: 1.5vw;
+    font-weight: 500;
+    padding: 0% 5%;
+    font-family: "Montserrat Ace Medium";
+  }
+
+  .navbar a:hover {
+    font-weight: 600;
+    text-align: center;
+    color: #FFCB05;
+  }
+
+  /*Seção formulários */
+  .section {
+    width: auto;
+    height: auto;
+  }
+  .secao_form {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+  form {
+    background-color: white;
+    width: 35%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 3% 2.5%;
+    border-radius: 5px;
+  }
+  .entrar {
+    margin-right: 10%;
+  }
+  .cadastro {
+    margin-left: 10%;
+  }
+  form h1 {
+    margin-bottom: 1%;
+    text-align: center;
+    font-size: 28px;
+    font-family: 'Montserrat Ace SemiBold';
+  }
+   form hr {
+    margin-bottom: 7%;
+    border-color: black;
+    width: 30%;
+    margin: auto auto 7% auto;
+  }
+   form input {
+    margin: 3% 0 5% 5%;
+    padding: 1.5%;
+    font-size: 15px;
+    border-radius: 2px;
+    background-color: #d9d9d9;
+    border: none;
+  }
+  form label {
+    font-weight: bold;
+    font-size: 18px;
+  }
+  form button {
+    width: 35%;
+    margin: 5% auto 0 auto;
+    padding: 5% 0;
+    font-size: 20px;
+    font-weight: 500;
+    border: none;
+    border-radius: 10px;
+    background-color: #252525;
+    color: white;
+  }
+
+  /* Bloco cobrir */
+
+  .bloco {
+    width: 53%;
+    position: absolute;
+    height: 100vh;
+    background-color: white;
+    background: linear-gradient(180deg, #4639DB 0%, #339FEE 100%);
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 10%;
+  }
+  .bloco h1 {
+    font-weight: 600;
+    font-size: 40px;
+    text-align: center;
+    color: white;
+    font-family: 'Montserrat Ace Medium';
+  }
+  .bloco button {
+    width: 30%;
+    margin: 20% 0;
+    padding: 4% 0;
+    font-family: 'Montserrat Ace Medium';
+    font-size: 26px;
+    font-weight: 600;
+    border: none;
+    border-radius: 10px;
+    background-color: white;
+    color: black;
+  }
+  /* Animações  bloco*/
+
+  @keyframes esquerda {
+    0% {
+      transform: translateX(88.7%);
+    }
+  
+    100% {
+      transform: translateX(0%);
+    }
+  }
+  
+  @keyframes direita {
+    0% {
+      transform: translateX(0%);
+    }
+  
+    100% {
+      transform: translateX(88.7%);
+    }
+  }
+  
+  .esquerda {
+    animation: esquerda 1.5s forwards ease-in-out;
+  }
+  
+  .direita {
+    animation: direita 1.5s forwards ease-in-out;
+  }
+
+  footer {
+    width: 100%;
+    height: 30%;
+    background-color: black;
+    border-top: 3px solid #339FEE;
+  }
+  

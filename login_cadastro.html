@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/style_login.css">
+    <link rel="stylesheet" href="fontes/fonts.css">
+</head>
+<body>
+    <section id="cabecalho">
+    <div class="menu_log">
+    </div>
+    <header>
+        <div class="container">
+            <img src="imagens/Logo_pokemon.png" alt="" onclick="redirecionar_home()">
+            <ul class="navbar">
+                <li><a href="Index.html">Voltar</a></li>
+            </ul>
+        </div>
+    </header>
+</section>  
+<section id="entrar_e_cadastrar">
+    <div class="secao_form">
+        <div class="bloco" id="div_bloco">
+            <h1 id="h1_bloco">Seja bem vindo novamente!</h1>
+            <button onclick="animacao_cadastrar()" id="button_cobrir">
+                Entrar
+            </button>
+        </div>
+        <form class="entrar">
+            <h1>LOGIN</h1>
+            <hr>
+            <label for="input_user">Nome de usuário:</label>
+            <input type="text" id="input_user">
+            <label for="input_email">E-mail:</label>
+            <input type="text" id="input_email">
+            <label for="input_senha">Senha:</label>
+            <input type="text" id="input_senha">
+            <button class="botao_especial">Entrar</button>
+        </form>
+        <form class="cadastro">
+            <h1>CADASTRAR</h1>
+            <hr>
+            <label for="input_user">Nome de usuário:</label>
+            <input type="text" id="input_user">
+            <label for="input_email">Digite seu e-mail:</label>
+            <input type="text" id="input_email">
+            <label for="input_confirme_email">Confirme seu e-mail:</label>
+            <input type="text" id="input_confirme_email">
+            <label for="input_senha">Crie sua senha:</label>
+            <input type="text" id="input_senha">
+            <label for="input_confirme_senha">Confirme sua senha:</label>
+            <input type="text" id="input_confirme_senha">
+            <button class="botao_especial">Cadastrar</button>
+        </form>
+    </div>
+</section> 
+<footer>
+
+</footer> 
+</body>
+</html>
+<script>
+     function animacao_cadastrar() {
+        if (div_bloco.classList != "direita") {
+            div_bloco.classList.remove("esquerda")
+            div_bloco.classList.add("direita")
+
+
+            h1_bloco.innerHTML = `Se junte a nós nesse mundo Pokémon!`
+            button_cobrir.innerHTML = `Cadastrar`
+            button_cobrir.setAttribute("onclick", "animacao_entrar();")
+        }
+    }
+    function animacao_entrar() {
+            if (div_bloco.classList != "esquerda") {
+                div_bloco.classList.remove("direita")
+                div_bloco.classList.add("esquerda")
+                h1_bloco.innerHTML = `Seja bem vindo novamente!`
+                button_cobrir.innerHTML = `Entrar`
+                button_cobrir.setAttribute("onclick", "animacao_cadastrar();")
+            }
+    }
+</script>

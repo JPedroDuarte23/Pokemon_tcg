@@ -7,13 +7,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My CardDex | Home</title>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="fontes/fonts.css">
     <script src="https://kit.fontawesome.com/c52875e8e8.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
     <div class="menu_log">
         <ul class="lista_log">
-            <li><a href="">ENTRAR</a></li>
+            <li><a href="login_cadastro.html">ENTRAR</a></li>
             <li>|</li>
             <li><a href="">CADASTRAR</a></li>
         </ul>
@@ -171,6 +172,8 @@
 <script type="text/javascript" src="js/vanilla-tilt.js"></script>
 <script>
 
+    /* Seção redirecionamento dos botões */
+
     function redirecionar_home() {
         window.location.href = "index.html"
     }
@@ -184,6 +187,7 @@
         window.location.href = "https://tcg.pokemon.com/pt-br/top-deck-academy/"
     }
 
+        /* Seção animação da carta girando e trocando de imagem */
 
     VanillaTilt.init(document.querySelectorAll(".face"), {
         max: 25,
@@ -220,8 +224,10 @@
             back.classList.toggle("sumiu")
         }, 675)
     }, 8000)
-
-
+    
+    /* Seção animação texto das expansões */
+    const eventos = document.querySelector('.transicao')
+    eventos.addEventListener('animationend', remover_animacao())
     var sm1 = div_colecao_detalhe.innerHTML
     function remover_animacao() {
         div_colecao_detalhe.classList.remove("transicao")

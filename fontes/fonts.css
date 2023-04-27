@@ -1,0 +1,83 @@
+
+@font-face {
+    font-family: 'Inter';
+    src: url("Inter-VariableFont_slnt,wght.ttf");
+}
+    @font-face {
+    font-family: 'Montserrat Ace Regular';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Montserrat Ace Regular'), url('Montserrat-Ace-Regular.woff') format('woff');
+    }
+    
+
+    @font-face {
+    font-family: 'Montserrat Ace Italic';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Montserrat Ace Italic'), url('Montserrat-Ace-Italic.woff') format('woff');
+    }
+    
+
+    @font-face {
+    font-family: 'Montserrat Ace Light';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Montserrat Ace Light'), url('Montserrat-Ace-Light.woff') format('woff');
+    }
+    
+
+    @font-face {
+    font-family: 'Montserrat Ace Light Italic';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Montserrat Ace Light Italic'), url('Montserrat-Ace-Light-Italic.woff') format('woff');
+    }
+    
+
+    @font-face {
+    font-family: 'Montserrat Ace Medium';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Montserrat Ace Medium'), url('Montserrat-Ace-Medium.woff') format('woff');
+    }
+    
+
+    @font-face {
+    font-family: 'Montserrat Ace Medium Italic';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Montserrat Ace Medium Italic'), url('Montserrat-Ace-Medium-Italic.woff') format('woff');
+    }
+    
+
+    @font-face {
+    font-family: 'Montserrat Ace SemiBold';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Montserrat Ace SemiBold'), url('Montserrat-Ace-SemiBold.woff') format('woff');
+    }
+    
+
+    @font-face {
+    font-family: 'Montserrat Ace SemiBold Italic';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Montserrat Ace SemiBold Italic'), url('Montserrat-Ace-SemiBold-Italic.woff') format('woff');
+    }
+    
+
+    @font-face {
+    font-family: 'Montserrat Ace Bold';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Montserrat Ace Bold'), url('Montserrat-Ace-Bold.woff') format('woff');
+    }
+    
+
+    @font-face {
+    font-family: 'Montserrat Ace Bold Italic';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Montserrat Ace Bold Italic'), url('Montserrat-Ace-Bold-Italic.woff') format('woff');
+    }
