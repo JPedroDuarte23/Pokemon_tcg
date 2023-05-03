@@ -57,13 +57,13 @@
     justify-content: center;
 }
 .secao_sobre img {
-    max-width: 50.5%;
+    max-width: 60%;
     height: auto;
     width: auto;
 }
 .conteudo_lateral {
     padding: 4%;
-    width: 49.5%;
+    width: 41.5%;
     display: flex;
     flex-direction: column;
     text-align: center;
@@ -72,12 +72,12 @@
     box-sizing: border-box;
 }
 .conteudo_lateral h1 {
-  font-size: 30pt;
+  font-size: 2vw;
 }
 .conteudo_lateral h4 {
   font-weight: lighter;
-  font-size: 24px;
-  line-height: 24px;
+  font-size: 1.4vw;
+  line-height: 20px;
 }
 .conteudo_lateral hr {
   margin: 5% 0;
@@ -87,7 +87,8 @@
 .conteudo_lateral button {
   margin-top: 10%;
   width: 70%;
-  height: 12.5%;
+  padding: 5% 0;
+  box-sizing: border-box;
   color: white;
   background-color: #252525;
   border: none;
@@ -152,7 +153,7 @@
 
 .secao_raridade {
   width: 100%;
-  height: 95%;
+  height: auto;
   color: black;
   background-color: #d9d9d9;
   display: flex;
@@ -164,6 +165,8 @@
   flex-direction: column;
   height: 100%;
   width: 80%;
+  box-sizing: border-box;
+  padding-bottom: 3%;
 }
 .texto_e_carta {
   display: flex;
@@ -173,6 +176,7 @@
 .texto_raridade {
   width: 60%;
   padding: 5% 3% 0% 0%;
+  box-sizing: border-box;
 }
 .texto_raridade hr {
   margin: 1% 0 5% 0;

@@ -12,6 +12,7 @@
     justify-content: center;
     align-items: center;
     position: relative;
+    overflow: hidden;
   }
   form {
     background-color: white;
@@ -20,7 +21,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 3% 2.5%;
+    padding: 2% 2.5%;
     border-radius: 5px;
     box-sizing: border-box;
   }
@@ -37,13 +38,13 @@
     font-family: 'Montserrat Ace SemiBold';
   }
    form hr {
-    margin-bottom: 7%;
+    margin-bottom: 5%;
     border-color: black;
     width: 30%;
     margin: auto auto 7% auto;
   }
    form input {
-    margin: 3% 0 5% 5%;
+    margin: 3% 0 3% 5%;
     padding: 1.5%;
     font-size: 15px;
     border-radius: 2px;
@@ -56,7 +57,7 @@
   }
   form button {
     width: 35%;
-    margin: 5% auto 0 auto;
+    margin: 3% auto 0 auto;
     padding: 5% 0;
     font-size: 20px;
     font-weight: 500;
