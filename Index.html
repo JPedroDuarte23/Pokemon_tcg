@@ -6,11 +6,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My CardDex | Home</title>
-    <link rel="stylesheet" href="css/style.css">
+
+    <link rel="stylesheet" href="css/style_index.css">
+    <link rel="stylesheet" href="css/css_geral.css">
     <link rel="stylesheet" href="fontes/fonts.css">
+
     <script src="https://kit.fontawesome.com/c52875e8e8.js" crossorigin="anonymous"></script>
     <script type="text/javascript" src="js/vanilla-tilt.js"></script>
     <script type="text/javascript" src="js/textos_espancoes.js"></script>
+    <script type="text/javascript" src="js/redirecionamentos.js"></script>
+
 </head>
 
 <body>
@@ -162,21 +167,7 @@
         item = document.getElementById('item-' + id).innerHTML;
         valor_select.value = item;
     }
-    /* Seção redirecionamento dos botões */
-
-    function redirecionar_home() {
-        window.location.href = "index.html"
-    }
-    function redirecionar_cadastro() {
-        window.location.href = "Login_Cadastro.html"
-    }
-    function redirecionar_ferramenta() {
-        Window.location.href = "#div_secao_ferramenta"
-    }
-    function redirecionar_aulas() {
-        window.location.href = "https://tcg.pokemon.com/pt-br/top-deck-academy/"
-    }
-
+ 
     /* Seção animação da carta girando e trocando de imagem */
 
     VanillaTilt.init(document.querySelectorAll(".face"), {

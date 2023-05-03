@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+    <link rel="stylesheet" href="css/style_dash_geral.css">
+    
+    <script type="text/javascript" src="js/redirecionamentos.js"></script>
+    <script src="https://kit.fontawesome.com/c52875e8e8.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div id="div_pop_up" class="registrar"></div>
+    <section class="main" id="corpo_principal">
+        <div class="sidebar">
+            <img src="imagens/Logo_pokemon.png" class="logomarca" id="img_logo" onclick="redirecionar_home()">
+            <ul>
+                <li><a href="Dash_inicial.html" class="ativado"> <i class="fa-solid fa-house fa-lg"></i>Home</a>
+                </li>
+                <li><a href="Dash_colecoes.html"><i class="fa-solid fa-box-open fa-lg"></i>Coleção</a></li>
+                <li><a href="Dashboard_cofig.html"><i class="fa-solid fa-layer-group fa-lg"></i>Decks</a></li>
+                <li><a href="Dashboard_cofig.html"><i class="fa-solid fa-gear fa-lg"></i>Configurações</a></li>
+            </ul>
+
+        </div>
+        <div class="caixa_maior">
+            <header class="">
+                <div>
+                    <h2>Home</h2>
+                    <div class="pesquisar">
+                        <input type="text" class="barra_de_pesquisa" placeholder="Procura algo específico?">
+                        <button class="lupa" type="submit">
+                            <i class="fa-solid fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="lateral_icones">
+                    <div class="icone" onclick=""><i class="fa-solid fa-circle-question fa-lg"></i></div>
+                    <div class="icone" onclick=""><i class="fa-solid fa-bell fa-lg"></i></div>
+                    <div class="user">
+                        <div class="circulo"></div>
+                        <h4>Treinador &nbsp; <i class="fa-solid fa-angle-down fa-xs"></i></h4>
+                    </div>
+                </div>
+            </header>
+            <section class="botoes light_mode">
+                <button class="botao_ativado">Visão Gerais</button>
+                <button onclick="">Coleção 1</button>
+                <button onclick="">Coleção 2</button>
+                <button onclick="">Coleção 3</button>
+                <button onclick="">Coleção 4</button>
+                <button onclick="registrar_carta()" class="registrador"><i class="fa-solid fa-plus"></i>Adicionar Carta</button>
+            </section>
+</body>
+
+</html>
+<script>
+    function registrar_carta() {
+      div_pop_up.innerHTML = `
+      <div id="blur">
+        <div class="pop_up">
+          <h3>Registrar Sensor</h3>
+          <hr>
+          <h4>CNPJ:</h4> <input>
+          <h4>Situação do sensor:</h4> <input>
+          <h4>Localização:</h4> <input>
+          <h4>CNPJ:</h4> <input>
+          <h4>Situação do sensor:</h4> <input>
+          <h4>Localização:</h4> <input>
+          <button onclick= voltar()>Registrar</button>
+          </div>
+      </div>
+      `
+      blur.classList.add("blur")
+    }
+    function voltar() {
+        div_pop_up.innerHTML = ""
+    }
+
+</script>
