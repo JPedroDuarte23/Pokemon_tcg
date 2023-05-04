@@ -11,11 +11,9 @@
 </head>
 <body>
     <section id="cabecalho">
-    <div class="menu_log">
-    </div>
     <header>
         <div class="container">
-            <img src="imagens/Logo_pokemon.png" alt="" onclick="redirecionar_home()">
+            <img src="imagens/Logo_pokemon.png">
             <ul class="navbar">
                 <li><a href="Index.html">Voltar</a></li>
             </ul>
@@ -39,7 +37,7 @@
             <input type="text" id="input_email">
             <label for="input_senha">Senha:</label>
             <input type="text" id="input_senha">
-            <button class="botao_especial">Entrar</button>
+            <button class="botao_especial" onclick="entrar()">Entrar</button>
         </form>
         <form class="cadastro">
             <h1>CADASTRAR</h1>
@@ -54,7 +52,7 @@
             <input type="text" id="input_senha">
             <label for="input_confirme_senha">Confirme sua senha:</label>
             <input type="text" id="input_confirme_senha">
-            <button class="botao_especial">Cadastrar</button>
+            <button class="botao_especial" onclick="entrar()">Cadastrar</button>
         </form>
     </div>
 </section> 
@@ -64,6 +62,9 @@
 </body>
 </html>
 <script>
+    function entrar() {
+    window.location.href = `Dash_inicial.html`
+}
      function animacao_cadastrar() {
         if (div_bloco.classList != "direita") {
             div_bloco.classList.remove("esquerda")
