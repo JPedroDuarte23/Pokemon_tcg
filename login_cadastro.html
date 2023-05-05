@@ -37,7 +37,7 @@
             <input type="text" id="input_email">
             <label for="input_senha">Senha:</label>
             <input type="text" id="input_senha">
-            <button class="botao_especial" onclick="entrar()">Entrar</button>
+            <button class="botao_especial" onclick="entrar_dashboard()" type="button">Entrar</button>
         </form>
         <form class="cadastro">
             <h1>CADASTRAR</h1>
@@ -52,7 +52,7 @@
             <input type="text" id="input_senha">
             <label for="input_confirme_senha">Confirme sua senha:</label>
             <input type="text" id="input_confirme_senha">
-            <button class="botao_especial" onclick="entrar()">Cadastrar</button>
+            <button class="botao_especial" onclick="entrar_dashboard()" type="button">Cadastrar</button>
         </form>
     </div>
 </section> 
@@ -62,8 +62,8 @@
 </body>
 </html>
 <script>
-    function entrar() {
-    window.location.href = `Dash_inicial.html`
+    function entrar_dashboard() {
+        window.location.href = "Dash_inicial.html"
 }
      function animacao_cadastrar() {
         if (div_bloco.classList != "direita") {

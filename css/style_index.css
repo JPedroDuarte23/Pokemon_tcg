@@ -194,6 +194,7 @@
 .raridades {
   width: 50%;
   margin-top: 5%;
+  filter: drop-shadow(3px 2px 5px rgba(0, 0, 0, 0.4));
 }
 
 #card {
@@ -440,7 +441,9 @@ input {
   padding-left: 7px;
   transition: .3s;
 }
-
+#logo_geracao {
+  max-width: 68px;
+}
 /* Footer */
 
 

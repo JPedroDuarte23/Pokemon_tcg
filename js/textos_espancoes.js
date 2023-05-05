@@ -20,30 +20,32 @@ function dropdown(p) {
         }, 0)
     }
     if (valor_select.value == "Sun e Moon") {
-                geracao_S_e_M()
+        geracao_S_e_M()
+    } else if (valor_select.value == "Espada e Escudo") {
+        geracao_E_e_E() 
     }
 }
 function geracao_S_e_M() {
     logo_geracao.setAttribute('src', 'imagens/sun&moon.png')
     div_linha_do_tempo.innerHTML = `<img src="imagens/Linha do tempo.png" alt="" class="linha_do_tempo">
             <div class="icones_colecoes" onmouseout="remover_animacao()">
-                <img src="imagens/icone_s&m.png" alt="" id="isunmoon" onmouseover="sun_moon()">
-                <img src="imagens/icone_prisma.png" alt="" id="iprisma" onmouseover="guardians_risng()">
-                <img src="imagens/icone_burning.png" alt="" id="iburning" onmouseover="burning_shadows()">
-                <img src="imagens/icone_v.png" alt="" id="iv" onmouseover="shining_legends()">
-                <img src="imagens/asa_icone.png" alt="" id="iasa" onmouseover="crimson_invasion()">
-                <img src="imagens/icone_prismatico.png" alt="" id="iprismatico" onmouseover="ultra_prism()">
-                <img src="imagens/icone_crisis.png" alt="" id="icrisis" onmouseover="forbidden_light()">
-                <img src="imagens/icone_bola.png" alt="" id="ibola" onmouseover="celestial_storm()">
-                <img src="imagens/icone_dragao.png" alt="" id="idragao" onmouseover="dragon_majesty()">
-                <img src="imagens/icone_thunder.png" alt="" id="ithunder" onmouseover="lost_thunder()">
-                <img src="imagens/icone_bonds.png" alt="" id="ibonds" onmouseover="team_up()">
-                <img src="imagens/icone_planta.png" alt="" id="iplanta" onmouseover="unbroken_bonds()">
-                <img src="imagens/icone_bonds_2.png" alt="" id="ibonds_2" onmouseover="unified_minds()">
-                <img src="imagens/icone_shiny.png" alt="" id="ishiny" onmouseover="shiny_vault()">
-                <img src="imagens/icone_hexagono.png" alt="" id="ihexagono" onmouseover="cosmic_eclipse()">`
+                <img src="imagens/icones_sm/icone_s&m.png" alt="" id="isunmoon" onmouseover="sun_moon()">
+                <img src="imagens/icones_sm/icone_prisma.png" alt="" id="iprisma" onmouseover="guardians_risng()">
+                <img src="imagens/icones_sm/icone_burning.png" alt="" id="iburning" onmouseover="burning_shadows()">
+                <img src="imagens/icones_sm/icone_v.png" alt="" id="iv" onmouseover="shining_legends()">
+                <img src="imagens/icones_sm/asa_icone.png" alt="" id="iasa" onmouseover="crimson_invasion()">
+                <img src="imagens/icones_sm/icone_prismatico.png" alt="" id="iprismatico" onmouseover="ultra_prism()">
+                <img src="imagens/icones_sm/icone_crisis.png" alt="" id="icrisis" onmouseover="forbidden_light()">
+                <img src="imagens/icones_sm/icone_bola.png" alt="" id="ibola" onmouseover="celestial_storm()">
+                <img src="imagens/icones_sm/icone_dragao.png" alt="" id="idragao" onmouseover="dragon_majesty()">
+                <img src="imagens/icones_sm/icone_thunder.png" alt="" id="ithunder" onmouseover="lost_thunder()">
+                <img src="imagens/icones_sm/icone_bonds.png" alt="" id="ibonds" onmouseover="team_up()">
+                <img src="imagens/icones_sm/icone_planta.png" alt="" id="iplanta" onmouseover="unbroken_bonds()">
+                <img src="imagens/icones_sm/icone_bonds_2.png" alt="" id="ibonds_2" onmouseover="unified_minds()">
+                <img src="imagens/icones_sm/icone_shiny.png" alt="" id="ishiny" onmouseover="shiny_vault()">
+                <img src="imagens/icones_sm/icone_hexagono.png" alt="" id="ihexagono" onmouseover="cosmic_eclipse()">`
         div_detalhes.innerHTML = `<div class="colecao_detalhe transicao" id="div_colecao_detalhe">
-                <img src="imagens/icone_s&m.png" alt="">
+                <img src="imagens/icones_sm/icone_s&m.png" alt="">
                 <h2>Expansão Sun & Moon - SM1</h2>
             </div>
             
@@ -59,7 +61,7 @@ function geracao_S_e_M() {
 }
 function sun_moon() {
     div_colecao_detalhe.innerHTML = `
-    <img src="imagens/icone_s&m.png" alt="">
+    <img src="imagens/icones_sm/icone_s&m.png" alt="">
     <h2>Expansão Sun & Moon - SM1</h2>
     `
     div_colecao_detalhe.classList.add("transicao")
@@ -75,7 +77,7 @@ function sun_moon() {
 }
 function guardians_risng() {
     div_colecao_detalhe.innerHTML = `
-    <img src="imagens/icone_prisma.png">
+    <img src="imagens/icones_sm/icone_prisma.png">
     <h2>Expansão Guardiões Ascendentes - SM2</h2>
     `
     div_colecao_detalhe.classList.add("transicao")
@@ -91,7 +93,7 @@ function guardians_risng() {
 }
 function burning_shadows() {
     div_colecao_detalhe.innerHTML = `
-    <img src="imagens/icone_burning.png">
+    <img src="imagens/icones_sm/icone_burning.png">
     <h2>Expansão Sombras ardentes - SM3</h2>
     `
     div_colecao_detalhe.classList.add("transicao")
@@ -102,7 +104,7 @@ function burning_shadows() {
 }
 function shining_legends() {
     div_colecao_detalhe.innerHTML = `
-    <img src="imagens/icone_v.png">
+    <img src="imagens/icones_sm/icone_v.png">
     <h2>Expansão Lendas Luminecentes - SM4</h2>
     `
     div_colecao_detalhe.classList.add("transicao")
@@ -112,7 +114,7 @@ function shining_legends() {
 }
 function crimson_invasion() {
     div_colecao_detalhe.innerHTML = `
-    <img src="imagens/asa_icone.png">
+    <img src="imagens/icones_sm/asa_icone.png">
     <h2>Expansão Invasão Carmesin - SM5</h2>
     `
     div_colecao_detalhe.classList.add("transicao")
@@ -122,7 +124,7 @@ function crimson_invasion() {
 }
 function ultra_prism() {
     div_colecao_detalhe.innerHTML = `
-    <img src="imagens/icone_prismatico.png">
+    <img src="imagens/icones_sm/icone_prismatico.png">
     <h2>Expansão Ultra Prisma - SM6</h2>
     `
     div_colecao_detalhe.classList.add("transicao")
@@ -132,7 +134,7 @@ function ultra_prism() {
 }
 function forbidden_light() {
     div_colecao_detalhe.innerHTML = `
-    <img src="imagens/icone_crisis.png">
+    <img src="imagens/icones_sm/icone_crisis.png">
     <h2>Expansão Luz Proibida - SM7</h2>
     `
     div_colecao_detalhe.classList.add("transicao")
@@ -142,7 +144,7 @@ function forbidden_light() {
 }
 function celestial_storm() {
     div_colecao_detalhe.innerHTML = `
-    <img src="imagens/icone_bola.png">
+    <img src="imagens/icones_sm/icone_bola.png">
     <h2>Expansão Tempestade Celestial - SM8</h2>
     `
     div_colecao_detalhe.classList.add("transicao")
@@ -152,7 +154,7 @@ function celestial_storm() {
 }
 function dragon_majesty() {
     div_colecao_detalhe.innerHTML = `
-    <img src="imagens/icone_dragao.png">
+    <img src="imagens/icones_sm/icone_dragao.png">
     <h2>Expansão Dragões Soberanos- SM9</h2>
     `
     div_colecao_detalhe.classList.add("transicao")
@@ -162,7 +164,7 @@ function dragon_majesty() {
 }
 function lost_thunder() {
     div_colecao_detalhe.innerHTML = `
-    <img src="imagens/icone_thunder.png">
+    <img src="imagens/icones_sm/icone_thunder.png">
     <h2>Expansão Trovões Perdidos - SM10</h2>
     `
     div_colecao_detalhe.classList.add("transicao")
@@ -172,7 +174,7 @@ function lost_thunder() {
 }
 function team_up() {
     div_colecao_detalhe.innerHTML = `
-    <img src="imagens/icone_bonds.png">
+    <img src="imagens/icones_sm/icone_bonds.png">
     <h2>Expansão União de Aliados - SM11</h2>
     `
     div_colecao_detalhe.classList.add("transicao")
@@ -182,7 +184,7 @@ function team_up() {
 }
 function unbroken_bonds() {
     div_colecao_detalhe.innerHTML = `
-    <img src="imagens/icone_planta.png">
+    <img src="imagens/icones_sm/icone_planta.png">
     <h2>Expansão Elos Inquebráveis - SM12</h2>
     `
     div_colecao_detalhe.classList.add("transicao")
@@ -192,7 +194,7 @@ function unbroken_bonds() {
 }
 function unified_minds() {
     div_colecao_detalhe.innerHTML = `
-    <img src="imagens/icone_bonds_2.png">
+    <img src="imagens/icones_sm/icone_bonds_2.png">
     <h2>Expansão Sintonia Mental - SM13</h2>
     `
     div_colecao_detalhe.classList.add("transicao")
@@ -202,7 +204,7 @@ function unified_minds() {
 }
 function shiny_vault() {
     div_colecao_detalhe.innerHTML = `
-    <img src="imagens/icone_shiny.png">
+    <img src="imagens/icones_sm/icone_shiny.png">
     <h2>Expansão Destinos Ocultos - SM14</h2>
     `
     div_colecao_detalhe.classList.add("transicao")
@@ -212,11 +214,46 @@ function shiny_vault() {
 }
 function cosmic_eclipse() {
     div_colecao_detalhe.innerHTML = `
-    <img src="imagens/icone_hexagono.png">
+    <img src="imagens/icones_sm/icone_hexagono.png">
     <h2>Expansão Eclípse Cósmico- SM15</h2>
     `
     div_colecao_detalhe.classList.add("transicao")
     div_texto_detalhe.classList.add("transicao")
     img_banner_detalhe.setAttribute('src', 'https://cdn-cardmavin.mavin.io/wp-content/uploads/2019/12/pokemon-cosmic-eclipse-set-1024x171.jpg')
     ptxt.innerHTML = `A Supreme Connection of Stars and Pokémon! At the apex of the Sun & Moon Series, the Pokémon TCG: Sun & Moon—Cosmic Eclipse expansion boosts the connection of Pokémon and Trainers, and it launches TAG TEAM combinations to new levels! Jump into battle with Charizard & Braixen-GX, Venusaur & Snivy-GX, Blastoise & Piplup-GX, and Solgaleo & Lunala-GX, along with the triple TAG TEAM of Arceus & Dialga & Palkia-GX, plus many more! Feel the stellar power of Pokémon with the Sun & Moon—Cosmic Eclipse expansion!`
+}
+
+function geracao_E_e_E() {
+    logo_geracao.setAttribute('src', 'imagens/Sword_Shield.png')
+    div_linha_do_tempo.innerHTML = `<img src="imagens/Linha do tempo.png" alt="" class="linha_do_tempo">
+            <div class="icones_colecoes" onmouseout="remover_animacao()">
+                <img src="imagens/icones_es/Sword_shield_symbol.png" alt="" id="isunmoon" onmouseover="sun_moon()">
+                <img src="imagens/icones_es/Rebel_clash_symbol.png" alt="" id="iprisma" onmouseover="guardians_risng()">
+                <img src="imagens/icones_es/Darkness_ablaze_symbol.png" alt="" id="iburning" onmouseover="burning_shadows()">
+                <img src="imagens/icones_es/Champions_path_symbol.png" alt="" id="iv" onmouseover="shining_legends()">
+                <img src="imagens/icones_es/Vivid_voltage_symbol.png" alt="" id="iasa" onmouseover="crimson_invasion()">
+                <img src="imagens/icones_es/Shining_fates_symbol.png" alt="" id="iprismatico" onmouseover="ultra_prism()">
+                <img src="imagens/icones_es/Battle_styles_symbol.png" alt="" id="icrisis" onmouseover="forbidden_light()">
+                <img src="imagens/icones_es/Chilling_reign_symbol.png" alt="" id="ibola" onmouseover="celestial_storm()">
+                <img src="imagens/icones_es/Evolving_skies_symbol.png" alt="" id="idragao" onmouseover="dragon_majesty()">
+                <img src="imagens/icones_es/Fusion_strike_symbol.png" alt="" id="ithunder" onmouseover="lost_thunder()">
+                <img src="imagens/icones_es/Brilliant_stars_symbol.png" alt="" id="ibonds" onmouseover="team_up()">
+                <img src="imagens/icones_es/Astral_radiance_symbol.png" alt="" id="iplanta" onmouseover="unbroken_bonds()">
+                <img src="imagens/icones_es/Lost_origin_symbol.png" alt="" id="ibonds_2" onmouseover="unified_minds()">
+                <img src="imagens/icones_es/Silver_tempest_symbol.png" alt="" id="ishiny" onmouseover="shiny_vault()">
+                <img src="imagens/icones_es/Crown_zenith_symbol.png" alt="" id="ihexagono" onmouseover="cosmic_eclipse()">`
+        div_detalhes.innerHTML = `<div class="colecao_detalhe transicao" id="div_colecao_detalhe">
+                <img src="imagens/icones_sm/icone_s&m.png" alt="">
+                <h2>Expansão Sun & Moon - SM1</h2>
+            </div>
+            
+            <div class="texto_detalhe transicao" id="div_texto_detalhe">
+                <p id="ptxt">The battles heat up with Pokémon from the tropical Alola region in the Pokémon TCG: Sun &
+                    Moon
+                    expansion. Start your journey with Rowlet, Litten, and Popplio, then seek out the Legendary Pokémon
+                    Solgaleo-GX and Lunala-GX to witness the awesome power of a new kind of Pokémon: each Pokémon-GX
+                    brings an attack so devastating that you can use only one of them per game. Discover dozens of
+                    never-before-seen Pokémon, Alola forms of some familiar favorites, and new ways to battle in the
+                    Pokémon TCG: Sun & Moon expansion. </p>
+                <img src="imagens/Banner_S&M.png" alt="" id="img_banner_detalhe">`
 }
