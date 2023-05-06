@@ -14,7 +14,27 @@
 </head>
 
 <body>
-    <div id="div_pop_up" class="registrar"></div>
+    <div id="div_pop_up" class="registrar">
+        <div id="blur">
+            <div class="pop_up">
+                <h4>Nome da carta:</h4>
+                <input id="cardNameInput" type="text" /> <br>
+                <h4>Tipo da carta:</h4>
+                <select id="select_supertype">
+                    <option value="pokemon">Pokemon</option>
+                    <option value="trainer">Treinador</option>
+                    <option value="energy">Energia</option>
+                </select> <br>
+                <h4>Estágio do pokemon:</h4>
+                <input type="text" id="subtypeInput"> <br>
+                <h4>Tipo do pokemon:</h4>
+                <input type="text" id="tipo"> <br>
+                <h4>Raridade:</h4>
+                <input type="text" id="raridade"> <br>
+                <button id="searchButton">Search</button>
+              </div>
+          </div>
+    </div>
     <section class="main" id="corpo_principal">
         <div class="sidebar">
             <img src="imagens/Logo_pokemon.png" class="logomarca" id="img_logo" onclick="redirecionar_home()">
@@ -23,7 +43,7 @@
                 </li>
                 <li><a href="Dash_colecoes.html" class="ativado"><i class="fa-solid fa-box-open fa-lg"></i>Coleção</a></li>
                 <li><a href="Dash_decks.html"><i class="fa-solid fa-layer-group fa-lg"></i>Decks</a></li>
-                <li><a href="Dashboard_cofig.html"><i class="fa-solid fa-gear fa-lg"></i>Configurações</a></li>
+                <li><a href="Dashboard_cofig.html"><i class="fa-solid fa-file-lines fa-lg"></i>Informações</a></li>
             </ul>
 
         </div>
@@ -58,31 +78,75 @@
             <section id="secao_visao_geral">
                 <div class="caixa_graficos">
                     <div class="titulo_caixa_graficos"><h2>Cartas</h2></div>
+                    <div id="cardData"></div>
                 </div>
+                
             </section>
 </body>
 
 </html>
 <script>
     function registrar_carta() {
-      div_pop_up.innerHTML = `
-      <div id="blur">
-        <div class="pop_up">
-          <h3>Registrar Sensor</h3>
-          <hr>
-          <h4>CNPJ:</h4> <input>
-          <h4>Situação do sensor:</h4> <input>
-          <h4>Localização:</h4> <input>
-          <h4>CNPJ:</h4> <input>
-          <h4>Situação do sensor:</h4> <input>
-          <h4>Localização:</h4> <input>
-          <button onclick= voltar()>Registrar</button>
-          </div>
-      </div>
-      `
-      blur.classList.add("blur")
+      div_pop_up.style.display = "flex"
     }
     function voltar() {
-        div_pop_up.innerHTML = ""
+        div_pop_up.style.display = "none"
     }
+</script>
+<script type="module">
+    import pokemon from 'https://cdn.skypack.dev/pokemontcgsdk'
+    pokemon.configure({ apiKey: '52749edc-448b-4551-9345-b8ba0ae3d2a3' })
+
+    const cardNameInput = document.getElementById('cardNameInput')
+    const searchButton = document.getElementById('searchButton')
+    const cardData = document.getElementById('cardData')
+    const supertype = document.getElementById('select_supertype')
+    const subtype = document.getElementById('subtypeInput')
+    const tipo = document.getElementById('tipo')
+    const raridade = document.getElementById('raridade')
+    async function procurarCarta() {
+        cardData.innerHTML = "";
+        if (supertype.value == "pokemon") {
+            try {
+                const result = await pokemon.card.where({
+                    q:`name:"${cardNameInput.value}" AND 
+                       subtypes:"${subtype.value}" AND
+                       types:"${tipo.value}" AND
+                       rarity:"${raridade.value}"
+                       `});
+                for (var contador = 0; contador < result.data.length; contador++) {
+                    const card = result.data[contador];
+                    console.log(card)
+                    cardData.innerHTML += `
+                        <img src="${card.images.small}" alt="${card.name}" />
+                        `;
+
+                }
+            } catch (error) {
+                cardData.innerHTML += `<p>Card not found.</p>`;
+            }
+        } else {
+            try {
+                const result = await pokemon.card.where({
+                        q: `name:"${cardNameInput.value}" AND 
+                            rarity:"${raridade.value}"
+                            ` });
+                for (var contador = 0; contador < result.data.length; contador++) {
+                    const card_2 = result.data[contador];
+                    console.log(card_2)
+                    cardData.innerHTML += `
+                        <h2>${card_2.name}</h2>
+                        <img src="${card_2.images.small}" alt="${card_2.name}" />
+                        <p>Rarity: ${card_2.rarity}</p>
+                        `;
+                }
+            } catch (error) {
+                cardData.innerHTML += `<p>Card not found.</p>`;
+            }
+        }
+    }
+    
+    searchButton.addEventListener('click', procurarCarta);
+    searchButton.addEventListener('click', voltar);
+    
 </script>

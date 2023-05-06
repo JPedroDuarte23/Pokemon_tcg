@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select modificado</title>
+    <style>
+        input {
+            height: 40px;
+            width: 30%;
+            padding: 5px 5px 0px 5px;
+            box-sizing: border-box;
+            border-radius: 5px;
+            color: black;
+            background-color: transparent;
+            border: 1px solid black;
+            margin-left: 1.5%;
+            font-size: 26px;
+            font-weight: 600;
+        }
+
+        ::-webkit-input-placeholder {
+            color: #7a7a7a;
+            font-size: 26px;
+            font-weight: 600;
+        }
+
+        .section_teste {
+            width: 85%;
+
+        }
+
+        .dropDown {
+            width: 30%;
+            background-color: #339FEE;
+            color: #252525;
+            border-radius: 5px;
+            margin-top: 10px;
+            font-size: 26px;
+            font-weight: 600;
+            display: flex;
+            height: 40%;
+            overflow: auto;
+            display: none;
+            transform: translate(0px, -10px);
+            margin-left: 1.5%;
+        }
+
+        ::-webkit-scrollbar {
+            width: 5px;
+            background-color: #1d1d1d;
+            border-top-right-radius: 5px;
+            border-bottom-right-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background-color: #5b5b5b;
+            border-radius: 5px;
+        }
+
+        .item {
+            height: 25%;
+            padding: 0px 5px;
+            box-sizing: border-box;
+            transition: .3s;
+            cursor: pointer;
+        }
+
+        .item:hover {
+            background-color: #121212;
+            color: white;
+            padding-left: 7px;
+            transition: .3s;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="select_img">
+        <input type="text" name="geracao" placeholder="Selecione o item" id="input_select" onfocus="dropdown(0)"
+            onblur="dropdown(1)">
+    </div>
+    <div class="section_teste">
+        <div class="dropDown">
+            <div class="item" id="item-1" onMouseDown="category(1)">Item 1</div>
+            <div class="item" id="item-2" onMouseDown="category(2)">Item 2</div>
+        </div>
+    </div>
+</body>
+
+</html>
+<script>
+    var valor_select = document.querySelector('#input_select');
+    var item = 0;
+    function category(id) {
+        item = document.getElementById('item-' + id).innerHTML;
+        valor_select.value = item;
+    }
+    function dropdown(p) {
+        var elementos = document.querySelectorAll('.dropDown')
+        var estilo_display;
+        var estilo_transform;
+        if (p === 0) {
+            estilo_display = "block";
+            estilo_transform = "0px";
+        } else {
+            estilo_display = "none";
+            estilo_transform = "0px,-10px";
+        }
+
+        for (var id = 0; id < elementos.length; id++) {
+            var elemento = elementos[id];
+            elemento.style.display = estilo_display;
+
+            setTimeout(function () {
+                elemento.style.transform = `translate(${estilo_transform})`;
+            }, 0)
+        }
+        if (valor_select.value == "item 1") {
+            funcao_1()
+        } else if (valor_select.value == "item 2") {
+            funcao_2()
+        }
+    }
+</script>

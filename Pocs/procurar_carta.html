@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+</head>
+
+<body>
+    Nome da carta:
+    <input id="cardNameInput" type="text" /> <br>
+    Tipo da carta:
+    <select id="select_supertype">
+        <option value="pokemon">Pokemon</option>
+        <option value="trainer">Treinador</option>
+        <option value="energy">Energia</option>
+    </select> <br>
+    Estágio do pokemon:
+    <input type="text" id="subtypeInput"> <br>
+    Tipo do pokemon:
+    <input type="text" id="tipo"> <br>
+    Raridade:
+    <input type="text" id="raridade"> <br>
+    <button id="searchButton">Search</button>
+    <div id="cardData"></div>
+
+    <script type="module">
+        import pokemon from 'https://cdn.skypack.dev/pokemontcgsdk'
+        pokemon.configure({ apiKey: '52749edc-448b-4551-9345-b8ba0ae3d2a3' })
+
+        const cardNameInput = document.getElementById('cardNameInput')
+        const searchButton = document.getElementById('searchButton')
+        const cardData = document.getElementById('cardData')
+        const supertype = document.getElementById('select_supertype')
+        const subtype = document.getElementById('subtypeInput')
+        const tipo = document.getElementById('tipo')
+        const raridade = document.getElementById('raridade')
+        async function procurarCarta() {
+            cardData.innerHTML = "";
+            if (supertype.value == "pokemon") {
+                try {
+                    const result = await pokemon.card.where({
+                        q:`name:"${cardNameInput.value}" AND 
+                           subtypes:"${subtype.value}" AND
+                           types:"${tipo.value}" AND
+                           rarity:"${raridade.value}"
+                           `});
+                    for (var contador = 0; contador < result.data.length; contador++) {
+                        const card = result.data[contador];
+                        console.log(card)
+                        cardData.innerHTML += `
+                            <h2>${card.name}</h2>
+                            <img src="${card.images.small}" alt="${card.name}" />
+                            <p>Rarity: ${card.rarity}</p>
+                            `;
+
+                    }
+                } catch (error) {
+                    cardData.innerHTML += `<p>Card not found.</p>`;
+                }
+            } else {
+                try {
+                    const result = await pokemon.card.where({
+                            q: `name:"${cardNameInput.value}" AND 
+                                rarity:"${raridade.value}"
+                                ` });
+                    for (var contador = 0; contador < result.data.length; contador++) {
+                        const card_2 = result.data[contador];
+                        console.log(card_2)
+                        cardData.innerHTML += `
+                            <h2>${card_2.name}</h2>
+                            <img src="${card_2.images.small}" alt="${card_2.name}" />
+                            <p>Rarity: ${card_2.rarity}</p>
+                            `;
+                    }
+                } catch (error) {
+                    cardData.innerHTML += `<p>Card not found.</p>`;
+                }
+            }
+        }
+
+        searchButton.addEventListener('click', procurarCarta);
+    </script>
+</body>
+
+</html>
