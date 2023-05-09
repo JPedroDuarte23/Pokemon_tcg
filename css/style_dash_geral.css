@@ -369,8 +369,8 @@ border-radius: 10px;
 #cardData img {
     margin: 10px;
     border-radius: 10px;
-    width: 20%;
-    height: 20%;
+    width: 22%;
+    height: 22%;
 }
 #cardData img:hover {
     transform: scale(1.1,1.1);
