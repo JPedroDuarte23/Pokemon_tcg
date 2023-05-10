@@ -92,61 +92,8 @@
     function voltar() {
         div_pop_up.style.display = "none"
     }
-</script>
-<script type="module">
-    import pokemon from 'https://cdn.skypack.dev/pokemontcgsdk'
-    pokemon.configure({ apiKey: '52749edc-448b-4551-9345-b8ba0ae3d2a3' })
-
-    const cardNameInput = document.getElementById('cardNameInput')
-    const searchButton = document.getElementById('searchButton')
-    const cardData = document.getElementById('cardData')
-    const supertype = document.getElementById('select_supertype')
-    const subtype = document.getElementById('subtypeInput')
-    const tipo = document.getElementById('tipo')
-    const raridade = document.getElementById('raridade')
-    async function procurarCarta() {
-        cardData.innerHTML = "";
-        if (supertype.value == "pokemon") {
-            try {
-                const result = await pokemon.card.where({
-                    q:`name:"${cardNameInput.value}" AND 
-                       subtypes:"${subtype.value}" AND
-                       types:"${tipo.value}" AND
-                       rarity:"${raridade.value}"
-                       `});
-                for (var contador = 0; contador < result.data.length; contador++) {
-                    const card = result.data[contador];
-                    console.log(card)
-                    cardData.innerHTML += `
-                        <img src="${card.images.small}" alt="${card.name}" />
-                        `;
-
-                }
-            } catch (error) {
-                cardData.innerHTML += `<p>Card not found.</p>`;
-            }
-        } else {
-            try {
-                const result = await pokemon.card.where({
-                        q: `name:"${cardNameInput.value}" AND 
-                            rarity:"${raridade.value}"
-                            ` });
-                for (var contador = 0; contador < result.data.length; contador++) {
-                    const card_2 = result.data[contador];
-                    console.log(card_2)
-                    cardData.innerHTML += `
-                        <h2>${card_2.name}</h2>
-                        <img src="${card_2.images.small}" alt="${card_2.name}" />
-                        <p>Rarity: ${card_2.rarity}</p>
-                        `;
-                }
-            } catch (error) {
-                cardData.innerHTML += `<p>Card not found.</p>`;
-            }
-        }
-    }
-    
-    searchButton.addEventListener('click', procurarCarta);
     searchButton.addEventListener('click', voltar);
-    
 </script>
+
+    
+    
