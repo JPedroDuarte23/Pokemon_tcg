@@ -21,10 +21,24 @@ app.get('/', (req, res) => {
 
 const connection = mysql.createConnection({
   host: 'localhost',
-  user: 'estudante',
+  user: 'aluno',
   password: 'galho123',
   database: 'pokemon_tcg'
 });
+
+app.get('/registros', (req, res) => {
+  const selectQuery = 'SELECT * FROM cartas';
+
+  connection.query(selectQuery, (error, results) => {
+    if (error) {
+      console.error('Erro ao buscar registros no banco de dados:', error);
+      res.status(500).json({ error: 'Erro ao buscar registros no banco de dados' });
+    } else {
+      res.status(200).json(results);
+    }
+  });
+});
+
 const serial = async (
   PokeInfo
 ) => {

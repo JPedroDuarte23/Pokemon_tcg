@@ -6,11 +6,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My CardDex | Coleções</title>
-    
-    <link rel="stylesheet" href="css/style_dash_geral.css">
+    <style>
+        img {
+          width: 30px;
+        }
+        table {
+            text-align: center;
+        }
+      </style>
+    <link rel="stylesheet" href="style_dash_geral.css">
 
     <script src="https://kit.fontawesome.com/c52875e8e8.js" crossorigin="anonymous"></script>
-    <script type="text/javascript" src="js/redirecionamentos.js"></script>
+    <!-- <script type="text/javascript" src="js/redirecionamentos.js"></script> -->
 </head>
 
 <body>
@@ -41,7 +48,7 @@
     </div>
     <section class="main" id="corpo_principal">
         <div class="sidebar">
-            <img src="imagens/Logo_pokemon.png" class="logomarca" id="img_logo" onclick="redirecionar_home()"> 
+            <!-- <img src="imagens/Logo_pokemon.png" class="logomarca" id="img_logo" onclick="redirecionar_home()"> -->
             <ul>
                 <li><a href="Dash_inicial.html" > <i class="fa-solid fa-house fa-lg"></i>Home</a>
                 </li>
@@ -72,8 +79,8 @@
                 </div>
             </header>
             <section class="botoes light_mode">
-                <button class="botao_ativado">Cartas Registradas</button>
-                <button onclick="">Todas as cartas</button>
+                <button class="botao_ativado" onclick="mostrar_registros()">Cartas Registradas</button>
+                <button onclick="mostrar_colecao()">Todas as Cartas</button>
                 <button onclick="">Ultra-raras</button>
                 <button onclick="">Raras</button>
                 <button onclick="">Incomuns</button>
@@ -81,9 +88,9 @@
                 <button onclick="registrar_carta()" class="registrador"><i class="fa-solid fa-plus"></i>Adicionar Carta</button>
             </section>
             <section id="secao_visao_geral">
-                <div class="caixa_graficos">
-                    <div class="titulo_caixa_graficos"><h2>Cartas Registradas</h2></div>
-                    <div id="cardData"></div>
+                <div class="caixa_graficos" id= "caixaGraficos">
+                    <div  class="titulo_caixa_graficos"><h2>Cartas Registradas</h2></div>
+                    <div id="cartasRegistradas" class="caixote"></div>
                 </div>
                 
             </section>
@@ -97,13 +104,13 @@
     function voltar() {
         div_pop_up.style.display = "none"
     }
-    // Pega 
+    searchButton.addEventListener('click', voltar);
     fetch(`/cartas/informacoes`)
     .then(response => response.json())
     .then(data => {
       // Criar o HTML para a carta com base nos dados recebidos do servidor
       for (i = 0; i <= data.length - 1 ; i++) {
-      document.getElementById('cardData').innerHTML += `
+      document.getElementById('cartasRegistradas').innerHTML += `
           <img src="${data[i].images.small}">
       `;
     }
@@ -111,6 +118,79 @@
     console.log(error);
   });
 
+  function mostrar_colecao() {
+    const caixaGraficos = document.getElementById('caixaGraficos');
+    caixaGraficos.innerHTML = `
+    <div class="titulo_caixa_graficos"><h2>Coleção</h2></div>
+    <div id="cartasColecao" class="caixote"></div>
+    `
+    const cartasColecao = document.getElementById('cartasColecao')
+    fetch('http://localhost:3000/registros')
+  .then((response) => response.json())
+  .then((data) => {
+    const table = document.createElement('table');
+    const thead = document.createElement('thead');
+    const tbody = document.createElement('tbody');
+    
+    // Criando cabeçalho da tabela
+    const headerRow = document.createElement('tr');
+    const nomeHeader = document.createElement('th');
+    const imagemHeader = document.createElement('th');
+    const tipoHeader = document.createElement('th');
+    nomeHeader.textContent = 'Nome';
+    imagemHeader.textContent = 'Imagem';
+    tipoHeader.textContent = 'Tipo';
+    headerRow.appendChild(nomeHeader);
+    headerRow.appendChild(imagemHeader);
+    headerRow.appendChild(tipoHeader);
+    thead.appendChild(headerRow);
+    
+    // Preenchendo linhas da tabela
+    data.forEach((registro) => {
+      const row = document.createElement('tr');
+      const nomeCell = document.createElement('td');
+      const imagemCell = document.createElement('td');
+      const tipoCell = document.createElement('td');
+      
+      nomeCell.textContent = registro.nome;
+      tipoCell.textContent = registro.tipo;
+      const imagem = document.createElement('img');
+      imagem.src = registro.imagem;
+      imagemCell.appendChild(imagem);
+      
+      row.appendChild(nomeCell);
+      row.appendChild(imagemCell);
+      row.appendChild(tipoCell);
+      tbody.appendChild(row);
+    });
+    
+    // Adicionando cabeçalho e corpo da tabela ao elemento registros
+    table.appendChild(thead);
+    table.appendChild(tbody);
+    cartasColecao.appendChild(table);
+  })
+  .catch((error) => {
+    console.error('Erro ao buscar registros no servidor:', error);
+  });
+  }
 
-    searchButton.addEventListener('click', voltar);
+   function mostrar_registros() {
+    const caixaGraficos = document.getElementById('caixaGraficos');
+    caixaGraficos.innerHTML = `
+    <div  class="titulo_caixa_graficos"><h2>Cartas Registradas</h2></div>
+    <div id="cartasRegistradas"></div>
+    `
+    fetch(`/cartas/informacoes`)
+    .then(response => response.json())
+    .then(data => {
+      // Criar o HTML para a carta com base nos dados recebidos do servidor
+      for (i = 0; i <= data.length - 1 ; i++) {
+      document.getElementById('cartasRegistradas').innerHTML += `
+          <img src="${data[i].images.small}">
+      `;
+    }
+    }).catch(error => {
+    console.log(error);
+  });
+   }
 </script>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Busca de registros no banco de dados</title>
+</head>
+<style>
+  img {
+    width: 100px;
+  }
+</style>
+<body>
+  <h1>Registros no banco de dados</h1>
+  <!-- <ul id="registros"></ul> -->
+  <div id="registros"></div>
+
+  <script>
+    fetch('http://localhost:3000/registros')
+  .then((response) => response.json())
+  .then((data) => {
+    const registros = document.getElementById('registros');
+    const table = document.createElement('table');
+    const thead = document.createElement('thead');
+    const tbody = document.createElement('tbody');
+    
+    // Criando cabeçalho da tabela
+    const headerRow = document.createElement('tr');
+    const nomeHeader = document.createElement('th');
+    const imagemHeader = document.createElement('th');
+    const tipoHeader = document.createElement('th');
+    nomeHeader.textContent = 'Nome';
+    imagemHeader.textContent = 'Imagem';
+    tipoHeader.textContent = 'Tipo';
+    headerRow.appendChild(nomeHeader);
+    headerRow.appendChild(imagemHeader);
+    headerRow.appendChild(tipoHeader);
+    thead.appendChild(headerRow);
+    
+    // Preenchendo linhas da tabela
+    data.forEach((registro) => {
+      const row = document.createElement('tr');
+      const nomeCell = document.createElement('td');
+      const imagemCell = document.createElement('td');
+      const tipoCell = document.createElement('td');
+      
+      nomeCell.textContent = registro.nome;
+      tipoCell.textContent = registro.tipo;
+      const imagem = document.createElement('img');
+      imagem.src = registro.imagem;
+      imagemCell.appendChild(imagem);
+      
+      row.appendChild(nomeCell);
+      row.appendChild(imagemCell);
+      row.appendChild(tipoCell);
+      tbody.appendChild(row);
+    });
+    
+    // Adicionando cabeçalho e corpo da tabela ao elemento registros
+    table.appendChild(thead);
+    table.appendChild(tbody);
+    registros.appendChild(table);
+  })
+  .catch((error) => {
+    console.error('Erro ao buscar registros no servidor:', error);
+  });
+  </script>
+</body>
+
+</html>
