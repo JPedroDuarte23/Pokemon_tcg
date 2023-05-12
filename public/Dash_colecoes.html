@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My CardDex | Coleções</title>
+  <link rel="stylesheet" href="css/style_dash_geral.css">
+  <link rel="stylesheet" href="css/css_tabelas.css">
+  <script src="https://kit.fontawesome.com/c52875e8e8.js" crossorigin="anonymous"></script>
+  <script type="text/javascript" src="js/redirecionamentos.js"></script>
+</head>
+
+<body>
+  <div id="div_pop_up" class="registrar">
+    <div id="blur">
+      <div class="pop_up">
+        <h3>Registrar Cartas</h3>
+        <hr>
+        <form method="post" action="http://localhost:3000/search">
+          <table>
+            <tr>
+              <td><label for="nomePokemonInput">Nome da carta:</label></td>
+              <td></td>
+              <td><label for="selectSupertype">Tipo da carta:</label></td>
+            </tr>
+            <tr>
+              <td><input type="text" id="nomePokemonInput" name="nomePokemonInput"></td>
+              <td></td>
+              <td>
+                <select id="selectSupertype" name="selectSupertype">
+                  <option value="pokemon">Pokemon</option>
+                  <option value="trainer">Treinador</option>
+                  <option value="energy">Energia</option>
+                </select>
+              </td>
+            </tr>
+            <tr>
+              <td><label for="subtypeInput">Estágio do pokemon:</label></td>
+              <td></td>
+              <td><label for="typesInput">Tipo do pokemon:</label></td>
+            </tr>
+            <tr>
+              <td><input type="text" id="subtypeInput" name="subtypeInput"></td>
+              <td></td>
+              <td><input type="text" id="typesInput" name="typesInput"></td>
+            </tr>
+            <tr>
+              <td><label for="rarityInput">Raridade:</label></td>
+              <td></td>
+              <td><label for="setInput">Set</label></td>
+            </tr>
+            <tr>
+              <td><input type="text" id="rarityInput" name="rarityInput"></td>
+              <td></td>
+              <td><input type="text" id="setInput" name="setInput"></td>
+            </tr>
+          </table>
+          <button type="submit" id="searchButton">Search</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <section class="main" id="corpo_principal">
+    <div class="sidebar">
+      <img src="imagens/Logo_pokemon.png" class="logomarca" id="img_logo" onclick="redirecionar_home()">
+      <ul>
+        <li><a href="Dash_inicial.html"> <i class="fa-solid fa-house fa-lg"></i>Home</a>
+        </li>
+        <li><a href="Dash_colecoes.html" class="ativado"><i class="fa-solid fa-box-open fa-lg"></i>Coleção</a></li>
+        <li><a href="Dash_decks.html"><i class="fa-solid fa-layer-group fa-lg"></i>Decks</a></li>
+        <li><a href="Dashboard_cofig.html"><i class="fa-solid fa-file-lines fa-lg"></i>Informações</a></li>
+      </ul>
+
+    </div>
+    <div class="caixa_maior">
+      <header class="">
+        <div>
+          <h2>Coleção</h2>
+          <div class="pesquisar">
+            <input type="text" class="barra_de_pesquisa" placeholder="Procura algo específico?">
+            <button class="lupa" type="submit">
+              <i class="fa-solid fa-search"></i>
+            </button>
+          </div>
+        </div>
+        <div class="lateral_icones">
+          <div class="icone" onclick=""><i class="fa-solid fa-circle-question fa-lg"></i></div>
+          <div class="icone" onclick=""><i class="fa-solid fa-bell fa-lg"></i></div>
+          <div class="user">
+            <div class="circulo"></div>
+            <h4>Treinador &nbsp; <i class="fa-solid fa-angle-down fa-xs"></i></h4>
+          </div>
+        </div>
+      </header>
+      <section class="botoes light_mode">
+        <button class="botao_ativado" onclick="mostrar_registros()">Cartas Registradas</button>
+        <button onclick="mostrar_colecao()">Todas as Cartas</button>
+        <button onclick="">Ultra-raras</button>
+        <button onclick="">Raras</button>
+        <button onclick="">Incomuns</button>
+        <button onclick="">Comuns</button>
+        <button onclick="registrar_carta()" class="registrador"><i class="fa-solid fa-plus"></i>Adicionar Carta</button>
+      </section>
+      <section id="secao_visao_geral">
+        <div class="caixa_graficos" id="caixaGraficos">
+          <div class="titulo_caixa_graficos">
+            <h2>Cartas Registradas</h2>
+          </div>
+          <div id="cartasRegistradas" class="caixa_novas_cartas"></div>
+        </div>
+      </section>
+</body>
+
+</html>
+<script>
+  function registrar_carta() {
+    div_pop_up.style.display = "flex"
+  }
+  function voltar() {
+    div_pop_up.style.display = "none"
+  }
+  searchButton.addEventListener('click', voltar);
+  fetch(`/cartas/informacoes`)
+    .then(response => response.json())
+    .then(data => {
+      // Criar o HTML para a carta com base nos dados recebidos do servidor
+      for (i = 0; i <= data.length - 1; i++) {
+        document.getElementById('cartasRegistradas').innerHTML += `
+          <img src="${data[i].images.small}">
+      `;
+      }
+    }).catch(error => {
+      console.log(error);
+    });
+
+  function mostrar_colecao() {
+    const caixaGraficos = document.getElementById('caixaGraficos');
+    caixaGraficos.innerHTML = `
+    <div class="titulo_caixa_graficos"><h2>Coleção</h2></div>
+    <div id="cartasColecao" class="caixa_colecao">
+      <table id="tabela">
+        <thead>
+          <tr>
+            <th>Imagem</th>
+            <th>Nome</th>
+            <th>Tipo</th>
+        </tr>
+      </thead>
+      <tbody id="corpo_tabela">
+        </tbody>
+    </table>
+    </div>
+    `
+    fetch('http://localhost:3000/registros')
+      .then((response) => response.json())
+      .then((data) => {
+        const tabelas = document.getElementById('tabela');
+        const tbody = document.getElementById('corpo_tabela');
+
+        data.forEach((registro) => {
+          //Configurando linhas e os tds para inserir os dados do banco
+          const linha = document.createElement('tr');
+          const linhaSeparadora = document.createElement('tr');
+          const nomeCell = document.createElement('td');
+          const imagemCell = document.createElement('td');
+          const tipoCell = document.createElement('td');
+          const separador = document.createElement('td')
+
+          // Colocando imagem no td
+          const imagem = document.createElement('img');
+          imagem.src = registro.imagem;
+          imagemCell.appendChild(imagem);
+
+          nomeCell.textContent = registro.nome;
+          tipoCell.textContent = registro.tipo;
+
+          // Adicionado tudo com appendChild (linha[imagem, nome, tipo])
+          linha.appendChild(imagemCell);
+          linha.appendChild(nomeCell);
+          linha.appendChild(tipoCell);
+          tbody.appendChild(linha);
+
+          imagem.classList.add('imagem_tabela');
+        });
+      })
+      .catch((error) => {
+        console.error('Erro ao buscar registros no servidor:', error);
+      });
+  }
+
+  function mostrar_registros() {
+    const caixaGraficos = document.getElementById('caixaGraficos');
+    caixaGraficos.innerHTML = `
+    <div  class="titulo_caixa_graficos"><h2>Cartas Registradas</h2></div>
+    <div id="cartasRegistradas"></div>
+    `
+    fetch(`/cartas/informacoes`)
+      .then(response => response.json())
+      .then(data => {
+        // Criar o HTML para a carta com base nos dados recebidos do servidor
+        for (i = 0; i <= data.length - 1; i++) {
+          document.getElementById('cartasRegistradas').innerHTML += `
+          <img src="${data[i].images.small}">
+      `;
+        }
+      }).catch(error => {
+        console.log(error);
+      });
+  }
+</script>

@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My CardDex | Home</title>
+
+    <link rel="stylesheet" href="css/style_index.css">
+    <link rel="stylesheet" href="css/css_geral.css">
+    <link rel="stylesheet" href="fontes/fonts.css">
+
+    <script src="https://kit.fontawesome.com/c52875e8e8.js" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="js/vanilla-tilt.js"></script>
+    <script type="text/javascript" src="js/textos_espancoes.js"></script>
+    <script type="text/javascript" src="js/redirecionamentos.js"></script>
+
+</head>
+
+<body>
+    <div class="menu_log">
+        <ul class="lista_log">
+            <li><a href="login_cadastro.html">ENTRAR</a></li>
+            <li>|</li>
+            <li><a href="">CADASTRAR</a></li>
+        </ul>
+    </div>
+    <header>
+        <div class="container">
+            <img src="imagens/Logo_pokemon.png" alt="" onclick="redirecionar_home()">
+            <ul class="navbar">
+                <li><a href="#div_secao_sobre">Sobre</a></li>
+                <li><a href="#div_secao_ferramenta">Como funciona</a></li>
+                <li><a href="#div_secao_raridade">Cartas raras</a></li>
+                <li><a href="#div_secao_colecoes">Coleções lançadas</a></li>
+            </ul>
+        </div>
+    </header>
+    <div class="banner">
+        <div class="container">
+            <h1>Conheça a sua nova ferramenta para gerenciar sua coleção de cartas</h1>
+            <h3>Com o nosso gerenciador ficou muito mais fácil colecionar e montar decks fortes para jogar com seus
+                amigos e competitivamente!</h3>
+            <button onclick="redirecionar_ferramenta()" class="botao_especial">Saiba mais <i
+                    class="fa-solid fa-angle-right"></i></button>
+        </div>
+    </div>
+    <div class="secao_sobre cima" id="div_secao_sobre">
+        <div class="container">
+            <img src="imagens/pokebola_carta.png" alt="">
+            <div class="conteudo_lateral">
+                <h1>O que é Pokémon TCG?</h1>
+                <hr>
+                <h4>Nullam mollis urna sed nibh dignissim, quis rhoncus erat interdum. Etiam eget elit dolor. Integer et
+                    enim dolor. Mauris tempor at tellus at congue. Proin vel pellentesque quam, at tincidunt dui.
+                    Vestibulum
+                    blandit nibh ipsum, ut malesuada ante tincidunt a. Sed et posuere sapien. Quisque feugiat ante non
+                    semper ultricies. Sed auctor turpis arcu, vitae volutpat nisi volutpat at. Nulla id nulla ac quam
+                    scelerisque pretium. Suspendisse sit amet turpis consectetur, sagittis nulla ac, vehicula purus.
+                    Etiam
+                    non convallis felis. Aenean fringilla maximus libero, at lobortis justo tempus eget. Vestibulum a
+                    augue
+                    sit amet dolor mattis consequat. </h4>
+            </div>
+        </div>
+    </div>
+    <div class="secao_sobre baixo">
+        <div class="container">
+            <div class="conteudo_lateral">
+                <h1>Aprenda a jogar
+                    com a Academia de Baralho Campeão</h1>
+                <hr>
+                <h4>Assista aos vídeos para aprender os fundamentos do pokemon TCG. Não importa se você é um jogador
+                    iniciante ou um jogador mais avançado. Sempre a muito a aprender!</h4>
+                <button onclick="redirecionar_aulas()" class="botao_especial">
+                    ASSISTA AGORA! <i class="fa-solid fa-angle-right"></i>
+                </button>
+            </div>
+            <img src="imagens/pikachu_giz.png" alt="">
+        </div>
+    </div>
+    <div class="secao_ferramenta" id="div_secao_ferramenta">
+        <img src="imagens/gif_starters final.gif" alt="" class="starters">
+        <div class="texto_lateral">
+            <h1>Gerenciador de coleções e decks</h1>
+            <hr>
+            <p> Devido ao grande volume a variedade de cartas existentes e ao acúmulo de cartas repetidas nas coleções
+                fica difícil para os jogadores se organizarem e acharem cartas específicas que estão procurando. A
+                situação piora pois pela falta de organização fica difícil montar decks bons e eficientes para jogar</p>
+            <p>
+                Portando nós criamos uma ferramenta gratúita onde o jogador pode registrar suas cartas, montar decks,
+                visualizar a progreção da quantidade de cartas restantes em um set/geração e procurar por cartas
+                específicas
+            </p>
+            <button onclick="redirecionar_cadastro()">Cadastre-se e experimente!</button>
+        </div>
+    </div>
+
+    <div class="secao_raridade" id="div_secao_raridade">
+        <div class="container">
+            <section class="texto_e_carta">
+                <div class="texto_raridade">
+                    <h1>Raridade das cartas</h1>
+                    <hr>
+                    <p>Nullam mollis urna sed nibh dignissim, quis rhoncus erat interdum. Etiam eget elit dolor. Integer
+                        et
+                        enim dolor. Mauris tempor at tellus at congue. Proin vel pellentesque quam, at tincidunt dui.
+                        Vestibulum
+                        blandit nibh ipsum, ut malesuada ante tincidunt a. Sed et posuere sapien. Quisque feugiat ante
+                        non
+                        semper ultricies. Sed auctor turpis arcu, vitae volutpat nisi volutpat at. Nulla id nulla ac
+                        quam
+                        scelerisque pretium. Suspendisse sit amet turpis consectetur, sagittis nulla ac, vehicula purus.
+                        Etiam
+                        non convallis felis. Aenean fringilla maximus libero, at lobortis justo tempus eget. Vestibulum
+                        a
+                        augue
+                        sit amet dolor mattis consequat. </p>
+                    <img src="" alt="">
+                </div>
+
+                <div id="card" class="card">
+                    <div id="back" class="face sumiu" data-tilt>><img src="imagens/pngkit_pokemon-card-png_2416981.png"
+                            class="back_card"></div>
+                    <div id="front" class="face" data-tilt data-tilt-glare data-tilt-max-glare="0.5"> <img
+                            src="imagens/Lycanroc_GX.png" class="Lycanroc_GX" id="poke_card">
+                    </div>
+                </div>
+            </section>
+            <img src="imagens/raridades.png" alt="" class="raridades">
+        </div>
+    </div>
+    <div class="secao_colecoes" id="div_secao_colecoes">
+        <div class="container">
+            <h1>Gerações e expansções</h1>
+            <div class="select_img">
+                <img src="" alt="" id="logo_geracao">
+                <input type="text" name="geracao" placeholder="Selecione a geração" id="input_select"
+                    onfocus="dropdown(0)" onblur="dropdown(1)">
+            </div>
+            <div class="section_teste">
+                <div class="dropDown">
+                    <div class="item" id="item-1" onMouseDown="category(1)">Sun e Moon</div>
+                    <div class="item" id="item-2" onMouseDown="category(2)">Espada e Escudo</div>
+                </div>
+            </div>
+            <div id="div_linha_do_tempo">
+            </div>
+            <div id="div_detalhes">
+
+            </div>
+        </div>
+    </div>
+    </div>
+    </div>
+    <footer>
+    </footer>
+</body>
+
+</html>
+
+<script>
+    var valor_select = document.querySelector('#input_select');
+    var item = 0;
+    function category(id) {
+        item = document.getElementById('item-' + id).innerHTML;
+        valor_select.value = item;
+    }
+ 
+    /* Seção animação da carta girando e trocando de imagem */
+
+    VanillaTilt.init(document.querySelectorAll(".face"), {
+        max: 25,
+        speed: 400,
+    });
+
+    const card = document.querySelector("#card")
+
+    var contador = 2
+
+    setInterval(function () {
+        setTimeout(function () {
+            back.classList.toggle("sumiu")
+        }, 240)
+        card.classList.toggle("flip")
+
+        setTimeout(function () {
+            if (contador % 6 == 1) {
+                poke_card.setAttribute('src', 'imagens/Lycanroc_GX.png')
+                poke_card.setAttribute('class', 'Lycanroc_GX')
+            } else if (contador % 6 == 2) {
+                poke_card.setAttribute('src', 'imagens/Tapu_lele.png')
+                poke_card.setAttribute('class', 'Tapu_lele_GX')
+            } else if (contador % 6 == 3) {
+                poke_card.setAttribute('src', 'imagens/Cynthia_full_art.png')
+                poke_card.setAttribute('class', 'Cynthia')
+            } else if (contador % 6 == 4){
+                poke_card.setAttribute('src', 'imagens/Mewtwo_GX.png')
+                poke_card.setAttribute('class', 'Mewtwo_GX')
+            } else if (contador % 6 == 5) {
+                poke_card.setAttribute('src', 'imagens/zekrom_pikachu.png')
+                poke_card.setAttribute('class', 'Tapu_lele_GX')
+            } else {
+                poke_card.setAttribute('src', 'imagens/venusaur_celebi.png')
+                poke_card.setAttribute('class', 'Tapu_lele_GX')
+            }
+            contador++
+        }, 375)
+        setTimeout(function () {
+            back.classList.toggle("sumiu")
+        }, 675)
+    }, 8000)
+    function remover_animacao() {
+        div_colecao_detalhe.classList.remove("transicao")
+        div_texto_detalhe.classList.remove("transicao")
+    }
+</script>

@@ -1,0 +1,109 @@
+/* Caixa dos gráficos */
+#secao_visao_geral {
+    width: 100%;
+    height: 90%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+.caixa_graficos {
+    width: 90%;
+    height: 75vh;
+    background-color: #3662AD;
+    margin: 0 0 4% 0;
+    border-radius: 10px;
+    border: 15px solid #232C5F;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+.titulo_caixa_graficos {
+    display: flex;
+    align-items: center;
+    height: 8vh;
+    width: 100%;
+    color: white;
+    background-color: #232C5F;
+    padding-bottom: 1%;
+    padding-left: 2%;
+    box-sizing: border-box;
+}
+.sub_secao_1 {
+    width: 100%;
+    height: 40%;
+    margin: 1.5%;
+    display: flex;
+    gap:1.5%
+}
+.caixa_1{
+    width: 50%;
+    height: 100%;
+    background-color: #232C5F;
+    border-radius: 10px;
+}
+.caixa_2 {
+    width: 45.5%;
+    height: 100%;
+    background-color: #232C5F;
+    border-radius: 10px;
+}
+.caixa_3 {
+    width: 97%;
+    height: 50%;
+    background-color: #232C5F;
+    border-radius: 10px;
+    margin: 0 1.5% 1.5% 1.5%;
+}
+#cartasRegistradas {
+    width: 100%;
+    height: 100%;
+}
+#cartasRegistradas img {
+    margin: 10px;
+    border-radius: 10px;
+    height: auto;
+    width: auto;
+    max-width: 20%;
+}
+#cartasRegistradas img:hover {
+    transform: scale(1.05,1.05);
+    transition: transform 0.5s;
+}
+.caixa_novas_cartas {
+    overflow-y: auto;
+    height: 63vh;
+}
+.caixa_colecao {
+    overflow-y: auto;
+    height: 63vh;
+    display: flex;
+    justify-content: center;
+}
+
+/* Tabelas */ 
+
+#tabela {
+    width: 90%;
+    margin: 0;
+    color: white;
+    border-collapse: collapse;
+    text-align: center;
+}
+th {
+    padding: 10px 0;
+}
+.imagem_tabela {
+    width: 50px;
+}
+::-webkit-scrollbar {
+    width: 5px;
+    background-color: #1d1d1d;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background-color: #FFCB05;
+    border-radius: 5px;
+  }
