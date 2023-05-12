@@ -46,11 +46,11 @@ const serial = async (
   // Pega os dados inseridos pelo usuário no formulário que passam pelo http://localhost:300/search
 
   app.post('/search', (req, res) => {
-    const { nomePokemonInput, subtypeInput, typesInput, rarityInput } = req.body;
+    const { nomePokemonInput, subtypeInput, typesInput, rarityInput, setInput } = req.body;
 
   // Faz a requisição da API que retorna uma lista de JSON, seleciona os dados do indice[0] que serão armazenados desse JSON
 
-    axios.get(`https://api.pokemontcg.io/v2/cards?q=name:"${nomePokemonInput}" subtypes:"${subtypeInput}" types:"${typesInput}" rarity:"${rarityInput}"`)
+    axios.get(`https://api.pokemontcg.io/v2/cards?q=name:"${nomePokemonInput}" subtypes:"${subtypeInput}" types:"${typesInput}" rarity:"${rarityInput}" set:{id:}`)
       .then(response => {
         const cardData = response.data.data[0];
         const cardName = cardData.name;
