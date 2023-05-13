@@ -22,13 +22,13 @@ var mySqlConfig = {
     host: "localhost",
     database: "pokemon_tcg",
     user: "aluno",
-    password: "sptech",
+     password: "galho123",
 };
-const connection = mysql.createConnection({
+var connection = mysql.createConnection({
     host: "localhost",
     database: "pokemon_tcg",
     user: "aluno",
-    password: "sptech",
+    password: "galho123",
 });
 
 function executar(instrucao) {
@@ -50,7 +50,7 @@ function executar(instrucao) {
         });
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         return new Promise(function (resolve, reject) {
-            var conexao = mysql.createConnection(mySqlConfig);
+            var conexao = mysql.createConnection(mySqlConfig)
             conexao.connect();
             conexao.query(instrucao, function (erro, resultados) {
                 conexao.end();

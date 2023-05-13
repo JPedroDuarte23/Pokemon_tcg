@@ -21,9 +21,9 @@
 <body>
     <div class="menu_log">
         <ul class="lista_log">
-            <li><a href="login_cadastro.html">ENTRAR</a></li>
+            <li><a href="login_cadastro.html" id="a_entrar">ENTRAR</a></li>
             <li>|</li>
-            <li><a href="">CADASTRAR</a></li>
+            <li><a href="login_cadastro.html" id="a_cadastrar">CADASTRAR</a></li>
         </ul>
     </div>
     <header>
@@ -40,6 +40,7 @@
     <div class="banner">
         <div class="container">
             <h1>Conheça a sua nova ferramenta para gerenciar sua coleção de cartas</h1>
+            <hr>
             <h3>Com o nosso gerenciador ficou muito mais fácil colecionar e montar decks fortes para jogar com seus
                 amigos e competitivamente!</h3>
             <button onclick="redirecionar_ferramenta()" class="botao_especial">Saiba mais <i
@@ -133,7 +134,7 @@
     </div>
     <div class="secao_colecoes" id="div_secao_colecoes">
         <div class="container">
-            <h1>Gerações e expansções</h1>
+            <h1>Gerações e expanções</h1>
             <div class="select_img">
                 <img src="" alt="" id="logo_geracao">
                 <input type="text" name="geracao" placeholder="Selecione a geração" id="input_select"
@@ -161,6 +162,16 @@
 </html>
 
 <script>
+    const entrar = document.getElementById('a_entrar');
+    const cadastrar = document.getElementById('a_cadastrar');
+
+    entrar.addEventListener('click', () => {
+        localStorage.setItem('posicaoDiv', 'direita');
+    });
+
+    cadastrar.addEventListener('click', () => {
+        localStorage.setItem('posicaoDiv', 'esquerda');
+    });
     var valor_select = document.querySelector('#input_select');
     var item = 0;
     function category(id) {

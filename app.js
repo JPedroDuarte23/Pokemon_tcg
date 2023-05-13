@@ -8,14 +8,13 @@ var PORTA = process.env.AMBIENTE_PROCESSO == "desenvolvimento" ? 3000 : 8080;
 var { connection } = require("./src/database/config.js")
 var app = express();
 var axios = require('axios');
-var bodyParser = require('body-parser');
 var PokemonTCG = require('pokemontcgsdk');
 PokemonTCG.configure({ apiKey: '52749edc-448b-4551-9345-b8ba0ae3d2a3' });
 
 var indexRouter = require("./src/routes/index");
-var usuarioRouter = require("./src/routes/usuarios");
-var avisosRouter = require("./src/routes/avisos");
-var medidasRouter = require("./src/routes/medidas");
+var usuarioRouter = require("./src/routes/usuarios.js");
+var avisosRouter = require("./src/routes/avisos.js");
+var medidasRouter = require("./src/routes/medidas.js");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -28,7 +27,6 @@ app.use("/usuarios", usuarioRouter);
 app.use("/avisos", avisosRouter);
 app.use("/medidas", medidasRouter)
 
-app.use(bodyParser.urlencoded({ extended: false }));
 
 app.get('/registros', (req, res) => {
     const selectQuery = 'SELECT * FROM cartas';
@@ -40,6 +38,7 @@ app.get('/registros', (req, res) => {
       } else {
         res.status(200).json(results);
       }
+      // connection.end()
     });
   });
   
@@ -63,7 +62,7 @@ app.get('/registros', (req, res) => {
   
     // Insere no banco de dados as cartas que ele registrou
   
-          const insertQuery = `INSERT INTO cartas (nomeCarta, imagem, tipo) VALUES (?, ?, ?)`;
+          const insertQuery = `INSERT INTO cartas (nome, imagem, tipo) VALUES (?, ?, ?)`;
           const values = [cardName, cardImage, cardType];
   
     // PokeInfo é uma lista de Json
@@ -81,6 +80,7 @@ app.get('/registros', (req, res) => {
         .catch(error => {
           console.log('Erro ao fazer a consulta na API Pokemon TCG:', error);
         })
+        // connection.end()
     })
   }
   const servidor = (

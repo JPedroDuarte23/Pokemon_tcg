@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,66 +10,81 @@
     <link rel="stylesheet" href="css/css_geral.css">
     <link rel="stylesheet" href="fontes/fonts.css">
 </head>
+
 <body>
     <section id="cabecalho">
-    <header>
-        <div class="container">
-            <img src="imagens/Logo_pokemon.png">
-            <ul class="navbar">
-                <li><a href="Index.html">Voltar</a></li>
-            </ul>
+        <header>
+            <div class="container">
+                <img src="imagens/Logo_pokemon.png">
+                <ul class="navbar">
+                    <li><a href="Index.html">Voltar</a></li>
+                </ul>
+            </div>
+        </header>
+    </section>
+    <section id="entrar_e_cadastrar">
+        <div class="secao_form">
+            <div class="bloco" id="div_bloco">
+                <h1 id="h1_bloco">Seja bem vindo novamente!</h1>
+                <button onclick="animacao_cadastrar()" id="button_cobrir">
+                    Entrar
+                </button>
+            </div>
+            <form class="entrar">
+                <h1>LOGIN</h1>
+                <hr>
+                <label for="input_user">Nome de usuário:</label>
+                <input type="text" id="input_user_entrar">
+                <label for="input_email">E-mail:</label>
+                <input type="text" id="input_email_entrar">
+                <label for="input_senha">Senha:</label>
+                <input type="text" id="input_senha_entrar">
+                <button class="botao_especial" onclick="entrar()" type="button">Entrar</button>
+            </form>
+            <form class="cadastro">
+                <h1>CADASTRAR</h1>
+                <hr>
+                <label for="input_user">Nome de usuário:</label>
+                <input type="text" id="input_user">
+                <label for="input_email">Digite seu e-mail:</label>
+                <input type="text" id="input_email">
+                <label for="input_confirme_email">Confirme seu e-mail:</label>
+                <input type="text" id="input_confirme_email">
+                <label for="input_senha">Crie sua senha:</label>
+                <input type="text" id="input_senha">
+                <label for="input_confirme_senha">Confirme sua senha:</label>
+                <input type="text" id="input_confirmar_senha">
+                <button class="botao_especial" onclick="cadastrar()" type="button">Cadastrar</button>
+            </form>
         </div>
-    </header>
-</section>  
-<section id="entrar_e_cadastrar">
-    <div class="secao_form">
-        <div class="bloco" id="div_bloco">
-            <h1 id="h1_bloco">Seja bem vindo novamente!</h1>
-            <button onclick="animacao_cadastrar()" id="button_cobrir">
-                Entrar
-            </button>
-        </div>
-        <form class="entrar">
-            <h1>LOGIN</h1>
-            <hr>
-            <label for="input_user">Nome de usuário:</label>
-            <input type="text" id="input_user">
-            <label for="input_email">E-mail:</label>
-            <input type="text" id="input_email">
-            <label for="input_senha">Senha:</label>
-            <input type="text" id="input_senha">
-            <button class="botao_especial" onclick="entrar_dashboard()" type="button">Entrar</button>
-        </form>
-        <form class="cadastro">
-            <h1>CADASTRAR</h1>
-            <hr>
-            <label for="input_user">Nome de usuário:</label>
-            <input type="text" id="input_user">
-            <label for="input_email">Digite seu e-mail:</label>
-            <input type="text" id="input_email">
-            <label for="input_confirme_email">Confirme seu e-mail:</label>
-            <input type="text" id="input_confirme_email">
-            <label for="input_senha">Crie sua senha:</label>
-            <input type="text" id="input_senha">
-            <label for="input_confirme_senha">Confirme sua senha:</label>
-            <input type="text" id="input_confirme_senha">
-            <button class="botao_especial" onclick="entrar_dashboard()" type="button">Cadastrar</button>
-        </form>
-    </div>
-</section> 
-<footer>
+    </section>
+    <footer>
 
-</footer> 
+    </footer>
 </body>
+
 </html>
 <script>
+    const posicaoDiv = localStorage.getItem('posicaoDiv');
+    const divLogin = document.getElementById('div_bloco');
+
+    if (posicaoDiv === 'esquerda') {
+        divLogin.classList.add('esquerda');
+    } 
+    else if (posicaoDiv === 'direita') {
+        divLogin.classList.add('direita');
+        h1_bloco.innerHTML = `Se junte a nós nesse mundo Pokémon!`
+        button_cobrir.innerHTML = `Cadastrar`
+            button_cobrir.setAttribute("onclick", "animacao_entrar();")
+    }
+
     function entrar_dashboard() {
         window.location.href = "Dash_inicial.html"
-}
-     function animacao_cadastrar() {
-        if (div_bloco.classList != "direita") {
-            div_bloco.classList.remove("esquerda")
-            div_bloco.classList.add("direita")
+    }
+    function animacao_cadastrar() {
+        if (divLogin.classList != "direita") {
+            divLogin.classList.remove("esquerda")
+            divLogin.classList.add("direita")
 
 
             h1_bloco.innerHTML = `Se junte a nós nesse mundo Pokémon!`
@@ -77,12 +93,115 @@
         }
     }
     function animacao_entrar() {
-            if (div_bloco.classList != "esquerda") {
-                div_bloco.classList.remove("direita")
-                div_bloco.classList.add("esquerda")
-                h1_bloco.innerHTML = `Seja bem vindo novamente!`
-                button_cobrir.innerHTML = `Entrar`
-                button_cobrir.setAttribute("onclick", "animacao_cadastrar();")
+        if (divLogin.classList != "esquerda") {
+            divLogin.classList.remove("direita")
+            divLogin.classList.add("esquerda")
+            h1_bloco.innerHTML = `Seja bem vindo novamente!`
+            button_cobrir.innerHTML = `Entrar`
+            button_cobrir.setAttribute("onclick", "animacao_cadastrar();")
+        }
+    }
+    function cadastrar() {
+
+        //Recupere o valor da nova input pelo nome do id
+        // Agora vá para o método fetch logo abaixo
+        var nomeVar = input_user.value;
+        var emailVar = input_email.value;
+        var senhaVar = input_senha.value;
+        var confirmacaoSenhaVar = input_confirmar_senha.value;
+
+        if (nomeVar == "" || emailVar == "" || senhaVar == "" || confirmacaoSenhaVar == "") {
+            return false;
+        }
+
+        // Enviando o valor da nova input
+        fetch("/usuarios/cadastrar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                // crie um atributo que recebe o valor recuperado aqui
+                // Agora vá para o arquivo routes/usuario.js
+                nomeServer: nomeVar,
+                emailServer: emailVar,
+                senhaServer: senhaVar
+            })
+        }).then(function (resposta) {
+
+            console.log("resposta: ", resposta);
+
+            if (resposta.ok) {
+                alert("Você se cadastrou com sucesso")
+                    div_bloco.classList.remove("esquerda")
+                    div_bloco.classList.add("direita")
+
+                limparFormulario();
+            } else {
+                throw ("Houve um erro ao tentar realizar o cadastro!");
             }
+        }).catch(function (resposta) {
+            console.log(`#ERRO: ${resposta}`);
+        });
+
+        return false;
+    }
+    function entrar() {
+
+        var emailVarE = input_email_entrar.value;
+        var senhaVarE = input_senha_entrar.value;
+
+        if (emailVarE == "" || senhaVarE == "") {
+            cardErro.style.display = "block"
+            mensagem_erro.innerHTML = "(Mensagem de erro para todos os campos em branco)";
+            return false;
+        }
+
+        console.log("FORM LOGIN: ", emailVarE);
+        console.log("FORM SENHA: ", senhaVarE);
+
+        fetch("/usuarios/autenticar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                emailServer: emailVarE,
+                senhaServer: senhaVarE
+            })
+        }).then(function (resposta) {
+            console.log("ESTOU NO THEN DO entrar()!")
+
+            if (resposta.ok) {
+                console.log(resposta);
+
+                resposta.json().then(json => {
+                    console.log(json);
+                    console.log(JSON.stringify(json));
+
+                    sessionStorage.EMAIL_USUARIO = json.email;
+                    sessionStorage.NOME_USUARIO = json.nome;
+                    sessionStorage.ID_USUARIO = json.id;
+
+                    setTimeout(function () {
+                        window.location = "./Dash_inicial.html";
+                    }, 1000); // apenas para exibir o loading
+
+                });
+
+            } else {
+
+                console.log("Houve um erro ao tentar realizar o login!");
+
+                resposta.text().then(texto => {
+                    console.error(texto);
+                });
+            }
+
+        }).catch(function (erro) {
+            console.log(erro);
+        })
+
+        return false;
     }
 </script>
