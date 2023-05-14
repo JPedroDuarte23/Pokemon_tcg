@@ -11,9 +11,10 @@
     <link rel="stylesheet" href="css/css_tabelas.css">
     <script src="https://kit.fontawesome.com/c52875e8e8.js" crossorigin="anonymous"></script>
     <script type="text/javascript" src="js/redirecionamentos.js"></script>
+    <script src="../js/funcoes.js"></script>
 </head>
 
-<body>
+<body onload="validarSessao()">
     <div id="div_pop_up" class="registrar">
         <div id="blur">
             <div class="pop_up">
@@ -44,6 +45,7 @@
                 <li><a href="Dash_colecoes.html"><i class="fa-solid fa-box-open fa-lg"></i>Coleção</a></li>
                 <li><a href="Dash_decks.html"  class="ativado"><i class="fa-solid fa-layer-group fa-lg"></i>Decks</a></li>
                 <li><a href="Dashboard_cofig.html"><i class="fa-solid fa-file-lines fa-lg"></i>Informações</a></li>
+                <li><a onclick="limparSessao()">Sair</a></li>
             </ul>
 
         </div>
@@ -63,7 +65,7 @@
                     <div class="icone" onclick=""><i class="fa-solid fa-bell fa-lg"></i></div>
                     <div class="user">
                         <div class="circulo"></div>
-                        <h4>Treinador &nbsp; <i class="fa-solid fa-angle-down fa-xs"></i></h4>
+                        <h4 id="nome_usuario"></h4>
                     </div>
                 </div>
             </header>

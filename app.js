@@ -8,6 +8,7 @@ var PORTA = process.env.AMBIENTE_PROCESSO == "desenvolvimento" ? 3000 : 8080;
 var { connection } = require("./src/database/config.js")
 var app = express();
 var axios = require('axios');
+
 var PokemonTCG = require('pokemontcgsdk');
 PokemonTCG.configure({ apiKey: '52749edc-448b-4551-9345-b8ba0ae3d2a3' });
 
@@ -29,7 +30,8 @@ app.use("/medidas", medidasRouter)
 
 
 app.get('/registros', (req, res) => {
-    const selectQuery = 'SELECT * FROM cartas';
+  
+    const selectQuery = `SELECT * FROM cartas `
     connection.connect();
     connection.query(selectQuery, (error, results) => {
       if (error) {
@@ -38,9 +40,9 @@ app.get('/registros', (req, res) => {
       } else {
         res.status(200).json(results);
       }
-      // connection.end()
     });
   });
+
   
   const serial = async (
     PokeInfo
@@ -49,38 +51,39 @@ app.get('/registros', (req, res) => {
     // Pega os dados inseridos pelo usuário no formulário que passam pelo http://localhost:300/search
   
     app.post('/search', (req, res) => {
-      const { nomePokemonInput, subtypeInput, typesInput, rarityInput } = req.body;
-  
+      const { nomePokemonInput, subtypeInput, typesInput, rarityInput, setInput, idInput} = req.body;
     // Faz a requisição da API que retorna uma lista de JSON, seleciona os dados do indice[0] que serão armazenados desse JSON
-  
-      axios.get(`https://api.pokemontcg.io/v2/cards?q=name:"${nomePokemonInput}" subtypes:"${subtypeInput}" types:"${typesInput}" rarity:"${rarityInput}"`)
+
+      axios.get(`https://api.pokemontcg.io/v2/cards?q=name:"${nomePokemonInput}" subtypes:"${subtypeInput}" types:"${typesInput}" rarity:"${rarityInput}" set.id:"${setInput}"`)
         .then(response => {
           const cardData = response.data.data[0];
-          const cardName = cardData.name;
-          const cardImage = cardData.images.small;
-          const cardType = cardData.types;
+          const nome = cardData.name;
+          const imagem = cardData.images.small;
+          const tipo = cardData.types;
+          const raridade = cardData.rarity;
+          const idSet = cardData.set.id;
   
     // Insere no banco de dados as cartas que ele registrou
   
-          const insertQuery = `INSERT INTO cartas (nome, imagem, tipo) VALUES (?, ?, ?)`;
-          const values = [cardName, cardImage, cardType];
+          const insertQuery = `INSERT INTO cartas (nome, imagemURL, tipo, raridade, idSet, fkUsuario) VALUES (?, ?, ?, ?, ?, ?)`;
+          const values = [nome, imagem, tipo, raridade, idSet, idInput];
   
     // PokeInfo é uma lista de Json
-          PokeInfo.push(cardData)
+          PokeInfo.push(cardData);
           connection.connect();
           connection.query(insertQuery, values, (error, results) => {
             if (error) {
               console.log('Erro ao inserir registro na tabela:', error);
-            }
-  
+            } else {
             console.log('Registro inserido com sucesso!');
+            }
             res.redirect('/Dash_colecoes.html');
           });
         })
         .catch(error => {
           console.log('Erro ao fazer a consulta na API Pokemon TCG:', error);
+          res.redirect('/Dash_colecoes.html')
         })
-        // connection.end()
     })
   }
   const servidor = (
