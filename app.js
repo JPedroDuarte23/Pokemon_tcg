@@ -29,17 +29,20 @@ app.use("/avisos", avisosRouter);
 app.use("/medidas", medidasRouter)
 
 
-app.get('/registros', (req, res) => {
+
   
-    const selectQuery = `SELECT * FROM cartas `
+  app.get('/registros', (req, res) => {
+    const id_usuario = req.params.id;
+    // faz o select na tabela cartas
     connection.connect();
-    connection.query(selectQuery, (error, results) => {
+    const sql = `SELECT * FROM cartas`;
+    connection.query(sql, [id_usuario], (error, results, fields) => {
       if (error) {
-        console.error('Erro ao buscar registros no banco de dados:', error);
-        res.status(500).json({ error: 'Erro ao buscar registros no banco de dados' });
-      } else {
-        res.status(200).json(results);
+        console.error(error);
+        res.status(500).json({ error: 'Erro ao buscar as cartas.' });
+        return;
       }
+      res.json(results); // envia a resposta para o cliente
     });
   });
 

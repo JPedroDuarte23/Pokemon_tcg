@@ -61,7 +61,7 @@
           <input id="idInput" name="idInput" type="hidden">
           <button type="submit" id="searchButton">Search</button>
         </form>
-          
+
       </div>
     </div>
   </div>
@@ -140,7 +140,8 @@
     });
 
   function mostrar_colecao() {
-    const caixaGraficos = document.getElementById('caixaGraficos');
+    var id = Number(idInput.value)
+    var caixaGraficos = document.getElementById('caixaGraficos');
     caixaGraficos.innerHTML = `
     <div class="titulo_caixa_graficos"><h2>Coleção</h2></div>
     <div id="cartasColecao" class="caixa_colecao">
@@ -157,13 +158,14 @@
     </table>
     </div>
     `
-    fetch('http://localhost:3000/registros')
+    fetch(`http://localhost:3000/registros`)
       .then((response) => response.json())
       .then((data) => {
         const tabelas = document.getElementById('tabela');
         const tbody = document.getElementById('corpo_tabela');
+        const cartasDoUsuario = data.filter(registro => registro.fkUsuario === id);
 
-        data.forEach((registro) => {
+        cartasDoUsuario.forEach((registro) => {
           //Configurando linhas e os tds para inserir os dados do banco
           const linha = document.createElement('tr');
           const linhaSeparadora = document.createElement('tr');
@@ -195,7 +197,7 @@
   }
 
   function mostrar_registros() {
-    const caixaGraficos = document.getElementById('caixaGraficos');
+    var caixaGraficos = document.getElementById('caixaGraficos');
     caixaGraficos.innerHTML = `
     <div  class="titulo_caixa_graficos"><h2>Cartas Registradas</h2></div>
     <div id="cartasRegistradas"></div>
