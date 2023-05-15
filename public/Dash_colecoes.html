@@ -13,7 +13,7 @@
   <script src="../js/funcoes.js"></script>
 </head>
 
-<body onload="validarSessao()">
+<body onload="validarSessao(), query_colecao(1)">
   <div id="div_pop_up" class="registrar">
     <div id="blur">
       <div class="pop_up">
@@ -74,7 +74,7 @@
         <li><a href="Dash_colecoes.html" class="ativado"><i class="fa-solid fa-box-open fa-lg"></i>Coleção</a></li>
         <li><a href="Dash_decks.html"><i class="fa-solid fa-layer-group fa-lg"></i>Decks</a></li>
         <li><a href="Dashboard_cofig.html"><i class="fa-solid fa-file-lines fa-lg"></i>Informações</a></li>
-        <li><a onclick="limparSessao()">Sair</a></li>
+        <li><a onclick="limparSessao()"><i class="fa-solid fa-right-from-bracket fa-lg"></i>Sair</a></li>
       </ul>
 
     </div>
@@ -99,12 +99,12 @@
         </div>
       </header>
       <section class="botoes light_mode">
-        <button class="botao_ativado" onclick="mostrar_registros()">Cartas Registradas</button>
-        <button onclick="mostrar_colecao()">Todas as Cartas</button>
-        <button onclick="">Ultra-raras</button>
-        <button onclick="">Raras</button>
-        <button onclick="">Incomuns</button>
-        <button onclick="">Comuns</button>
+        <button class="botao_ativado" onclick="query_colecao(1)">Cartas Registradas</button>
+        <button onclick="query_colecao(2)">Todas as Cartas</button>
+        <button onclick="query_colecao(3)">Ultra-raras</button>
+        <button onclick="query_colecao(4)">Raras</button>
+        <button onclick="query_colecao(5)">Incomuns</button>
+        <button onclick="query_colecao(6)">Comuns</button>
         <button onclick="registrar_carta()" class="registrador"><i class="fa-solid fa-plus"></i>Adicionar Carta</button>
       </section>
       <section id="secao_visao_geral">
@@ -119,100 +119,5 @@
 
 </html>
 <script>
-  function registrar_carta() {
-    div_pop_up.style.display = "flex"
-  }
-  function voltar() {
-    div_pop_up.style.display = "none"
-  }
-  searchButton.addEventListener('click', voltar);
-  fetch(`/cartas/informacoes`)
-    .then(response => response.json())
-    .then(data => {
-      // Criar o HTML para a carta com base nos dados recebidos do servidor
-      for (i = 0; i <= data.length - 1; i++) {
-        document.getElementById('cartasRegistradas').innerHTML += `
-          <img src="${data[i].images.small}">
-      `;
-      }
-    }).catch(error => {
-      console.log(error);
-    });
-
-  function mostrar_colecao() {
-    var id = Number(idInput.value)
-    var caixaGraficos = document.getElementById('caixaGraficos');
-    caixaGraficos.innerHTML = `
-    <div class="titulo_caixa_graficos"><h2>Coleção</h2></div>
-    <div id="cartasColecao" class="caixa_colecao">
-      <table id="tabela">
-        <thead>
-          <tr>
-            <th>Imagem</th>
-            <th>Nome</th>
-            <th>Tipo</th>
-        </tr>
-      </thead>
-      <tbody id="corpo_tabela">
-        </tbody>
-    </table>
-    </div>
-    `
-    fetch(`http://localhost:3000/registros`)
-      .then((response) => response.json())
-      .then((data) => {
-        const tabelas = document.getElementById('tabela');
-        const tbody = document.getElementById('corpo_tabela');
-        const cartasDoUsuario = data.filter(registro => registro.fkUsuario === id);
-
-        cartasDoUsuario.forEach((registro) => {
-          //Configurando linhas e os tds para inserir os dados do banco
-          const linha = document.createElement('tr');
-          const linhaSeparadora = document.createElement('tr');
-          const nomeCell = document.createElement('td');
-          const imagemCell = document.createElement('td');
-          const tipoCell = document.createElement('td');
-          const separador = document.createElement('td')
-
-          // Colocando imagem no td
-          const imagem = document.createElement('img');
-          imagem.src = registro.imagemURL;
-          imagemCell.appendChild(imagem);
-
-          nomeCell.textContent = registro.nome;
-          tipoCell.textContent = registro.tipo;
-
-          // Adicionado tudo com appendChild (linha[imagem, nome, tipo])
-          linha.appendChild(imagemCell);
-          linha.appendChild(nomeCell);
-          linha.appendChild(tipoCell);
-          tbody.appendChild(linha);
-
-          imagem.classList.add('imagem_tabela');
-        });
-      })
-      .catch((error) => {
-        console.error('Erro ao buscar registros no servidor:', error);
-      });
-  }
-
-  function mostrar_registros() {
-    var caixaGraficos = document.getElementById('caixaGraficos');
-    caixaGraficos.innerHTML = `
-    <div  class="titulo_caixa_graficos"><h2>Cartas Registradas</h2></div>
-    <div id="cartasRegistradas"></div>
-    `
-    fetch(`/cartas/informacoes`)
-      .then(response => response.json())
-      .then(data => {
-        // Criar o HTML para a carta com base nos dados recebidos do servidor
-        for (i = 0; i <= data.length - 1; i++) {
-          document.getElementById('cartasRegistradas').innerHTML += `
-          <img src="${data[i].images.small}">
-      `;
-        }
-      }).catch(error => {
-        console.log(error);
-      });
-  }
+ searchButton.addEventListener('click', voltar);
 </script>

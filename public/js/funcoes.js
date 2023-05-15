@@ -1,5 +1,22 @@
 // sessão
-
+var tabela_padrao = `
+    <div class="titulo_caixa_graficos"><h2>Coleção</h2></div>
+    <div id="cartasColecao" class="caixa_colecao">
+      <table id="tabela">
+        <thead>
+          <tr>
+            <th>Imagem</th>
+            <th>Nome</th>
+            <th>Tipo</th>
+            <th>Raridade</th>
+            <th>Set</th>
+        </tr>
+      </thead>
+      <tbody id="corpo_tabela">
+        </tbody>
+    </table>
+    </div>
+    `
 function validarSessao() {
 
     var id = sessionStorage.ID_USUARIO;
@@ -20,6 +37,143 @@ function limparSessao() {
     sessionStorage.clear();
     // finalizarAguardar();
     window.location = "../login_cadastro.html";
+}
+function registrar_carta() {
+    div_pop_up.style.display = "flex"
+}
+function voltar() {
+    div_pop_up.style.display = "none"
+}
+
+function query_colecao(seletor) {
+    var id = Number(idInput.value)
+    var caixaGraficos = document.getElementById('caixaGraficos');
+    var cartasDoUsuario = 0;
+
+    fetch(`http://localhost:3000/registros`)
+        .then((response) => response.json())
+        .then((data) => {
+            var tbody = document.getElementById('corpo_tabela');
+            if (seletor == 1) {
+
+                caixaGraficos.innerHTML = `
+                 <div  class="titulo_caixa_graficos"><h2>Cartas Registradas</h2></div>
+                <div id="cartasRegistradas"></div>
+                 `
+                cartasDoUsuario = data.filter(registro => registro.fkUsuario === id);
+                var cartasRegistradas = document.getElementById('cartasRegistradas')
+                cartasDoUsuario.forEach((registro) => {
+                    
+                    var imagem = document.createElement('img');
+                    imagem.src = registro.imagemURL;
+                    cartasRegistradas.appendChild(imagem);
+
+                });
+
+            } else {
+                caixaGraficos.innerHTML = tabela_padrao
+                var tbody = document.getElementById('corpo_tabela')
+                if (seletor == 2) {
+                    cartasDoUsuario = data.filter(registro => registro.fkUsuario === id);
+                } else if (seletor == 3) {
+
+                    cartasDoUsuario = data.filter(registro => registro.fkUsuario === id
+                        && (registro.raridade === "Rare Ultra"
+                            || registro.raridade === "Rare Rainbow"
+                            || registro.raridade === "Rare Secret"));
+
+                } else if (seletor == 4) {
+
+                    cartasDoUsuario = data.filter(registro => registro.fkUsuario === id
+                        && (registro.raridade === "Rare"
+                            || registro.raridade === "Rare Holo"
+                            || registro.raridade === "Rare Holo V"
+                            || registro.raridade === "Rare ACE"
+                            || registro.raridade === "Rare BREAK"
+                            || registro.raridade === "Rare Holo"
+                            || registro.raridade === "Rare Holo EX"
+                            || registro.raridade === "Rare Holo GX"
+                            || registro.raridade === "Rare Holo LV.X"
+                            || registro.raridade === "Rare Holo Star"
+                            || registro.raridade === "Rare Holo V"
+                            || registro.raridade === "Rare Holo VMAX"
+                            || registro.raridade === "Rare Prime"
+                            || registro.raridade === "Rare Prism Star"
+                            || registro.raridade === "Rare Rainbow"
+                            || registro.raridade === "Rare Secret"
+                            || registro.raridade === "Rare Shining"
+                            || registro.raridade === "Rare Shiny"
+                            || registro.raridade === "Rare Shiny GX"));
+
+                } else if (seletor == 5) {
+
+                    cartasDoUsuario = data.filter(registro => registro.fkUsuario === id
+                        && registro.raridade === "Uncommon");
+
+                } else if (seletor == 6) {
+
+                    cartasDoUsuario = data.filter(registro => registro.fkUsuario === id
+                        && registro.raridade === "Common");
+
+                }
+                cartasDoUsuario.forEach((registro) => {
+                    const linha = document.createElement('tr');
+                    const nomeCell = document.createElement('td');
+                    const imagemCell = document.createElement('td');
+                    const tipoCell = document.createElement('td');
+                    const raridadeCell = document.createElement('td');
+                    var setCell = document.createElement('td')
+          
+                    // Colocando imagem no td
+                    const imagem_consulta = document.createElement('img');
+                    imagem_consulta.src = registro.imagemURL;
+                    imagemCell.appendChild(imagem_consulta);
+                    
+                    nomeCell.innerHTML = registro.nome;
+                    tipoCell.innerHTML= registro.tipo;
+                    raridadeCell.innerHTML = registro.raridade;
+                    setCell.innerHTML = registro.idSet
+          
+                    // Adicionado tudo com appendChild (linha[imagem, nome, tipo])
+                    linha.appendChild(imagemCell);
+                    linha.appendChild(nomeCell);
+                    linha.appendChild(tipoCell);
+                    linha.appendChild(raridadeCell);
+                    linha.appendChild(setCell);
+                    tbody.appendChild(linha);
+          
+            
+                    imagem_consulta.classList.add('imagem_tabela');
+                    
+                });
+                
+            }
+            // const linhasParaTabela = criarLinhasParaTabela(cartasDoUsuario);
+            
+        })
+        .catch((error) => {
+            console.error('Erro ao buscar registros no servidor:', error);
+        });
+}
+
+function mostrar_registros() {
+    var caixaGraficos = document.getElementById('caixaGraficos');
+    caixaGraficos.innerHTML = `
+    <div  class="titulo_caixa_graficos"><h2>Cartas Registradas</h2></div>
+    <div id="cartasRegistradas"></div>
+    `
+    fetch(`/cartas/informacoes`)
+        .then(response => response.json())
+        .then(data => {
+            // Criar o HTML para a carta com base nos dados recebidos do servidor
+            for (i = 0; i <= data.length - 1; i++) {
+                document.getElementById('cartasRegistradas').innerHTML += `
+          <img src="${data[i].images.small}">
+      `;
+            }
+        }).catch(error => {
+            console.log(error);
+        });
 }
 
 

@@ -55,10 +55,6 @@
     border-radius: 10px;
     margin: 0 1.5% 1.5% 1.5%;
 }
-#cartasRegistradas {
-    width: 100%;
-    height: 100%;
-}
 #cartasRegistradas img {
     margin: 10px;
     border-radius: 10px;
@@ -80,7 +76,16 @@
     display: flex;
     justify-content: center;
 }
-
+#cartasRegistradas {
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    height: 63vh;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: center;
+}
 /* Tabelas */ 
 
 #tabela {
