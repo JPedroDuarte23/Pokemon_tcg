@@ -32,10 +32,10 @@ app.use("/medidas", medidasRouter)
 
   
   app.get('/registros', (req, res) => {
-   var id_usuario = req.params.id;
+    const id_usuario = req.params.id;
     // faz o select na tabela cartas
     connection.connect();
-   var sql = `SELECT * FROM cartas`;
+    const sql = `SELECT * FROM cartas`;
     connection.query(sql, [id_usuario], (error, results, fields) => {
       if (error) {
         console.error(error);
@@ -47,29 +47,30 @@ app.use("/medidas", medidasRouter)
   });
 
   
- var serial = async (
+  const serial = async (
     PokeInfo
   ) => {
   
     // Pega os dados inseridos pelo usuário no formulário que passam pelo http://localhost:300/search
   
     app.post('/search', (req, res) => {
-     var { nomePokemonInput, subtypeInput, typesInput, rarityInput, setInput, idInput} = req.body;
+      const { nomePokemonInput, subtypeInput, typesInput, rarityInput, setInput, idInput} = req.body;
     // Faz a requisição da API que retorna uma lista de JSON, seleciona os dados do indice[0] que serão armazenados desse JSON
 
       axios.get(`https://api.pokemontcg.io/v2/cards?q=name:"${nomePokemonInput}" subtypes:"${subtypeInput}" types:"${typesInput}" rarity:"${rarityInput}" set.id:"${setInput}"`)
         .then(response => {
-         var cardData = response.data.data[0];
-         var nome = cardData.name;
-         var imagem = cardData.images.small;
-         var tipo = cardData.types;
-         var raridade = cardData.rarity;
-         var idSet = cardData.set.id;
+          const cardData = response.data.data[0];
+          const nome = cardData.name;
+          const imagem = cardData.images.small;
+          const tipo = cardData.types;
+          const raridade = cardData.rarity;
+          const idSet = cardData.set.id;
+          const numero = `${cardData.number} / ${cardData.set.printedTotal}`
   
     // Insere no banco de dados as cartas que ele registrou
   
-         var insertQuery = `INSERT INTO cartas (nome, imagemURL, tipo, raridade, idSet, fkUsuario) VALUES (?, ?, ?, ?, ?, ?)`;
-         var values = [nome, imagem, tipo, raridade, idSet, idInput];
+          const insertQuery = `INSERT INTO cartas (nome, imagemURL, tipo, raridade, idSet, fkUsuario, numero) VALUES (?, ?, ?, ?, ?, ?, ?)`;
+          const values = [nome, imagem, tipo, raridade, idSet, idInput, numero];
   
     // PokeInfo é uma lista de Json
           PokeInfo.push(cardData);
@@ -89,7 +90,7 @@ app.use("/medidas", medidasRouter)
         })
     })
   }
- var servidor = (
+  const servidor = (
     PokeInfo
   ) => {
     app.use((request, response, next) => {
@@ -104,7 +105,7 @@ app.use("/medidas", medidasRouter)
   }
   
   (async () => {
-   var PokeInfo = [];
+    const PokeInfo = [];
     await serial(
       PokeInfo
     );

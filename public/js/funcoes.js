@@ -10,6 +10,7 @@ var tabela_padrao = `
             <th>Tipo</th>
             <th>Raridade</th>
             <th>Set</th>
+            <th>Numero</th>
         </tr>
       </thead>
       <tbody id="corpo_tabela">
@@ -117,15 +118,17 @@ function query_colecao(seletor) {
 
                 }
                 cartasDoUsuario.forEach((registro) => {
-                    const linha = document.createElement('tr');
-                    const nomeCell = document.createElement('td');
-                    const imagemCell = document.createElement('td');
-                    const tipoCell = document.createElement('td');
-                    const raridadeCell = document.createElement('td');
+                    var linha = document.createElement('tr');
+                    var nomeCell = document.createElement('td');
+                    var imagemCell = document.createElement('td');
+                    var tipoCell = document.createElement('td');
+                    var raridadeCell = document.createElement('td');
                     var setCell = document.createElement('td')
+                    var numeroCell = document.createElement('td')
+
           
                     // Colocando imagem no td
-                    const imagem_consulta = document.createElement('img');
+                    var imagem_consulta = document.createElement('img');
                     imagem_consulta.src = registro.imagemURL;
                     imagemCell.appendChild(imagem_consulta);
                     
@@ -133,6 +136,7 @@ function query_colecao(seletor) {
                     tipoCell.innerHTML= registro.tipo;
                     raridadeCell.innerHTML = registro.raridade;
                     setCell.innerHTML = registro.idSet
+                    numeroCell.innerHTML = registro.numero
           
                     // Adicionado tudo com appendChild (linha[imagem, nome, tipo])
                     linha.appendChild(imagemCell);
@@ -140,6 +144,7 @@ function query_colecao(seletor) {
                     linha.appendChild(tipoCell);
                     linha.appendChild(raridadeCell);
                     linha.appendChild(setCell);
+                    linha.appendChild(numeroCell)
                     tbody.appendChild(linha);
           
             
@@ -148,7 +153,7 @@ function query_colecao(seletor) {
                 });
                 
             }
-            // const linhasParaTabela = criarLinhasParaTabela(cartasDoUsuario);
+            // var linhasParaTabela = criarLinhasParaTabela(cartasDoUsuario);
             
         })
         .catch((error) => {
