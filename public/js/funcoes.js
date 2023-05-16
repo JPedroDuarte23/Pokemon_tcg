@@ -135,7 +135,7 @@ function query_colecao(seletor) {
                     nomeCell.innerHTML = registro.nome;
                     tipoCell.innerHTML= registro.tipo;
                     raridadeCell.innerHTML = registro.raridade;
-                    setCell.innerHTML = registro.idSet
+                    setCell.innerHTML = registro.nomeSet
                     numeroCell.innerHTML = registro.numero
           
                     // Adicionado tudo com appendChild (linha[imagem, nome, tipo])

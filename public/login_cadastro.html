@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>My PokeDex | Login e Cadastro</title>
     <link rel="stylesheet" href="css/style_login.css">
     <link rel="stylesheet" href="css/css_geral.css">
     <link rel="stylesheet" href="fontes/fonts.css">
@@ -49,7 +49,7 @@
                 <label for="input_email">Digite seu e-mail:</label>
                 <input type="text" id="input_email">
                 <label for="input_confirme_email">Confirme seu e-mail:</label>
-                <input type="text" id="input_confirme_email">
+                <input type="text" id="input_confirmar_email">
                 <label for="input_senha">Crie sua senha:</label>
                 <input type="password" id="input_senha">
                 <label for="input_confirme_senha">Confirme sua senha:</label>
@@ -107,12 +107,29 @@
         // Agora vá para o método fetch logo abaixo
         var nomeVar = input_user.value;
         var emailVar = input_email.value;
+        var confirmacaoEmailVar = input_confirmar_email.value
         var senhaVar = input_senha.value;
         var confirmacaoSenhaVar = input_confirmar_senha.value;
 
         if (nomeVar == "" || emailVar == "" || senhaVar == "" || confirmacaoSenhaVar == "") {
+            alert("Você precisa preencher os campos para se cadastrar")
             return false;
-        }
+        } else if (emailVar.indexOf('@')== -1 ||
+                   (emailVar.indexOf('.com') == -1 &&
+                   emailVar.indexOf('.br') == -1 &&
+                   emailVar.indexOf('.school') == -1)){
+            alert("Insira um email válido")
+            return false;
+        } else if (emailVar != confirmacaoEmailVar){
+            alert("Os emails inseridos são diferentes. Insira corretamente os dados")
+            return false;
+        } else if (senhaVar.length < 8) {
+            alert("Sua senha precisa ter ao menos 8 caractéres")
+            return false;
+        } else if (senhaVar != confirmacaoSenhaVar) {
+            alert("As duas senhas que foram inseritas estão diferente uma da outra")
+            return false;
+        } else {
 
         // Enviando o valor da nova input
         fetch("/usuarios/cadastrar", {
@@ -146,6 +163,7 @@
 
         return false;
     }
+}
     function entrar() {
 
         var emailVarE = input_email_entrar.value;
@@ -183,9 +201,7 @@
                     sessionStorage.NOME_USUARIO = json.nome;
                     sessionStorage.ID_USUARIO = json.id;
 
-                    setTimeout(function () {
-                        window.location = "./Dash_inicial.html";
-                    }, 1000); // apenas para exibir o loading
+                    window.location = "./Dash_inicial.html";
 
                 });
 

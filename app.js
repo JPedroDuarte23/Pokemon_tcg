@@ -54,23 +54,29 @@ app.use("/medidas", medidasRouter)
     // Pega os dados inseridos pelo usuário no formulário que passam pelo http://localhost:300/search
   
     app.post('/search', (req, res) => {
-      const { nomePokemonInput, subtypeInput, typesInput, rarityInput, setInput, idInput} = req.body;
+      const { nomePokemonInput, selectSubtype, selectTypes, selectRarity, selectSet, idInput} = req.body;
     // Faz a requisição da API que retorna uma lista de JSON, seleciona os dados do indice[0] que serão armazenados desse JSON
+    /*  console.log(nomePokemonInput)
+      console.log(selectSubtype)  
+      console.log(selectTypes)
+      console.log(selectRarity)
+      console.log(selectSet) 
+    */
 
-      axios.get(`https://api.pokemontcg.io/v2/cards?q=name:"${nomePokemonInput}" subtypes:"${subtypeInput}" types:"${typesInput}" rarity:"${rarityInput}" set.id:"${setInput}"`)
+      axios.get(`https://api.pokemontcg.io/v2/cards?q=name:"${nomePokemonInput}" subtypes:"${selectSubtype}" types:"${selectTypes}" rarity:"${selectRarity}" set.name:"${selectSet}"`)
         .then(response => {
           const cardData = response.data.data[0];
           const nome = cardData.name;
           const imagem = cardData.images.small;
           const tipo = cardData.types;
           const raridade = cardData.rarity;
-          const idSet = cardData.set.id;
+          const nomeSet = cardData.set.name;
           const numero = `${cardData.number} / ${cardData.set.printedTotal}`
   
     // Insere no banco de dados as cartas que ele registrou
   
-          const insertQuery = `INSERT INTO cartas (nome, imagemURL, tipo, raridade, idSet, fkUsuario, numero) VALUES (?, ?, ?, ?, ?, ?, ?)`;
-          const values = [nome, imagem, tipo, raridade, idSet, idInput, numero];
+          const insertQuery = `INSERT INTO cartas (nome, imagemURL, tipo, raridade, nomeSet, fkUsuario, numero) VALUES (?, ?, ?, ?, ?, ?, ?)`;
+          const values = [nome, imagem, tipo, raridade, nomeSet, idInput, numero];
   
     // PokeInfo é uma lista de Json
           PokeInfo.push(cardData);

@@ -16,58 +16,274 @@
 
 <body onload="validarSessao()">
      <div id="div_pop_up" class="registrar">
-        <div id="blur">
-            <div class="pop_up">
-              <h3>Registrar Cartas</h3>
-              <hr>
-              <form method="post" action="http://localhost:3000/search">
-                <table>
-                  <tr>
-                    <td><label for="nomePokemonInput">Nome da carta:</label></td>
-                    <td></td>
-                    <td><label for="selectSupertype">Tipo da carta:</label></td>
-                  </tr>
-                  <tr>
-                    <td><input type="text" id="nomePokemonInput" name="nomePokemonInput"></td>
-                    <td></td>
-                    <td>
-                      <select id="selectSupertype" name="selectSupertype">
-                        <option value="pokemon">Pokemon</option>
-                        <option value="trainer">Treinador</option>
-                        <option value="energy">Energia</option>
-                      </select>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td><label for="subtypeInput">Estágio do pokemon:</label></td>
-                    <td></td>
-                    <td><label for="typesInput">Tipo do pokemon:</label></td>
-                  </tr>
-                  <tr>
-                    <td><input type="text" id="subtypeInput" name="subtypeInput"></td>
-                    <td></td>
-                    <td><input type="text" id="typesInput" name="typesInput"></td>
-                  </tr>
-                  <tr>
-                    <td><label for="rarityInput">Raridade:</label></td>
-                    <td></td>
-                    <td><label for="setInput">Set</label></td>
-                  </tr>
-                  <tr>
-                    <td><input type="text" id="rarityInput" name="rarityInput"></td>
-                    <td></td>
-                    <td><input type="text" id="setInput" name="setInput"></td>
-                  </tr>
-                </table>
-                <input id="idInput" name="idInput" style="display: none;">
-                <button type="submit" id="searchButton">Search</button>
-              </form>
+      <div id="blur">
+        <div class="pop_up">
+          <i class="fa-solid fa-xmark fa-xl" id="i_voltar" onclick="voltar()"></i>
+          <h3>Registrar Cartas</h3>
+          <hr>
+          <form method="post" action="http://localhost:3000/search">
+            <div class="campo">
+              <label for="nomePokemonInput">Nome da carta:</label>
+              <input type="text" id="nomePokemonInput" name="nomePokemonInput">
             </div>
+            <div class="campo">
+              <label for="selectSupertype">Tipo da carta:</label>
+              <select id="selectSupertype" name="selectSupertype" multiple size="3">
+                <option value="pokemon">Pokemon</option>
+                <option value="trainer">Treinador</option>
+                <option value="energy">Energia</option>
+              </select>
+            </div>
+            <div class="campo">
+              <label for="selectSubtype">Estágio do pokemon:</label>
+              <select name="selectSubtype" id="selectSubtype" multiple size="5">
+                <option value="BREAK">BREAK</option>
+                <option value="Baby">Bebê</option>
+                <option value="Basic">Básico</option>
+                <option value="EX">EX</option>
+                <option value="GX">GX</option>
+                <option value="Goldenrod Game Corner">Goldenrod Game Corner</option>
+                <option value="Item">Item</option>
+                <option value="LEGEND">LENDA</option>
+                <option value="Level-Up">Level X</option>
+                <option value="MEGA">MEGA</option>
+                <option value="Pokémon Tool">Ferramenta pokémon</option>
+                <option value="Pokémon Tool F">Ferramenta pokémon F</option>
+                <option value="Rapid Strike">Golpe fluido</option>
+                <option value="Restored">Restaurado</option>
+                <option value="Rocket's Secret Machine">Máquina secreta da equipe Rocket</option>
+                <option value="Single Strike">Golpe decisivo</option>
+                <option value="Special">Especial</option>
+                <option value="Stadium">Estadio</option>
+                <option value="Stage 1">Estagio 1</option>
+                <option value="Stage 2">Estagio 2</option>
+                <option value="Supporter">Apoiador</option>
+                <option value="TAG TEAM">Aliados</option>
+                <option value="Technical Machine">Technical Machine</option>
+                <option value="V">V</option>
+                <option value="VMAX">VMAX</option>
+              </select>
+            </div>
+            <div class="campo">
+              <label for="selectTypes">Tipo do pokemon:</label>
+              <select name="selectTypes" id="selectTypes" multiple size="3">
+                <option value="fire">Fogo</option>
+                <option value="grass">Grama</option>
+                <option value="water">Àgua</option>
+                <option value="colorless">Normal</option>
+                <option value="lightning">Raio</option>
+                <option value="fighting">Lutador</option>
+                <option value="psychic">Psíquico</option>
+                <option value="darkness">Escuridão</option>
+                <option value="metal">Metal</option>
+                <option value="fairy">Fada</option>
+                <option value="dragon">Dragão</option>
+              </select>
+            </div>
+            <div class="campo">
+              <label for="selectRarity">Raridade:</label>
+              <select name="selectRarity" id="selectRarity" multiple size="5">
+                <option value="Amazing Rare">Rara Incrível</option>
+                <option value="Classic Collection">Coleção Clássica</option>
+                <option value="Common">Comum</option>
+                <option value="Double Rare">Rara Dupla</option>
+                <option value="Hyper Rare">Rara Hiper</option>
+                <option value="Illustration Rare">Rara de Ilustração</option>
+                <option value="LEGEND">Lenda</option>
+                <option value="Promo">Promocional</option>
+                <option value="Radiant Rare">Rara Radiante</option>
+                <option value="Rare">Rara</option>
+                <option value="Rare ACE">Rara ACE</option>
+                <option value="Rare BREAK">Rara BREAK</option>
+                <option value="Rare Holo">Rara Holo</option>
+                <option value="Rare Holo EX">Rara Holo EX</option>
+                <option value="Rare Holo GX">Rara Holo GX</option>
+                <option value="Rare Holo LV.X">Rara Holo LV.X</option>
+                <option value="Rare Holo Star">Rara Holo Star</option>
+                <option value="Rare Holo V">Rara Holo V</option>
+                <option value="Rare Holo VMAX">Rara Holo VMAX</option>
+                <option value="Rare Holo VSTAR">Rara Holo VSTAR</option>
+                <option value="Rare Prime">Rara Prime</option>
+                <option value="Rare Prism Star">Rara Prism Star</option>
+                <option value="Rare Rainbow">Rara Arco-Íris</option>
+                <option value="Rare Secret">Rara Secreta</option>
+                <option value="Rare Shining">Rara Brilhante</option>
+                <option value="Rare Shiny">Rara Brilhante</option>
+                <option value="Rare Shiny GX">Rara Brilhante GX</option>
+                <option value="Rare Ultra">Rara Ultra</option>
+                <option value="Special Illustration Rare">Rara de Ilustração Especial</option>
+                <option value="Trainer Gallery Rare Holo">Rara Holo da Galeria de Treinadores</option>
+                <option value="Ultra Rare">Rara Ultra</option>
+                <option value="Uncommon">Incomum</option>
+              </select>
+            </div>
+            <div class="campo">
+              <label for="selectSet">Set:</label>
+              <select name="selectSet" id="selectSet" multiple size="5">
+                <option value="Ancient Origins">Ancient Origins</option>
+                <option value="Aquapolis">Aquapolis</option>
+                <option value="Arceus">Arceus</option>
+                <option value="Astral Radiance">Astral Radiance</option>
+                <option value="Astral Radiance Trainer Gallery">Astral Radiance Trainer Gallery</option>
+                <option value="BREAKpoint">BREAKpoint</option>
+                <option value="BREAKthrough">BREAKthrough</option>
+                <option value="BW Black Star Promos">BW Black Star Promos</option>
+                <option value="Base">Base</option>
+                <option value="Base Set 2">Base Set 2</option>
+                <option value="Battle Styles">Battle Styles</option>
+                <option value="Best of Game">Best of Game</option>
+                <option value="Black &amp; White">Black &amp; White</option>
+                <option value="Boundaries Crossed">Boundaries Crossed</option>
+                <option value="Brilliant Stars">Brilliant Stars</option>
+                <option value="Brilliant Stars Trainer Gallery">Brilliant Stars Trainer Gallery</option>
+                <option value="Burning Shadows">Burning Shadows</option>
+                <option value="Call of Legends">Call of Legends</option>
+                <option value="Celebrations">Celebrations</option>
+                <option value="Celebrations: Classic Collection">Celebrations: Classic Collection</option>
+                <option value="Celestial Storm">Celestial Storm</option>
+                <option value="Champion&#39;s Path">Champion&#39;s Path</option>
+                <option value="Chilling Reign">Chilling Reign</option>
+                <option value="Cosmic Eclipse">Cosmic Eclipse</option>
+                <option value="Crimson Invasion">Crimson Invasion</option>
+                <option value="Crown Zenith">Crown Zenith</option>
+                <option value="Crown Zenith Galarian Gallery">Crown Zenith Galarian Gallery</option>
+                <option value="Crystal Guardians">Crystal Guardians</option>
+                <option value="DP Black Star Promos">DP Black Star Promos</option>
+                <option value="Dark Explorers">Dark Explorers</option>
+                <option value="Darkness Ablaze">Darkness Ablaze</option>
+                <option value="Delta Species">Delta Species</option>
+                <option value="Deoxys">Deoxys</option>
+                <option value="Detective Pikachu">Detective Pikachu</option>
+                <option value="Diamond &amp; Pearl">Diamond &amp; Pearl</option>
+                <option value="Double Crisis">Double Crisis</option>
+                <option value="Dragon">Dragon</option>
+                <option value="Dragon Frontiers">Dragon Frontiers</option>
+                <option value="Dragon Majesty">Dragon Majesty</option>
+                <option value="Dragon Vault">Dragon Vault</option>
+                <option value="Dragons Exalted">Dragons Exalted</option>
+                <option value="EX Trainer Kit 2 Minun">EX Trainer Kit 2 Minun</option>
+                <option value="EX Trainer Kit 2 Plusle">EX Trainer Kit 2 Plusle</option>
+                <option value="EX Trainer Kit Latias">EX Trainer Kit Latias</option>
+                <option value="EX Trainer Kit Latios">EX Trainer Kit Latios</option>
+                <option value="Emerald">Emerald</option>
+                <option value="Emerging Powers">Emerging Powers</option>
+                <option value="Evolutions">Evolutions</option>
+                <option value="Evolving Skies">Evolving Skies</option>
+                <option value="Expedition Base Set">Expedition Base Set</option>
+                <option value="Fates Collide">Fates Collide</option>
+                <option value="FireRed &amp; LeafGreen">FireRed &amp; LeafGreen</option>
+                <option value="Flashfire">Flashfire</option>
+                <option value="Forbidden Light">Forbidden Light</option>
+                <option value="Fossil">Fossil</option>
+                <option value="Furious Fists">Furious Fists</option>
+                <option value="Fusion Strike">Fusion Strike</option>
+                <option value="Generations">Generations</option>
+                <option value="Great Encounters">Great Encounters</option>
+                <option value="Guardians Rising">Guardians Rising</option>
+                <option value="Gym Challenge">Gym Challenge</option>
+                <option value="Gym Heroes">Gym Heroes</option>
+                <option value="HGSS Black Star Promos">HGSS Black Star Promos</option>
+                <option value="HS—Triumphant">HS—Triumphant</option>
+                <option value="HS—Undaunted">HS—Undaunted</option>
+                <option value="HS—Unleashed">HS—Unleashed</option>
+                <option value="HeartGold &amp; SoulSilver">HeartGold &amp; SoulSilver</option>
+                <option value="Hidden Fates">Hidden Fates</option>
+                <option value="Hidden Legends">Hidden Legends</option>
+                <option value="Holon Phantoms">Holon Phantoms</option>
+                <option value="Jungle">Jungle</option>
+                <option value="Kalos Starter Set">Kalos Starter Set</option>
+                <option value="Legend Maker">Legend Maker</option>
+                <option value="Legendary Collection">Legendary Collection</option>
+                <option value="Legendary Treasures">Legendary Treasures</option>
+                <option value="Legends Awakened">Legends Awakened</option>
+                <option value="Lost Origin">Lost Origin</option>
+                <option value="Lost Origin Trainer Gallery">Lost Origin Trainer Gallery</option>
+                <option value="Lost Thunder">Lost Thunder</option>
+                <option value="Majestic Dawn">Majestic Dawn</option>
+                <option value="McDonald&#39;s Collection 2011">McDonald&#39;s Collection 2011</option>
+                <option value="McDonald&#39;s Collection 2012">McDonald&#39;s Collection 2012</option>
+                <option value="McDonald&#39;s Collection 2014">McDonald&#39;s Collection 2014</option>
+                <option value="McDonald&#39;s Collection 2015">McDonald&#39;s Collection 2015</option>
+                <option value="McDonald&#39;s Collection 2016">McDonald&#39;s Collection 2016</option>
+                <option value="McDonald&#39;s Collection 2017">McDonald&#39;s Collection 2017</option>
+                <option value="McDonald&#39;s Collection 2018">McDonald&#39;s Collection 2018</option>
+                <option value="McDonald&#39;s Collection 2019">McDonald&#39;s Collection 2019</option>
+                <option value="McDonald&#39;s Collection 2021">McDonald&#39;s Collection 2021</option>
+                <option value="McDonald&#39;s Collection 2022">McDonald&#39;s Collection 2022</option>
+                <option value="Mysterious Treasures">Mysterious Treasures</option>
+                <option value="Neo Destiny">Neo Destiny</option>
+                <option value="Neo Discovery">Neo Discovery</option>
+                <option value="Neo Genesis">Neo Genesis</option>
+                <option value="Neo Revelation">Neo Revelation</option>
+                <option value="Next Destinies">Next Destinies</option>
+                <option value="Nintendo Black Star Promos">Nintendo Black Star Promos</option>
+                <option value="Noble Victories">Noble Victories</option>
+                <option value="POP Series 1">POP Series 1</option>
+                <option value="POP Series 2">POP Series 2</option>
+                <option value="POP Series 3">POP Series 3</option>
+                <option value="POP Series 4">POP Series 4</option>
+                <option value="POP Series 5">POP Series 5</option>
+                <option value="POP Series 6">POP Series 6</option>
+                <option value="POP Series 7">POP Series 7</option>
+                <option value="POP Series 8">POP Series 8</option>
+                <option value="POP Series 9">POP Series 9</option>
+                <option value="Phantom Forces">Phantom Forces</option>
+                <option value="Plasma Blast">Plasma Blast</option>
+                <option value="Plasma Freeze">Plasma Freeze</option>
+                <option value="Plasma Storm">Plasma Storm</option>
+                <option value="Platinum">Platinum</option>
+                <option value="Pokémon Futsal Collection">Pokémon Futsal Collection</option>
+                <option value="Pokémon GO">Pokémon GO</option>
+                <option value="Pokémon Rumble">Pokémon Rumble</option>
+                <option value="Power Keepers">Power Keepers</option>
+                <option value="Primal Clash">Primal Clash</option>
+                <option value="Rebel Clash">Rebel Clash</option>
+                <option value="Rising Rivals">Rising Rivals</option>
+                <option value="Roaring Skies">Roaring Skies</option>
+                <option value="Ruby &amp; Sapphire">Ruby &amp; Sapphire</option>
+                <option value="SM Black Star Promos">SM Black Star Promos</option>
+                <option value="SWSH Black Star Promos">SWSH Black Star Promos</option>
+                <option value="Sandstorm">Sandstorm</option>
+                <option value="Scarlet &amp; Violet">Scarlet &amp; Violet</option>
+                <option value="Scarlet &amp; Violet Black Star Promos">Scarlet &amp; Violet Black Star Promos</option>
+                <option value="Secret Wonders">Secret Wonders</option>
+                <option value="Shining Fates">Shining Fates</option>
+                <option value="Shining Legends">Shining Legends</option>
+                <option value="Shiny Vault">Shiny Vault</option>
+                <option value="Shiny Vault">Shiny Vault</option>
+                <option value="Silver Tempest">Silver Tempest</option>
+                <option value="Silver Tempest Trainer Gallery">Silver Tempest Trainer Gallery</option>
+                <option value="Skyridge">Skyridge</option>
+                <option value="Southern Islands">Southern Islands</option>
+                <option value="Steam Siege">Steam Siege</option>
+                <option value="Stormfront">Stormfront</option>
+                <option value="Sun &amp; Moon">Sun &amp; Moon</option>
+                <option value="Supreme Victors">Supreme Victors</option>
+                <option value="Sword &amp; Shield">Sword &amp; Shield</option>
+                <option value="Team Magma vs Team Aqua">Team Magma vs Team Aqua</option>
+                <option value="Team Rocket">Team Rocket</option>
+                <option value="Team Rocket Returns">Team Rocket Returns</option>
+                <option value="Team Up">Team Up</option>
+                <option value="Ultra Prism">Ultra Prism</option>
+                <option value="Unbroken Bonds">Unbroken Bonds</option>
+                <option value="Unified Minds">Unified Minds</option>
+                <option value="Unseen Forces">Unseen Forces</option>
+                <option value="Vivid Voltage">Vivid Voltage</option>
+                <option value="Wizards Black Star Promos">Wizards Black Star Promos</option>
+                <option value="XY">XY</option>
+                <option value="XY Black Star Promos">XY Black Star Promos</option>
+              </select>
+            </div>
+            <input id="idInput" name="idInput" type="hidden">
+            <button type="submit" id="searchButton">Search</button>
+          </form>
+  
         </div>
+      </div>
      </div> 
     <section class="main" id="corpo_principal">
         <div class="sidebar">
-            <img src="imagens/Logo_pokemon.png" class="logomarca" id="img_logo" onclick="redirecionar_home()">
+            <img src="imagens/Logo_pokemon.png" class="logomarca" id="img_logo">
             <ul>
                 <li><a href="Dash_inicial.html" class="ativado"> <i class="fa-solid fa-house fa-lg"></i>Home</a>
                 </li>

@@ -94,7 +94,7 @@
                 visualizar a progreção da quantidade de cartas restantes em um set/geração e procurar por cartas
                 específicas
             </p>
-            <button onclick="redirecionar_cadastro()">Cadastre-se e experimente!</button>
+            <button id="botao_ferramenta" onclick="redirecionar_cadastro()">Cadastre-se e experimente!</button>
         </div>
     </div>
 
@@ -164,11 +164,14 @@
 <script>
     const entrar = document.getElementById('a_entrar');
     const cadastrar = document.getElementById('a_cadastrar');
+    const botao_ferramenta = document.getElementById('botao_ferramenta')
 
     entrar.addEventListener('click', () => {
         localStorage.setItem('posicaoDiv', 'direita');
     });
-
+    botao_ferramenta.addEventListener('click', () => {
+        localStorage.setItem('posicaoDiv', 'esquerda');
+    });
     cadastrar.addEventListener('click', () => {
         localStorage.setItem('posicaoDiv', 'esquerda');
     });

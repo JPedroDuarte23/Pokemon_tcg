@@ -153,7 +153,10 @@
   font-size: 1.3vw;
   font-weight: bold;
 }
-
+.texto_lateral button:hover {
+  background-color: #FFCB05;
+  transition: background-color 0.25s;
+}
 /* Seção raridade das cartas */
 
 .secao_raridade {

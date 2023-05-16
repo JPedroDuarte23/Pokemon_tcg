@@ -26,11 +26,13 @@ a {
 }
 #blur {
     width: 100%;
-    height: 100%;
+    min-height: 100vh;
+    height: auto;
     position: fixed;
     backdrop-filter: blur(10px) brightness(0.5);
     background-color: rgba(0, 0, 0, 0.5);
     z-index: 99;
+    overflow: auto;
 }
 .logomarca:hover {
     cursor: pointer;
@@ -253,7 +255,7 @@ button.botao_ativado, button.registrador {
     position: absolute;
     width: 50%;
     height: auto;
-    max-height: 95%;
+    max-height: auto;
     background-color: #232C5F;
     color: white;
     border-radius: 5px;
@@ -262,19 +264,13 @@ button.botao_ativado, button.registrador {
     padding: 2%;
     display: flex;
     flex-direction: column;
+    box-sizing: border-box;
 }
 .pop_up form {
     display: flex;
     flex-direction: column;
-    align-items: center;
-}
-.pop_up table {
-    margin-top: 3%;
-    width: 100%;
-    border-collapse: collapse;
-}
-.pop_up td {
-    padding: 2px 10px 2px 10px;
+    flex-wrap: wrap;
+    margin-top: 5%;
 }
 .pop_up h3 {
     text-align: center;
@@ -287,24 +283,58 @@ button.botao_ativado, button.registrador {
     align-self: center;
     border: 1px solid #8B0000;
 }
+.pop_up #i_voltar {
+    width: 10px;
+    height: 10px;
+    position: absolute;
+    right: 3%;
+    color: #FFCB05;
+    cursor: pointer;
+}
+.pop_up #i_voltar:hover {
+    color: #FF8C05 ;
+}
+.campo {
+    padding: 5% 0%;
+    box-sizing: border-box;
+    border-bottom: 1px solid #FFCB05;
+    display: flex;
+    align-items: baseline;
+}
 
-.pop_up label {
+.campo label {
     font-size: 1.1vw;
-    margin: 2% 0 2% 0;
+    margin: 3% 0 3% 0;
     font-weight: normal;
 }
 
-.pop_up input {
-    width: 100%;
-    margin: 0 5%;
+.campo input {
+    width: 50%;
+    margin: 3%;
     padding: 0.5%;
 }
-.pop_up select {
+.campo select {
     width: 30%;
     margin: 0 5%;
     padding: 0.5%;
 }
-
+.campo select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    direction: ltr; /* Define a direção do menu suspenso */
+    background-color: #3662AD;
+    color: white;
+    border: 1px solid black;
+  }
+  .campo option {
+    padding: 10px 0;
+    border-bottom: 1px solid black;
+  }
+  .campo option:checked {
+    background-color: #090718;
+    color: white;
+  }
 .pop_up button {
     margin: 5%;
     align-self: center;
