@@ -22,13 +22,13 @@ var mySqlConfig = {
     host: "localhost",
     database: "pokemon_tcg",
     user: "aluno",
-     password: "galho123",
+     password: "sptech",
 };
 var connection = mysql.createConnection({
     host: "localhost",
     database: "pokemon_tcg",
     user: "aluno",
-    password: "galho123",
+    password: "sptech",
 });
 
 function executar(instrucao) {

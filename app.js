@@ -51,7 +51,7 @@ app.use("/medidas", medidasRouter)
     PokeInfo
   ) => {
   
-    // Pega os dados inseridos pelo usuário no formulário que passam pelo http://localhost:300/search
+    // Pega os dados inseridos pelo usuário no formulário que passam pelo http://localhost:3000/search
   
     app.post('/search', (req, res) => {
       const { nomePokemonInput, selectSubtype, selectTypes, selectRarity, selectSet, idInput} = req.body;

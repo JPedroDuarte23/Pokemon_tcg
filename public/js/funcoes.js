@@ -159,6 +159,11 @@ function query_colecao(seletor) {
         .catch((error) => {
             console.error('Erro ao buscar registros no servidor:', error);
         });
+        var botaoAtivado = document.querySelector('.botao_ativado')
+        var botao = document.getElementById('botao-'+ seletor);
+        botaoAtivado.classList.remove("botao_ativado")
+        botao.classList.add("botao_ativado")
+
 }
 
 function mostrar_registros() {
