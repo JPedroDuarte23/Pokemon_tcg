@@ -81,7 +81,8 @@ function query_colecao(seletor) {
                     cartasDoUsuario = data.filter(registro => registro.fkUsuario === id
                         && (registro.raridade === "Rare Ultra"
                             || registro.raridade === "Rare Rainbow"
-                            || registro.raridade === "Rare Secret"));
+                            || registro.raridade === "Rare Secret"
+                            || registro.raridade === "Hyper Rare"));
 
                 } else if (seletor == 4) {
 

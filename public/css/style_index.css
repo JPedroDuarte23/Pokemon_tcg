@@ -417,7 +417,7 @@ input {
   font-size: 20px;
   font-weight: 600;
   display: flex;
-  height: 40%;
+  height: 10vh;
   overflow: auto;
   display: none;
   transform: translate(0px, -10px);
@@ -436,7 +436,7 @@ input {
 }
 
 .item {
-  height: 25%;
+  height: 5vh;
   padding: 0px 5px;
   box-sizing: border-box;
   transition: .3s;
@@ -449,8 +449,11 @@ input {
   padding-left: 7px;
   transition: .3s;
 }
-#logo_geracao {
+.logo_geracao {
   max-width: 68px;
+}
+.SV_logo {
+  max-width: 100px;
 }
 /* Footer */
 
