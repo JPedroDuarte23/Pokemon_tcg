@@ -32,11 +32,10 @@ app.use("/medidas", medidasRouter)
 
   
   app.get('/registros', (req, res) => {
-    const id_usuario = req.params.id;
     // faz o select na tabela cartas
     connection.connect();
     const sql = `SELECT * FROM cartas`;
-    connection.query(sql, [id_usuario], (error, results, fields) => {
+    connection.query(sql, (error, results, fields) => {
       if (error) {
         console.error(error);
         res.status(500).json({ error: 'Erro ao buscar as cartas.' });
@@ -45,23 +44,66 @@ app.use("/medidas", medidasRouter)
       res.json(results); // envia a resposta para o cliente
     });
   });
+  const deck_select = async () => {
+    app.get('/decks', (req,res) =>{
+      connection.connect() 
+      const sql = `SELECT * FROM deck`
+      connection.query(sql, (error, results, fields) => {
+        if (error) {
+          console.log(error) 
+          res.status(500).json({ error: 'Erro ao buscar os decks'});
+          return
+        }
+        res.json(results);
+      })
+    })
+  }
+  const decks_insert = async () => {
+    app.post('/registro-deck', (req, res) => {
+    const { inputImagemDeck, inputDeckNome, inputTipoPrincipal, idInput} = req.body;
+    const insert_deck_Query = `INSERT INTO deck (nomeDeck, imagem, fkUsuario, tipoPrincipal) VALUES (?, ?, ?, ?)`;
+    const values_deck = [inputDeckNome, inputImagemDeck, idInput, inputTipoPrincipal];
 
-  
-  const serial = async (
-    PokeInfo
-  ) => {
-  
+    connection.connect();
+    connection.query(insert_deck_Query, values_deck, (error, results) => {
+      if (error) {
+        console.log('Erro ao inserir registro na tabela:', error);
+        res.redirect('/Dash_decks.html')
+      } else {
+      console.log('Deck inserido com sucesso!');
+      res.redirect('/Dash_decks.html')
+      }
+      res.json(results)
+    })
+  });
+}
+const update_carta_deck = async() => {
+  app.post('/adicionar-carta', (req, res) => {
+    const { IDDeckInput, idCartaValue} = req.body
+    console.log(IDDeckInput)
+    console.log(idCartaValue)
+    const update = `UPDATE cartas SET fkDeck = ? WHERE idCarta = ?`
+    const values_update = [IDDeckInput, idCartaValue]
+    connection.connect();
+    connection.query(update, values_update, (error, results) => {
+      if (error) {
+        console.log('Erro ao inserir registro na tabela:', error);
+        res.redirect('/Dash_decks.html');
+      } else {
+      console.log('Registro inserido com sucesso!');
+      res.redirect('/Dash_decks.html');
+      }
+      
+    })
+  })
+}
+
+  const card_insert = async () => {
     // Pega os dados inseridos pelo usuário no formulário que passam pelo http://localhost:3000/search
-  
     app.post('/search', (req, res) => {
       const { nomePokemonInput, selectSubtype, selectTypes, selectRarity, selectSet, idInput} = req.body;
     // Faz a requisição da API que retorna uma lista de JSON, seleciona os dados do indice[0] que serão armazenados desse JSON
-    /*  console.log(nomePokemonInput)
-      console.log(selectSubtype)  
-      console.log(selectTypes)
-      console.log(selectRarity)
-      console.log(selectSet) 
-    */
+
 
       axios.get(`https://api.pokemontcg.io/v2/cards?q=name:"${nomePokemonInput}" subtypes:"${selectSubtype}" types:"${selectTypes}" rarity:"${selectRarity}" set.name:"${selectSet}"`)
         .then(response => {
@@ -79,7 +121,6 @@ app.use("/medidas", medidasRouter)
           const values = [nome, imagem, tipo, raridade, nomeSet, idInput, numero];
   
     // PokeInfo é uma lista de Json
-          PokeInfo.push(cardData);
           connection.connect();
           connection.query(insertQuery, values, (error, results) => {
             if (error) {
@@ -96,9 +137,8 @@ app.use("/medidas", medidasRouter)
         })
     })
   }
-  const servidor = (
-    PokeInfo
-  ) => {
+
+  const servidor = () => {
     app.use((request, response, next) => {
       response.header('Access-Control-Allow-Origin', '*');
       response.header('Access-Control-Allow-Headers', 'Origin, Content-Type, Accept');
@@ -111,13 +151,11 @@ app.use("/medidas", medidasRouter)
   }
   
   (async () => {
-    const PokeInfo = [];
-    await serial(
-      PokeInfo
-    );
-    servidor(
-      PokeInfo
-    );
+    await card_insert();
+    await decks_insert();
+    await deck_select();
+    await update_carta_deck();
+    servidor();
   })();
 
 

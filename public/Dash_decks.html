@@ -14,25 +14,20 @@
     <script src="../js/funcoes.js"></script>
 </head>
 
-<body onload="validarSessao()">
+<body onload="validarSessao(), query_decks(1)">
     <div id="div_pop_up" class="registrar">
         <div id="blur">
             <div class="pop_up">
-                <h4>Nome da carta:</h4>
-                <input id="cardNameInput" type="text" /> <br>
-                <h4>Tipo da carta:</h4>
-                <select id="select_supertype">
-                    <option value="pokemon">Pokemon</option>
-                    <option value="trainer">Treinador</option>
-                    <option value="energy">Energia</option>
-                </select> <br>
-                <h4>Estágio do pokemon:</h4>
-                <input type="text" id="subtypeInput"> <br>
-                <h4>Tipo do pokemon:</h4>
-                <input type="text" id="tipo"> <br>
-                <h4>Raridade:</h4>
-                <input type="text" id="raridade"> <br>
-                <button id="searchButton">Search</button>
+                <form action="/registro-deck" method="post">
+                    <label for="inputDeckNome">Nome do seu Deck:</label>
+                    <input type="text" name="inputDeckNome" id="inputDeckNome">
+                    <label for="inputTipoPrincipal">Tipo principal:</label>
+                    <input type="text" name="inputTipoPrincipal" id="inputTipoPrincipal">
+                    <label for="inputImagemDeck">Imagem do deck</label>
+                    <input type="text" name="inputImagemDeck" id="inputImagemDeck">
+                    <input type="text" name="idInput" id="idInput" style="display: none;">
+                    <button type="submit" id="criarDeckButton">Criar</button>
+                </form>
               </div>
           </div>
     </div>
@@ -75,11 +70,11 @@
                 <button onclick="">Deck Engrenagens de Água</button>
                 <button onclick="">Deck Engrenagens de Terra</button>
                 <button onclick="">Deck Engrenagens de Vento</button>
-                <button onclick="registrar_carta()" class="registrador"><i class="fa-solid fa-plus"></i>Adicionar Carta</button>
+                <button onclick="registrar()" class="registrador"><i class="fa-solid fa-plus"></i>Adicionar Deck</button>
             </section>
             <section id="secao_visao_geral">
-                <div class="caixa_graficos">
-                    <div class="titulo_caixa_graficos"><h2>Cartas</h2></div>
+                <div class="caixa_graficos" id="caixaGraficos">
+                    <div class="titulo_caixa_graficos"><h2>Decks</h2></div>
                     <div id="cardData"></div>
                 </div>
 
@@ -88,13 +83,7 @@
 
 </html>
 <script>
-    function registrar_carta() {
-      div_pop_up.style.display = "flex"
-    }
-    function voltar() {
-        div_pop_up.style.display = "none"
-    }
-    searchButton.addEventListener('click', voltar);
+    criarDeckButton.addEventListener('click', voltar);
 </script>
 
     
