@@ -20,14 +20,24 @@ CREATE TABLE usuario (
 CREATE TABLE cartas (
 	idCarta INT AUTO_INCREMENT,
 	nome VARCHAR(100),
-	imagemURL VARCHAR(150),
+	imagemPequena VARCHAR(150),
+	imagemGrande VARCHAR(150),
 	tipo VARCHAR(45),
 	raridade VARCHAR(45),
-	idSet VARCHAR(10),
+	nomeSet VARCHAR(10),
 	fkUsuario INT, 
 	numero VARCHAR(15),
+	fkDeck INT,
 	CONSTRAINT fkUsuario FOREIGN KEY (fkUsuario) REFERENCES usuario(id),
+	CONSTRAINT fkDeck FOREIGN KEY (fkDeck) REFERENCES deck(idDeck),
 	CONSTRAINT pkComposta PRIMARY KEY (idCarta, fkUsuario)
+);
+CREATE TABLE deck (
+	idDeck INT PRIMARY KEY AUTO_INCREMENT,
+	nomeDeck VARCHAR(45),
+	imagem VARCHAR(200),
+	fkUsuario INT,
+	CONSTRAINT fkDeckUsuario FOREIGN KEY (fkUsuario) REFERENCES usuario(id)
 );
 
 
