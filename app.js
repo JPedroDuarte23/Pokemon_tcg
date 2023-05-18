@@ -93,7 +93,7 @@ const update_carta_deck = async() => {
       console.log('Registro inserido com sucesso!');
       res.redirect('/Dash_decks.html');
       }
-      
+      res.json(results)
     })
   })
 }
