@@ -27,9 +27,6 @@ app.use("/", indexRouter);
 app.use("/usuarios", usuarioRouter);
 app.use("/avisos", avisosRouter);
 app.use("/medidas", medidasRouter)
-
-
-
   
   app.get('/registros', (req, res) => {
     // faz o select na tabela cartas
@@ -109,7 +106,8 @@ const update_carta_deck = async() => {
         .then(response => {
           const cardData = response.data.data[0];
           const nome = cardData.name;
-          const imagem = cardData.images.small;
+          const imagemPequena = cardData.images.small;
+          const imagemGrande = cardData.images.large;
           const tipo = cardData.types;
           const raridade = cardData.rarity;
           const nomeSet = cardData.set.name;
@@ -117,8 +115,8 @@ const update_carta_deck = async() => {
   
     // Insere no banco de dados as cartas que ele registrou
   
-          const insertQuery = `INSERT INTO cartas (nome, imagemURL, tipo, raridade, nomeSet, fkUsuario, numero) VALUES (?, ?, ?, ?, ?, ?, ?)`;
-          const values = [nome, imagem, tipo, raridade, nomeSet, idInput, numero];
+          const insertQuery = `INSERT INTO cartas (nome, imagemPequena, imagemGrande, tipo, raridade, nomeSet, fkUsuario, numero) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`;
+          const values = [nome, imagemPequena, imagemGrande, tipo, raridade, nomeSet, idInput, numero];
   
     // PokeInfo é uma lista de Json
           connection.connect();

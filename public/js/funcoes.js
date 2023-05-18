@@ -23,6 +23,7 @@ var tabela_decks = `    <div class="titulo_caixa_graficos"><h2>Coleção</h2></d
   <table id="tabela">
     <thead>
       <tr>
+        <th>ID</th>
         <th>Imagem</th>
         <th>Nome</th>
         <th>Tipo</th>
@@ -35,7 +36,7 @@ var tabela_decks = `    <div class="titulo_caixa_graficos"><h2>Coleção</h2></d
 var carta_detalhes = `
     <div id="blur">
         <div class="pop_up">
-            <img src="" alt="">
+            <img src="" alt="" id="imagem_carta_detalhe">
             <div class="textos">
                 <h3>Nome_Pokemon</h3>
                 <hr>
@@ -110,7 +111,7 @@ function query_colecao(seletor) {
                 cartasDoUsuario.forEach((registro) => {
                     
                     var imagem = document.createElement('img');
-                    imagem.src = registro.imagemURL;
+                    imagem.src = registro.imagemPequena;
                     cartasRegistradas.appendChild(imagem);
                 });
             } else {
@@ -173,7 +174,7 @@ function query_colecao(seletor) {
           
                     // Colocando imagem no td
                     var imagem_consulta = document.createElement('img');
-                    imagem_consulta.src = registro.imagemURL;
+                    imagem_consulta.src = registro.imagemPequena; 
                     imagemCell.appendChild(imagem_consulta);
 
                     var botao_deck = document.createElement('button')
@@ -182,6 +183,7 @@ function query_colecao(seletor) {
                     botao_deck.addEventListener('click', function() {
                         var id = sessionStorage.ID_USUARIO
                         div_pop_up.innerHTML = carta_detalhes;
+                        imagem_carta_detalhe.src = registro.imagemPequena; 
                         idCartaValue.setAttribute('value', registro.idCarta)
                         var addCarta = document.getElementById('botao_add_carta')
                         registrar();
@@ -241,8 +243,6 @@ function query_decks(seletor) {
                 var nomeCell = document.createElement('td');
                 var imagemCell = document.createElement('td');
                 var tipoCell = document.createElement('td');
-
-                idCell.style.display = "none"
       
                 // Colocando imagem no td
                 var imagem_consulta = document.createElement('img');
