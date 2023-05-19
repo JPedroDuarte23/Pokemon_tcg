@@ -58,7 +58,7 @@ app.use("/medidas", medidasRouter)
   const decks_insert = async () => {
     app.post('/registro-deck', (req, res) => {
     const { inputImagemDeck, inputDeckNome, inputTipoPrincipal, idInput} = req.body;
-    const insert_deck_Query = `INSERT INTO deck (nomeDeck, imagem, fkUsuario, tipoPrincipal) VALUES (?, ?, ?, ?)`;
+    const insert_deck_Query = `INSERT INTO deck (nomeDeck, imagem, fkUsuario, tipoPrincipal, vitorias, derrotas) VALUES (?, ?, ?, ?, 0, 0)`;
     const values_deck = [inputDeckNome, inputImagemDeck, idInput, inputTipoPrincipal];
 
     connection.connect();
@@ -88,6 +88,30 @@ const update_carta_deck = async() => {
       } else {
       console.log('Registro inserido com sucesso!');
       res.redirect('/Dash_decks.html');
+      }
+    })
+  })
+}
+const update_deck_resultado = async => {
+  app.post('/resultado', (req, res) => {
+    const { inputDeckID, inputResultado, fkUserInput} = req.body
+    console.log(inputDeckID)
+    console.log(fkUserInput)
+    var update_resultado = "";
+    if (inputResultado == "vitoria") {
+      update_resultado = `UPDATE deck SET vitorias = vitorias + 1 WHERE idDeck = ? AND fkUsuario = ?`
+    } else {
+      update_resultado = `UPDATE deck SET derrotas = derrotas + 1 WHERE idDeck= ? AND fkUsuario = ?`
+    }
+    const values_resultado = [inputDeckID, fkUserInput]
+    connection.connect();
+    connection.query(update_resultado, values_resultado, (error, results) => {
+      if (error) {
+        console.log('Erro ao inserir resultado na tabela:', error);
+        res.redirect('/Dash_inicial.html');
+      } else {
+      console.log('Resultado inserido com sucesso!');
+      res.redirect('/Dash_inicial.html');
       }
     })
   })
@@ -243,6 +267,7 @@ const update_carta_deck = async() => {
     await deck_select();
     await update_carta_deck();
     await graficos_cartas();
+    await update_deck_resultado();
     servidor();
   })();
 

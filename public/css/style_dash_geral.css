@@ -232,7 +232,12 @@ header div {
     color: black;
     font-weight: bold   ;
 }
-
+.botoes_inicial {
+    justify-content: space-evenly;
+}
+.botoes_inicial button {
+    width: 30%;
+}
 button.botao_ativado, button.registrador {
     background: #8B0000;
     background: linear-gradient(180deg, #8B0000 0%, #B22222 100%);

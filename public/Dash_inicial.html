@@ -9,11 +9,12 @@
 
   <link rel="stylesheet" href="css/style_dash_geral.css">
   <link rel="stylesheet" href="css/css_tabelas.css">
+  <link rel="stylesheet" href="css/style_graficos.css">
   <script type="text/javascript" src="js/redirecionamentos.js"></script>
   <script src="https://kit.fontawesome.com/c52875e8e8.js" crossorigin="anonymous"></script>
   <script src="../js/funcoes.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js/dist/Chart.min.js"></script>
-
+  <script src="js/graficos.js"></script>
 </head>
 
 <body onload="validarSessao(), carregar_graficos()">
@@ -316,13 +317,10 @@
           </div>
         </div>
       </header>
-      <section class="botoes light_mode">
+      <section class="botoes_inicial botoes">
         <button class="botao_ativado">Visão Geral</button>
-        <button onclick="Registrar_resultado()">Alterar vitórias e derrotas</button>
-        <button onclick="">Coleção 2</button>
-        <button onclick="">Coleção 3</button>
-        <button onclick="">Coleção 4</button>
-        <button onclick="registrar()" class="registrador"><i class="fa-solid fa-plus"></i>Adicionar Carta</button>
+        <button onclick="registrar_resultado()" class="botao_ativado">Alterar vitórias e derrotas</button>
+        <button onclick="registrar()" class="botao_ativado"><i class="fa-solid fa-plus"></i>Adicionar Carta</button>
       </section>
       <section id="secao_visao_geral">
         <div class="caixa_graficos">
@@ -331,41 +329,42 @@
           </div>
           <div class="sub_secao_1">
             <div class="caixa_1">
+              <h3>Tipos de cartas</h3>
               <canvas id="suptipos_colecao"></canvas>
             </div>
             <div class="caixa_2"></div>
           </div>
-          <div class="caixa_3"></div>
+          <div class="caixa_3" id="caixa_3"></div>
         </div>
       </section>
 </body>
 
 </html>
 <script>
+      var id = Number(sessionStorage.ID_USUARIO)
   searchButton.addEventListener('click', voltar);
-  function carregar_graficos() {
-    var id = Number(sessionStorage.ID_USUARIO)
-    var caixaGraficos = document.getElementById('caixaGraficos');
-    fetch(`http://localhost:3000/grafico_colecao`)
-      .then((response) => response.json())
-      .then((res) => {
-        var rosquinha = document.getElementById('suptipos_colecao')
-
-        new Chart(rosquinha, {
-          type: 'doughnut',
-          data: {
-            labels: ['Categoria 1', 'Categoria 2', 'Categoria 3'],
-            datasets: [{
-              data: [res[0].qtd_pokemons, res[0].qtd_treinadores, res[0].qtd_energias],
-              backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
-              hoverBackgroundColor: ['#FF6384', '#36A2EB', '#FFCE56']
-            }]
-          },
-          options: {
-            responsive: true,
-            maintainAspectRatio: false
-          }
-        });
-      })
+  function registrar_resultado() {
+    div_pop_up.innerHTML = `
+    <div id="blur">
+            <div class="pop_up_carta">
+                <i class="fa-solid fa-xmark fa-xl" id="i_voltar" onclick="voltar(1)"></i>
+                <form action="/resultado" method="post">
+                    <div class="campo">
+                      <label for="inputDeckID">ID do seu Deck:</label>
+                      <input type="text" name="inputDeckID" id="inputDeckID">
+                    </div>
+                    <div class="campo">
+                      <label for="inputResultado">Resultado:</label> 
+                      <input type="radio" name="inputResultado" value="vitoria">Vitória
+                      <input type="radio" name="inputResultado" value="derrota">Derrota
+                    </div>
+                    <input type="text" name="fkUserInput" id="fkUserInput" style="display: none;">
+                    <button type="submit" id="registrador_resultados">Criar</button>
+                </form>
+              </div>
+          </div>
+    `
+    fkUserInput.setAttribute('value', id);
+    registrar();
   }
 </script>

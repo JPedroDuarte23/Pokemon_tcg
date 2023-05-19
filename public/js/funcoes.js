@@ -120,7 +120,7 @@ function registrar() {
 }
 function voltar(tipo) {
     if (tipo == 1) {
-        div_pop_up.innerHTML = form_carta   
+        div_pop_up.innerHTML = formulario_padrao   
     } 
     div_pop_up.style.display = "none"
 }

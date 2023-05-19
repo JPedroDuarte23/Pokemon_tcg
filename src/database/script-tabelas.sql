@@ -39,6 +39,7 @@ CREATE TABLE cartas (
 CREATE TABLE deck (
 	idDeck INT PRIMARY KEY AUTO_INCREMENT,
 	nomeDeck VARCHAR(45),
+	tipoPrincipal VARCHAR(20),
 	imagem VARCHAR(200),
 	vitorias INT,
 	derrotas INT,
