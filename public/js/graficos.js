@@ -53,6 +53,7 @@ function carregar_graficos() {
         });
       })
       gerar_estatisticas();
+      gerar_barras();
   }
   function gerar_estatisticas() {
     var caixa3 = document.getElementById('caixa_3');
@@ -91,8 +92,65 @@ function carregar_graficos() {
                 estatistica.appendChild(total);
                 estatistica.appendChild(porcentagem_vitorias);
                 caixa3.appendChild(estatistica)
-              contador++;
+             ;
             });
             
         })
   }
+  function gerar_barras() {
+    fetch('http://localhost:3000/registros')
+      .then((response) => response.json())
+      .then((data) => {
+        var cartasTipoFogo = data.filter(registro => registro.fkUsuario === id && registro.tipo === "Fire");
+        var cartasTipoAgua = data.filter(registro => registro.fkUsuario === id && registro.tipo === "Water");
+        var cartasTipoPlanta = data.filter(registro => registro.fkUsuario === id && registro.tipo === "Grass");
+        var cartasTipoRaio = data.filter(registro => registro.fkUsuario === id && registro.tipo === "Lightning");
+        var cartasTipoLutador = data.filter(registro => registro.fkUsuario === id && registro.tipo === "Fighting");
+
+        var porcentagemCTF = Math.round(((cartasTipoFogo.length / data.length) * 100));
+        var porcentagemCTA = Math.round(((cartasTipoAgua.length / data.length) * 100));
+        var porcentagemCTP = Math.round(((cartasTipoPlanta.length / data.length) * 100));
+        var porcentagemCTR = Math.round(((cartasTipoRaio.length / data.length) * 100));
+        var porcentagemCTL = Math.round(((cartasTipoLutador.length / data.length) * 100));
+  
+        var tamanhoDaBarra = 50;
+  
+        var barra1 = document.getElementById("div_barra_1");
+        var barra2 = document.getElementById("div_barra_2");
+        var barra3 = document.getElementById("div_barra_3");
+        var barra4 = document.getElementById("div_barra_4");
+        var barra5 = document.getElementById("div_barra_5");
+
+        gerarBarraProgresso(barra1, tamanhoDaBarra, porcentagemCTF);
+        gerarBarraProgresso(barra2, tamanhoDaBarra, porcentagemCTA);
+        gerarBarraProgresso(barra3, tamanhoDaBarra, porcentagemCTP);
+        gerarBarraProgresso(barra4, tamanhoDaBarra, porcentagemCTR);
+        gerarBarraProgresso(barra5, tamanhoDaBarra, porcentagemCTL);
+
+        porcentagem_1.innerText = `${porcentagemCTF}%`
+        porcentagem_2.innerText = `${porcentagemCTA}%`
+        porcentagem_3.innerText = `${porcentagemCTP}%`
+        porcentagem_4.innerText = `${porcentagemCTR}%`
+        porcentagem_5.innerText = `${porcentagemCTL}%`
+      });
+  }
+  function gerarBarraProgresso(barra, tamanhoDaBarra, porcentagemDaBarra) {
+    contador ++;
+    for (var j = 0; j < tamanhoDaBarra; j++) {
+      var segmentos = document.createElement('div');
+      segmentos.classList.add('segmentos_progresso');
+      var colorStart = [59, 175, 218];
+      var colorEnd = [220, 0, 0]; 
+      var percentualCompleto = j / tamanhoDaBarra * 100;
+      var color = [];
+      for (var k = 0; k < 3; k++) {
+        color[k] = Math.round(colorStart[k] + (colorEnd[k] - colorStart[k]) * (percentualCompleto / 100));
+      }
+      segmentos.style.background = 'rgba(120, 120, 124, 0.37)'; 
+      if (j < tamanhoDaBarra * (porcentagemDaBarra / 100)) {
+        segmentos.style.background = 'rgb(' + color.join(',') + ')';
+      }
+      barra.appendChild(segmentos);
+    }
+  }
+  

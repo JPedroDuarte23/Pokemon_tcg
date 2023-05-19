@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .progress-container {
+      margin-bottom: 10px;
+    }
+
+    .progress-bar {
+      width: 250px;
+      height: 20px;
+      border: 1px solid #ccc;
+      margin-bottom: 10px;
+    }
+
+    .progress-block {
+      width: 4px;
+      height: 100%;
+      float: left;
+      margin-left: 1px;
+      border-radius: 2px;
+      background-color: #ccc; /* Define a cor cinza padrão */
+    }
+
+  </style>
+</head>
+<body>
+  <div class="progress-bar" id="progress-bar"></div>
+  <script>
+    var progressBarSize = 40; // Tamanho de cada barra de progresso
+    var progressBarPercentages = 98  // Porcentagens de cada barra de progresso
+    var progressBar = document.getElementById("progress-bar")
+
+
+      for (var j = 0; j < progressBarSize; j++) {
+        var progressBlock = document.createElement('div');
+        progressBlock.classList.add('progress-block');
+
+        // Calcula a cor intermediária com base na porcentagem
+        var colorStart = [59, 175, 218]; // RGB para a cor de início
+        var colorEnd = [220, 0, 0]; // RGB para a cor final
+        var percentComplete = j / progressBarSize * 100;
+        var color = [];
+        for (var k = 0; k < 3; k++) {
+          color[k] = Math.round(colorStart[k] + (colorEnd[k] - colorStart[k]) * (percentComplete / 100));
+        }
+
+        // Define a cor de fundo do bloco
+        progressBlock.style.background = '#808080'; 
+
+        // Define a classe para o bloco de progresso colorido com base na porcentagem
+        if (j < progressBarSize * (progressBarPercentages/ 100)) {
+          
+          progressBlock.style.background = 'rgb(' + color.join(',') + ')';
+        }
+
+        progressBar.appendChild(progressBlock);
+      }
+    
+  </script>
+</body>
+</html>
