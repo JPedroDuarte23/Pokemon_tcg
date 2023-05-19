@@ -1,16 +1,18 @@
 // var div_pop_up = document.getElementById('div_pop_up')
+
 var tabela_padrao = `
     <div class="titulo_caixa_graficos"><h2>Coleção</h2></div>
     <div id="cartasColecao" class="caixa_colecao">
       <table id="tabela">
         <thead>
           <tr>
-            <th>Imagem</th>
+            <th class="lateral_esqurda">Imagem</th>
             <th>Nome</th>
             <th>Tipo</th>
             <th>Raridade</th>
             <th>Set</th>
             <th>Numero</th>
+            <th class="lateral_direi"></th>
         </tr>
       </thead>
       <tbody id="corpo_tabela">
@@ -36,30 +38,58 @@ var tabela_decks = `    <div class="titulo_caixa_graficos"><h2>Coleção</h2></d
 var carta_detalhes = `
     <div id="blur">
         <div class="pop_up">
+        <i class="fa-solid fa-xmark fa-xl" id="i_voltar" onclick="voltar(1)"></i>
+        <div class="carta_textos">
             <img src="" alt="" id="imagem_carta_detalhe">
             <div class="textos">
-                <h3>Nome_Pokemon</h3>
+                <h2 id="nomePokeDtlh">Nome_Pokemon</h2>
                 <hr>
-                <h3>Subtipos</h3>
-                <h4>---------</h4>
-                <div class="quadrados">
+                <h3 id="subTipoDtlh">Subtipos: </h3>
+                <div class="caixa_quadrados">
+                <div class="quadrado">
                     <h3>Tipo</h3>
-                    <h4>---------</h4>
+                    <h4 id="tipoDtlh">---------</h4>
+                </div> 
+                <div class="quadrado">   
                     <h3>Raridade</h3>
-                    <h4>---------</h4>
+                    <h4 id="raridadeDtlh">---------</h4>
+                </div>
+                <div class="quadrado">
                     <h3>Series</h3>
-                    <h4>--------</h4>
-                    <h3>coleção</h3>
-                    <h4>-------</h4>
+                    <h4 id="seriesDtlh">--------</h4>
+                </div>
+                <div class="quadrado">
+                    <h3>Coleção</h3>
+                    <h4 id="colecaoDtlh">-------</h4>
+                </div>
+                <div class="quadrado">
+                    <h3>Número</h3>
+                    <h4 id="numeroDtlh">---------</h4>
+                </div> 
+                <div class="quadrado">
+                    <h3>Deck</h3>
+                    <h4 id="fkDeckDtlh">---------</h4>
+                </div> 
                 </div>
             </div>
+            </div>
             <form action="/adicionar-carta" method="post">
-                <label for="IDDeckInput">Nome do Deck</label>
-                <input id="IDDeckInput" name="IDDeckInput">
+            <table class="form_deck">
+            <tr>
+                <td><label for="IDDeckInput">Inisira o ID do deck para adicionar a carta</label></td>
+            </tr>
+            <tr>
+               <td><input id="IDDeckInput" name="IDDeckInput"></td>
+            <tr>
                 <input style="display: none" name="idCartaValue" id="idCartaValue">
+            </table>
                 <button type="submit" id="botao_add_carta">Adicionar ao Deck</button>
             </form>
         </div>
+        <style>
+        var addCarta = document.getElementById('botao_add_carta')
+        addCarta.addEventListener('click', voltar)
+        </style>
     </div>`
 var formulario_padrao = 0
 
@@ -88,12 +118,15 @@ function limparSessao() {
 function registrar() {
     div_pop_up.style.display = "flex"
 }
-function voltar() {
+function voltar(tipo) {
+    if (tipo == 1) {
+        div_pop_up.innerHTML = form_carta   
+    } 
     div_pop_up.style.display = "none"
 }
 
 function query_colecao(seletor) {
-    var id = Number(idInput.value)
+    var id = Number(sessionStorage.ID_USUARIO)
     var caixaGraficos = document.getElementById('caixaGraficos');
     var cartasDoUsuario = 0;
     fetch(`http://localhost:3000/registros`)
@@ -173,6 +206,7 @@ function query_colecao(seletor) {
                     idCell.style.display = "none"
           
                     // Colocando imagem no td
+                    imagemCell.classList.add("canto_esquerdo")
                     var imagem_consulta = document.createElement('img');
                     imagem_consulta.src = registro.imagemPequena; 
                     imagemCell.appendChild(imagem_consulta);
@@ -180,12 +214,21 @@ function query_colecao(seletor) {
                     var botao_deck = document.createElement('button')
                     botao_deck.setAttribute('class', 'select_card_btn')
                     botao_deck.innerHTML = `<i class="fa-solid fa-caret-right"></i>`;
+                    botao_deck.classList.add('botao_detalhe')
                     botao_deck.addEventListener('click', function() {
-                        var id = sessionStorage.ID_USUARIO
+
                         div_pop_up.innerHTML = carta_detalhes;
-                        imagem_carta_detalhe.src = registro.imagemPequena; 
+                        imagem_carta_detalhe.src = registro.imagemGrande; 
+                        imagem_carta_detalhe.classList.add("imagem_detalhe")
                         idCartaValue.setAttribute('value', registro.idCarta)
-                        var addCarta = document.getElementById('botao_add_carta')
+                        nomePokeDtlh.innerHTML = registro.nome;
+                        subTipoDtlh.innerHTML += registro.subtipo;
+                        tipoDtlh.innerHTML = registro.tipo;
+                        raridadeDtlh.innerHTML = registro.raridade;
+                        seriesDtlh.innerHTML = registro.series;
+                        colecaoDtlh.innerHTML = registro.nomeSet;
+                        numeroDtlh.innerHTML = registro.numero;
+                        fkDeckDtlh.innerHTML = registro.fkDeck;
                         registrar();
                     });
 
@@ -207,8 +250,6 @@ function query_colecao(seletor) {
                     linha.appendChild(numeroCell)
                     linha.appendChild(botaoCell);
                     tbody.appendChild(linha);
-          
-            
                     imagem_consulta.classList.add('imagem_tabela');
                 });
                 
@@ -223,10 +264,9 @@ function query_colecao(seletor) {
         var botao = document.getElementById('botao-'+ seletor);
         botaoAtivado.classList.remove("botao_ativado");
         botao.classList.add("botao_ativado");
-        addCarta.addEventListener('click', voltar)
 }
 function query_decks(seletor) {
-    var id = Number(idInput.value)
+    var id = Number(sessionStorage.ID_USUARIO)
     var caixaGraficos = document.getElementById('caixaGraficos');
     var decksDoUsuario = 0;
     fetch(`http://localhost:3000/decks`)
@@ -260,7 +300,7 @@ function query_decks(seletor) {
                 linha.appendChild(tipoCell);
                 tbody.appendChild(linha);
       
-                imagem_consulta.classList.add('imagem_tabela');
+                imagem_consulta.classList.add('imagem_tabela_deck');
             });
             
         })

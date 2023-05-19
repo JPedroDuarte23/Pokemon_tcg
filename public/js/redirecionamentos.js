@@ -10,3 +10,6 @@ function redirecionar_ferramenta() {
 function redirecionar_aulas() {
     window.location.href = "https://tcg.pokemon.com/pt-br/top-deck-academy/"
 }
+function redirecionar_info(){
+    window.location.href = "Dash_informacoes.html"
+}

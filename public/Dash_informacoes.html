@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My CardDex | Decks</title>
+    
+    <link rel="stylesheet" href="css/style_dash_geral.css">
+    <link rel="stylesheet" href="css/css_tabelas.css">
+    <script src="https://kit.fontawesome.com/c52875e8e8.js" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="js/redirecionamentos.js"></script>
+    <script src="../js/funcoes.js"></script>
+</head>
+
+<body onload="validarSessao()">
+    <div id="div_pop_up" class="registrar">
+        <div id="blur">
+            <div class="pop_up_carta">
+                <form action="/registro-deck" method="post">
+                    <label for="inputDeckNome">Nome do seu Deck:</label>
+                    <input type="text" name="inputDeckNome" id="inputDeckNome">
+                    <label for="inputTipoPrincipal">Tipo principal:</label>
+                    <input type="text" name="inputTipoPrincipal" id="inputTipoPrincipal">
+                    <label for="inputImagemDeck">Imagem do deck</label>
+                    <input type="text" name="inputImagemDeck" id="inputImagemDeck">
+                    <input type="text" name="idInput" id="idInput" style="display: none;">
+                    <button type="submit" id="criarDeckButton">Criar</button>
+                </form>
+              </div>
+          </div>
+    </div>
+    <section class="main" id="corpo_principal">
+        <div class="sidebar">
+            <img src="imagens/Logo_pokemon.png" class="logomarca" id="img_logo">
+            <ul>
+                <li><a href="Dash_inicial.html" > <i class="fa-solid fa-house fa-lg"></i>Home</a>
+                </li>
+                <li><a href="Dash_colecoes.html"><i class="fa-solid fa-box-open fa-lg"></i>Coleção</a></li>
+                <li><a href="Dash_decks.html"><i class="fa-solid fa-layer-group fa-lg"></i>Decks</a></li>
+                <li><a href="Dashboard_cofig.html" class="ativado"><i class="fa-solid fa-file-lines fa-lg"></i>Informações</a></li>
+                <li><a onclick="limparSessao()"><i class="fa-solid fa-right-from-bracket fa-lg"></i>Sair</a></li>
+            </ul>
+
+        </div>
+        <div class="caixa_maior">
+            <header class="">
+                <div>
+                    <h2>Informações</h2>
+                    <div class="pesquisar">
+                        <input type="text" class="barra_de_pesquisa" placeholder="Procura algo específico?">
+                        <button class="lupa" type="submit">
+                            <i class="fa-solid fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="lateral_icones">
+                    <div class="icone" onclick=""><i class="fa-solid fa-circle-question fa-lg"></i></div>
+                    <div class="icone" onclick=""><i class="fa-solid fa-bell fa-lg"></i></div>
+                    <div class="user">
+                        <div class="circulo"></div>
+                        <h4 id="nome_usuario"></h4>
+                    </div>
+                </div>
+            </header>
+
+
+            </section>
+            </div>
+</body>
+
+</html>
+<script>
+    criarDeckButton.addEventListener('click', voltar);
+</script>
+
+    
+    

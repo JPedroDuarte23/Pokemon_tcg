@@ -12,12 +12,14 @@
   <script type="text/javascript" src="js/redirecionamentos.js"></script>
   <script src="https://kit.fontawesome.com/c52875e8e8.js" crossorigin="anonymous"></script>
   <script src="../js/funcoes.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js/dist/Chart.min.js"></script>
+
 </head>
 
-<body onload="validarSessao()">
+<body onload="validarSessao(), carregar_graficos()">
   <div id="div_pop_up" class="registrar">
     <div id="blur">
-      <div class="pop_up">
+      <div class="pop_up_carta">
         <i class="fa-solid fa-xmark fa-xl" id="i_voltar" onclick="voltar()"></i>
         <h3>Registrar Cartas</h3>
         <hr>
@@ -288,7 +290,7 @@
         </li>
         <li><a href="Dash_colecoes.html"><i class="fa-solid fa-box-open fa-lg"></i>Coleção</a></li>
         <li><a href="Dash_decks.html"><i class="fa-solid fa-layer-group fa-lg"></i>Decks</a></li>
-        <li><a href="Dashboard_cofig.html"><i class="fa-solid fa-file-lines fa-lg"></i>Informações</a></li>
+        <li><a href="Dash_informacoes.html"><i class="fa-solid fa-file-lines fa-lg"></i>Informações</a></li>
         <li><a onclick="limparSessao()"><i class="fa-solid fa-right-from-bracket fa-lg"></i>Sair</a></li>
       </ul>
 
@@ -305,7 +307,7 @@
           </div>
         </div>
         <div class="lateral_icones">
-          <div class="icone" onclick=""><i class="fa-solid fa-circle-question fa-lg"></i></div>
+          <div class="icone" onclick="redirecionar_info()"><i class="fa-solid fa-circle-question fa-lg"></i></div>
           <div class="icone" onclick=""><i class="fa-solid fa-bell fa-lg"></i></div>
           <div class="user">
             <div class="circulo">
@@ -316,7 +318,7 @@
       </header>
       <section class="botoes light_mode">
         <button class="botao_ativado">Visão Geral</button>
-        <button onclick="">Coleção 1</button>
+        <button onclick="Registrar_resultado()">Alterar vitórias e derrotas</button>
         <button onclick="">Coleção 2</button>
         <button onclick="">Coleção 3</button>
         <button onclick="">Coleção 4</button>
@@ -328,7 +330,9 @@
             <h2>Visão geral</h2>
           </div>
           <div class="sub_secao_1">
-            <div class="caixa_1"></div>
+            <div class="caixa_1">
+              <canvas id="suptipos_colecao"></canvas>
+            </div>
             <div class="caixa_2"></div>
           </div>
           <div class="caixa_3"></div>
@@ -339,4 +343,29 @@
 </html>
 <script>
   searchButton.addEventListener('click', voltar);
+  function carregar_graficos() {
+    var id = Number(sessionStorage.ID_USUARIO)
+    var caixaGraficos = document.getElementById('caixaGraficos');
+    fetch(`http://localhost:3000/grafico_colecao`)
+      .then((response) => response.json())
+      .then((res) => {
+        var rosquinha = document.getElementById('suptipos_colecao')
+
+        new Chart(rosquinha, {
+          type: 'doughnut',
+          data: {
+            labels: ['Categoria 1', 'Categoria 2', 'Categoria 3'],
+            datasets: [{
+              data: [res[0].qtd_pokemons, res[0].qtd_treinadores, res[0].qtd_energias],
+              backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
+              hoverBackgroundColor: ['#FF6384', '#36A2EB', '#FFCE56']
+            }]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false
+          }
+        });
+      })
+  }
 </script>

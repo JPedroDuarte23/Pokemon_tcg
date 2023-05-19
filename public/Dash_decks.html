@@ -17,7 +17,8 @@
 <body onload="validarSessao(), query_decks(1)">
     <div id="div_pop_up" class="registrar">
         <div id="blur">
-            <div class="pop_up">
+            <div class="pop_up_carta">
+                <i class="fa-solid fa-xmark fa-xl" id="i_voltar" onclick="voltar(0)"></i>
                 <form action="/registro-deck" method="post">
                     <label for="inputDeckNome">Nome do seu Deck:</label>
                     <input type="text" name="inputDeckNome" id="inputDeckNome">
@@ -39,7 +40,7 @@
                 </li>
                 <li><a href="Dash_colecoes.html"><i class="fa-solid fa-box-open fa-lg"></i>Coleção</a></li>
                 <li><a href="Dash_decks.html"  class="ativado"><i class="fa-solid fa-layer-group fa-lg"></i>Decks</a></li>
-                <li><a href="Dashboard_cofig.html"><i class="fa-solid fa-file-lines fa-lg"></i>Informações</a></li>
+                <li><a href="Dash_informacoes.html"><i class="fa-solid fa-file-lines fa-lg"></i>Informações</a></li>
                 <li><a onclick="limparSessao()"><i class="fa-solid fa-right-from-bracket fa-lg"></i>Sair</a></li>
             </ul>
 
@@ -56,7 +57,7 @@
                     </div>
                 </div>
                 <div class="lateral_icones">
-                    <div class="icone" onclick=""><i class="fa-solid fa-circle-question fa-lg"></i></div>
+                    <div class="icone" onclick="redirecionar_info()"><i class="fa-solid fa-circle-question fa-lg"></i></div>
                     <div class="icone" onclick=""><i class="fa-solid fa-bell fa-lg"></i></div>
                     <div class="user">
                         <div class="circulo"></div>
@@ -65,11 +66,11 @@
                 </div>
             </header>
             <section class="botoes light_mode">
-                <button class="botao_ativado">Todas os Decks</button>
-                <button onclick="">Deck Engrenagens de Fogo</button>
-                <button onclick="">Deck Engrenagens de Água</button>
-                <button onclick="">Deck Engrenagens de Terra</button>
-                <button onclick="">Deck Engrenagens de Vento</button>
+                <button onclick="query_decks(1)" class="botao_ativado">Todos os Decks</button>
+                <button onclick="buscar_cartas_deck(1)">Deck 1</button>
+                <button onclick="buscar_cartas_deck(2)">Deck 2</button>
+                <button onclick="buscar_cartas_deck(3)">Deck 3</button>
+                <button onclick="buscar_cartas_deck(4)">Deck 4</button>
                 <button onclick="registrar()" class="registrador"><i class="fa-solid fa-plus"></i>Adicionar Deck</button>
             </section>
             <section id="secao_visao_geral">
@@ -84,6 +85,90 @@
 </html>
 <script>
     criarDeckButton.addEventListener('click', voltar);
+    function buscar_cartas_deck(num_deck) {
+    var id = Number(idInput.value)
+    var caixaGraficos = document.getElementById('caixaGraficos');
+    var cartasDoDeck = 0;
+    fetch(`http://localhost:3000/registros`)
+        .then((response) => response.json())
+        .then((data) => {
+            caixaGraficos.innerHTML = tabela_padrao
+            var tbody = document.getElementById('corpo_tabela');
+            cartasDoDeck= data.filter(registro => registro.fkDeck === num_deck);
+            cartasDoDeck.forEach((registro) => {
+                var linha = document.createElement('tr');
+                    var idCell = document.createElement('td')
+                    var nomeCell = document.createElement('td');
+                    var imagemCell = document.createElement('td');
+                    var tipoCell = document.createElement('td');
+                    var raridadeCell = document.createElement('td');
+                    var setCell = document.createElement('td')
+                    var numeroCell = document.createElement('td')
+                    var botaoCell = document.createElement('td')
+
+                    idCell.style.display = "none"
+          
+                    // Colocando imagem no td
+                    imagemCell.classList.add("canto_esquerdo")
+                    var imagem_consulta = document.createElement('img');
+                    imagem_consulta.src = registro.imagemPequena; 
+                    imagemCell.appendChild(imagem_consulta);
+
+                    var botao_deck = document.createElement('button')
+                    botao_deck.setAttribute('class', 'select_card_btn')
+                    botao_deck.innerHTML = `<i class="fa-solid fa-caret-right"></i>`;
+                    botao_deck.classList.add('botao_detalhe')
+                    botao_deck.addEventListener('click', function() {
+                        var id = sessionStorage.ID_USUARIO;
+                        div_pop_up.innerHTML = carta_detalhes;
+                        imagem_carta_detalhe.src = registro.imagemGrande; 
+                        imagem_carta_detalhe.classList.add("imagem_detalhe")
+                        idCartaValue.setAttribute('value', registro.idCarta)
+                        var addCarta = document.getElementById('botao_add_carta')
+                        nomePokeDtlh.innerHTML = registro.nome;
+                        subTipoDtlh.innerHTML += registro.subtipo;
+                        tipoDtlh.innerHTML = registro.tipo;
+                        raridadeDtlh.innerHTML = registro.raridade;
+                        seriesDtlh.innerHTML = registro.series;
+                        colecaoDtlh.innerHTML = registro.nomeSet;
+                        numeroDtlh.innerHTML = registro.numero;
+                        fkDeckDtlh.innerHTML = registro.fkDeck;
+                        registrar();
+                    });
+
+                    idCell.innerHTML = registro.idCarta;
+                    nomeCell.innerHTML = registro.nome;
+                    tipoCell.innerHTML= registro.tipo;
+                    raridadeCell.innerHTML = registro.raridade;
+                    setCell.innerHTML = registro.nomeSet
+                    numeroCell.innerHTML = registro.numero
+          
+                    // Adicionado tudo com appendChild (linha[imagem, nome, tipo])
+                    botaoCell.appendChild(botao_deck);
+                    linha.appendChild(idCell)
+                    linha.appendChild(imagemCell);
+                    linha.appendChild(nomeCell);
+                    linha.appendChild(tipoCell);
+                    linha.appendChild(raridadeCell);
+                    linha.appendChild(setCell);
+                    linha.appendChild(numeroCell)
+                    linha.appendChild(botaoCell);
+                    tbody.appendChild(linha);
+                    imagem_consulta.classList.add('imagem_tabela');
+                });   
+            }
+        )
+        .catch((error) => {
+            console.error('Erro ao buscar registros no servidor:', error);
+        });
+        var botaoAtivado = document.querySelector('.botao_ativado')
+        var botao = document.getElementById('botao-'+ num_deck);
+        botaoAtivado.classList.remove("botao_ativado");
+        botao.classList.add("botao_ativado");
+        addCarta.addEventListener('click', voltar)
+}
+var pop_up = document.getElementById("div_pop_up")
+  var form_carta = pop_up.innerHTML
 </script>
 
     

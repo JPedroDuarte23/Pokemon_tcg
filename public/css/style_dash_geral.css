@@ -34,10 +34,6 @@ a {
     z-index: 99;
     overflow: auto;
 }
-.logomarca:hover {
-    cursor: pointer;
-}
-
 .main {
     display: flex;
     flex-wrap: wrap;
@@ -251,7 +247,7 @@ button.botao_ativado, button.registrador {
 
 /* Registrar cartas */
 
-.pop_up {
+.pop_up_carta {
     position: absolute;
     width: 50%;
     height: auto;
@@ -266,24 +262,24 @@ button.botao_ativado, button.registrador {
     flex-direction: column;
     box-sizing: border-box;
 }
-.pop_up form {
+.pop_up_carta form {
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
     margin-top: 5%;
 }
-.pop_up h3 {
+.pop_up_carta h3 {
     text-align: center;
     margin-bottom: 0.5%;
     font-size: 1.5vw;
 }
 
-.pop_up hr {
+.pop_up_carta hr {
     width: 30%;
     align-self: center;
     border: 1px solid #8B0000;
 }
-.pop_up #i_voltar {
+#i_voltar {
     width: 10px;
     height: 10px;
     position: absolute;
@@ -291,7 +287,7 @@ button.botao_ativado, button.registrador {
     color: #FFCB05;
     cursor: pointer;
 }
-.pop_up #i_voltar:hover {
+ #i_voltar:hover {
     color: #FF8C05 ;
 }
 .campo {
@@ -335,7 +331,7 @@ button.botao_ativado, button.registrador {
     background-color: #090718;
     color: white;
   }
-.pop_up button {
+.pop_up_carta button {
     margin: 5%;
     align-self: center;
     width: 20%;

@@ -89,17 +89,29 @@
 /* Tabelas */ 
 
 #tabela {
-    width: 90%;
+    width: 98%;
     margin: 0;
     color: white;
     border-collapse: collapse;
     text-align: center;
+    font-size: 1.1vw;
 }
-th {
+#tabela th {
     padding: 10px 0;
+    border-bottom: 2px solid white;
+    font-weight: 800;
+    font-size: 1.2vw;
+}
+#tabela td {
+    border-top: 1px solid white;
+    border-bottom: 1px solid white;
+    padding: 10px;
 }
 .imagem_tabela {
-    width: 50px;
+    width: 60px;
+}
+.imagem_tabela_deck {
+    width: 150px;
 }
 ::-webkit-scrollbar {
     width: 5px;
@@ -110,3 +122,121 @@ th {
     background-color: #FFCB05;
     border-radius: 5px;
   }
+
+.botao_detalhe {
+    border-radius: 50px;
+    border: none;
+    width: 20px;
+    height: 20px;
+    color: black;
+    background-color: #FFCB05;
+    text-align: center;
+    box-shadow: 4px 2px 5px 0px rgba(0,0,0,0.3);
+}
+.canto_esquerdo {
+    border-top: 1px solid white;
+    border-bottom: 1px solid white;
+    border-left: none;
+}
+
+/* Pop up detalhe das cartas */
+
+.pop_up {
+    position: absolute;
+    width: 60%;
+    height: auto;
+    max-height: auto;
+    background-color: #232C5F;
+    color: white;
+    border-radius: 5px;
+    top: 10%;
+    left: 20%;
+    padding: 2%;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+}
+.carta_textos {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+.imagem_detalhe {
+    width: auto;
+    max-width: 45%;
+    filter: drop-shadow(7px -2px 5px rgba(0, 0, 0, 0.42));
+    border-radius: 10px;
+}
+.textos {
+    margin-left: 7%;
+    font-weight: normal;
+    width: 50%;
+}
+.textos h2 {
+    font-size: 2.5vw;
+    font-weight: 700;
+    color: #FFCB05;
+}
+.textos hr {
+    border: 1px solid #FFCB05;
+}
+.textos h3 {
+    font-size: 1.8vw;
+    font-weight: 500;
+}
+.caixa_quadrados {
+    margin-top: 20%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 20%;
+}
+.quadrado {
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+    margin-top: 5%;
+}
+.quadrado h3 {
+    font-size: 1.8vw;
+    font-weight: 500;
+    color: #FFCB05;
+}
+.quadrado h4 {
+    font-size: 1.5vw;
+    font-weight: 100;
+}
+.pop_up form {
+    margin-top: 10%;
+}
+.form_deck {
+    width: 98%;
+    margin: 0;
+    color: white;
+    border-collapse: collapse;
+    font-size: 1.1vw;
+}
+.form_deck label {
+    color: #FFCB05;
+    font-size: 2vw;
+    font-weight: 600;
+}
+.form_deck input {
+    width: 50%;
+    margin: 2%;
+    padding: 0.5%;
+    border-radius: 5px;
+}
+#botao_add_carta {
+    margin: 3%;
+    align-self: center;
+    width: 20%;
+    padding: 2% 0;
+    border-radius: 10px;
+    font-weight: bold;
+    font-size: 1.1vw;
+    background-color: #FFCB05;
+    border: none;
+    box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+}

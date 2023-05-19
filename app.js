@@ -70,7 +70,6 @@ app.use("/medidas", medidasRouter)
       console.log('Deck inserido com sucesso!');
       res.redirect('/Dash_decks.html')
       }
-      res.json(results)
     })
   });
 }
@@ -90,7 +89,6 @@ const update_carta_deck = async() => {
       console.log('Registro inserido com sucesso!');
       res.redirect('/Dash_decks.html');
       }
-      res.json(results)
     })
   })
 }
@@ -98,11 +96,17 @@ const update_carta_deck = async() => {
   const card_insert = async () => {
     // Pega os dados inseridos pelo usuário no formulário que passam pelo http://localhost:3000/search
     app.post('/search', (req, res) => {
-      const { nomePokemonInput, selectSubtype, selectTypes, selectRarity, selectSet, idInput} = req.body;
+      const { nomePokemonInput, selectSupertype, selectSubtype, selectTypes, selectRarity, selectSet, idInput} = req.body;
     // Faz a requisição da API que retorna uma lista de JSON, seleciona os dados do indice[0] que serão armazenados desse JSON
-
-
-      axios.get(`https://api.pokemontcg.io/v2/cards?q=name:"${nomePokemonInput}" subtypes:"${selectSubtype}" types:"${selectTypes}" rarity:"${selectRarity}" set.name:"${selectSet}"`)
+      console.log("começando a procura na api")
+      console.log(nomePokemonInput)
+      console.log(selectSupertype)
+      console.log(selectSubtype)
+      console.log(selectTypes)
+      console.log(selectRarity)
+      console.log(selectSet)
+   if (selectSupertype == "Pokémon") {
+    axios.get(`https://api.pokemontcg.io/v2/cards?q=name:"${nomePokemonInput}" subtypes:"${selectSubtype}" types:"${selectTypes}" rarity:"${selectRarity}" set.name:"${selectSet}"`)
         .then(response => {
           const cardData = response.data.data[0];
           const nome = cardData.name;
@@ -110,13 +114,15 @@ const update_carta_deck = async() => {
           const imagemGrande = cardData.images.large;
           const tipo = cardData.types;
           const raridade = cardData.rarity;
+          const subtipo = cardData.subtypes[0];
           const nomeSet = cardData.set.name;
+          const series = cardData.set.series;
           const numero = `${cardData.number} / ${cardData.set.printedTotal}`
   
     // Insere no banco de dados as cartas que ele registrou
   
-          const insertQuery = `INSERT INTO cartas (nome, imagemPequena, imagemGrande, tipo, raridade, nomeSet, fkUsuario, numero) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`;
-          const values = [nome, imagemPequena, imagemGrande, tipo, raridade, nomeSet, idInput, numero];
+          const insertQuery = `INSERT INTO cartas (nome, suptipo, subtipo, imagemPequena, imagemGrande, tipo, raridade, series, nomeSet, numero, fkUsuario) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
+          const values = [nome, selectSupertype, subtipo, imagemPequena, imagemGrande, tipo, raridade, series, nomeSet, numero, idInput];
   
     // PokeInfo é uma lista de Json
           connection.connect();
@@ -133,9 +139,92 @@ const update_carta_deck = async() => {
           console.log('Erro ao fazer a consulta na API Pokemon TCG:', error);
           res.redirect('/Dash_colecoes.html')
         })
+   } else if (selectSupertype == "Treinador") {
+    axios.get(`https://api.pokemontcg.io/v2/cards?q=name:"${nomePokemonInput}" supertype:"trainer" rarity:"${selectRarity}" set.name:"${selectSet}"`)
+    .then(response => {
+      const cardData = response.data.data[0];
+      const nome = cardData.name;
+      const imagemPequena = cardData.images.small;
+      const imagemGrande = cardData.images.large;
+      const raridade = cardData.rarity;
+      const subtipo = cardData.subtypes[0];
+      const nomeSet = cardData.set.name;
+      const series = cardData.set.series;
+      const numero = `${cardData.number} / ${cardData.set.printedTotal}`
+
+// Insere no banco de dados as cartas que ele registrou
+
+      const insertQuery = `INSERT INTO cartas (nome, suptipo, subtipo, imagemPequena, imagemGrande,  raridade, series, nomeSet, numero, fkUsuario) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
+      const values = [nome, selectSupertype, subtipo, imagemPequena, imagemGrande, raridade, series, nomeSet, numero, idInput];
+
+// PokeInfo é uma lista de Json
+      connection.connect();
+      connection.query(insertQuery, values, (error, results) => {
+        if (error) {
+          console.log('Erro ao inserir registro na tabela:', error);
+        } else {
+        console.log('Registro inserido com sucesso!');
+        }
+        res.redirect('/Dash_colecoes.html');
+      });
+    })
+    .catch(error => {
+      console.log('Erro ao fazer a consulta na API Pokemon TCG:', error);
+      res.redirect('/Dash_colecoes.html')
+    })
+   } else {
+    axios.get(`https://api.pokemontcg.io/v2/cards?q=name:"${selectTypes} ${nomePokemonInput}" supertype:"energy" rarity:"${selectRarity}" set.name:"${selectSet}"`)
+    .then(response => {
+      const cardData = response.data.data[0];
+      const nome = cardData.name;
+      const imagemPequena = cardData.images.small;
+      const imagemGrande = cardData.images.large;
+      const tipo = cardData.types;
+      const subtipo = cardData.subtypes[0];
+      const raridade = cardData.rarity;
+      const nomeSet = cardData.set.name;
+      const series = cardData.set.series;
+      const numero = `${cardData.number} / ${cardData.set.printedTotal}`
+
+// Insere no banco de dados as cartas que ele registrou
+
+      const insertQuery = `INSERT INTO cartas (nome, suptipo, subtipo, imagemPequena, imagemGrande, tipo,  raridade, series, nomeSet, numero, fkUsuario) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
+      const values = [nome, selectSupertype, subtipo, imagemPequena, imagemGrande, tipo, raridade, series, nomeSet, numero, idInput];
+
+// PokeInfo é uma lista de Json
+      connection.connect();
+      connection.query(insertQuery, values, (error, results) => {
+        if (error) {
+          console.log('Erro ao inserir registro na tabela:', error);
+        } else {
+        console.log('Registro inserido com sucesso!');
+        }
+        res.redirect('/Dash_colecoes.html');
+      });
+    })
+    .catch(error => {
+      console.log('Erro ao fazer a consulta na API Pokemon TCG:', error);
+      res.redirect('/Dash_colecoes.html')
+    })
+   }
     })
   }
-
+  const graficos_cartas = () => {
+    app.get('/grafico_colecao', (req,res) =>{
+      connection.connect() 
+      const sql_2 = ` SELECT (SELECT COUNT(*) FROM cartas WHERE suptipo = "Pokémon") AS qtd_pokemons,
+      (SELECT COUNT(*) FROM cartas WHERE suptipo = "Treinador") AS qtd_treinadores,
+      (SELECT COUNT(*) FROM cartas WHERE suptipo = "Energia") AS qtd_energias;`
+      connection.query(sql_2, (error, results, fields) => {
+        if (error) {
+          console.log(error) 
+          res.status(500).json({ error: 'Erro ao buscar os decks'});
+          return
+        }
+        res.json(results);
+      })
+    })
+  } 
   const servidor = () => {
     app.use((request, response, next) => {
       response.header('Access-Control-Allow-Origin', '*');
@@ -153,6 +242,7 @@ const update_carta_deck = async() => {
     await decks_insert();
     await deck_select();
     await update_carta_deck();
+    await graficos_cartas();
     servidor();
   })();
 
