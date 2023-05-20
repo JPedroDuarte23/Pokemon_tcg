@@ -158,30 +158,29 @@ function query_colecao(seletor) {
                         && (registro.raridade === "Rare Ultra"
                             || registro.raridade === "Rare Rainbow"
                             || registro.raridade === "Rare Secret"
-                            || registro.raridade === "Hyper Rare"));
-
-                } else if (seletor == 4) {
-
-                    cartasDoUsuario = data.filter(registro => registro.fkUsuario === id
-                        && (registro.raridade === "Rare"
-                            || registro.raridade === "Rare Holo"
+                            || registro.raridade === "Hyper Rare"
                             || registro.raridade === "Rare Holo V"
-                            || registro.raridade === "Rare ACE"
                             || registro.raridade === "Rare BREAK"
-                            || registro.raridade === "Rare Holo"
                             || registro.raridade === "Rare Holo EX"
                             || registro.raridade === "Rare Holo GX"
                             || registro.raridade === "Rare Holo LV.X"
                             || registro.raridade === "Rare Holo Star"
                             || registro.raridade === "Rare Holo V"
                             || registro.raridade === "Rare Holo VMAX"
-                            || registro.raridade === "Rare Prime"
-                            || registro.raridade === "Rare Prism Star"
                             || registro.raridade === "Rare Rainbow"
                             || registro.raridade === "Rare Secret"
                             || registro.raridade === "Rare Shining"
                             || registro.raridade === "Rare Shiny"
                             || registro.raridade === "Rare Shiny GX"));
+
+                } else if (seletor == 4) {
+
+                    cartasDoUsuario = data.filter(registro => registro.fkUsuario === id
+                        && (registro.raridade === "Rare"
+                        || registro.raridade === "Rare Holo"
+                        || registro.raridade === "Rare ACE"
+                        || registro.raridade === "Rare Prism Star"
+                        || registro.raridade === "Rare Prime"));
 
                 } else if (seletor == 5) {
 
@@ -191,6 +190,9 @@ function query_colecao(seletor) {
                 } else if (seletor == 6) {
                     cartasDoUsuario = data.filter(registro => registro.fkUsuario === id
                         && registro.raridade === "Common");
+                } else if (seletor == 7) {
+                    cartasDoUsuario = data.filter(registro => registro.fkUsuario === id
+                        && registro.raridade === "Promo");
                 }
                 cartasDoUsuario.forEach((registro) => {
                     var linha = document.createElement('tr');

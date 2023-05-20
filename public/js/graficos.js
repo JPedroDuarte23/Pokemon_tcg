@@ -91,8 +91,8 @@ function carregar_graficos() {
                 total.appendChild(num_vitorias);
                 estatistica.appendChild(total);
                 estatistica.appendChild(porcentagem_vitorias);
-                caixa3.appendChild(estatistica)
-             ;
+                caixa3.appendChild(estatistica);
+                contador++
             });
             
         })
@@ -101,17 +101,24 @@ function carregar_graficos() {
     fetch('http://localhost:3000/registros')
       .then((response) => response.json())
       .then((data) => {
-        var cartasTipoFogo = data.filter(registro => registro.fkUsuario === id && registro.tipo === "Fire");
-        var cartasTipoAgua = data.filter(registro => registro.fkUsuario === id && registro.tipo === "Water");
-        var cartasTipoPlanta = data.filter(registro => registro.fkUsuario === id && registro.tipo === "Grass");
-        var cartasTipoRaio = data.filter(registro => registro.fkUsuario === id && registro.tipo === "Lightning");
-        var cartasTipoLutador = data.filter(registro => registro.fkUsuario === id && registro.tipo === "Fighting");
+        var cartasDoUser = data.filter(registro => registro.fkUsuario === id)
+        var cartasTipoFogo = data.filter(registro => registro.fkUsuario === id && registro.tipo === "Fire" && registro.suptipo === "Pokémon");
+        var cartasTipoAgua = data.filter(registro => registro.fkUsuario === id && registro.tipo === "Water" && registro.suptipo === "Pokémon" );
+        var cartasTipoPlanta = data.filter(registro => registro.fkUsuario === id && registro.tipo === "Grass" && registro.suptipo === "Pokémon");
+        var cartasTipoRaio = data.filter(registro => registro.fkUsuario === id && registro.tipo === "Lightning" && registro.suptipo === "Pokémon");
+        var cartasTipoLutador = data.filter(registro => registro.fkUsuario === id && registro.tipo === "Fighting" && registro.suptipo === "Pokémon");
+        var cartasTipoNormal = data.filter(registro => registro.fkUsuario === id && registro.tipo === "Colorless" && registro.suptipo === "Pokémon");
+        var cartasTipoPsiquico = data.filter(registro => registro.fkUsuario === id && registro.tipo === "Psychic" && registro.suptipo === "Pokémon");
+        var cartasTipoEscuridao = data.filter(registro => registro.fkUsuario === id && registro.tipo === "Darkness" && registro.suptipo === "Pokémon");
 
-        var porcentagemCTF = Math.round(((cartasTipoFogo.length / data.length) * 100));
-        var porcentagemCTA = Math.round(((cartasTipoAgua.length / data.length) * 100));
-        var porcentagemCTP = Math.round(((cartasTipoPlanta.length / data.length) * 100));
-        var porcentagemCTR = Math.round(((cartasTipoRaio.length / data.length) * 100));
-        var porcentagemCTL = Math.round(((cartasTipoLutador.length / data.length) * 100));
+        var porcentagemCTF = Math.round(((cartasTipoFogo.length / cartasDoUser.length) * 100));
+        var porcentagemCTA = Math.round(((cartasTipoAgua.length / cartasDoUser.length) * 100));
+        var porcentagemCTP = Math.round(((cartasTipoPlanta.length / cartasDoUser.length) * 100));
+        var porcentagemCTR = Math.round(((cartasTipoRaio.length / cartasDoUser.length) * 100));
+        var porcentagemCTL = Math.round(((cartasTipoLutador.length / cartasDoUser.length) * 100));
+        var porcentagemCTN = Math.round(((cartasTipoNormal.length / cartasDoUser.length) * 100));
+        var porcentagemCTPS = Math.round(((cartasTipoPsiquico.length / cartasDoUser.length) * 100));
+        var porcentagemCTE = Math.round(((cartasTipoEscuridao.length / cartasDoUser.length) * 100));
   
         var tamanhoDaBarra = 50;
   
@@ -120,18 +127,27 @@ function carregar_graficos() {
         var barra3 = document.getElementById("div_barra_3");
         var barra4 = document.getElementById("div_barra_4");
         var barra5 = document.getElementById("div_barra_5");
+        var barra6 = document.getElementById("div_barra_6");
+        var barra7 = document.getElementById("div_barra_7");
+        var barra8 = document.getElementById("div_barra_8");
 
         gerarBarraProgresso(barra1, tamanhoDaBarra, porcentagemCTF);
         gerarBarraProgresso(barra2, tamanhoDaBarra, porcentagemCTA);
         gerarBarraProgresso(barra3, tamanhoDaBarra, porcentagemCTP);
         gerarBarraProgresso(barra4, tamanhoDaBarra, porcentagemCTR);
         gerarBarraProgresso(barra5, tamanhoDaBarra, porcentagemCTL);
+        gerarBarraProgresso(barra6, tamanhoDaBarra, porcentagemCTN);
+        gerarBarraProgresso(barra7, tamanhoDaBarra, porcentagemCTPS);
+        gerarBarraProgresso(barra8, tamanhoDaBarra, porcentagemCTE);
 
         porcentagem_1.innerText = `${porcentagemCTF}%`
         porcentagem_2.innerText = `${porcentagemCTA}%`
         porcentagem_3.innerText = `${porcentagemCTP}%`
         porcentagem_4.innerText = `${porcentagemCTR}%`
         porcentagem_5.innerText = `${porcentagemCTL}%`
+        porcentagem_6.innerText = `${porcentagemCTN}%`
+        porcentagem_7.innerText = `${porcentagemCTPS}%`
+        porcentagem_8.innerText = `${porcentagemCTE}%`
       });
   }
   function gerarBarraProgresso(barra, tamanhoDaBarra, porcentagemDaBarra) {

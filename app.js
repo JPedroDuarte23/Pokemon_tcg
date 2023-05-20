@@ -87,7 +87,7 @@ const update_carta_deck = async() => {
         res.redirect('/Dash_decks.html');
       } else {
       console.log('Registro inserido com sucesso!');
-      res.redirect('/Dash_decks.html');
+      res.redirect('/Dash_colecoes.html');
       }
     })
   })
@@ -136,7 +136,7 @@ const update_deck_resultado = async => {
           const nome = cardData.name;
           const imagemPequena = cardData.images.small;
           const imagemGrande = cardData.images.large;
-          const tipo = cardData.types;
+          const tipo = cardData.types[0];
           const raridade = cardData.rarity;
           const subtipo = cardData.subtypes[0];
           const nomeSet = cardData.set.name;
@@ -171,7 +171,17 @@ const update_deck_resultado = async => {
       const imagemPequena = cardData.images.small;
       const imagemGrande = cardData.images.large;
       const raridade = cardData.rarity;
-      const subtipo = cardData.subtypes[0];
+      var subtipo = "";
+      if (selectSet == "Base" 
+          || selectSet == "Base Set 2" 
+          || selectSet == "Jungle"
+          || selectSet == "Legendary Collection"
+          || selectSet == "Neo Discovery"
+          || selectSet == "Team Rocket") {
+        subtipo = "Treinador"
+      } else {
+        subtipo = cardData.subtypes[0];
+      }
       const nomeSet = cardData.set.name;
       const series = cardData.set.series;
       const numero = `${cardData.number} / ${cardData.set.printedTotal}`
@@ -197,7 +207,7 @@ const update_deck_resultado = async => {
       res.redirect('/Dash_colecoes.html')
     })
    } else {
-    axios.get(`https://api.pokemontcg.io/v2/cards?q=name:"${selectTypes} ${nomePokemonInput}" supertype:"energy" rarity:"${selectRarity}" set.name:"${selectSet}"`)
+    axios.get(`https://api.pokemontcg.io/v2/cards?q=name:"${nomePokemonInput}" supertype:"energy" rarity:"${selectRarity}" set.name:"${selectSet}"`)
     .then(response => {
       const cardData = response.data.data[0];
       const nome = cardData.name;

@@ -61,13 +61,14 @@
               <option value="Technical Machine">Technical Machine</option>
               <option value="V">V</option>
               <option value="VMAX">VMAX</option>
+              <option value="VSTAR">VSTAR</option>
             </select>
           </div>
           <div class="campo">
             <label for="selectTypes">Tipo do pokemon:</label>
             <select name="selectTypes" id="selectTypes" multiple size="3">
               <option value="fire">Fogo</option>
-              <option value="grass">Grama</option>
+              <option value="grass">Planta</option>
               <option value="water">Àgua</option>
               <option value="colorless">Normal</option>
               <option value="lightning">Raio</option>
@@ -185,30 +186,19 @@
               <option value="HS—Triumphant">HS—Triunfante</option>
               <option value="HS—Undaunted">HS—Destemido</option>
               <option value="HS—Unleashed">HS—Revelado</option>
-              <option value="HeartGold %26 SoulSilver">HeartGold SoulSilver</option>
+              <option value="HeartGold %26 SoulSilver">HeartGold & SoulSilver</option>
               <option value="Hidden Fates">Destinos Ocultos</option>
               <option value="Hidden Legends">Lendas Ocultas</option>
               <option value="Holon Phantoms">Fantasmas de Holon</option>
               <option value="Jungle">Selva</option>
-              <option value="Kalos Starter Set">Conjunto Inicial Kalos</option>
               <option value="Legend Maker">Criador de Lendas</option>
               <option value="Legendary Collection">Coleção de Lendas</option>
               <option value="Legendary Treasures">Tesouros Lendários</option>
               <option value="Legends Awakened">Lendas Despertadas</option>
               <option value="Lost Origin">Origem Perdida</option>
               <option value="Lost Origin Trainer Gallery">Galeria de Treinadores de Origem Perdida</option>
-              <option value="Lost Thunder">Trovoada Perdida</option>
+              <option value="Lost Thunder">Trovões Perdidos</option>
               <option value="Majestic Dawn">Amanhecer Majestoso</option>
-              <option value="McDonald%27s Collection 2011">Coleção McDonald's 2011</option>
-              <option value="McDonald%27s Collection 2012">Coleção McDonald's 2012</option>
-              <option value="McDonald%27s Collection 2014">Coleção McDonald's 2014</option>
-              <option value="McDonald%27s Collection 2015">Coleção McDonald's 2015</option>
-              <option value="McDonald%27s Collection 2016">Coleção McDonald's 2016</option>
-              <option value="McDonald%27s Collection 2017">Coleção McDonald's 2017</option>
-              <option value="McDonald%27s Collection 2018">Coleção McDonald's 2018</option>
-              <option value="McDonald%27s Collection 2019">Coleção McDonald's 2019</option>
-              <option value="McDonald%27s Collection 2021">Coleção McDonald's 2021</option>
-              <option value="McDonald%27s Collection 2022">Coleção McDonald's 2022</option>
               <option value="Mysterious Treasures">Tesouros Misteriosos</option>
               <option value="Neo Destiny">Destino Neo</option>
               <option value="Neo Discovery">Descoberta Neo</option>
@@ -231,9 +221,7 @@
               <option value="Plasma Freeze">Congelamento Plasma</option>
               <option value="Plasma Storm">Tempestade de Plasma</option>
               <option value="Platinum">Platinum</option>
-              <option value="Pokémon Futsal Collection">Coleção Pokémon Futsal</option>
               <option value="Pokémon GO">Pokémon GO</option>
-              <option value="Pokémon Rumble">Pokémon Rumble</option>
               <option value="Power Keepers">Guardiões de Poder</option>
               <option value="Primal Clash">Conflito Primordial</option>
               <option value="Rebel Clash">Rixa Rebelde</option>
@@ -251,8 +239,7 @@
               <option value="Shiny Vault">Shiny Vault</option>
               <option value="Silver Tempest">Tempestade Prateada</option>
               <option value="Silver Tempest Trainer Gallery">Galeria de Treinadores de Tempestade Prateada</option>
-              <option value="Skyridge">Skyridge</option>
-              <option value="Southern Islands">Ilhas do Sul</option>
+              <option value="Skyridge">Skyridge</option>  
               <option value="Steam Siege">Cerco de Vapor</option>
               <option value="Stormfront">Frente de Tempestade</option>
               <option value="Sun %26 Moon">Sol e Lua</option>
@@ -273,7 +260,7 @@
             </select>
           </div>
           <input id="idInput" name="idInput" type="hidden">
-          <button type="submit" id="searchButton">Search</button>
+          <button type="submit" id="searchButton">Procurar</button>
         </form>
 
       </div>
@@ -319,6 +306,7 @@
         <button id="botao-4" onclick="query_colecao(4)">Raras</button>
         <button id="botao-5" onclick="query_colecao(5)">Incomuns</button>
         <button id="botao-6" onclick="query_colecao(6)">Comuns</button>
+        <button id="botao-7" onclick="query_colecao(7)">Promocionais</button>
         <button onclick="registrar()" class="registrador"><i class="fa-solid fa-plus"></i>Adicionar Carta</button>
       </section>
       <section id="secao_visao_geral">

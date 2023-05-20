@@ -27,7 +27,7 @@
                     <label for="inputImagemDeck">Imagem do deck</label>
                     <input type="text" name="inputImagemDeck" id="inputImagemDeck">
                     <input type="text" name="idInput" id="idInput" style="display: none;">
-                    <button type="submit" id="criarDeckButton">Criar</button>
+                    <button type="submit" id="criarDeckButton">Registrar</button>
                 </form>
               </div>
           </div>
@@ -84,9 +84,9 @@
 
 </html>
 <script>
+    var id = sessionStorage.ID_USUARIO
     criarDeckButton.addEventListener('click', voltar);
     function buscar_cartas_deck(num_deck) {
-    var id = Number(idInput.value)
     var caixaGraficos = document.getElementById('caixaGraficos');
     var cartasDoDeck = 0;
     fetch(`http://localhost:3000/registros`)
@@ -94,7 +94,7 @@
         .then((data) => {
             caixaGraficos.innerHTML = tabela_padrao
             var tbody = document.getElementById('corpo_tabela');
-            cartasDoDeck= data.filter(registro => registro.fkDeck === num_deck);
+            cartasDoDeck= data.filter(registro => registro.fkDeck === num_deck && registro.fkUsuario === id);
             cartasDoDeck.forEach((registro) => {
                 var linha = document.createElement('tr');
                     var idCell = document.createElement('td')
