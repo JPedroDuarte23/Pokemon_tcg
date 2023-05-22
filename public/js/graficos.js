@@ -110,7 +110,11 @@ function carregar_graficos() {
         var cartasTipoNormal = data.filter(registro => registro.fkUsuario === id && registro.tipo === "Colorless" && registro.suptipo === "Pokémon");
         var cartasTipoPsiquico = data.filter(registro => registro.fkUsuario === id && registro.tipo === "Psychic" && registro.suptipo === "Pokémon");
         var cartasTipoEscuridao = data.filter(registro => registro.fkUsuario === id && registro.tipo === "Darkness" && registro.suptipo === "Pokémon");
-
+        var cartasTipoMetal = data.filter(registro => registro.fkUsuario === id && registro.tipo === "Metal" && registro.suptipo === "Pokémon");
+        var cartasTipoDragao = data.filter(registro => registro.fkUsuario === id && registro.tipo === "Dragon" && registro.suptipo === "Pokémon");
+        var cartasTipoFada = data.filter(registro => registro.fkUsuario === id && registro.tipo === "Fairy" && registro.suptipo === "Pokémon");
+       
+        
         var porcentagemCTF = Math.round(((cartasTipoFogo.length / cartasDoUser.length) * 100));
         var porcentagemCTA = Math.round(((cartasTipoAgua.length / cartasDoUser.length) * 100));
         var porcentagemCTP = Math.round(((cartasTipoPlanta.length / cartasDoUser.length) * 100));
@@ -119,7 +123,43 @@ function carregar_graficos() {
         var porcentagemCTN = Math.round(((cartasTipoNormal.length / cartasDoUser.length) * 100));
         var porcentagemCTPS = Math.round(((cartasTipoPsiquico.length / cartasDoUser.length) * 100));
         var porcentagemCTE = Math.round(((cartasTipoEscuridao.length / cartasDoUser.length) * 100));
-  
+        var porcentagemCTM = Math.round(((cartasTipoMetal.length / cartasDoUser.length) * 100));
+        var porcentagemCTD = Math.round(((cartasTipoDragao.length / cartasDoUser.length) * 100));
+        var porcentagemCTF = Math.round(((cartasTipoFada.length / cartasDoUser.length) * 100));
+
+        if (cartasTipoFogo == 0) {
+          porcentagemCTF = "---"
+        } 
+        if (cartasTipoAgua == 0) {
+          porcentagemCTA = "---"
+        }
+        if (cartasTipoPlanta == 0) {
+          porcentagemCTP = "---"
+        }
+        if (cartasTipoRaio == 0) {
+          porcentagemCTR = "---"
+        }
+        if (cartasTipoLutador == 0) {
+          porcentagemCTL = "---"
+        }
+        if (cartasTipoNormal == 0) {
+          porcentagemCTN = "---"
+        }
+        if (cartasTipoPsiquico == 0) {
+          porcentagemCTPS = "---"
+        }
+        if (cartasTipoEscuridao == 0) {
+          porcentagemCTE = "---"
+        }
+        if (cartasTipoMetal == 0) {
+          porcentagemCTM = "---"
+        }
+        if (cartasTipoDragao == 0) {
+          porcentagemCTD = "---"
+        }
+        if (cartasTipoFada == 0) {
+          porcentagemCTF = "---"
+        }
         var tamanhoDaBarra = 50;
   
         var barra1 = document.getElementById("div_barra_1");
@@ -130,6 +170,9 @@ function carregar_graficos() {
         var barra6 = document.getElementById("div_barra_6");
         var barra7 = document.getElementById("div_barra_7");
         var barra8 = document.getElementById("div_barra_8");
+        var barra9 = document.getElementById("div_barra_9");
+        var barra10 = document.getElementById("div_barra_10");
+        var barra11 = document.getElementById("div_barra_11");
 
         gerarBarraProgresso(barra1, tamanhoDaBarra, porcentagemCTF);
         gerarBarraProgresso(barra2, tamanhoDaBarra, porcentagemCTA);
@@ -139,6 +182,9 @@ function carregar_graficos() {
         gerarBarraProgresso(barra6, tamanhoDaBarra, porcentagemCTN);
         gerarBarraProgresso(barra7, tamanhoDaBarra, porcentagemCTPS);
         gerarBarraProgresso(barra8, tamanhoDaBarra, porcentagemCTE);
+        gerarBarraProgresso(barra9, tamanhoDaBarra, porcentagemCTM);
+        gerarBarraProgresso(barra10, tamanhoDaBarra, porcentagemCTD);
+        gerarBarraProgresso(barra11, tamanhoDaBarra, porcentagemCTF);
 
         porcentagem_1.innerText = `${porcentagemCTF}%`
         porcentagem_2.innerText = `${porcentagemCTA}%`
@@ -148,10 +194,14 @@ function carregar_graficos() {
         porcentagem_6.innerText = `${porcentagemCTN}%`
         porcentagem_7.innerText = `${porcentagemCTPS}%`
         porcentagem_8.innerText = `${porcentagemCTE}%`
+        porcentagem_9.innerText = `${porcentagemCTM}%`
+        porcentagem_10.innerText = `${porcentagemCTD}%`
+        porcentagem_11.innerText = `${porcentagemCTF}%`
       });
   }
+  //GERANDO GRADIENTES USANDO REDUÇÃO PERCENTUAL DO RGB E ADICIONANDO NAS BARRAS 50 DIVS 
   function gerarBarraProgresso(barra, tamanhoDaBarra, porcentagemDaBarra) {
-    contador ++;
+    // gerando as 50 divs 
     for (var j = 0; j < tamanhoDaBarra; j++) {
       var segmentos = document.createElement('div');
       segmentos.classList.add('segmentos_progresso');
@@ -159,11 +209,13 @@ function carregar_graficos() {
       var colorEnd = [220, 0, 0]; 
       var percentualCompleto = j / tamanhoDaBarra * 100;
       var color = [];
-      for (var k = 0; k < 3; k++) {
-        color[k] = Math.round(colorStart[k] + (colorEnd[k] - colorStart[k]) * (percentualCompleto / 100));
+      // colocando a cor 
+      for (var i = 0; i < 3; i++) {
+        color[i] = Math.round(colorStart[i] + (colorEnd[i] - colorStart[i]) * (percentualCompleto / 100));
       }
       segmentos.style.background = 'rgba(120, 120, 124, 0.37)'; 
       if (j < tamanhoDaBarra * (porcentagemDaBarra / 100)) {
+        //colocando o rgb e repartindo ele em vírgulas 'rgb(' R + ',' + G + ',' + B + ')'
         segmentos.style.background = 'rgb(' + color.join(',') + ')';
       }
       barra.appendChild(segmentos);

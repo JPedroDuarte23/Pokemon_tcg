@@ -1,5 +1,5 @@
 // var div_pop_up = document.getElementById('div_pop_up')
-
+var jsons_deck = 0;
 var tabela_padrao = `
     <div class="titulo_caixa_graficos"><h2>Coleção</h2></div>
     <div id="cartasColecao" class="caixa_colecao">
@@ -117,12 +117,14 @@ function limparSessao() {
 }
 function registrar() {
     div_pop_up.style.display = "flex"
+    body_tela.style.overflow = "hidden"
 }
 function voltar(tipo) {
     if (tipo == 1) {
         div_pop_up.innerHTML = formulario_padrao   
     } 
     div_pop_up.style.display = "none"
+    body_tela.style.overflow = "auto"
 }
 
 function query_colecao(seletor) {
@@ -271,6 +273,7 @@ function query_decks(seletor) {
     var id = Number(sessionStorage.ID_USUARIO)
     var caixaGraficos = document.getElementById('caixaGraficos');
     var decksDoUsuario = 0;
+    var contador = 1;
     fetch(`http://localhost:3000/decks`)
         .then((response) => response.json())
         .then((data) => {
@@ -279,13 +282,14 @@ function query_decks(seletor) {
             if (seletor == 1) {
                 decksDoUsuario = data.filter(registro => registro.fkUsuario === id);
             } 
+            jsons_deck = decksDoUsuario;
             decksDoUsuario.forEach((registro) => {
                 var linha = document.createElement('tr');
                 var idCell = document.createElement('td')
                 var nomeCell = document.createElement('td');
                 var imagemCell = document.createElement('td');
                 var tipoCell = document.createElement('td');
-      
+                
                 // Colocando imagem no td
                 var imagem_consulta = document.createElement('img');
                 imagem_consulta.src = registro.imagem;
@@ -301,10 +305,15 @@ function query_decks(seletor) {
                 linha.appendChild(nomeCell);
                 linha.appendChild(tipoCell);
                 tbody.appendChild(linha);
-      
+                var botao_deck = "";
+                if(contador <= 4) {
+                    botao_deck = document.getElementById('botao-'+ contador)
+                    botao_deck.setAttribute(`onclick`, `buscar_cartas_deck(${registro.idDeck})`)
+                    contador++
+                }
+                
                 imagem_consulta.classList.add('imagem_tabela_deck');
             });
-            
         })
 }
 
