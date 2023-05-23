@@ -357,6 +357,8 @@ button.botao_ativado, button.registrador, #todos_os_decks {
 border-radius: 10px;
 }
 
+/* Secao instrucoes da aba info*/
+
 .instrucoes  {
     color:white;
     width: 80%;
@@ -386,6 +388,8 @@ border-radius: 10px;
     border-radius: 10px;
 }
 
+/* Secao botoes radio */
+
 input[type='radio'] {
     display: none;
   }
@@ -403,14 +407,15 @@ input[type='radio'] {
     border: 1px solid #fff;
     width: 40px;
     height: 40px;
-    display: grid;
-    place-content: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     border-radius: 50%;
   }
   
   .custom-radio,
   span {
-    transition: 0.25s ease;
+    transition: 0.5s;
     color: #fff;
   }
   
