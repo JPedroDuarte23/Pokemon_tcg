@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My CardDex | Decks</title>
-    
+
     <link rel="stylesheet" href="css/style_dash_geral.css">
     <link rel="stylesheet" href="css/css_tabelas.css">
     <script src="https://kit.fontawesome.com/c52875e8e8.js" crossorigin="anonymous"></script>
@@ -28,18 +28,19 @@
                     <input type="text" name="idInput" id="idInput" style="display: none;">
                     <button type="submit" id="criarDeckButton">Criar</button>
                 </form>
-              </div>
-          </div>
+            </div>
+        </div>
     </div>
     <section class="main" id="corpo_principal">
         <div class="sidebar">
             <img src="imagens/Logo_pokemon.png" class="logomarca" id="img_logo">
             <ul>
-                <li><a href="Dash_inicial.html" > <i class="fa-solid fa-house fa-lg"></i>Home</a>
+                <li><a href="Dash_inicial.html"> <i class="fa-solid fa-house fa-lg"></i>Home</a>
                 </li>
                 <li><a href="Dash_colecoes.html"><i class="fa-solid fa-box-open fa-lg"></i>Coleção</a></li>
                 <li><a href="Dash_decks.html"><i class="fa-solid fa-layer-group fa-lg"></i>Decks</a></li>
-                <li><a href="Dashboard_cofig.html" class="ativado"><i class="fa-solid fa-file-lines fa-lg"></i>Informações</a></li>
+                <li><a href="Dashboard_cofig.html" class="ativado"><i
+                            class="fa-solid fa-file-lines fa-lg"></i>Informações</a></li>
                 <li><a onclick="limparSessao()"><i class="fa-solid fa-right-from-bracket fa-lg"></i>Sair</a></li>
             </ul>
 
@@ -48,12 +49,6 @@
             <header class="">
                 <div>
                     <h2>Informações</h2>
-                    <div class="pesquisar">
-                        <input type="text" class="barra_de_pesquisa" placeholder="Procura algo específico?">
-                        <button class="lupa" type="submit">
-                            <i class="fa-solid fa-search"></i>
-                        </button>
-                    </div>
                 </div>
                 <div class="lateral_icones">
                     <div class="icone" onclick=""><i class="fa-solid fa-circle-question fa-lg"></i></div>
@@ -64,16 +59,74 @@
                     </div>
                 </div>
             </header>
+            <div class="instrucoes">
+                <h2>Bem vindo à My Card Dex!</h2>
+                <p>Nós agradecemos muito a sua escolha de usar a nossa ferramenta
+                    de registro de cartas montagens de decks e muito mais!</p>
+                <h4>As informações abaixo irão te auxiliar no uso de nossa ferramenta</h4>
 
+                <h3>Registrando sua primeira carta</h3>
+                <p>Para registrar as cartas é necessário que siga o passo a passo
+                    abaixo, caso alguma coisa fuja dos passos mostrados aqui provavelmente
+                    a ferramenta não conseguirá encontrar sua carta.</p>
+                <p>&nbsp;&nbsp;&nbsp; <b>Passo 1:</b> Clique no botão + Adicionar Carta, ele irá abrir um formulário
+                    contendo os campos "Nome do Carta", "Tipo da carta", "Estágio do
+                    Pokémon", "Tipo do Pokémon", "Raridade" e "Set".</p>
+                <p>&nbsp;&nbsp;&nbsp; <b>Passo 2:</b> No campo "Nome da Carta" você irá inserir o nome da
+                    carta que fica na parte superior dela. Coloque somente o nome do Pokémon,
+                    nomeclaturas como EX, GX , level X, V, VMAX, VSTAR, etc você irá informar
+                    posteriormente. A ferramenta somente funciona com nomes em inglês, caso seja
+                    informado um nome de uma carta que esteja em outra língua a carta não será
+                    encontrada.</p>
+                <img src="imagens/Nome_poke.png" alt="" class="instrucao_imagem">
+                <p>&nbsp;&nbsp;&nbsp; <b>Passo 3:</b> O próximo campo é o que vai indicar se sua carta é um Pokémon,
+                    Treinador e Energia. Cada tipo de carta contém suas peculiaridades na procura.<br>
+                    - Pokémons: possuem Tipos e Estágios diversos;<br>
+                    - Treinadores: não possuem Tipos e seus Estágios são:
+                    Item, Apoiador, Ferramenta Pokémon e Estádios ;<br>
+                    - Energias: não possuem Tipos e seus Estágios são limitados
+                    a comum(resposta padrão) e especial;</p>
+                <p>&nbsp;&nbsp;&nbsp;<b>Passo 4:</b> Definir o Estágio da sua carta, aqui você poderá definir as
+                    peculiaridades de suas cartas, recomendamos colocar os estágios especiais aqui
+                    ao em vez de colocarem no nome da carta.</p>
+                <p>&nbsp;&nbsp;&nbsp; <b>Passo 5:</b> Caso sua carta seja um pokémon é necessário informar o tipo
+                    dele. Cartas com tipos múltiplos só são reconhecidas pelo primeiro atributo apresentado.</p>
+                <p>&nbsp;&nbsp;&nbsp; <b>Passo 6:</b> O próximo campo a ser preenchido é das Raridades, aqui estão
+                    litadas todas as raridades que ja apareceram durante a vida do jogo de cartas, portanto
+                    podem apresentar termos ambíguos como Rara Ultra e Ultra Rara que apontaram para
+                    diferentes tipos de carta. Caso não saiba qual grupo sua carta pertence, recomendamos
+                    pesquisar em sites de vendas de cartas ou enciclopedias sobre Pokémon TCG.</p>
+                <p>&nbsp;&nbsp;&nbsp; <b>Passo 7:</b> O último campo é muito importante, para preenche-lo é necessário
+                    saber a qual expansão sua carta pertence. Normalmente as expansões estão indicadas
+                    no canto inferior direito da sua carta. Caso não saiba o nome da expansão correspondente
+                    ao símbulo você pode conferir o nome ou na nossa <b>página inicial na seção de gerações e
+                        expansões</b>
+                    ou no <b>site a seguir:
+                        https://bulbapedia.bulbagarden.net/wiki/List_of_Pokémon_Trading_Card_Game_expansions </b> </p>
+                <img src="imagens/raridade_carta.png" alt="" class="instrucao_imagem">
+                <p>&nbsp;&nbsp;&nbsp; <b>Passo 8:</b> Agora é só clicar em procurar e aguardar o resultado!</p>
+                <h3>Registrando seu primeiro deck</h3>
+                <p>&nbsp;&nbsp;&nbsp; <b>Passo 1:</b> Vá na aba Decks, aperte o botão + Adicionar Deck</p>
+                <p>&nbsp;&nbsp;&nbsp; <b>Passo 2:</b> No formulário informe como vai se chamar o seu deck e o tipo
+                    principal</p>
+                <p>&nbsp;&nbsp;&nbsp; <b>Passo 3:</b> No campo de imagem é necessário colocar um link para a
+                    imagem do google. Para isso recomendamos clicar com o botão esquerdo sobre a imagem
+                    que você quer. Nas opções que aparecerem procure a opção abrir imagem em nova guia
+                    e na nova aba copie o endereço da imagem.</p>
 
-            </section>
+                <h3>Adicionando cartas aos decks</h3>
+                <p>&nbsp;&nbsp;&nbsp; <b>Passo 1:</b> Clique no botão amarelo na linha da carta que você deseja
+                    adicionar ao deck. </p>
+                <p>&nbsp;&nbsp;&nbsp; <b>Passo 2:</b> Coloque o ID do deck que você deseja adicionar aquela carta </p>
+                <img src="imagens/form_carta_deck.png" alt="" class="instrucao_imagem">
+                <p>&nbsp;&nbsp;&nbsp; <b>Passo 3:</b> Clique no botão e procure na aba Decks o botão referente ao
+                    nome do seu baralho, veja se a carta se encontra na tabela</p>
             </div>
+    </section>
+    </div>
 </body>
 
 </html>
 <script>
     criarDeckButton.addEventListener('click', voltar);
 </script>
-
-    
-    

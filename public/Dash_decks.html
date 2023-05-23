@@ -20,12 +20,20 @@
             <div class="pop_up_carta">
                 <i class="fa-solid fa-xmark fa-xl" id="i_voltar" onclick="voltar(0)"></i>
                 <form action="/registro-deck" method="post">
-                    <label for="inputDeckNome">Nome do seu Deck:</label>
-                    <input type="text" name="inputDeckNome" id="inputDeckNome">
-                    <label for="inputTipoPrincipal">Tipo principal:</label>
-                    <input type="text" name="inputTipoPrincipal" id="inputTipoPrincipal">
-                    <label for="inputImagemDeck">Imagem do deck</label>
-                    <input type="text" name="inputImagemDeck" id="inputImagemDeck">
+                    <h3>Registrar Decks</h3>
+                    <hr>
+                    <div class="campo">
+                        <label for="inputDeckNome">Nome do seu Deck:</label>
+                        <input type="text" name="inputDeckNome" id="inputDeckNome">
+                    </div>
+                    <div class="campo">
+                        <label for="inputTipoPrincipal">Tipo principal:</label>
+                        <input type="text" name="inputTipoPrincipal" id="inputTipoPrincipal">
+                    </div>
+                    <div class="campo">
+                        <label for="inputImagemDeck">Imagem do deck</label>
+                        <input type="text" name="inputImagemDeck" id="inputImagemDeck">
+                    </div>
                     <input type="text" name="idInput" id="idInput" style="display: none;">
                     <button type="submit" id="criarDeckButton">Registrar</button>
                 </form>
@@ -49,12 +57,6 @@
             <header class="">
                 <div>
                     <h2>Decks</h2>
-                    <div class="pesquisar">
-                        <input type="text" class="barra_de_pesquisa" placeholder="Procura algo específico?">
-                        <button class="lupa" type="submit">
-                            <i class="fa-solid fa-search"></i>
-                        </button>
-                    </div>
                 </div>
                 <div class="lateral_icones">
                     <div class="icone" onclick="redirecionar_info()"><i class="fa-solid fa-circle-question fa-lg"></i></div>
@@ -65,17 +67,16 @@
                     </div>
                 </div>
             </header>
-            <section class="botoes light_mode">
-                <button onclick="query_decks(1)" class="botao_ativado">Todos os Decks</button>
-                <button id="botao-1" onclick="buscar_cartas_deck()">Deck 1</button>
-                <button id="botao-2">Deck 2</button>
-                <button id="botao-3">Deck 3</button>
-                <button id="botao-4">Deck 4</button>
+            <section class="botoes">
+                <button onclick="query_decks(1)" id="todos_os_decks">Todos os Decks</button>
+                <span id="painel_deck">
+
+                </span>
                 <button onclick="registrar()" class="registrador"><i class="fa-solid fa-plus"></i>Adicionar Deck</button>
             </section>
             <section id="secao_visao_geral">
                 <div class="caixa_graficos" id="caixaGraficos">
-                    <div class="titulo_caixa_graficos"><h2>Decks</h2></div>
+                    <div class="titulo_caixa_graficos"><h2>Coleção</h2></div>
                     <div id="cardData"></div>
                 </div>
 
@@ -162,15 +163,9 @@
             console.error('Erro ao buscar registros no servidor:', error);
         });
         var botaoAtivado = document.querySelector('.botao_ativado')
-        var botao_1 = document.getElementById('botao-1');
-        var botao_2 = document.getElementById('botao-2');
-        var botao_3 = document.getElementById('botao-3');
-        var botao_4 = document.getElementById('botao-4');
-        botaoAtivado.classList.remove("botao_ativado");
-        botao_1.classList.add("botao_ativado");
-        // botao_2.classList.add("botao_ativado");
-        // botao_3.classList.add("botao_ativado");
-        // botao_4.classList.add("botao_ativado");
+        var botao_apertado = document.getElementById('botao-'+ num_deck);
+        botao_apertado.classList.add("botao_ativado");
+        botaoAtivado.classList.remove("botao_ativado")
         addCarta.addEventListener('click', voltar)
 }
 var pop_up = document.getElementById("div_pop_up")

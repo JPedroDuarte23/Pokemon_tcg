@@ -84,10 +84,11 @@ const update_carta_deck = async() => {
     connection.query(update, values_update, (error, results) => {
       if (error) {
         console.log('Erro ao inserir registro na tabela:', error);
-        res.redirect('/Dash_decks.html');
+        res.status(500).send('<script>alert("Houve um erro ao inserir a carta no deck"); window.location.href = "/Dash_colecoes.html";</script>');
       } else {
       console.log('Registro inserido com sucesso!');
-      res.redirect('/Dash_colecoes.html');
+      res.status(204).send('<script>alert("Cartas inseridas no deck!"); window.location.href = "/Dash_colecoes.html";</script>');
+
       }
     })
   })
@@ -108,10 +109,10 @@ const update_deck_resultado = async => {
     connection.query(update_resultado, values_resultado, (error, results) => {
       if (error) {
         console.log('Erro ao inserir resultado na tabela:', error);
-        res.redirect('/Dash_inicial.html');
+        res.redirect('/Dash_inicial.html')
       } else {
       console.log('Resultado inserido com sucesso!');
-      res.redirect('/Dash_inicial.html');
+      res.redirect('/Dash_inicial.html')
       }
     })
   })
@@ -156,12 +157,13 @@ const update_deck_resultado = async => {
             } else {
             console.log('Registro inserido com sucesso!');
             }
-            res.redirect('/Dash_colecoes.html');
+            res.status(204).send('<script>alert("Sua carta foi registrada com sucesso!"); window.location.href = "/Dash_colecoes.html";</script>');
+
           });
         })
         .catch(error => {
           console.log('Erro ao fazer a consulta na API Pokemon TCG:', error);
-          res.redirect('/Dash_colecoes.html')
+          res.status(500).send('<script>alert("Ocorreu um erro ao fazer a requisição para a API Pokémon."); window.location.href = "/Dash_colecoes.html";</script>');
         })
    } else if (selectSupertype == "Treinador") {
     axios.get(`https://api.pokemontcg.io/v2/cards?q=name:"${nomePokemonInput}" supertype:"trainer" rarity:"${selectRarity}" set.name:"${selectSet}"`)
@@ -199,12 +201,12 @@ const update_deck_resultado = async => {
         } else {
         console.log('Registro inserido com sucesso!');
         }
-        res.redirect('/Dash_colecoes.html');
+        res.status(204).send('<script>alert("Sua carta foi registrada com sucesso!"); window.location.href = "/Dash_colecoes.html";</script>');
       });
     })
     .catch(error => {
       console.log('Erro ao fazer a consulta na API Pokemon TCG:', error);
-      res.redirect('/Dash_colecoes.html')
+      res.status(500).send('<script>alert("Ocorreu um erro ao fazer a requisição para a API Pokémon."); window.location.href = "/Dash_colecoes.html";</script>');
     })
    } else {
     axios.get(`https://api.pokemontcg.io/v2/cards?q=name:"${nomePokemonInput}" supertype:"energy" rarity:"${selectRarity}" set.name:"${selectSet}"`)
@@ -233,32 +235,17 @@ const update_deck_resultado = async => {
         } else {
         console.log('Registro inserido com sucesso!');
         }
-        res.redirect('/Dash_colecoes.html');
+        res.status(204).send('<script>alert("Sua carta foi registrada com sucesso!"); window.location.href = "/Dash_colecoes.html";</script>');
       });
     })
     .catch(error => {
       console.log('Erro ao fazer a consulta na API Pokemon TCG:', error);
-      res.redirect('/Dash_colecoes.html')
+      res.status(500).send('<script>alert("Ocorreu um erro ao fazer a requisição para a API Pokémon."); window.location.href = "/Dash_colecoes.html";</script>');
     })
    }
     })
   }
-  const graficos_cartas = () => {
-    app.get('/grafico_colecao', (req,res) =>{
-      connection.connect() 
-      const sql_2 = ` SELECT (SELECT COUNT(*) FROM cartas WHERE suptipo = "Pokémon") AS qtd_pokemons,
-      (SELECT COUNT(*) FROM cartas WHERE suptipo = "Treinador") AS qtd_treinadores,
-      (SELECT COUNT(*) FROM cartas WHERE suptipo = "Energia") AS qtd_energias;`
-      connection.query(sql_2, (error, results, fields) => {
-        if (error) {
-          console.log(error) 
-          res.status(500).json({ error: 'Erro ao buscar os decks'});
-          return
-        }
-        res.json(results);
-      })
-    })
-  } 
+ 
   const servidor = () => {
     app.use((request, response, next) => {
       response.header('Access-Control-Allow-Origin', '*');
@@ -276,7 +263,6 @@ const update_deck_resultado = async => {
     await decks_insert();
     await deck_select();
     await update_carta_deck();
-    await graficos_cartas();
     await update_deck_resultado();
     servidor();
   })();

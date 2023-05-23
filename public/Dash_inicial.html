@@ -287,12 +287,12 @@
       <header class="">
         <div>
           <h2>Home</h2>
-          <div class="pesquisar">
+          <!-- <div class="pesquisar">
             <input type="text" class="barra_de_pesquisa" placeholder="Procura algo específico?">
             <button class="lupa" type="submit">
               <i class="fa-solid fa-search"></i>
             </button>
-          </div>
+          </div> -->
         </div>
         <div class="lateral_icones">
           <div class="icone" onclick="redirecionar_info()"><i class="fa-solid fa-circle-question fa-lg"></i></div>
@@ -389,6 +389,7 @@
 <script>
       var id = Number(sessionStorage.ID_USUARIO)
   searchButton.addEventListener('click', voltar);
+ 
   function registrar_resultado() {
     div_pop_up.innerHTML = `
     <div id="blur">
@@ -400,9 +401,26 @@
                       <input type="text" name="inputDeckID" id="inputDeckID">
                     </div>
                     <div class="campo">
-                      <label for="inputResultado">Resultado:</label> 
-                      <input type="radio" name="inputResultado" value="vitoria">Vitória
-                      <input type="radio" name="inputResultado" value="derrota">Derrota
+                     <div class="radio-container">
+                        <label for="radio">
+                          <input type="radio" id="radio" name="inputResultado" value="vitoria" />
+                          <div class="custom-radio">
+                            <span></span>
+                          </div>
+                          <span>Vitória</span>
+                        </label>
+                      </div>
+                    
+                      <div class="radio-container">
+                        <label for="radio1">
+                          <input type="radio" id="radio1" name="inputResultado" value="derrota" />
+                          <div class="custom-radio">
+                            <span></span>
+                          </div>
+                          <span>Derrota</span>
+                        </label>
+                      </div>
+
                     </div>
                     <input type="text" name="fkUserInput" id="fkUserInput" style="display: none;">
                     <button type="submit" id="registrador_resultados">Criar</button>
@@ -410,6 +428,10 @@
               </div>
           </div>
     `
+    // <label for="inputResultado">Resultado:</label> 
+    //                   <input type="radio" name="" >Vitória
+    //                   <input type="radio" name="inputResultado" value="derrota">Derrota
+
     fkUserInput.setAttribute('value', id);
     registrar();
   }

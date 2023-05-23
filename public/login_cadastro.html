@@ -165,16 +165,15 @@
     }
 }
     function entrar() {
-
+        var userVarE = input_user_entrar.value
         var emailVarE = input_email_entrar.value;
         var senhaVarE = input_senha_entrar.value;
 
-        if (emailVarE == "" || senhaVarE == "") {
-            cardErro.style.display = "block"
-            mensagem_erro.innerHTML = "(Mensagem de erro para todos os campos em branco)";
+        if (userVarE == "" || emailVarE == "" || senhaVarE == "") {
+            alert("Preencha os campos para logar")
             return false;
         }
-
+        console.log("FORM USER ", userVarE)
         console.log("FORM LOGIN: ", emailVarE);
         console.log("FORM SENHA: ", senhaVarE);
 
@@ -184,6 +183,7 @@
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
+                userServer: userVarE,
                 emailServer: emailVarE,
                 senhaServer: senhaVarE
             })

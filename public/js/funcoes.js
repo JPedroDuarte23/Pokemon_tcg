@@ -103,7 +103,7 @@ function validarSessao() {
    
     var nome_usuario = document.getElementById("nome_usuario")
     if (id != null && nome != null) {
-        nome_usuario.innerHTML = `${nome} &nbsp <i class="fa-solid fa-angle-down fa-xs"></i>`
+        nome_usuario.innerHTML = `${nome}`
         id_usuario.setAttribute('value', id);
     } else {
         window.location = "../login_cadastro.html";
@@ -131,10 +131,12 @@ function query_colecao(seletor) {
     var id = Number(sessionStorage.ID_USUARIO)
     var caixaGraficos = document.getElementById('caixaGraficos');
     var cartasDoUsuario = 0;
+
     fetch(`http://localhost:3000/registros`)
         .then((response) => response.json())
         .then((data) => {
             var tbody = document.getElementById('corpo_tabela');
+            
             if (seletor == 1) {
 
                 caixaGraficos.innerHTML = `
@@ -242,7 +244,7 @@ function query_colecao(seletor) {
                     raridadeCell.innerHTML = registro.raridade;
                     setCell.innerHTML = registro.nomeSet
                     numeroCell.innerHTML = registro.numero
-          
+                    
                     // Adicionado tudo com appendChild (linha[imagem, nome, tipo])
                     botaoCell.appendChild(botao_deck);
                     linha.appendChild(idCell)
@@ -274,11 +276,14 @@ function query_decks(seletor) {
     var caixaGraficos = document.getElementById('caixaGraficos');
     var decksDoUsuario = 0;
     var contador = 1;
+    var painelDeck = document.getElementById('painel_deck')
+    painelDeck.innerHTML = "";
     fetch(`http://localhost:3000/decks`)
         .then((response) => response.json())
         .then((data) => {
             caixaGraficos.innerHTML = tabela_decks
             var tbody = document.getElementById('corpo_tabela');
+            
             if (seletor == 1) {
                 decksDoUsuario = data.filter(registro => registro.fkUsuario === id);
             } 
@@ -305,13 +310,18 @@ function query_decks(seletor) {
                 linha.appendChild(nomeCell);
                 linha.appendChild(tipoCell);
                 tbody.appendChild(linha);
-                var botao_deck = "";
-                if(contador <= 4) {
-                    botao_deck = document.getElementById('botao-'+ contador)
-                    botao_deck.setAttribute(`onclick`, `buscar_cartas_deck(${registro.idDeck})`)
-                    contador++
-                }
                 
+                var botaoDeck = document.createElement('button')
+
+                if(contador <= data.length) {
+                    botaoDeck.setAttribute(`onclick`, `buscar_cartas_deck(${registro.idDeck})`)
+                    botaoDeck.setAttribute(`id`, `botao-${registro.idDeck}`)
+                    botaoDeck.classList.add('botao_estilizado')
+                    botaoDeck.innerText= `${registro.nomeDeck}`
+                    painelDeck.appendChild(botaoDeck)
+                    contador++  
+                }
+    
                 imagem_consulta.classList.add('imagem_tabela_deck');
             });
         })

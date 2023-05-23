@@ -377,30 +377,40 @@ function mostrar_expansao_SWSH(icone) {
 function geracao_S_e_V() {
     logo_geracao.setAttribute('src', 'imagens/Pokemon_TCG_Scarlet_Violet_Logo.png')
     logo_geracao.setAttribute('class', 'SV_logo')
-    div_linha_do_tempo.innerHTML = `<img src="imagens/Linha do tempo.png" alt="" class="linha_do_tempo">
+    div_linha_do_tempo.innerHTML = `<img src="imagens/linha_ev.png" alt="" class="linha_do_tempo">
             <div class="icones_colecoes" onmouseout="remover_animacao()">
-                <img src="imagens/icones_es/Sword_shield_symbol.png" alt="" id="isunmoon" onmouseover="mostrar_expansao_SWSH(1)">
-                <img src="imagens/icones_es/Rebel_clash_symbol.png" alt="" id="iprisma" onmouseover="mostrar_expansao_SWSH(2)">
-                <img src="imagens/icones_es/Darkness_ablaze_symbol.png" alt="" id="iburning" onmouseover="mostrar_expansao_SWSH(3)">
-                <img src="imagens/icones_es/Champions_path_symbol.png" alt="" id="iv" onmouseover="mostrar_expansao_SWSH(4)">
-                <img src="imagens/icones_es/Vivid_voltage_symbol.png" alt="" id="iasa" onmouseover="mostrar_expansao_SWSH(5)">
-                <img src="imagens/icones_es/Shining_fates_symbol.png" alt="" id="iprismatico" onmouseover="mostrar_expansao_SWSH(6)">
-                <img src="imagens/icones_es/Battle_styles_symbol.png" alt="" id="icrisis" onmouseover="mostrar_expansao_SWSH(7)">
-                <img src="imagens/icones_es/Chilling_reign_symbol.png" alt="" id="ibola" onmouseover="mostrar_expansao_SWSH(8)">
-                <img src="imagens/icones_es/Evolving_skies_symbol.png" alt="" id="idragao" onmouseover="mostrar_expansao_SWSH(9)">
-                <img src="imagens/icones_es/Fusion_strike_symbol.png" alt="" id="ithunder" onmouseover="mostrar_expansao_SWSH(10)">
-                <img src="imagens/icones_es/Brilliant_stars_symbol.png" alt="" id="ibonds" onmouseover="mostrar_expansao_SWSH(11)">
-                <img src="imagens/icones_es/Astral_radiance_symbol.png" alt="" id="iplanta" onmouseover="mostrar_expansao_SWSH(12)">
-                <img src="imagens/icones_es/Lost_origin_symbol.png" alt="" id="ibonds_2" onmouseover="mostrar_expansao_SWSH(13)">
-                <img src="imagens/icones_es/Silver_tempest_symbol.png" alt="" id="ishiny" onmouseover="mostrar_expansao_SWSH(14)">
-                <img src="imagens/icones_es/Crown_zenith_symbol.png" alt="" id="ihexagono" onmouseover="mostrar_expansao_SWSH(15)">`
-        div_detalhes.innerHTML = `<div class="colecao_detalhe transicao" id="div_colecao_detalhe">
-                <img src="imagens/icones_es/Sword_shield_symbol.png">
-                <h2>Expansão Espada e Escudo - SWSH1</h2>
+                <img src="imagens/icones_ev/SetSymbolScarlet_and_Violet.png" alt="" id="isunmoon" onmouseover="mostrar_expansao_SVI(1)">
+                <img src="imagens/icones_ev/SetSymbolPaldea_Evolved.png" alt="" id="iprisma" onmouseover="mostrar_expansao_SVI(2)">
+                <img src="imagens/icones_ev/200px-Icon-round-Question_mark.svg.png" alt="" id="iburning">`
+        div_detalhes.innerHTML = `
+            <div class="colecao_detalhe transicao" id="div_colecao_detalhe">
+                <img src="imagens/icones_ev/SetSymbolScarlet_and_Violet.png">
+                <h2>Expansão Escarlate & Violeta - SVI1</h2>
             </div>
             
             <div class="texto_detalhe transicao" id="div_texto_detalhe">
-                <p id="ptxt">Start a New Journey & Meet New Pokémon V!
-        Welcome to the Galar region! Meet more than a dozen powerful new Pokémon V, including the Legendary Zacian and Zamazenta—and some, like Stonjourner and Snorlax, that can evolve into enormous Pokémon VMAX for even more power! You'll also find first partners Grookey, Scorbunny, and Sobble, little cuties like Wooloo and Yamper, and a handful of familiar Pokémon in their new Galarian forms. Catch up with a new generation in the Pokémon TCG: Sword & Shield expansion!</p>
-                <img src="https://cdn-cardmavin.mavin.io/wp-content/uploads/2020/01/pokemon-sword-and-shield-set-list-1024x171.jpg" alt="" id="img_banner_detalhe">`
+                <p id="ptxt">Expansão em lançamento, mas informações estão por vir!</p>
+                <img src="https://cdn-cardmavin.mavin.io/wp-content/uploads/2023/04/pokemon-scarlet-violet-set-list-1024x171.jpg" alt="" id="img_banner_detalhe">`
+}
+function mostrar_expansao_SVI(icone) {
+    if (icone == 1) {
+        div_colecao_detalhe.innerHTML = `
+        <img src="imagens/icones_ev/SetSymbolScarlet_and_Violet.png">
+        <h2>Expansão Escarlate & Violeta - SVI1</h2>
+        `
+        img_banner_detalhe.setAttribute('src', 'https://cdn-cardmavin.mavin.io/wp-content/uploads/2023/04/pokemon-scarlet-violet-set-list-1024x171.jpg')
+        ptxt.innerHTML = `Expansão em lançamento, mas informações estão por vir!`
+    
+    } else if (icone == 2) {
+        div_colecao_detalhe.innerHTML = `
+        <img src="imagens/icones_ev/SetSymbolPaldea_Evolved.png">
+        <h2>Expansão Evoluções em Paldea - SVI2</h2>
+        `
+        img_banner_detalhe.setAttribute('src', 'https://www.totalcards.net/media/catalog/category/paldea-evolved-banner-new.jpg')
+        ptxt.innerHTML = `Expansão em lançamento, mas informações estão por vir!`
+    
+    } 
+
+    div_colecao_detalhe.classList.add("transicao")
+    div_texto_detalhe.classList.add("transicao")
 }

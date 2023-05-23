@@ -208,12 +208,14 @@ header div {
 .botoes {
     display: flex;
     flex-direction: row;
+    justify-content: space-around;
     gap: 25px;
     padding: 2% 2% 2% 0%;
     margin-bottom: 40px;
     background: transparent;
     min-height: 110px;
 }
+
 .botoes button {
     width: 15%;
     padding: 1% 0.6%;
@@ -225,6 +227,7 @@ header div {
     cursor: pointer;
     background: transparent;
 }
+
 .botoes button:hover {
     /* background: linear-gradient(180deg,  #FF8C05 0%, #FFCB05 100%); */
     background: #FFCB05 ;
@@ -232,16 +235,20 @@ header div {
     color: black;
     font-weight: bold   ;
 }
-.botoes_inicial {
-    justify-content: space-evenly;
-}
-.botoes_inicial button {
-    width: 30%;
-}
-button.botao_ativado, button.registrador {
+
+button.botao_ativado, button.registrador, #todos_os_decks {
     background: #8B0000;
     background: linear-gradient(180deg, #8B0000 0%, #B22222 100%);
     color: white;
+}
+#painel_deck {
+    height: 70px;
+    width: 50%;
+    display: flex;
+    justify-content: space-around;
+    overflow-x: auto;
+    overflow-y: hidden;
+    gap: 5%;
 }
 .registrador {
     margin-left: 5%;
@@ -349,3 +356,75 @@ button.botao_ativado, button.registrador {
     box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.25);
 border-radius: 10px;
 }
+
+.instrucoes  {
+    color:white;
+    width: 80%;
+    margin: 2% 7% 5% 7%;
+    text-align: justify;
+}
+.instrucoes p {
+    width: 88%;
+    margin:  2% 0 0 4%;
+    font-size: 1.3vw;
+}
+.instrucoes h4 {
+    font-size: 1.4vw;
+    margin: 2%;
+}
+.instrucoes h3 {
+    font-size: 1.5vw;
+    margin: 3% 0;
+    color: #FFCB05;
+}
+.instrucoes h2 {
+    font-size: 1.8vw;
+    color: #FFCB05;
+}
+.instrucao_imagem {
+    margin: 2% 15% ;
+    border-radius: 10px;
+}
+
+input[type='radio'] {
+    display: none;
+  }
+  .radio-container {
+    margin: auto;
+  }
+  .radio-container label {
+    display: flex;
+    align-items: center;
+    column-gap: 20px;
+  
+  }
+  
+  .custom-radio {
+    border: 1px solid #fff;
+    width: 40px;
+    height: 40px;
+    display: grid;
+    place-content: center;
+    border-radius: 50%;
+  }
+  
+  .custom-radio,
+  span {
+    transition: 0.25s ease;
+    color: #fff;
+  }
+  
+  .custom-radio span {
+    width: 25px;
+    height: 25px;
+    background: #fff;
+    border-radius: 50%;
+  }
+  /*Muda a cor do custom-radio quando a input é selecionada!*/
+  input[type='radio']:checked + .custom-radio {
+    border-color: #FFCB05;
+  }
+  
+  input[type='radio']:checked + .custom-radio span {
+    background: #FFCB05;
+  }

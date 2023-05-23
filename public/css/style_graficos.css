@@ -115,6 +115,7 @@
     height: 100%;
     border-radius: 10px;
     box-shadow: 4px 3px 7px -1px rgba(0, 0, 0, 0.23);
+    background: linear-gradient(90deg, #00C9FF 0%, #92FE9D 100%);
 }
 
 .cor_1 {
@@ -185,5 +186,4 @@
     margin-left: 1px;
     border-radius: 2px;
     background-color: #ccc;
-    /* Define a cor cinza padrão */
 }
