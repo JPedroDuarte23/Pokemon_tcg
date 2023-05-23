@@ -13,7 +13,7 @@ USE pokemon_tcg;
 CREATE TABLE usuario (
 	id INT PRIMARY KEY AUTO_INCREMENT,
 	nome VARCHAR(50),
-	email VARCHAR(200),
+	email VARCHAR(100),
 	senha VARCHAR(50)
 );
 
@@ -27,7 +27,7 @@ CREATE TABLE cartas (
 	tipo VARCHAR(45),
 	raridade VARCHAR(45),
 	series VARCHAR(45),
-	nomeSet VARCHAR(30),
+	nomeSet VARCHAR(45),
 	numero VARCHAR(15),
 	fkUsuario INT, 
 	fkDeck INT,
