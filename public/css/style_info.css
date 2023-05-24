@@ -6,16 +6,34 @@
     box-shadow: inset 0px 4px 6px rgba(0, 0, 0, 0.25);
 }
 .ash {
-    filter: drop-shadow(5px 4px 4px rgba(0, 0, 0, 0.4));
+    filter: drop-shadow(5px 4px 7px rgba(0, 0, 0, 0.7));
+    max-height: 1200px;
+    
 }
 .textos_info h2 {
     font-size: 2.3vw;
+}
+.textos_info h3 {
+    font-size: 1.6vw;
 }
 .textos_info hr {
     border: 1px solid black;
     width: 70%;
     margin: 1% 0 3%;
 }
-.textos_info h3 {
+.textos_info p {
     font-weight: 400;
+    font-size: 1.4vw;
+}
+.imagem_info {
+    filter: drop-shadow(5px 4px 7px rgba(0, 0, 0, 0.7));
+    max-width: 50%;
+    margin: 3% 25%;
+    border-radius: 5px;
+}
+
+.imagem_conclusão {
+    filter: drop-shadow(5px 4px 7px rgba(0, 0, 0, 0.7));
+    margin: 2% 25%;
+    border-radius: 5px;
 }

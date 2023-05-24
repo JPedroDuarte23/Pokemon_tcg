@@ -317,5 +317,12 @@
 <script>
   var pop_up = document.getElementById("div_pop_up")
   var form_carta = pop_up.innerHTML
+  function exibirAlerta(num) {
+    if(num == 0) {
+      alert("Carta registrada com sucesso!");
+    } if (num == 1) {
+      alert("Houve um erro ao inserir sua carta");
+    }
+  }
   searchButton.addEventListener('click', voltar);
 </script>

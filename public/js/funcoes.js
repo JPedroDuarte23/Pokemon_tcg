@@ -19,7 +19,7 @@ var tabela_padrao = `
         </tbody>
     </table>
     </div>
-    `
+    `;
 var tabela_decks = `    <div class="titulo_caixa_graficos"><h2>Coleção</h2></div>
 <div id="cartasColecao" class="caixa_colecao">
   <table id="tabela">
@@ -34,7 +34,7 @@ var tabela_decks = `    <div class="titulo_caixa_graficos"><h2>Coleção</h2></d
   <tbody id="corpo_tabela">
     </tbody>
 </table>
-</div>`
+</div>`;
 var carta_detalhes = `
     <div id="blur">
         <div class="pop_up">
@@ -90,263 +90,265 @@ var carta_detalhes = `
         var addCarta = document.getElementById('botao_add_carta')
         addCarta.addEventListener('click', voltar)
         </style>
-    </div>`
-var formulario_padrao = 0
+    </div>`;
+var formulario_padrao = 0;
 
 function validarSessao() {
-    formulario_padrao = div_pop_up.innerHTML
-    var id = sessionStorage.ID_USUARIO;
-    var nome = sessionStorage.NOME_USUARIO;
+  formulario_padrao = div_pop_up.innerHTML;
+  var id = sessionStorage.ID_USUARIO;
+  var nome = sessionStorage.NOME_USUARIO;
 
-        var id_usuario = document.getElementById("idInput");
+  var id_usuario = document.getElementById("idInput");
 
-   
-    var nome_usuario = document.getElementById("nome_usuario")
-    if (id != null && nome != null) {
-        nome_usuario.innerHTML = `${nome}`
-        id_usuario.setAttribute('value', id);
-    } else {
-        window.location = "../login_cadastro.html";
-    }
+  var nome_usuario = document.getElementById("nome_usuario");
+  if (id != null && nome != null) {
+    nome_usuario.innerHTML = `${nome}`;
+    id_usuario.setAttribute("value", id);
+  } else {
+    window.location = "../login_cadastro.html";
+  }
 }
 function limparSessao() {
-    // aguardar();
-    sessionStorage.clear();
-    // finalizarAguardar();
-    window.location = "../login_cadastro.html";
+  // aguardar();
+  sessionStorage.clear();
+  // finalizarAguardar();
+  window.location = "../login_cadastro.html";
 }
 function registrar() {
-    div_pop_up.style.display = "flex"
-    body_tela.style.overflow = "hidden"
+  div_pop_up.style.display = "flex";
+  body_tela.style.overflow = "hidden";
 }
 function voltar(tipo) {
-    if (tipo == 1) {
-        div_pop_up.innerHTML = formulario_padrao   
-    } 
-    div_pop_up.style.display = "none"
-    body_tela.style.overflow = "auto"
+  if (tipo == 1) {
+    div_pop_up.innerHTML = formulario_padrao;
+  }
+  div_pop_up.style.display = "none";
+  body_tela.style.overflow = "auto";
 }
 
 function query_colecao(seletor) {
-    var id = Number(sessionStorage.ID_USUARIO)
-    var caixaGraficos = document.getElementById('caixaGraficos');
-    var cartasDoUsuario = 0;
+  var id = Number(sessionStorage.ID_USUARIO);
+  var caixaGraficos = document.getElementById("caixaGraficos");
+  var cartasDoUsuario = 0;
 
-    fetch(`http://localhost:3000/registros`)
-        .then((response) => response.json())
-        .then((data) => {
-            var tbody = document.getElementById('corpo_tabela');
-            
-            if (seletor == 1) {
+  fetch(`http://localhost:3000/registros`)
+    .then((response) => response.json())
+    .then((data) => {
+      var tbody = document.getElementById("corpo_tabela");
 
-                caixaGraficos.innerHTML = `
+      if (seletor == 1) {
+        caixaGraficos.innerHTML = `
                  <div  class="titulo_caixa_graficos"><h2>Cartas Registradas</h2></div>
                 <div id="cartasRegistradas"></div>
-                 `
-                cartasDoUsuario = data.filter(registro => registro.fkUsuario === id);
-                var cartasRegistradas = document.getElementById('cartasRegistradas')
-                cartasDoUsuario.forEach((registro) => {
-                    
-                    var imagem = document.createElement('img');
-                    imagem.src = registro.imagemPequena;
-                    cartasRegistradas.appendChild(imagem);
-                });
-            } else {
-                caixaGraficos.innerHTML = tabela_padrao
-                var tbody = document.getElementById('corpo_tabela')
-                if (seletor == 2) {
-                    cartasDoUsuario = data.filter(registro => registro.fkUsuario === id);
-                } else if (seletor == 3) {
-
-                    cartasDoUsuario = data.filter(registro => registro.fkUsuario === id
-                        && (registro.raridade === "Rare Ultra"
-                            || registro.raridade === "Rare Rainbow"
-                            || registro.raridade === "Rare Secret"
-                            || registro.raridade === "Hyper Rare"
-                            || registro.raridade === "Rare Holo V"
-                            || registro.raridade === "Rare BREAK"
-                            || registro.raridade === "Rare Holo EX"
-                            || registro.raridade === "Rare Holo GX"
-                            || registro.raridade === "Rare Holo LV.X"
-                            || registro.raridade === "Rare Holo Star"
-                            || registro.raridade === "Rare Holo V"
-                            || registro.raridade === "Rare Holo VMAX"
-                            || registro.raridade === "Rare Rainbow"
-                            || registro.raridade === "Rare Secret"
-                            || registro.raridade === "Rare Shining"
-                            || registro.raridade === "Rare Shiny"
-                            || registro.raridade === "Rare Shiny GX"));
-
-                } else if (seletor == 4) {
-
-                    cartasDoUsuario = data.filter(registro => registro.fkUsuario === id
-                        && (registro.raridade === "Rare"
-                        || registro.raridade === "Rare Holo"
-                        || registro.raridade === "Rare ACE"
-                        || registro.raridade === "Rare Prism Star"
-                        || registro.raridade === "Rare Prime"));
-
-                } else if (seletor == 5) {
-
-                    cartasDoUsuario = data.filter(registro => registro.fkUsuario === id
-                        && registro.raridade === "Uncommon");
-
-                } else if (seletor == 6) {
-                    cartasDoUsuario = data.filter(registro => registro.fkUsuario === id
-                        && registro.raridade === "Common");
-                } else if (seletor == 7) {
-                    cartasDoUsuario = data.filter(registro => registro.fkUsuario === id
-                        && registro.raridade === "Promo");
-                }
-                cartasDoUsuario.forEach((registro) => {
-                    var linha = document.createElement('tr');
-                    var idCell = document.createElement('td')
-                    var nomeCell = document.createElement('td');
-                    var imagemCell = document.createElement('td');
-                    var tipoCell = document.createElement('td');
-                    var raridadeCell = document.createElement('td');
-                    var setCell = document.createElement('td')
-                    var numeroCell = document.createElement('td')
-                    var botaoCell = document.createElement('td')
-
-                    idCell.style.display = "none"
-          
-                    // Colocando imagem no td
-                    imagemCell.classList.add("canto_esquerdo")
-                    var imagem_consulta = document.createElement('img');
-                    imagem_consulta.src = registro.imagemPequena; 
-                    imagemCell.appendChild(imagem_consulta);
-
-                    var botao_deck = document.createElement('button')
-                    botao_deck.setAttribute('class', 'select_card_btn')
-                    botao_deck.innerHTML = `<i class="fa-solid fa-caret-right"></i>`;
-                    botao_deck.classList.add('botao_detalhe')
-                    botao_deck.addEventListener('click', function() {
-
-                        div_pop_up.innerHTML = carta_detalhes;
-                        imagem_carta_detalhe.src = registro.imagemGrande; 
-                        imagem_carta_detalhe.classList.add("imagem_detalhe")
-                        idCartaValue.setAttribute('value', registro.idCarta)
-                        nomePokeDtlh.innerHTML = registro.nome;
-                        subTipoDtlh.innerHTML += registro.subtipo;
-                        tipoDtlh.innerHTML = registro.tipo;
-                        raridadeDtlh.innerHTML = registro.raridade;
-                        seriesDtlh.innerHTML = registro.series;
-                        colecaoDtlh.innerHTML = registro.nomeSet;
-                        numeroDtlh.innerHTML = registro.numero;
-                        fkDeckDtlh.innerHTML = registro.fkDeck;
-                        registrar();
-                    });
-
-                    idCell.innerHTML = registro.idCarta;
-                    nomeCell.innerHTML = registro.nome;
-                    tipoCell.innerHTML= registro.tipo;
-                    raridadeCell.innerHTML = registro.raridade;
-                    setCell.innerHTML = registro.nomeSet
-                    numeroCell.innerHTML = registro.numero
-                    
-                    // Adicionado tudo com appendChild (linha[imagem, nome, tipo])
-                    botaoCell.appendChild(botao_deck);
-                    linha.appendChild(idCell)
-                    linha.appendChild(imagemCell);
-                    linha.appendChild(nomeCell);
-                    linha.appendChild(tipoCell);
-                    linha.appendChild(raridadeCell);
-                    linha.appendChild(setCell);
-                    linha.appendChild(numeroCell)
-                    linha.appendChild(botaoCell);
-                    tbody.appendChild(linha);
-                    imagem_consulta.classList.add('imagem_tabela');
-                });
-                
-            }
-            // var linhasParaTabela = criarLinhasParaTabela(cartasDoUsuario);
-            
-        })
-        .catch((error) => {
-            console.error('Erro ao buscar registros no servidor:', error);
+                 `;
+        cartasDoUsuario = data.filter((registro) => registro.fkUsuario === id);
+        var cartasRegistradas = document.getElementById("cartasRegistradas");
+        cartasDoUsuario.forEach((registro) => {
+          var imagem = document.createElement("img");
+          imagem.src = registro.imagemPequena;
+          cartasRegistradas.appendChild(imagem);
         });
-        var botaoAtivado = document.querySelector('.botao_ativado')
-        var botao = document.getElementById('botao-'+ seletor);
-        botaoAtivado.classList.remove("botao_ativado");
-        botao.classList.add("botao_ativado");
+      } else {
+        caixaGraficos.innerHTML = tabela_padrao;
+        var tbody = document.getElementById("corpo_tabela");
+        if (seletor == 2) {
+          cartasDoUsuario = data.filter(
+            (registro) => registro.fkUsuario === id
+          );
+        } else if (seletor == 3) {
+          cartasDoUsuario = data.filter(
+            (registro) =>
+              registro.fkUsuario === id &&
+              (registro.raridade === "Rare Ultra" ||
+                registro.raridade === "Rare Rainbow" ||
+                registro.raridade === "Rare Secret" ||
+                registro.raridade === "Hyper Rare" ||
+                registro.raridade === "Rare Holo V" ||
+                registro.raridade === "Rare BREAK" ||
+                registro.raridade === "Rare Holo EX" ||
+                registro.raridade === "Rare Holo GX" ||
+                registro.raridade === "Rare Holo LV.X" ||
+                registro.raridade === "Rare Holo Star" ||
+                registro.raridade === "Rare Holo V" ||
+                registro.raridade === "Rare Holo VMAX" ||
+                registro.raridade === "Rare Rainbow" ||
+                registro.raridade === "Rare Secret" ||
+                registro.raridade === "Rare Shining" ||
+                registro.raridade === "Rare Shiny" ||
+                registro.raridade === "Rare Shiny GX")
+          );
+        } else if (seletor == 4) {
+          cartasDoUsuario = data.filter(
+            (registro) =>
+              registro.fkUsuario === id &&
+              (registro.raridade === "Rare" ||
+                registro.raridade === "Rare Holo" ||
+                registro.raridade === "Rare ACE" ||
+                registro.raridade === "Rare Prism Star" ||
+                registro.raridade === "Rare Prime")
+          );
+        } else if (seletor == 5) {
+          cartasDoUsuario = data.filter(
+            (registro) =>
+              registro.fkUsuario === id && registro.raridade === "Uncommon"
+          );
+        } else if (seletor == 6) {
+          cartasDoUsuario = data.filter(
+            (registro) =>
+              registro.fkUsuario === id && registro.raridade === "Common"
+          );
+        } else if (seletor == 7) {
+          cartasDoUsuario = data.filter(
+            (registro) =>
+              registro.fkUsuario === id && registro.raridade === "Promo"
+          );
+        }
+        cartasDoUsuario.forEach((registro) => {
+          var linha = document.createElement("tr");
+          var idCell = document.createElement("td");
+          var nomeCell = document.createElement("td");
+          var imagemCell = document.createElement("td");
+          var tipoCell = document.createElement("td");
+          var raridadeCell = document.createElement("td");
+          var setCell = document.createElement("td");
+          var numeroCell = document.createElement("td");
+          var botaoCell = document.createElement("td");
+
+          idCell.style.display = "none";
+
+          // Colocando imagem no td
+          imagemCell.classList.add("canto_esquerdo");
+          var imagem_consulta = document.createElement("img");
+          imagem_consulta.src = registro.imagemPequena;
+          imagemCell.appendChild(imagem_consulta);
+
+          var botao_deck = document.createElement("button");
+          botao_deck.setAttribute("class", "select_card_btn");
+          botao_deck.innerHTML = `<i class="fa-solid fa-caret-right"></i>`;
+          botao_deck.classList.add("botao_detalhe");
+          botao_deck.addEventListener("click", function () {
+            div_pop_up.innerHTML = carta_detalhes;
+            imagem_carta_detalhe.src = registro.imagemGrande;
+            imagem_carta_detalhe.classList.add("imagem_detalhe");
+            idCartaValue.setAttribute("value", registro.idCarta);
+            nomePokeDtlh.innerHTML = registro.nome;
+            subTipoDtlh.innerHTML += registro.subtipo;
+            tipoDtlh.innerHTML = registro.tipo;
+            raridadeDtlh.innerHTML = registro.raridade;
+            seriesDtlh.innerHTML = registro.series;
+            colecaoDtlh.innerHTML = registro.nomeSet;
+            numeroDtlh.innerHTML = registro.numero;
+            fkDeckDtlh.innerHTML = registro.fkDeck;
+            registrar();
+          });
+
+          idCell.innerHTML = registro.idCarta;
+          nomeCell.innerHTML = registro.nome;
+          tipoCell.innerHTML = registro.tipo;
+          raridadeCell.innerHTML = registro.raridade;
+          setCell.innerHTML = registro.nomeSet;
+          numeroCell.innerHTML = registro.numero;
+
+          // Adicionado tudo com appendChild (linha[imagem, nome, tipo])
+          botaoCell.appendChild(botao_deck);
+          linha.appendChild(idCell);
+          linha.appendChild(imagemCell);
+          linha.appendChild(nomeCell);
+          linha.appendChild(tipoCell);
+          linha.appendChild(raridadeCell);
+          linha.appendChild(setCell);
+          linha.appendChild(numeroCell);
+          linha.appendChild(botaoCell);
+          tbody.appendChild(linha);
+          imagem_consulta.classList.add("imagem_tabela");
+        });
+      }
+      // var linhasParaTabela = criarLinhasParaTabela(cartasDoUsuario);
+    })
+    .catch((error) => {
+      console.error("Erro ao buscar registros no servidor:", error);
+    });
+  var botaoAtivado = document.querySelector(".botao_ativado");
+  var botao = document.getElementById("botao-" + seletor);
+  botaoAtivado.classList.remove("botao_ativado");
+  botao.classList.add("botao_ativado");
 }
 function query_decks(seletor) {
-    var id = Number(sessionStorage.ID_USUARIO)
-    var caixaGraficos = document.getElementById('caixaGraficos');
-    var decksDoUsuario = 0;
-    var contador = 1;
-    var painelDeck = document.getElementById('painel_deck')
-    painelDeck.innerHTML = "";
-    fetch(`http://localhost:3000/decks`)
-        .then((response) => response.json())
-        .then((data) => {
-            caixaGraficos.innerHTML = tabela_decks
-            var tbody = document.getElementById('corpo_tabela');
-            
-            if (seletor == 1) {
-                decksDoUsuario = data.filter(registro => registro.fkUsuario === id);
-            } 
-            jsons_deck = decksDoUsuario;
-            decksDoUsuario.forEach((registro) => {
-                var linha = document.createElement('tr');
-                var idCell = document.createElement('td')
-                var nomeCell = document.createElement('td');
-                var imagemCell = document.createElement('td');
-                var tipoCell = document.createElement('td');
-                
-                // Colocando imagem no td
-                var imagem_consulta = document.createElement('img');
-                imagem_consulta.src = registro.imagem;
-                imagemCell.appendChild(imagem_consulta);
+  var id = Number(sessionStorage.ID_USUARIO);
+  var caixaGraficos = document.getElementById("caixaGraficos");
+  var decksDoUsuario = 0;
+  var contador = 1;
+  var painelDeck = document.getElementById("painel_deck");
+  painelDeck.innerHTML = "";
+  fetch(`http://localhost:3000/decks`)
+    .then((response) => response.json())
+    .then((data) => {
+      caixaGraficos.innerHTML = tabela_decks;
+      var tbody = document.getElementById("corpo_tabela");
 
-                idCell.innerHTML = registro.idDeck;
-                nomeCell.innerHTML = registro.nomeDeck;
-                tipoCell.innerHTML= registro.tipoPrincipal;
-      
-                // Adicionado tudo com appendChild (linha[imagem, nome, tipo])
-                linha.appendChild(idCell)
-                linha.appendChild(imagemCell);
-                linha.appendChild(nomeCell);
-                linha.appendChild(tipoCell);
-                tbody.appendChild(linha);
-                
-                var botaoDeck = document.createElement('button')
+      if (seletor == 1) {
+        decksDoUsuario = data.filter((registro) => registro.fkUsuario === id);
+      }
+      jsons_deck = decksDoUsuario;
+      decksDoUsuario.forEach((registro) => {
+        var linha = document.createElement("tr");
+        var idCell = document.createElement("td");
+        var nomeCell = document.createElement("td");
+        var imagemCell = document.createElement("td");
+        var tipoCell = document.createElement("td");
 
-                if(contador <= data.length) {
-                    botaoDeck.setAttribute(`onclick`, `buscar_cartas_deck(${registro.idDeck})`)
-                    botaoDeck.setAttribute(`id`, `botao-${registro.idDeck}`)
-                    botaoDeck.classList.add('botao_estilizado')
-                    botaoDeck.innerText= `${registro.nomeDeck}`
-                    painelDeck.appendChild(botaoDeck)
-                    contador++  
-                }
-    
-                imagem_consulta.classList.add('imagem_tabela_deck');
-            });
-        })
+        // Colocando imagem no td
+        var imagem_consulta = document.createElement("img");
+        imagem_consulta.src = registro.imagem;
+        imagemCell.appendChild(imagem_consulta);
+
+        idCell.innerHTML = registro.idDeck;
+        nomeCell.innerHTML = registro.nomeDeck;
+        tipoCell.innerHTML = registro.tipoPrincipal;
+
+        // Adicionado tudo com appendChild (linha[imagem, nome, tipo])
+        linha.appendChild(idCell);
+        linha.appendChild(imagemCell);
+        linha.appendChild(nomeCell);
+        linha.appendChild(tipoCell);
+        tbody.appendChild(linha);
+
+        var botaoDeck = document.createElement("button");
+
+        if (contador <= data.length) {
+          botaoDeck.setAttribute(
+            `onclick`,
+            `buscar_cartas_deck(${registro.idDeck})`
+          );
+          botaoDeck.setAttribute(`id`, `botao-${registro.idDeck}`);
+          botaoDeck.classList.add("botao_estilizado");
+          botaoDeck.innerText = `${registro.nomeDeck}`;
+          painelDeck.appendChild(botaoDeck);
+          contador++;
+        }
+
+        imagem_consulta.classList.add("imagem_tabela_deck");
+      });
+    });
 }
 
 function mostrar_registros() {
-    var caixaGraficos = document.getElementById('caixaGraficos');
-    caixaGraficos.innerHTML = `
+  var caixaGraficos = document.getElementById("caixaGraficos");
+  caixaGraficos.innerHTML = `
     <div  class="titulo_caixa_graficos"><h2>Cartas Registradas</h2></div>
     <div id="cartasRegistradas"></div>
-    `
-    fetch(`/cartas/informacoes`)
-        .then(response => response.json())
-        .then(data => {
-            // Criar o HTML para a carta com base nos dados recebidos do servidor
-            for (i = 0; i <= data.length - 1; i++) {
-                document.getElementById('cartasRegistradas').innerHTML += `
+    `;
+  fetch(`/cartas/informacoes`)
+    .then((response) => response.json())
+    .then((data) => {
+      // Criar o HTML para a carta com base nos dados recebidos do servidor
+      for (i = 0; i <= data.length - 1; i++) {
+        document.getElementById("cartasRegistradas").innerHTML += `
           <img src="${data[i].images.small}">
       `;
-            }
-        }).catch(error => {
-            console.log(error);
-        });
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+    });
 }
-
-
-
-
