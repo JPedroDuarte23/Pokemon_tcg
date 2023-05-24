@@ -311,9 +311,11 @@ button.botao_ativado, button.registrador, #todos_os_decks {
 }
 
 .campo label {
-    font-size: 1.1vw;
+    font-size: 1.2vw;
+    font-weight: 700;
+    width: 30%;
     margin: 3% 0 3% 0;
-    font-weight: normal;
+    text-align: center;
 }
 
 .campo input {
@@ -322,21 +324,22 @@ button.botao_ativado, button.registrador, #todos_os_decks {
     padding: 0.5%;
 }
 .campo select {
-    width: 30%;
+    width: 50%;
     margin: 0 5%;
-    padding: 0.5%;
+    border-radius: 5px;
 }
 .campo select {
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
-    direction: ltr; /* Define a direção do menu suspenso */
+    direction: ltr;
     background-color: #3662AD;
     color: white;
     border: 1px solid black;
   }
   .campo option {
-    padding: 10px 0;
+    font-size: 1.1vw;
+    padding: 10px 3%;
     border-bottom: 1px solid black;
   }
   .campo option:checked {
@@ -400,7 +403,7 @@ input[type='radio'] {
     display: flex;
     align-items: center;
     column-gap: 20px;
-  
+    width: auto;
   }
   
   .custom-radio {

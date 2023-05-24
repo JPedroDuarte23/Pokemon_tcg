@@ -32,16 +32,16 @@ app.use("/medidas", medidasRouter);
 // SELECT DAS CARTAS
 
 app.get("/registros", (req, res) => {
-  // faz o select na tabela cartas
+  // Faz o select na tabela cartas
   connection.connect();
-  const sql = `SELECT * FROM cartas`;
-  connection.query(sql, (error, results, fields) => {
+  const select_cartas = `SELECT * FROM cartas`;
+  connection.query(select_cartas, (error, results, fields) => {
     if (error) {
       console.error(error);
       res.status(500).json({ error: "Erro ao buscar as cartas." });
       return;
     }
-    res.json(results); // envia a resposta para o cliente
+    res.json(results); // envia a resposta para o endpoint
   });
 });
 
@@ -49,9 +49,10 @@ app.get("/registros", (req, res) => {
 
 const deck_select = async () => {
   app.get("/decks", (req, res) => {
+    // Faz select na tabela deck
     connection.connect();
-    const sql = `SELECT * FROM deck`;
-    connection.query(sql, (error, results, fields) => {
+    const select_deck = `SELECT * FROM deck`;
+    connection.query(select_deck, (error, results, fields) => {
       if (error) {
         console.log(error);
         res.status(500).json({ error: "Erro ao buscar os decks" });
@@ -65,9 +66,9 @@ const deck_select = async () => {
 // CRIAÇÃO DE DECKS
 
 const decks_insert = async () => {
+  // Insere os dados do formulário na tabela deck com o método mostrado no dat-acqu-ino
   app.post("/registro-deck", (req, res) => {
-    const { inputImagemDeck, inputDeckNome, inputTipoPrincipal, idInput } =
-      req.body;
+    const { inputImagemDeck, inputDeckNome, inputTipoPrincipal, idInput } = req.body;
     const insert_deck_Query = `INSERT INTO deck (nomeDeck, imagem, fkUsuario, tipoPrincipal, vitorias, derrotas) VALUES (?, ?, ?, ?, 0, 0)`;
     const values_deck = [
       inputDeckNome,
@@ -220,7 +221,6 @@ const card_insert = async () => {
             idInput,
           ];
 
-          // PokeInfo é uma lista de Json
           connection.connect();
           connection.query(insertQuery, values, (error, results) => {
             if (error) {
