@@ -117,10 +117,10 @@ const update_carta_deck = async () => {
           );
       } else {
         console.log("Registro inserido com sucesso!");
-        res
-          .status(204)
-          .send(
-            '<script>alert("Cartas inseridas no deck!"); window.location.href = "/Dash_colecoes.html";</script>'
+         res
+           .status(202)
+           .send(
+             '<script>alert("Cartas inseridas no deck!"); window.location.href = "/Dash_colecoes.html";</script>'
           );
       }
     });

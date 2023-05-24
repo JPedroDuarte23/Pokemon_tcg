@@ -9,9 +9,13 @@
     <link rel="stylesheet" href="css/style_login.css">
     <link rel="stylesheet" href="css/css_geral.css">
     <link rel="stylesheet" href="fontes/fonts.css">
+    <script src="js/funcoes.js"></script>
 </head>
 
 <body>
+    <div id="div_aguardar" class="blur sumiu">
+        <img src="imagens/pikachu-running.gif" alt="" class="imagem_pikachu">
+    </div>
     <section id="cabecalho">
         <header>
             <div class="container">
@@ -70,12 +74,12 @@
 
     if (posicaoDiv === 'esquerda') {
         divLogin.classList.add('esquerda');
-    } 
+    }
     else if (posicaoDiv === 'direita') {
         divLogin.classList.add('direita');
         h1_bloco.innerHTML = `Se junte a nós nesse mundo Pokémon!`
         button_cobrir.innerHTML = `Cadastrar`
-            button_cobrir.setAttribute("onclick", "animacao_entrar();")
+        button_cobrir.setAttribute("onclick", "animacao_entrar();")
     }
 
     function entrar_dashboard() {
@@ -102,7 +106,7 @@
         }
     }
     function cadastrar() {
-
+        aguardar();
         //Recupere o valor da nova input pelo nome do id
         // Agora vá para o método fetch logo abaixo
         var nomeVar = input_user.value;
@@ -112,65 +116,88 @@
         var confirmacaoSenhaVar = input_confirmar_senha.value;
 
         if (nomeVar == "" || emailVar == "" || senhaVar == "" || confirmacaoSenhaVar == "") {
-            alert("Você precisa preencher os campos para se cadastrar")
+            setTimeout(() => {
+                alert("Você precisa preencher os campos para se cadastrar")
+                finalizarAguardar();
+            }, 1000)
             return false;
-        } else if (emailVar.indexOf('@')== -1 ||
-                   (emailVar.indexOf('.com') == -1 &&
-                   emailVar.indexOf('.br') == -1 &&
-                   emailVar.indexOf('.school') == -1)){
-            alert("Insira um email válido")
+        } else if (emailVar.indexOf('@') == -1 ||
+            (emailVar.indexOf('.com') == -1 &&
+                emailVar.indexOf('.br') == -1 &&
+                emailVar.indexOf('.school') == -1)) {
+            setTimeout(() => {
+                alert("Insira um email válido")
+                finalizarAguardar();
+            }, 1000)
             return false;
-        } else if (emailVar != confirmacaoEmailVar){
+        } else if (emailVar != confirmacaoEmailVar) {
+            setTimeout(() => {
+                alert("Os emails inseridos são diferentes. Insira corretamente os dados")
+                finalizarAguardar();
+            }, 1000)
             alert("Os emails inseridos são diferentes. Insira corretamente os dados")
+            finalizarAguardar();
             return false;
         } else if (senhaVar.length < 8) {
-            alert("Sua senha precisa ter ao menos 8 caractéres")
+            setTimeout(() => {
+                alert("Sua senha precisa ter ao menos 8 caractéres")
+                finalizarAguardar();
+            }, 1000)
             return false;
         } else if (senhaVar != confirmacaoSenhaVar) {
-            alert("As duas senhas que foram inseritas estão diferente uma da outra")
+            setTimeout(() => {
+                alert("As duas senhas que foram inseritas estão diferente uma da outra")
+                finalizarAguardar();
+            }, 1000)
             return false;
         } else {
 
-        // Enviando o valor da nova input
-        fetch("/usuarios/cadastrar", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                // crie um atributo que recebe o valor recuperado aqui
-                // Agora vá para o arquivo routes/usuario.js
-                nomeServer: nomeVar,
-                emailServer: emailVar,
-                senhaServer: senhaVar
-            })
-        }).then(function (resposta) {
+            // Enviando o valor da nova input
+            fetch("/usuarios/cadastrar", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    // crie um atributo que recebe o valor recuperado aqui
+                    // Agora vá para o arquivo routes/usuario.js
+                    nomeServer: nomeVar,
+                    emailServer: emailVar,
+                    senhaServer: senhaVar
+                })
+            }).then(function (resposta) {
 
-            console.log("resposta: ", resposta);
+                console.log("resposta: ", resposta);
 
-            if (resposta.ok) {
-                alert("Você se cadastrou com sucesso")
-                    div_bloco.classList.remove("esquerda")
-                    div_bloco.classList.add("direita")
-
-                limparFormulario();
-            } else {
-                throw ("Houve um erro ao tentar realizar o cadastro!");
-            }
-        }).catch(function (resposta) {
-            console.log(`#ERRO: ${resposta}`);
-        });
-
-        return false;
+                if (resposta.ok) {
+                    setTimeout(() => {
+                        alert("Você se cadastrou com sucesso")
+                        div_bloco.classList.remove("esquerda")
+                        div_bloco.classList.add("direita")
+                        finalizarAguardar();
+                    }, 1000)
+                    // 
+                } else {
+                    throw ("Houve um erro ao tentar realizar o cadastro!");
+                }
+            }).catch(function (resposta) {
+                console.log(`#ERRO: ${resposta}`);
+                // finalizarAguardar();
+            });
+            return false;
+        }
     }
-}
     function entrar() {
+        aguardar();
         var userVarE = input_user_entrar.value
         var emailVarE = input_email_entrar.value;
         var senhaVarE = input_senha_entrar.value;
 
         if (userVarE == "" || emailVarE == "" || senhaVarE == "") {
-            alert("Preencha os campos para logar")
+            setTimeout(() =>{
+                alert("Preencha os campos para logar")
+                finalizarAguardar()
+            }, 1000 )
             return false;
         }
         console.log("FORM USER ", userVarE)
@@ -201,19 +228,20 @@
                     sessionStorage.NOME_USUARIO = json.nome;
                     sessionStorage.ID_USUARIO = json.id;
 
-                    
-                    window.location = "./Dash_inicial.html";
-
+                    setTimeout(() => {
+                        window.location = "./Dash_inicial.html";
+                    }, 1000)
                 });
 
             } else {
-
                 console.log("Houve um erro ao tentar realizar o login!");
-
                 resposta.text().then(texto => {
                     console.error(texto);
                 });
-                alert("Nenhum usuario encontrado")
+                setTimeout(() => {
+                    alert("Nenhum usuario encontrado")
+                    finalizarAguardar()
+                })       
             }
 
         }).catch(function (erro) {
@@ -221,5 +249,15 @@
         })
 
         return false;
+    }
+    var divAguardar = document.getElementById('div_aguardar')
+    function aguardar() {
+        divAguardar.classList.toggle('sumiu')
+        divAguardar.classList.toggle('apareceu')
+    }
+
+    function finalizarAguardar(texto) {
+        divAguardar.classList.toggle('sumiu')
+        divAguardar.classList.toggle('apareceu')
     }
 </script>

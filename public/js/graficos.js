@@ -113,7 +113,7 @@ function gerar_barras() {
   fetch("http://localhost:3000/registros")
     .then((response) => response.json())
     .then((data) => {
-      var cartasDoUser = data.filter((registro) => registro.fkUsuario === id);
+      var cartasDoUser = data.filter((registro) => registro.fkUsuario === id && registro.suptipo === "Pokémon");
       var cartasTipoFogo = data.filter(
         (registro) =>
           registro.fkUsuario === id &&

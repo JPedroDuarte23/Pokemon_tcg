@@ -114,6 +114,7 @@ function limparSessao() {
   // finalizarAguardar();
   window.location = "../login_cadastro.html";
 }
+
 function registrar() {
   div_pop_up.style.display = "flex";
   body_tela.style.overflow = "hidden";
