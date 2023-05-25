@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="css/style_dash_geral.css">
   <link rel="stylesheet" href="css/css_tabelas.css">
   <link rel="stylesheet" href="css/style_graficos.css">
+  <link rel="icon" type="image/png" href="imagens/pokebola.png"/>
   <script type="text/javascript" src="js/redirecionamentos.js"></script>
   <script src="https://kit.fontawesome.com/c52875e8e8.js" crossorigin="anonymous"></script>
   <script src="../js/funcoes.js"></script>
@@ -18,6 +19,10 @@
 </head>
 
 <body onload="validarSessao(), carregar_graficos()" id="body_tela">
+  <div id="div_aguardar" class="blur sumiu">
+    <img src="imagens/pikachu-running.gif" alt="" class="imagem_pikachu">
+    <h1>Carregando...</h1>
+</div>
   <div id="div_pop_up" class="registrar">
     <div id="blur">
       <div class="pop_up_carta">
@@ -279,7 +284,7 @@
         <li><a href="Dash_colecoes.html"><i class="fa-solid fa-box-open fa-lg"></i>Coleção</a></li>
         <li><a href="Dash_decks.html"><i class="fa-solid fa-layer-group fa-lg"></i>Decks</a></li>
         <li><a href="Dash_informacoes.html"><i class="fa-solid fa-file-lines fa-lg"></i>Informações</a></li>
-        <li><a onclick="limparSessao()"><i class="fa-solid fa-right-from-bracket fa-lg"></i>Sair</a></li>
+        <li><a onclick="limparSessao()" style="cursor: pointer;"><i class="fa-solid fa-right-from-bracket fa-lg"></i>Sair</a></li>
       </ul>
 
     </div>
@@ -287,16 +292,9 @@
       <header class="">
         <div>
           <h2>Home</h2>
-          <!-- <div class="pesquisar">
-            <input type="text" class="barra_de_pesquisa" placeholder="Procura algo específico?">
-            <button class="lupa" type="submit">
-              <i class="fa-solid fa-search"></i>
-            </button>
-          </div> -->
         </div>
         <div class="lateral_icones">
           <div class="icone" onclick="redirecionar_info()"><i class="fa-solid fa-circle-question fa-lg"></i></div>
-          <div class="icone" onclick=""><i class="fa-solid fa-bell fa-lg"></i></div>
           <div class="user">
             <div class="circulo">
             </div>
@@ -387,13 +385,16 @@
 
 </html>
 <script>
-      var id = Number(sessionStorage.ID_USUARIO)
+  var divAguardar = document.getElementById('div_aguardar')
+  var id = Number(sessionStorage.ID_USUARIO)
   searchButton.addEventListener('click', voltar);
  
   function registrar_resultado() {
     div_pop_up.innerHTML = `
     <div id="blur">
             <div class="pop_up_carta">
+              <h3>Registrar Resultados</h3>
+                <hr>
                 <i class="fa-solid fa-xmark fa-xl" id="i_voltar" onclick="voltar(1)"></i>
                 <form action="/resultado" method="post">
                     <div class="campo">
@@ -428,10 +429,6 @@
               </div>
           </div>
     `
-    // <label for="inputResultado">Resultado:</label> 
-    //                   <input type="radio" name="" >Vitória
-    //                   <input type="radio" name="inputResultado" value="derrota">Derrota
-
     fkUserInput.setAttribute('value', id);
     registrar();
   }

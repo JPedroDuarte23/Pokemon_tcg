@@ -287,14 +287,15 @@ function gerar_barras() {
       porcentagem_11.innerText = `${porcentagemCTFD}%`;
     });
 }
+
 //GERANDO GRADIENTES USANDO REDUÇÃO PERCENTUAL DO RGB E ADICIONANDO NAS BARRAS 50 DIVS
 function gerarBarraProgresso(barra, tamanhoDaBarra, porcentagemDaBarra) {
   // gerando as 50 divs
   for (var j = 0; j < tamanhoDaBarra; j++) {
     var segmentos = document.createElement("div");
     segmentos.classList.add("segmentos_progresso");
-    var colorStart = [59, 175, 218];
-    var colorEnd = [220, 0, 0];
+    var colorStart = [227, 86, 209];
+    var colorEnd = [10, 0, 255];
     var percentualCompleto = (j / tamanhoDaBarra) * 100;
     var color = [];
     // colocando a cor

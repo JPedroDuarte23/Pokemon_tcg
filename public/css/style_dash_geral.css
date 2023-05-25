@@ -16,7 +16,26 @@ body {
     height: 100%;
     scroll-behavior: smooth;
 }
-
+.blur {
+    width: 100%;
+    min-height: 100vh;
+    height: auto;
+    position: fixed;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(10px) brightness(0.5);
+    background-color: rgba(0, 0, 0, 0.4);
+    z-index: 99;    
+    color: white;
+  }
+  .apareceu {display: flex;
+  flex-direction: column;}
+  .sumiu {display: none;}
+  .imagem_pikachu {
+    max-width: 300px;
+    margin-bottom: 1%;
+    padding-right: 5%;
+  }
 a {
     text-decoration: none;
     color: black;
@@ -114,42 +133,6 @@ header div {
     align-items: center;
 }
 
-.lupa {
-    position:absolute;
-    top: 40%; 
-    right:5%;
-    z-index:10;
-    border:none;
-    background:transparent;
-    outline:none;
-    color: #acacac;
-  }
-  
-  .pesquisar {
-    position: relative;
-    width: 500px;
-  }
-  
-.barra_de_pesquisa{
-    width: 100%;
-    min-width: 300px;
-    box-sizing: border-box;
-    margin-top: 2%;
-    height: 40px;
-    border-radius: 10px;
-    border: none;
-    background: #8B0000;
-    background: linear-gradient(180deg, #8B0000 0%, #B22222 100%);
-    padding-left: 5%;
-    color: white;
-    box-sizing: border-box;
-    outline: none;
-    font-size: 16px;
-}
-::-webkit-input-placeholder {
-    color: #acacac;
-  }
-
 .lateral_icones {
     width: 25%;
     height: 100%;
@@ -170,7 +153,7 @@ header div {
 .lateral_icones .icone {
     width: 20%;
     max-width: 40px;
-    height: 75%;
+    height: 5vh;
     background-color: #FFCB05;
     border-radius: 10px;
     display: flex;

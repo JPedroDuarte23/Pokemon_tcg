@@ -8,12 +8,17 @@
   <title>My CardDex | Coleções</title>
   <link rel="stylesheet" href="css/style_dash_geral.css">
   <link rel="stylesheet" href="css/css_tabelas.css">
+  <link rel="icon" type="image/png" href="imagens/pokebola.png"/>
   <script src="https://kit.fontawesome.com/c52875e8e8.js" crossorigin="anonymous"></script>
   <script type="text/javascript" src="js/redirecionamentos.js"></script>
   <script src="../js/funcoes.js"></script>
 </head>
 
 <body onload="validarSessao(), query_colecao(1)" id="body_tela">
+  <div id="div_aguardar" class="blur sumiu">
+    <img src="imagens/pikachu-running.gif" alt="" class="imagem_pikachu">
+    <h1>Carregando...</h1>
+</div>
   <div id="div_pop_up" class="registrar">
     <div id="blur">
       <div class="pop_up_carta">
@@ -275,7 +280,7 @@
         <li><a href="Dash_colecoes.html" class="ativado"><i class="fa-solid fa-box-open fa-lg"></i>Coleção</a></li>
         <li><a href="Dash_decks.html"><i class="fa-solid fa-layer-group fa-lg"></i>Decks</a></li>
         <li><a href="Dash_informacoes.html"><i class="fa-solid fa-file-lines fa-lg"></i>Informações</a></li>
-        <li><a onclick="limparSessao()"><i class="fa-solid fa-right-from-bracket fa-lg"></i>Sair</a></li>
+        <li><a href="" onclick="limparSessao()" style="cursor: pointer;"><i class="fa-solid fa-right-from-bracket fa-lg"></i>Sair</a></li>
       </ul>
 
     </div>
@@ -286,7 +291,6 @@
         </div>
         <div class="lateral_icones">
           <div class="icone" onclick="redirecionar_info()"><i class="fa-solid fa-circle-question fa-lg"></i></div>
-          <div class="icone" onclick=""><i class="fa-solid fa-bell fa-lg"></i></div>
           <div class="user">
             <div class="circulo"></div>
             <h4 id="nome_usuario"></h4>
@@ -315,6 +319,7 @@
 
 </html>
 <script>
+   var divAguardar = document.getElementById('div_aguardar')
   var pop_up = document.getElementById("div_pop_up")
   var form_carta = pop_up.innerHTML
   function exibirAlerta(num) {

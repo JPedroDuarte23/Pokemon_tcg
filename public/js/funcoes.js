@@ -20,7 +20,8 @@ var tabela_padrao = `
     </table>
     </div>
     `;
-var tabela_decks = `    <div class="titulo_caixa_graficos"><h2>Coleção</h2></div>
+var tabela_decks = `    
+<div class="titulo_caixa_graficos"><h2>Coleção</h2></div>
 <div id="cartasColecao" class="caixa_colecao">
   <table id="tabela">
     <thead>
@@ -108,13 +109,23 @@ function validarSessao() {
     window.location = "../login_cadastro.html";
   }
 }
-function limparSessao() {
-  // aguardar();
-  sessionStorage.clear();
-  // finalizarAguardar();
-  window.location = "../login_cadastro.html";
+function aguardar() {
+  divAguardar.classList.toggle('sumiu')
+  divAguardar.classList.toggle('apareceu')
 }
 
+function finalizarAguardar(texto) {
+  divAguardar.classList.toggle('sumiu')
+  divAguardar.classList.toggle('apareceu')
+}
+function limparSessao() {
+  aguardar();
+  sessionStorage.clear();
+setTimeout(() => {
+    window.location.href = "../login_cadastro.html";
+    finalizarAguardar();
+  }, 2000);
+}
 function registrar() {
   div_pop_up.style.display = "flex";
   body_tela.style.overflow = "hidden";
@@ -250,7 +261,7 @@ function query_colecao(seletor) {
           setCell.innerHTML = registro.nomeSet;
           numeroCell.innerHTML = registro.numero;
 
-          // Adicionado tudo com appendChild (linha[imagem, nome, tipo])
+          // Adicionado tudo com appendChild 
           botaoCell.appendChild(botao_deck);
           linha.appendChild(idCell);
           linha.appendChild(imagemCell);
@@ -264,7 +275,6 @@ function query_colecao(seletor) {
           imagem_consulta.classList.add("imagem_tabela");
         });
       }
-      // var linhasParaTabela = criarLinhasParaTabela(cartasDoUsuario);
     })
     .catch((error) => {
       console.error("Erro ao buscar registros no servidor:", error);
@@ -274,6 +284,7 @@ function query_colecao(seletor) {
   botaoAtivado.classList.remove("botao_ativado");
   botao.classList.add("botao_ativado");
 }
+
 function query_decks(seletor) {
   var id = Number(sessionStorage.ID_USUARIO);
   var caixaGraficos = document.getElementById("caixaGraficos");
@@ -330,26 +341,5 @@ function query_decks(seletor) {
 
         imagem_consulta.classList.add("imagem_tabela_deck");
       });
-    });
-}
-
-function mostrar_registros() {
-  var caixaGraficos = document.getElementById("caixaGraficos");
-  caixaGraficos.innerHTML = `
-    <div  class="titulo_caixa_graficos"><h2>Cartas Registradas</h2></div>
-    <div id="cartasRegistradas"></div>
-    `;
-  fetch(`/cartas/informacoes`)
-    .then((response) => response.json())
-    .then((data) => {
-      // Criar o HTML para a carta com base nos dados recebidos do servidor
-      for (i = 0; i <= data.length - 1; i++) {
-        document.getElementById("cartasRegistradas").innerHTML += `
-          <img src="${data[i].images.small}">
-      `;
-      }
-    })
-    .catch((error) => {
-      console.log(error);
     });
 }

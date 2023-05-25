@@ -6,14 +6,17 @@
     justify-content: center;
     align-items: center;
     backdrop-filter: blur(10px) brightness(0.5);
-    background-color: rgba(0, 0, 0, 0.1);
+    background-color: rgba(0, 0, 0, 0.4);
     z-index: 99;    
+    color: white;
   }
-  .apareceu {display: flex;}
+  .apareceu {display: flex;
+  flex-direction: column;}
   .sumiu {display: none;}
   .imagem_pikachu {
-    max-width: 200px;
-    transform: rotateY(180deg);
+    max-width: 300px;
+    margin-bottom: 1%;
+    padding-right: 5%;
   }
   /*Seção formulários */
   .section {

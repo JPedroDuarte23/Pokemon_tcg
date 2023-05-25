@@ -9,12 +9,14 @@
     <link rel="stylesheet" href="css/style_login.css">
     <link rel="stylesheet" href="css/css_geral.css">
     <link rel="stylesheet" href="fontes/fonts.css">
+    <link rel="icon" type="image/png" href="imagens/pokebola.png"/>
     <script src="js/funcoes.js"></script>
 </head>
 
 <body>
     <div id="div_aguardar" class="blur sumiu">
         <img src="imagens/pikachu-running.gif" alt="" class="imagem_pikachu">
+        <h1>Carregando...</h1>
     </div>
     <section id="cabecalho">
         <header>
@@ -69,9 +71,9 @@
 
 </html>
 <script>
-    const posicaoDiv = localStorage.getItem('posicaoDiv');
-    const divLogin = document.getElementById('div_bloco');
-
+    var posicaoDiv = localStorage.getItem('posicaoDiv');
+    var divLogin = document.getElementById('div_bloco');
+    var divAguardar = document.getElementById('div_aguardar')
     if (posicaoDiv === 'esquerda') {
         divLogin.classList.add('esquerda');
     }
@@ -250,14 +252,5 @@
 
         return false;
     }
-    var divAguardar = document.getElementById('div_aguardar')
-    function aguardar() {
-        divAguardar.classList.toggle('sumiu')
-        divAguardar.classList.toggle('apareceu')
-    }
-
-    function finalizarAguardar(texto) {
-        divAguardar.classList.toggle('sumiu')
-        divAguardar.classList.toggle('apareceu')
-    }
+   
 </script>

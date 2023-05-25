@@ -30,7 +30,7 @@ app.use("/avisos", avisosRouter);
 app.use("/medidas", medidasRouter);
 
 // SELECT DAS CARTAS
-
+const select_cartas = async () => {
 app.get("/registros", (req, res) => {
   // Faz o select na tabela cartas
   connection.connect();
@@ -44,6 +44,7 @@ app.get("/registros", (req, res) => {
     res.json(results); // envia a resposta para o endpoint
   });
 });
+}
 
 // SELECT DO DECKS
 
@@ -293,8 +294,6 @@ const card_insert = async () => {
             numero,
             idInput,
           ];
-
-          // PokeInfo é uma lista de Json
           connection.connect();
           connection.query(insertQuery, values, (error, results) => {
             if (error) {
@@ -358,7 +357,6 @@ const card_insert = async () => {
             idInput,
           ];
 
-          // PokeInfo é uma lista de Json
           connection.connect();
           connection.query(insertQuery, values, (error, results) => {
             if (error) {
@@ -407,6 +405,7 @@ const servidor = () => {
 };
 
 (async () => {
+  await select_cartas();
   await card_insert();
   await decks_insert();
   await deck_select();
