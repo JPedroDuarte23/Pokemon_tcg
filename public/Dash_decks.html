@@ -32,12 +32,24 @@
                         <input type="text" name="inputDeckNome" id="inputDeckNome">
                     </div>
                     <div class="campo">
-                        <label for="inputTipoPrincipal">Tipo principal:</label>
-                        <input type="text" name="inputTipoPrincipal" id="inputTipoPrincipal">
-                    </div>
-                    <div class="campo">
                         <label for="inputImagemDeck">Imagem do deck</label>
                         <input type="text" name="inputImagemDeck" id="inputImagemDeck">
+                    </div>
+                    <div class="campo">
+                        <label for="selectTipoPrincipal">Tipo principal:</label>
+                        <select name="selectTipoPrincipal" id="selectTipoPrincipal" multiple size="3">
+                            <option value="Fire">Fogo</option>
+                            <option value="Grass">Planta</option>
+                            <option value="Water">Àgua</option>
+                            <option value="Colorless">Normal</option>
+                            <option value="Lightning">Raio</option>
+                            <option value="Fighting">Lutador</option>
+                            <option value="Psychic">Psíquico</option>
+                            <option value="Darkness">Escuridão</option>
+                            <option value="Metal">Metal</option>
+                            <option value="Fairy">Fada</option>
+                            <option value="Dragon">Dragão</option>
+                          </select>
                     </div>
                     <input type="text" name="idInput" id="idInput" style="display: none;">
                     <button type="submit" id="criarDeckButton">Registrar</button>

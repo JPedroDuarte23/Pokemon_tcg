@@ -69,13 +69,13 @@ const deck_select = async () => {
 const decks_insert = async () => {
   // Insere os dados do formulário na tabela deck com o método mostrado no dat-acqu-ino
   app.post("/registro-deck", (req, res) => {
-    const { inputImagemDeck, inputDeckNome, inputTipoPrincipal, idInput } = req.body;
+    const { inputImagemDeck, inputDeckNome, selectTipoPrincipal, idInput } = req.body;
     const insert_deck_Query = `INSERT INTO deck (nomeDeck, imagem, fkUsuario, tipoPrincipal, vitorias, derrotas) VALUES (?, ?, ?, ?, 0, 0)`;
     const values_deck = [
       inputDeckNome,
       inputImagemDeck,
       idInput,
-      inputTipoPrincipal,
+      selectTipoPrincipal,
     ];
 
     connection.connect();
