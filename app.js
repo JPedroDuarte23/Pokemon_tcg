@@ -29,6 +29,7 @@ app.use("/usuarios", usuarioRouter);
 app.use("/avisos", avisosRouter);
 app.use("/medidas", medidasRouter);
 
+
 // SELECT DAS CARTAS
 const select_cartas = async () => {
 app.get("/registros", (req, res) => {

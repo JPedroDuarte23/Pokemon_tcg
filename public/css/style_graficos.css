@@ -95,10 +95,11 @@
     justify-content: space-around;
     padding: 10px;
     color: white;
+    margin-bottom: 2%;
 }
 
 .secao_estatistica h3 {
-    width: 100px;
+    width: 120px;
     text-align: center;
 }
 

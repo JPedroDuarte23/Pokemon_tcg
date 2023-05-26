@@ -303,6 +303,7 @@ function gerarBarraProgresso(barra, tamanhoDaBarra, porcentagemDaBarra) {
       color[i] = Math.round(
         colorStart[i] +
           (colorEnd[i] - colorStart[i]) * (percentualCompleto / 100)
+          // [Rcomeço,Gcomeço,Bcomeço] + ([Rfinal,Gfinal,Bfinal] - [Rcomeço, Gcomeço, Bcomeço]) * (percentualCompleto/100)
       );
     }
     segmentos.style.background = "rgba(120, 120, 124, 0.37)";
