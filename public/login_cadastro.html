@@ -79,7 +79,7 @@
     }
     else if (posicaoDiv === 'direita') {
         divLogin.classList.add('direita');
-        h1_bloco.innerHTML = `Se junte a nós nesse mundo Pokémon!`
+        h1_bloco.innerHTML = `Junte-se a nós nesse mundo Pokémon!`
         button_cobrir.innerHTML = `Cadastrar`
         button_cobrir.setAttribute("onclick", "animacao_entrar();")
     }
@@ -93,7 +93,7 @@
             divLogin.classList.add("direita")
 
 
-            h1_bloco.innerHTML = `Se junte a nós nesse mundo Pokémon!`
+            h1_bloco.innerHTML = `Junte-se a nós nesse mundo Pokémon!`
             button_cobrir.innerHTML = `Cadastrar`
             button_cobrir.setAttribute("onclick", "animacao_entrar();")
         }
@@ -121,7 +121,7 @@
             setTimeout(() => {
                 alert("Você precisa preencher os campos para se cadastrar")
                 finalizarAguardar();
-            }, 1000)
+            }, 2000)
             return false;
         } else if (emailVar.indexOf('@') == -1 ||
             (emailVar.indexOf('.com') == -1 &&
@@ -130,13 +130,13 @@
             setTimeout(() => {
                 alert("Insira um email válido")
                 finalizarAguardar();
-            }, 1000)
+            }, 2000)
             return false;
         } else if (emailVar != confirmacaoEmailVar) {
             setTimeout(() => {
                 alert("Os emails inseridos são diferentes. Insira corretamente os dados")
                 finalizarAguardar();
-            }, 1000)
+            }, 2000)
             alert("Os emails inseridos são diferentes. Insira corretamente os dados")
             finalizarAguardar();
             return false;
@@ -144,13 +144,13 @@
             setTimeout(() => {
                 alert("Sua senha precisa ter ao menos 8 caractéres")
                 finalizarAguardar();
-            }, 1000)
+            }, 2000)
             return false;
         } else if (senhaVar != confirmacaoSenhaVar) {
             setTimeout(() => {
                 alert("As duas senhas que foram inseritas estão diferente uma da outra")
                 finalizarAguardar();
-            }, 1000)
+            }, 2000)
             return false;
         } else {
 
@@ -177,14 +177,13 @@
                         div_bloco.classList.remove("esquerda")
                         div_bloco.classList.add("direita")
                         finalizarAguardar();
-                    }, 1000)
+                    }, 2000)
                     // 
                 } else {
                     throw ("Houve um erro ao tentar realizar o cadastro!");
                 }
             }).catch(function (resposta) {
                 console.log(`#ERRO: ${resposta}`);
-                // finalizarAguardar();
             });
             return false;
         }
@@ -232,7 +231,8 @@
 
                     setTimeout(() => {
                         window.location = "./Dash_inicial.html";
-                    }, 1000)
+                        finalizarAguardar()
+                    }, 2000)
                 });
 
             } else {

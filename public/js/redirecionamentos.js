@@ -15,5 +15,5 @@ function redirecionar_info(){
     setTimeout(() => {
         finalizarAguardar();
         window.location.href = "Dash_informacoes.html"
-    },1000)
+    },2000)
 }

@@ -114,7 +114,7 @@ function aguardar() {
   divAguardar.classList.toggle('apareceu')
 }
 
-function finalizarAguardar(texto) {
+function finalizarAguardar() {
   divAguardar.classList.toggle('sumiu')
   divAguardar.classList.toggle('apareceu')
 }
