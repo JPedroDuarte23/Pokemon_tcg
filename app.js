@@ -29,12 +29,21 @@ app.use("/usuarios", usuarioRouter);
 app.use("/avisos", avisosRouter);
 app.use("/medidas", medidasRouter);
 
+var id_user = 0;
+const pegar_idUser = async () => {
+  app.post("/iduser", (req,res) => {
+    const { sessionID } = req.body;
+    id_user = sessionID
+  });
+}
+
+
 // SELECT DAS CARTAS
 const select_cartas = async () => {
 app.get("/registros", (req, res) => {
   // Faz o select na tabela cartas
   connection.connect();
-  const select_cartas = `SELECT * FROM cartas`;
+  const select_cartas = `SELECT * FROM cartas WHERE fkUsuario = ${id_user}`;
   connection.query(select_cartas, (error, results, fields) => {
     if (error) {
       console.error(error);
@@ -52,7 +61,7 @@ const deck_select = async () => {
   app.get("/decks", (req, res) => {
     // Faz select na tabela deck
     connection.connect();
-    const select_deck = `SELECT * FROM deck`;
+    const select_deck = `SELECT * FROM deck WHERE fkUsuario = ${id_user}`;
     connection.query(select_deck, (error, results, fields) => {
       if (error) {
         console.log(error);
@@ -69,12 +78,12 @@ const deck_select = async () => {
 const decks_insert = async () => {
   // Insere os dados do formulário na tabela deck com o método mostrado no dat-acqu-ino
   app.post("/registro-deck", (req, res) => {
-    const { inputImagemDeck, inputDeckNome, selectTipoPrincipal, idInput } = req.body;
+    const { inputImagemDeck, inputDeckNome, selectTipoPrincipal} = req.body;
     const insert_deck_Query = `INSERT INTO deck (nomeDeck, imagem, fkUsuario, tipoPrincipal, vitorias, derrotas) VALUES (?, ?, ?, ?, 0, 0)`;
     const values_deck = [
       inputDeckNome,
       inputImagemDeck,
-      idInput,
+      id_user,
       selectTipoPrincipal,
     ];
 
@@ -133,16 +142,15 @@ const update_carta_deck = async () => {
 
 const update_deck_resultado = (async) => {
   app.post("/resultado", (req, res) => {
-    const { inputDeckID, inputResultado, fkUserInput } = req.body;
+    const { inputDeckID, inputResultado} = req.body;
     console.log(inputDeckID);
-    console.log(fkUserInput);
     var update_resultado = "";
     if (inputResultado == "vitoria") {
       update_resultado = `UPDATE deck SET vitorias = vitorias + 1 WHERE idDeck = ? AND fkUsuario = ?`;
     } else {
       update_resultado = `UPDATE deck SET derrotas = derrotas + 1 WHERE idDeck= ? AND fkUsuario = ?`;
     }
-    const values_resultado = [inputDeckID, fkUserInput];
+    const values_resultado = [inputDeckID, id_user];
     connection.connect();
     connection.query(update_resultado, values_resultado, (error, results) => {
       if (error) {
@@ -219,7 +227,7 @@ const card_insert = async () => {
             series,
             nomeSet,
             numero,
-            idInput,
+            id_user,
           ];
 
           connection.connect();
@@ -292,7 +300,7 @@ const card_insert = async () => {
             series,
             nomeSet,
             numero,
-            idInput,
+            id_user,
           ];
           connection.connect();
           connection.query(insertQuery, values, (error, results) => {
@@ -354,7 +362,7 @@ const card_insert = async () => {
             series,
             nomeSet,
             numero,
-            idInput,
+            id_user,
           ];
 
           connection.connect();
@@ -399,12 +407,10 @@ const servidor = () => {
     );
     next();
   });
-  app.get("/cartas/informacoes", (_, response) => {
-    response.send(PokeInfo);
-  });
-};
+  }
 
 (async () => {
+  await pegar_idUser();
   await select_cartas();
   await card_insert();
   await decks_insert();

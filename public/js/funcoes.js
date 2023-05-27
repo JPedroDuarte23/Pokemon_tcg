@@ -103,8 +103,16 @@ function validarSessao() {
 
   var nome_usuario = document.getElementById("nome_usuario");
   if (id != null && nome != null) {
+    fetch("/iduser", {
+      method: "POST",
+      headers: {
+          "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+          sessionID: id
+      })
+  })
     nome_usuario.innerHTML = `${nome}`;
-    id_usuario.setAttribute("value", id);
   } else {
     window.location = "../login_cadastro.html";
   }
@@ -170,8 +178,8 @@ function query_colecao(seletor) {
         } else if (seletor == 3) {
           cartasDoUsuario = data.filter(
             (registro) =>
-              registro.fkUsuario === id &&
-              (registro.raridade === "Rare Ultra" ||
+            
+              registro.raridade === "Rare Ultra" ||
                 registro.raridade === "Rare Rainbow" ||
                 registro.raridade === "Rare Secret" ||
                 registro.raridade === "Hyper Rare" ||
@@ -187,32 +195,31 @@ function query_colecao(seletor) {
                 registro.raridade === "Rare Secret" ||
                 registro.raridade === "Rare Shining" ||
                 registro.raridade === "Rare Shiny" ||
-                registro.raridade === "Rare Shiny GX")
+                registro.raridade === "Rare Shiny GX"
           );
         } else if (seletor == 4) {
           cartasDoUsuario = data.filter(
             (registro) =>
-              registro.fkUsuario === id &&
-              (registro.raridade === "Rare" ||
+                registro.raridade === "Rare" ||
                 registro.raridade === "Rare Holo" ||
                 registro.raridade === "Rare ACE" ||
                 registro.raridade === "Rare Prism Star" ||
-                registro.raridade === "Rare Prime")
+                registro.raridade === "Rare Prime"
           );
         } else if (seletor == 5) {
           cartasDoUsuario = data.filter(
             (registro) =>
-              registro.fkUsuario === id && registro.raridade === "Uncommon"
+             registro.raridade === "Uncommon"
           );
         } else if (seletor == 6) {
           cartasDoUsuario = data.filter(
             (registro) =>
-              registro.fkUsuario === id && registro.raridade === "Common"
+             registro.raridade === "Common"
           );
         } else if (seletor == 7) {
           cartasDoUsuario = data.filter(
             (registro) =>
-              registro.fkUsuario === id && registro.raridade === "Promo"
+             registro.raridade === "Promo"
           );
         }
         cartasDoUsuario.forEach((registro) => {
@@ -300,8 +307,7 @@ function query_colecao(seletor) {
   botao.classList.add("botao_ativado");
 }
 
-function query_decks(seletor) {
-  var id = Number(sessionStorage.ID_USUARIO);
+function query_decks() {
   var caixaGraficos = document.getElementById("caixaGraficos");
   var decksDoUsuario = 0;
   var contador = 1;
@@ -312,12 +318,9 @@ function query_decks(seletor) {
     .then((data) => {
       caixaGraficos.innerHTML = tabela_decks;
       var tbody = document.getElementById("corpo_tabela");
-
-      if (seletor == 1) {
-        decksDoUsuario = data.filter((registro) => registro.fkUsuario === id);
-      }
       jsons_deck = decksDoUsuario;
-      decksDoUsuario.forEach((registro) => {
+
+      data.forEach((registro) => {
         var linha = document.createElement("tr");
         var idCell = document.createElement("td");
         var nomeCell = document.createElement("td");

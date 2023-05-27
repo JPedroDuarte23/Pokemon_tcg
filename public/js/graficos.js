@@ -23,15 +23,15 @@ function carregar_graficos() {
       gradientENG.addColorStop(1, "#ffef00");
       cartasTipoPokemon = res.filter(
         (registro) =>
-          registro.fkUsuario === id && registro.suptipo === "Pokémon"
+         registro.suptipo === "Pokémon"
       );
       cartasTipoTreinador = res.filter(
         (registro) =>
-          registro.fkUsuario === id && registro.suptipo === "Treinador"
+         registro.suptipo === "Treinador"
       );
       cartasTipoEnergia = res.filter(
         (registro) =>
-          registro.fkUsuario === id && registro.suptipo === "Energia"
+         registro.suptipo === "Energia"
       );
 
       var qtd_pokemons = cartasTipoPokemon.length;
@@ -68,13 +68,11 @@ function carregar_graficos() {
 }
 function gerar_estatisticas() {
   var caixa3 = document.getElementById("caixa_3");
-  var decksDoUsuario = 0;
   contador = 1;
   fetch(`http://localhost:3000/decks`)
     .then((response) => response.json())
     .then((data) => {
-      decksDoUsuario = data.filter((registro) => registro.fkUsuario === id);
-      decksDoUsuario.forEach((registro) => {
+      data.forEach((registro) => {
         var total = document.createElement("div");
         var num_vitorias = document.createElement("div");
         var estatistica = document.createElement("div");
@@ -113,70 +111,59 @@ function gerar_barras() {
   fetch("http://localhost:3000/registros")
     .then((response) => response.json())
     .then((data) => {
-      var cartasDoUser = data.filter((registro) => registro.fkUsuario === id && registro.suptipo === "Pokémon");
+      var cartasDoUser = data.filter((registro) => registro.suptipo === "Pokémon");
       var cartasTipoFogo = data.filter(
         (registro) =>
-          registro.fkUsuario === id &&
           registro.tipo === "Fire" &&
           registro.suptipo === "Pokémon"
       );
       var cartasTipoAgua = data.filter(
         (registro) =>
-          registro.fkUsuario === id &&
           registro.tipo === "Water" &&
           registro.suptipo === "Pokémon"
       );
       var cartasTipoPlanta = data.filter(
         (registro) =>
-          registro.fkUsuario === id &&
           registro.tipo === "Grass" &&
           registro.suptipo === "Pokémon"
       );
       var cartasTipoRaio = data.filter(
         (registro) =>
-          registro.fkUsuario === id &&
           registro.tipo === "Lightning" &&
           registro.suptipo === "Pokémon"
       );
       var cartasTipoLutador = data.filter(
         (registro) =>
-          registro.fkUsuario === id &&
           registro.tipo === "Fighting" &&
           registro.suptipo === "Pokémon"
       );
       var cartasTipoNormal = data.filter(
         (registro) =>
-          registro.fkUsuario === id &&
           registro.tipo === "Colorless" &&
           registro.suptipo === "Pokémon"
       );
       var cartasTipoPsiquico = data.filter(
-        (registro) =>
-          registro.fkUsuario === id &&
+        (registro) =>        
           registro.tipo === "Psychic" &&
           registro.suptipo === "Pokémon"
       );
       var cartasTipoEscuridao = data.filter(
-        (registro) =>
-          registro.fkUsuario === id &&
+        (registro) =>       
           registro.tipo === "Darkness" &&
           registro.suptipo === "Pokémon"
       );
       var cartasTipoMetal = data.filter(
-        (registro) =>
-          registro.fkUsuario === id &&
+        (registro) =>        
           registro.tipo === "Metal" &&
           registro.suptipo === "Pokémon"
       );
       var cartasTipoDragao = data.filter(
-        (registro) =>
-          registro.fkUsuario === id &&
+        (registro) =>        
           registro.tipo === "Dragon" &&
           registro.suptipo === "Pokémon"
       );
       var cartasTipoFada = data.filter(
-        (registro) =>
-          registro.fkUsuario === id &&
+        (registro) =>        
           registro.tipo === "Fairy" &&
           registro.suptipo === "Pokémon"
       );
