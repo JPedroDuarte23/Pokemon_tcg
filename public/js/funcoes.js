@@ -243,17 +243,17 @@ function query_colecao(seletor) {
           imagemCell.appendChild(imagem_consulta);
 
           var imagem_tipo = document.createElement("img");
-          if(registro.tipo === "Fire") {imagem_tipo.src = 'https://archives.bulbagarden.net/media/upload/thumb/a/ad/Fire-attack.png/30px-Fire-attack.png'}
-          else if (registro.tipo === "Water") {imagem_tipo.src = 'https://archives.bulbagarden.net/media/upload/thumb/1/11/Water-attack.png/30px-Water-attack.png'}
-          else if (registro.tipo === "Grass") {imagem_tipo.src = 'https://archives.bulbagarden.net/media/upload/thumb/2/2e/Grass-attack.png/30px-Grass-attack.png'}
-          else if (registro.tipo === "Lightning") {imagem_tipo.src = 'https://archives.bulbagarden.net/media/upload/thumb/0/04/Lightning-attack.png/30px-Lightning-attack.png'}
-          else if (registro.tipo === "Fighting") {imagem_tipo.src = 'https://archives.bulbagarden.net/media/upload/thumb/4/48/Fighting-attack.png/30px-Fighting-attack.png'}
-          else if (registro.tipo === "Colorless") {imagem_tipo.src = 'https://archives.bulbagarden.net/media/upload/thumb/1/1d/Colorless-attack.png/30px-Colorless-attack.png'}
-          else if (registro.tipo === "Psychic") {imagem_tipo.src = 'https://archives.bulbagarden.net/media/upload/thumb/e/ef/Psychic-attack.png/30px-Psychic-attack.png'}
-          else if (registro.tipo === "Darkness") {imagem_tipo.src = 'https://archives.bulbagarden.net/media/upload/thumb/a/ab/Darkness-attack.png/30px-Darkness-attack.png'}
-          else if (registro.tipo === "Metal") {imagem_tipo.src = 'https://archives.bulbagarden.net/media/upload/thumb/6/64/Metal-attack.png/30px-Metal-attack.png'}
-          else if (registro.tipo === "Fairy") {imagem_tipo.src = 'https://archives.bulbagarden.net/media/upload/thumb/4/40/Fairy-attack.png/30px-Fairy-attack.png'}
-          else if (registro.tipo === "Dragon") {imagem_tipo.src = 'https://archives.bulbagarden.net/media/upload/thumb/8/8a/Dragon-attack.png/30px-Dragon-attack.png'}
+          if(registro.tipo === "Fire") {imagem_tipo.src = 'https://archives.bulbagarden.net/media/upload/thumb/a/ad/Fire-attack.png/25px-Fire-attack.png'}
+          else if (registro.tipo === "Water") {imagem_tipo.src = 'https://archives.bulbagarden.net/media/upload/thumb/1/11/Water-attack.png/25px-Water-attack.png'}
+          else if (registro.tipo === "Grass") {imagem_tipo.src = 'https://archives.bulbagarden.net/media/upload/thumb/2/2e/Grass-attack.png/25px-Grass-attack.png'}
+          else if (registro.tipo === "Lightning") {imagem_tipo.src = 'https://archives.bulbagarden.net/media/upload/thumb/0/04/Lightning-attack.png/25px-Lightning-attack.png'}
+          else if (registro.tipo === "Fighting") {imagem_tipo.src = 'https://archives.bulbagarden.net/media/upload/thumb/4/48/Fighting-attack.png/25px-Fighting-attack.png'}
+          else if (registro.tipo === "Colorless") {imagem_tipo.src = 'https://archives.bulbagarden.net/media/upload/thumb/1/1d/Colorless-attack.png/25px-Colorless-attack.png'}
+          else if (registro.tipo === "Psychic") {imagem_tipo.src = 'https://archives.bulbagarden.net/media/upload/thumb/e/ef/Psychic-attack.png/25px-Psychic-attack.png'}
+          else if (registro.tipo === "Darkness") {imagem_tipo.src = 'https://archives.bulbagarden.net/media/upload/thumb/a/ab/Darkness-attack.png/25px-Darkness-attack.png'}
+          else if (registro.tipo === "Metal") {imagem_tipo.src = 'https://archives.bulbagarden.net/media/upload/thumb/6/64/Metal-attack.png/25px-Metal-attack.png'}
+          else if (registro.tipo === "Fairy") {imagem_tipo.src = 'https://archives.bulbagarden.net/media/upload/thumb/4/40/Fairy-attack.png/25px-Fairy-attack.png'}
+          else if (registro.tipo === "Dragon") {imagem_tipo.src = 'https://archives.bulbagarden.net/media/upload/thumb/8/8a/Dragon-attack.png/25px-Dragon-attack.png'}
           tipoCell.appendChild(imagem_tipo)
 
           var botao_deck = document.createElement("button");
@@ -336,17 +336,17 @@ function query_decks() {
         nomeCell.innerHTML = registro.nomeDeck;
 
         var imagem_tipo = document.createElement("img");
-          if(registro.tipoPrincipal === "Fire") {imagem_tipo.src = 'https://archives.bulbagarden.net/media/upload/thumb/a/ad/Fire-attack.png/20px-Fire-attack.png'}
-          else if (registro.tipoPrincipal === "Water") {imagem_tipo.src = 'https://archives.bulbagarden.net/media/upload/thumb/1/11/Water-attack.png/20px-Water-attack.png'}
-          else if (registro.tipoPrincipal === "Grass") {imagem_tipo.src = 'https://archives.bulbagarden.net/media/upload/thumb/2/2e/Grass-attack.png/20px-Grass-attack.png'}
-          else if (registro.tipoPrincipal === "Lightning") {imagem_tipo.src = 'https://archives.bulbagarden.net/media/upload/thumb/0/04/Lightning-attack.png/20px-Lightning-attack.png'}
-          else if (registro.tipoPrincipal === "Fighting") {imagem_tipo.src = 'https://archives.bulbagarden.net/media/upload/thumb/4/48/Fighting-attack.png/20px-Fighting-attack.png'}
-          else if (registro.tipoPrincipal === "Colorless") {imagem_tipo.src = 'https://archives.bulbagarden.net/media/upload/thumb/1/1d/Colorless-attack.png/20px-Colorless-attack.png'}
-          else if (registro.tipoPrincipal === "Psychic") {imagem_tipo.src = 'https://archives.bulbagarden.net/media/upload/thumb/e/ef/Psychic-attack.png/20px-Psychic-attack.png'}
-          else if (registro.tipoPrincipal === "Darkness") {imagem_tipo.src = 'https://archives.bulbagarden.net/media/upload/thumb/a/ab/Darkness-attack.png/20px-Darkness-attack.png'}
-          else if (registro.tipoPrincipal === "Metal") {imagem_tipo.src = 'https://archives.bulbagarden.net/media/upload/thumb/6/64/Metal-attack.png/20px-Metal-attack.png'}
-          else if (registro.tipoPrincipal === "Fairy") {imagem_tipo.src = 'https://archives.bulbagarden.net/media/upload/thumb/4/40/Fairy-attack.png/20px-Fairy-attack.png'}
-          else if (registro.tipoPrincipal === "Dragon") {imagem_tipo.src = 'https://archives.bulbagarden.net/media/upload/thumb/8/8a/Dragon-attack.png/20px-Dragon-attack.png'}
+          if(registro.tipoPrincipal === "Fire") {imagem_tipo.src = 'https://archives.bulbagarden.net/media/upload/thumb/a/ad/Fire-attack.png/30px-Fire-attack.png'}
+          else if (registro.tipoPrincipal === "Water") {imagem_tipo.src = 'https://archives.bulbagarden.net/media/upload/thumb/1/11/Water-attack.png/30px-Water-attack.png'}
+          else if (registro.tipoPrincipal === "Grass") {imagem_tipo.src = 'https://archives.bulbagarden.net/media/upload/thumb/2/2e/Grass-attack.png/30px-Grass-attack.png'}
+          else if (registro.tipoPrincipal === "Lightning") {imagem_tipo.src = 'https://archives.bulbagarden.net/media/upload/thumb/0/04/Lightning-attack.png/30px-Lightning-attack.png'}
+          else if (registro.tipoPrincipal === "Fighting") {imagem_tipo.src = 'https://archives.bulbagarden.net/media/upload/thumb/4/48/Fighting-attack.png/30px-Fighting-attack.png'}
+          else if (registro.tipoPrincipal === "Colorless") {imagem_tipo.src = 'https://archives.bulbagarden.net/media/upload/thumb/1/1d/Colorless-attack.png/30px-Colorless-attack.png'}
+          else if (registro.tipoPrincipal === "Psychic") {imagem_tipo.src = 'https://archives.bulbagarden.net/media/upload/thumb/e/ef/Psychic-attack.png/30px-Psychic-attack.png'}
+          else if (registro.tipoPrincipal === "Darkness") {imagem_tipo.src = 'https://archives.bulbagarden.net/media/upload/thumb/a/ab/Darkness-attack.png/30px-Darkness-attack.png'}
+          else if (registro.tipoPrincipal === "Metal") {imagem_tipo.src = 'https://archives.bulbagarden.net/media/upload/thumb/6/64/Metal-attack.png/30px-Metal-attack.png'}
+          else if (registro.tipoPrincipal === "Fairy") {imagem_tipo.src = 'https://archives.bulbagarden.net/media/upload/thumb/4/40/Fairy-attack.png/30px-Fairy-attack.png'}
+          else if (registro.tipoPrincipal === "Dragon") {imagem_tipo.src = 'https://archives.bulbagarden.net/media/upload/thumb/8/8a/Dragon-attack.png/30px-Dragon-attack.png'}
           tipoCell.appendChild(imagem_tipo)
         // Adicionado tudo com appendChild (linha[imagem, nome, tipo])
         linha.appendChild(idCell);
