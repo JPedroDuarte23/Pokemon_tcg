@@ -38,6 +38,7 @@ const pegar_idUser = async () => {
 }
 
 
+
 // SELECT DAS CARTAS
 const select_cartas = async () => {
 app.get("/registros", (req, res) => {

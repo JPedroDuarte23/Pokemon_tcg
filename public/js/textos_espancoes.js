@@ -41,6 +41,7 @@ function dropdown(p) {
 function geracao_XY() {
   logo_geracao.setAttribute("src", "imagens/logoXY.png");
   logo_geracao.setAttribute("class", "SV_logo");
+  div_linha_do_tempo.classList.add('transicao')
   div_linha_do_tempo.innerHTML = `<img src="imagens/Linha do tempo.png" alt="" class="linha_do_tempo">
             <div class="icones_colecoes" onmouseout="remover_animacao()">
                 <img src="imagens/icones_xy/40px-SetSymbolKalos_Starter_Set.png" alt="" id="isunmoon" onmouseover="mostrar_expansao_XY(1)">
@@ -58,7 +59,7 @@ function geracao_XY() {
                 <img src="imagens/icones_xy/40px-SetSymbolFates_Collide.png" alt="" id="ibonds_2" onmouseover="mostrar_expansao_XY(13)">
                 <img src="imagens/icones_xy/40px-SetSymbolSteam_Siege.png" alt="" id="ishiny" onmouseover="mostrar_expansao_XY(14)">
                 <img src="imagens/icones_xy/40px-SetSymbolEvolutions.png" alt="" id="ihexagono" onmouseover="mostrar_expansao_XY(15)">`;
-  div_detalhes.innerHTML = `<div class="colecao_detalhe transicao" id="div_colecao_detalhe">
+                div_detalhes.innerHTML = `<div class="colecao_detalhe transicao" id="div_colecao_detalhe">
                 <img src="imagens/icones_xy/40px-SetSymbolXY.png" alt="">
                 <h2>Expansão XY - XY1</h2>
             </div>
@@ -264,6 +265,7 @@ function mostrar_expansao_XY(icone) {
 function geracao_SM() {
   logo_geracao.setAttribute("src", "imagens/sun&moon.png");
   logo_geracao.setAttribute("class", "logo_geracao");
+  div_linha_do_tempo.classList.add('transicao')
   div_linha_do_tempo.innerHTML = `<img src="imagens/Linha do tempo.png" alt="" class="linha_do_tempo">
             <div class="icones_colecoes" onmouseout="remover_animacao()">
                 <img src="imagens/icones_sm/icone_s&m.png" alt="" id="isunmoon" onmouseover="mostrar_expansao_SM(1)">
@@ -474,6 +476,7 @@ function mostrar_expansao_SM(icone) {
 function geracao_SWSH() {
   logo_geracao.setAttribute("src", "imagens/Sword_Shield.png");
   logo_geracao.setAttribute("class", "logo_geracao");
+  div_linha_do_tempo.classList.add('transicao')
   div_linha_do_tempo.innerHTML = `<img src="imagens/Linha do tempo.png" alt="" class="linha_do_tempo">
             <div class="icones_colecoes" onmouseout="remover_animacao()">
                 <img src="imagens/icones_es/Sword_shield_symbol.png" alt="" id="isunmoon" onmouseover="mostrar_expansao_SWSH(1)">
@@ -679,6 +682,7 @@ function geracao_SVI() {
     "imagens/Pokemon_TCG_Scarlet_Violet_Logo.png"
   );
   logo_geracao.setAttribute("class", "SV_logo");
+  div_linha_do_tempo.classList.add('transicao')
   div_linha_do_tempo.innerHTML = `<img src="imagens/linha_ev.png" alt="" class="linha_do_tempo">
             <div class="icones_colecoes" onmouseout="remover_animacao()">
                 <img src="imagens/icones_ev/SetSymbolScarlet_and_Violet.png" alt="" id="isunmoon" onmouseover="mostrar_expansao_SVI(1)">
