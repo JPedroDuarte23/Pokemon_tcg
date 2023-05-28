@@ -211,7 +211,7 @@ const card_insert = () => {
       selectTypes,
       selectRarity,
       selectSet,
-      idInput,
+      quantidadeCartaInput,
     } = req.body;
     // Faz a requisição da API que retorna uma lista de JSON, seleciona os dados do indice[0] que serão armazenados desse JSON
     console.log("começando a procura na api");
@@ -221,6 +221,15 @@ const card_insert = () => {
     console.log(selectTypes);
     console.log(selectRarity);
     console.log(selectSet);
+    var deuErro = false;
+    if(quantidadeCartaInput < 1 || quantidadeCartaInput > 10) {
+      res
+      .status(500)
+      .send(
+        '<script>alert("A quantidade só pode estar entre 0 e 10"); history.back();</script>'
+      );
+    } else {
+      for(var i = 0 ; i < quantidadeCartaInput; i++) {
     if (selectSupertype == "Pokémon") {
       // CARTAS TIPO POKÉMON
 
@@ -261,18 +270,9 @@ const card_insert = () => {
           connection.query(insertQuery, values, (error, results) => {
             if (error) {
               console.log("Erro ao inserir registro na tabela:", error);
-              res
-                .status(500)
-                .send(
-                  '<script>alert("Ocorreu um erro ao inserir o registro na tabela."); history.back();</script>'
-                );
+              deuErro = true;
             } else {
               console.log("Registro inserido com sucesso!");
-              res
-                .status(200)
-                .send(
-                  '<script>alert("Carta registrada com sucesso!"); history.back();</script>'
-                );
             }
           });
         })
@@ -333,18 +333,9 @@ const card_insert = () => {
           connection.query(insertQuery, values, (error, results) => {
             if (error) {
               console.log("Erro ao inserir registro na tabela:", error);
-              res
-                .status(500)
-                .send(
-                  '<script>alert("Ocorreu um erro ao inserir o registro na tabela."); history.back();</script>'
-                );
+              deuErro = true;
             } else {
               console.log("Registro inserido com sucesso!");
-              res
-                .status(200)
-                .send(
-                  '<script>alert("Carta registrada com sucesso!"); history.back();</script>'
-                );
             }
           });
         })
@@ -396,18 +387,9 @@ const card_insert = () => {
           connection.query(insertQuery, values, (error, results) => {
             if (error) {
               console.log("Erro ao inserir registro na tabela:", error);
-              res
-                .status(500)
-                .send(
-                  '<script>alert("Ocorreu um erro ao inserir o registro na tabela."); history.back();</script>'
-                );
+              deuErro = true;
             } else {
               console.log("Registro inserido com sucesso!");
-              res
-                .status(200)
-                .send(
-                  '<script>alert("Carta registrada com sucesso!"); history.back();</script>'
-                );
             }
           });
         })
@@ -420,7 +402,19 @@ const card_insert = () => {
             );
         });
     }
-  });
+  }
+  if (deuErro) {
+    res.status(500).send(
+      '<script>alert("Ocorreu um erro durante o processamento."); window.location.href = "/Dash_colecoes.html"</script>'
+    );
+  } else {
+    res.status(200).send(
+      '<script>alert("Cartas registradas com sucesso!"); window.location.href = "/Dash_colecoes.html"</script>'
+    );
+  }
+}
+
+});
 };
 
 // CONFIGURANDO HEADERS DO SERVIDOR NODE (dat-acqu-ino)
