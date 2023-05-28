@@ -285,11 +285,7 @@ function query_colecao(seletor) {
           idCell.innerHTML = registro.idCarta;
           nomeCell.innerHTML = registro.nome;
           if(registro.tipo == undefined) {
-            if(registro.suptipo == "Treinador") {
-              tipoCell.innerHTML = "Treinador" 
-            } else {
-              tipoCell.innerHTML = "Energia"
-            }
+              imagem_tipo.src = 'imagens/pokeball.png'
           }
           raridadeCell.innerHTML = registro.raridade;
           setCell.innerHTML = registro.nomeSet;
