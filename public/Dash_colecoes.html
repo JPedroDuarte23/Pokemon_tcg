@@ -320,6 +320,12 @@
 <script>
    var divAguardar = document.getElementById('div_aguardar')
   var pop_up = document.getElementById("div_pop_up")
+  divAguardar.classList.toggle('apareceu')
+    divAguardar.classList.toggle('sumiu')
+    setTimeout(function() {
+        divAguardar.classList.toggle('apareceu')
+        divAguardar.classList.toggle('sumiu')
+    }, 800) 
   var form_carta = pop_up.innerHTML
   function exibirAlerta(num) {
     if(num == 0) {

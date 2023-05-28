@@ -99,8 +99,6 @@ function validarSessao() {
   var id = sessionStorage.ID_USUARIO;
   var nome = sessionStorage.NOME_USUARIO;
 
-  var id_usuario = document.getElementById("idInput");
-
   var nome_usuario = document.getElementById("nome_usuario");
   if (id != null && nome != null) {
     fetch("/iduser", {
@@ -364,7 +362,7 @@ function query_decks() {
           else if (registro.tipoPrincipal === "Fairy") {imagem_tipo.src = 'https://archives.bulbagarden.net/media/upload/thumb/4/40/Fairy-attack.png/30px-Fairy-attack.png'}
           else if (registro.tipoPrincipal === "Dragon") {imagem_tipo.src = 'https://archives.bulbagarden.net/media/upload/thumb/8/8a/Dragon-attack.png/30px-Dragon-attack.png'}
           tipoCell.appendChild(imagem_tipo)
-          
+
         linha.appendChild(idCell);
         linha.appendChild(imagemCell);
         linha.appendChild(nomeCell);

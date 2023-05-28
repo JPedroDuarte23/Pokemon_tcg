@@ -387,7 +387,12 @@
   var divAguardar = document.getElementById('div_aguardar')
   var id = Number(sessionStorage.ID_USUARIO)
   searchButton.addEventListener('click', voltar);
- 
+  divAguardar.classList.toggle('apareceu')
+    divAguardar.classList.toggle('sumiu')
+    setTimeout(function() {
+        divAguardar.classList.toggle('apareceu')
+        divAguardar.classList.toggle('sumiu')
+    }, 800) 
   function registrar_resultado() {
     div_pop_up.innerHTML = `
     <div id="blur">

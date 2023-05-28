@@ -107,6 +107,12 @@
 </html>
 <script>
     var divAguardar = document.getElementById('div_aguardar')
+    divAguardar.classList.toggle('apareceu')
+    divAguardar.classList.toggle('sumiu')
+    setTimeout(function() {
+        divAguardar.classList.toggle('apareceu')
+        divAguardar.classList.toggle('sumiu')
+    }, 800) 
     var id = sessionStorage.ID_USUARIO
     criarDeckButton.addEventListener('click', voltar);
     function buscar_cartas_deck(num_deck) {

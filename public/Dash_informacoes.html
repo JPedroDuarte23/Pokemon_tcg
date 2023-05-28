@@ -56,7 +56,7 @@
                     <h2>Informações</h2>
                 </div>
                 <div class="lateral_icones">
-                    <div class="icone" onclick="redirecionar_info()"><i class="fa-solid fa-circle-question fa-lg"></i></div>
+                    <div class="icone"><i class="fa-solid fa-circle-question fa-lg"></i></div>
                     <div class="user">
                         <div class="circulo"></div>
                         <h4 id="nome_usuario"></h4>
@@ -143,4 +143,10 @@
 <script>
      var divAguardar = document.getElementById('div_aguardar')
     criarDeckButton.addEventListener('click', voltar);
+    divAguardar.classList.toggle('apareceu')
+    divAguardar.classList.toggle('sumiu')
+    setTimeout(function() {
+        divAguardar.classList.toggle('apareceu')
+        divAguardar.classList.toggle('sumiu')
+    }, 800) 
 </script>
