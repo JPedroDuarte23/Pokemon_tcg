@@ -6,10 +6,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My CardDex | Decks</title>
-    
+
     <link rel="stylesheet" href="css/style_dash_geral.css">
     <link rel="stylesheet" href="css/css_tabelas.css">
-    <link rel="icon" type="image/png" href="imagens/pokebola.png"/>
+    <link rel="icon" type="image/png" href="imagens/pokebola.png" />
     <script src="https://kit.fontawesome.com/c52875e8e8.js" crossorigin="anonymous"></script>
     <script type="text/javascript" src="js/redirecionamentos.js"></script>
     <script src="../js/funcoes.js"></script>
@@ -24,7 +24,7 @@
         <div id="blur">
             <div class="pop_up_carta">
                 <i class="fa-solid fa-xmark fa-xl" id="i_voltar" onclick="voltar(0)"></i>
-                <form action="/registro-deck" method="post">
+                <form action="/registro-deck" method="post" id="deckForm">
                     <h3>Registrar Decks</h3>
                     <hr>
                     <div class="campo">
@@ -49,23 +49,25 @@
                             <option value="Metal">Metal</option>
                             <option value="Fairy">Fada</option>
                             <option value="Dragon">Dragão</option>
-                          </select>
+                        </select>
                     </div>
                     <button type="submit" id="criarDeckButton">Registrar</button>
                 </form>
-              </div>
-          </div>
+            </div>
+        </div>
     </div>
     <section class="main" id="corpo_principal">
         <div class="sidebar">
             <img src="imagens/Logo_pokemon.png" class="logomarca" id="img_logo">
             <ul>
-                <li><a href="Dash_inicial.html" > <i class="fa-solid fa-house fa-lg"></i>Home</a>
+                <li><a href="Dash_inicial.html"> <i class="fa-solid fa-house fa-lg"></i>Home</a>
                 </li>
                 <li><a href="Dash_colecoes.html"><i class="fa-solid fa-box-open fa-lg"></i>Coleção</a></li>
-                <li><a href="Dash_decks.html"  class="ativado"><i class="fa-solid fa-layer-group fa-lg"></i>Decks</a></li>
+                <li><a href="Dash_decks.html" class="ativado"><i class="fa-solid fa-layer-group fa-lg"></i>Decks</a>
+                </li>
                 <li><a href="Dash_informacoes.html"><i class="fa-solid fa-file-lines fa-lg"></i>Informações</a></li>
-                <li><a onclick="limparSessao()" style="cursor: pointer;"><i class="fa-solid fa-right-from-bracket fa-lg"></i>Sair</a></li>
+                <li><a onclick="limparSessao()" style="cursor: pointer;"><i
+                            class="fa-solid fa-right-from-bracket fa-lg"></i>Sair</a></li>
             </ul>
 
         </div>
@@ -75,7 +77,8 @@
                     <h2>Decks</h2>
                 </div>
                 <div class="lateral_icones">
-                    <div class="icone" onclick="redirecionar_info()"><i class="fa-solid fa-circle-question fa-lg"></i></div>
+                    <div class="icone" onclick="redirecionar_info()"><i class="fa-solid fa-circle-question fa-lg"></i>
+                    </div>
                     <div class="user">
                         <div class="circulo"></div>
                         <h4 id="nome_usuario"></h4>
@@ -87,11 +90,14 @@
                 <span id="painel_deck">
 
                 </span>
-                <button onclick="registrar()" class="registrador"><i class="fa-solid fa-plus"></i>Adicionar Deck</button>
+                <button onclick="registrar()" class="registrador"><i class="fa-solid fa-plus"></i>Adicionar
+                    Deck</button>
             </section>
             <section id="secao_visao_geral">
                 <div class="caixa_graficos" id="caixaGraficos">
-                    <div class="titulo_caixa_graficos"><h2>Coleção</h2></div>
+                    <div class="titulo_caixa_graficos">
+                        <h2>Coleção</h2>
+                    </div>
                     <div id="cardData"></div>
                 </div>
 
@@ -100,20 +106,20 @@
 
 </html>
 <script>
-     var divAguardar = document.getElementById('div_aguardar')
+    var divAguardar = document.getElementById('div_aguardar')
     var id = sessionStorage.ID_USUARIO
     criarDeckButton.addEventListener('click', voltar);
     function buscar_cartas_deck(num_deck) {
-    var caixaGraficos = document.getElementById('caixaGraficos');
-    var cartasDoDeck = 0;
-    fetch(`/registros`)
-        .then((response) => response.json())
-        .then((data) => {
-            caixaGraficos.innerHTML = tabela_padrao
-            var tbody = document.getElementById('corpo_tabela');
-            cartasDoDeck = data.filter(registro => registro.fkDeck === num_deck);
-            cartasDoDeck.forEach((registro) => {
-                var linha = document.createElement('tr');
+        var caixaGraficos = document.getElementById('caixaGraficos');
+        var cartasDoDeck = 0;
+        fetch(`/registros`)
+            .then((response) => response.json())
+            .then((data) => {
+                caixaGraficos.innerHTML = tabela_padrao
+                var tbody = document.getElementById('corpo_tabela');
+                cartasDoDeck = data.filter(registro => registro.fkDeck === num_deck);
+                cartasDoDeck.forEach((registro) => {
+                    var linha = document.createElement('tr');
                     var idCell = document.createElement('td')
                     var nomeCell = document.createElement('td');
                     var imagemCell = document.createElement('td');
@@ -124,27 +130,48 @@
                     var botaoCell = document.createElement('td')
 
                     idCell.style.display = "none"
-          
+
+                    var imagem_tipo = document.createElement("img");
+                    imagem_tipo.classList.add('sombra');
+                    if (registro.tipo === "Fire") { imagem_tipo.src = 'https://archives.bulbagarden.net/media/upload/thumb/a/ad/Fire-attack.png/25px-Fire-attack.png' }
+                    else if (registro.tipo === "Water") { imagem_tipo.src = 'https://archives.bulbagarden.net/media/upload/thumb/1/11/Water-attack.png/25px-Water-attack.png' }
+                    else if (registro.tipo === "Grass") { imagem_tipo.src = 'https://archives.bulbagarden.net/media/upload/thumb/2/2e/Grass-attack.png/25px-Grass-attack.png' }
+                    else if (registro.tipo === "Lightning") { imagem_tipo.src = 'https://archives.bulbagarden.net/media/upload/thumb/0/04/Lightning-attack.png/25px-Lightning-attack.png' }
+                    else if (registro.tipo === "Fighting") { imagem_tipo.src = 'https://archives.bulbagarden.net/media/upload/thumb/4/48/Fighting-attack.png/25px-Fighting-attack.png' }
+                    else if (registro.tipo === "Colorless") { imagem_tipo.src = 'https://archives.bulbagarden.net/media/upload/thumb/1/1d/Colorless-attack.png/25px-Colorless-attack.png' }
+                    else if (registro.tipo === "Psychic") { imagem_tipo.src = 'https://archives.bulbagarden.net/media/upload/thumb/e/ef/Psychic-attack.png/25px-Psychic-attack.png' }
+                    else if (registro.tipo === "Darkness") { imagem_tipo.src = 'https://archives.bulbagarden.net/media/upload/thumb/a/ab/Darkness-attack.png/25px-Darkness-attack.png' }
+                    else if (registro.tipo === "Metal") { imagem_tipo.src = 'https://archives.bulbagarden.net/media/upload/thumb/6/64/Metal-attack.png/25px-Metal-attack.png' }
+                    else if (registro.tipo === "Fairy") { imagem_tipo.src = 'https://archives.bulbagarden.net/media/upload/thumb/4/40/Fairy-attack.png/25px-Fairy-attack.png' }
+                    else if (registro.tipo === "Dragon") { imagem_tipo.src = 'https://archives.bulbagarden.net/media/upload/thumb/8/8a/Dragon-attack.png/25px-Dragon-attack.png' }
+                    tipoCell.appendChild(imagem_tipo)
                     // Colocando imagem no td
                     imagemCell.classList.add("canto_esquerdo")
                     var imagem_consulta = document.createElement('img');
-                    imagem_consulta.src = registro.imagemPequena; 
+                    imagem_consulta.src = registro.imagemPequena;
                     imagemCell.appendChild(imagem_consulta);
 
                     var botao_deck = document.createElement('button')
                     botao_deck.setAttribute('class', 'select_card_btn')
                     botao_deck.innerHTML = `<i class="fa-solid fa-caret-right"></i>`;
                     botao_deck.classList.add('botao_detalhe')
-                    botao_deck.addEventListener('click', function() {
+                    botao_deck.addEventListener('click', function () {
                         var id = sessionStorage.ID_USUARIO;
                         div_pop_up.innerHTML = carta_detalhes;
-                        imagem_carta_detalhe.src = registro.imagemGrande; 
+                        imagem_carta_detalhe.src = registro.imagemGrande;
                         imagem_carta_detalhe.classList.add("imagem_detalhe")
                         idCartaValue.setAttribute('value', registro.idCarta)
                         var addCarta = document.getElementById('botao_add_carta')
                         nomePokeDtlh.innerHTML = registro.nome;
                         subTipoDtlh.innerHTML += registro.subtipo;
                         tipoDtlh.innerHTML = registro.tipo;
+                        if (registro.tipo == undefined) {
+                            if (registro.suptipo == "Treinador") {
+                                tipoDtlh.innerHTML = "Trainer"
+                            } else {
+                                tipoDtlh.innerHTML = "Energy"
+                            }
+                        }
                         raridadeDtlh.innerHTML = registro.raridade;
                         seriesDtlh.innerHTML = registro.series;
                         colecaoDtlh.innerHTML = registro.nomeSet;
@@ -155,11 +182,17 @@
 
                     idCell.innerHTML = registro.idCarta;
                     nomeCell.innerHTML = registro.nome;
-                    tipoCell.innerHTML= registro.tipo;
+                    if (registro.tipo == undefined) {
+                        if (registro.suptipo == "Treinador") {
+                            tipoCell.innerHTML = "Treinador"
+                        } else {
+                            tipoCell.innerHTML = "Energia"
+                        }
+                    }
                     raridadeCell.innerHTML = registro.raridade;
                     setCell.innerHTML = registro.nomeSet
                     numeroCell.innerHTML = registro.numero
-          
+
                     // Adicionado tudo com appendChild (linha[imagem, nome, tipo])
                     botaoCell.appendChild(botao_deck);
                     linha.appendChild(idCell)
@@ -172,21 +205,27 @@
                     linha.appendChild(botaoCell);
                     tbody.appendChild(linha);
                     imagem_consulta.classList.add('imagem_tabela');
-                });   
+                });
             }
-        )
-        .catch((error) => {
-            console.error('Erro ao buscar registros no servidor:', error);
-        });
+            )
+            .catch((error) => {
+                console.error('Erro ao buscar registros no servidor:', error);
+            });
         var botaoAtivado = document.querySelector('.botao_ativado')
-        var botao_apertado = document.getElementById('botao-'+ num_deck);
+        var botao_apertado = document.getElementById('botao-' + num_deck);
         botao_apertado.classList.add("botao_ativado");
         botaoAtivado.classList.remove("botao_ativado")
         addCarta.addEventListener('click', voltar)
-}
-var pop_up = document.getElementById("div_pop_up")
-  var form_carta = pop_up.innerHTML
+    }
+    var pop_up = document.getElementById("div_pop_up")
+    var form_carta = pop_up.innerHTML
+    var form_deck = document.getElementById('deckForm')
+    form_deck.addEventListener('submit', function (event) {
+        event.preventDefault(); // Evita o envio padrão do formulário
+        aguardar()
+        setTimeout(function () {
+            finalizarAguardar();
+            form_deck.submit();
+        }, 1000);
+    });
 </script>
-
-    
-    

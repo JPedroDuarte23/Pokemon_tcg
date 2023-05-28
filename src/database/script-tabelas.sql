@@ -17,7 +17,7 @@ CREATE TABLE deck (
 	derrotas INT,
 	fkUsuario INT,
 	CONSTRAINT fkDeckUsuario FOREIGN KEY (fkUsuario) REFERENCES usuario(id)
-);
+)AUTO_INCREMENT = 1000;
 CREATE TABLE cartas (
 	idCarta INT AUTO_INCREMENT,
 	nome VARCHAR(50),

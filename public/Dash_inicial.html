@@ -29,7 +29,7 @@
         <i class="fa-solid fa-xmark fa-xl" id="i_voltar" onclick="voltar()"></i>
         <h3>Registrar Cartas</h3>
         <hr>
-        <form method="post" action="http://localhost:3000/search">
+        <form method="post" action="http://localhost:3000/search" id="cartaForm">
           <div class="campo">
             <label for="nomePokemonInput">Nome da carta:</label>
             <input type="text" id="nomePokemonInput" name="nomePokemonInput">
@@ -127,7 +127,7 @@
             </select>
           </div>
           <div class="campo">
-            <label for="selectSet">Set:</label>
+            <label for="selectSet">Expansão:</label>
             <select name="selectSet" id="selectSet" multiple size="5">
               <option value="Ancient Origins">Origens Ancestrais</option>
               <option value="Aquapolis">Aquapolis</option>
@@ -395,7 +395,7 @@
               <h3>Registrar Resultados</h3>
                 <hr>
                 <i class="fa-solid fa-xmark fa-xl" id="i_voltar" onclick="voltar(1)"></i>
-                <form action="/resultado" method="post">
+                <form action="/resultado" method="post" id="resultadoForm">
                     <div class="campo">
                       <label for="inputDeckID">ID do seu Deck:</label>
                       <input type="text" name="inputDeckID" id="inputDeckID">
@@ -422,13 +422,32 @@
                       </div>
 
                     </div>
-                    <input type="text" name="fkUserInput" id="fkUserInput" style="display: none;">
                     <button type="submit" id="registrador_resultados">Registrar resultado</button>
                 </form>
               </div>
           </div>
     `
-    fkUserInput.setAttribute('value', id);
+
     registrar();
+    var form_resultado = document.getElementById('resultadoForm')
+  form_resultado.addEventListener('submit', function(event) {
+    event.preventDefault(); // Evita o envio padrão do formulário
+    div_pop_up.style.display = "none"
+    aguardar()
+    setTimeout(function() {
+      finalizarAguardar();
+      form_resultado.submit();
+    }, 2000);
+  });
   }
+  var form_carta = document.getElementById('cartaForm')
+  form_carta.addEventListener('submit', function(event) {
+    event.preventDefault(); // Evita o envio padrão do formulário
+    aguardar()
+    setTimeout(function() {
+      finalizarAguardar();
+      form_carta.submit();
+    }, 2000);
+  });
+  
 </script>

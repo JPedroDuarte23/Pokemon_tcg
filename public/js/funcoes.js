@@ -10,8 +10,8 @@ var tabela_padrao = `
             <th>Nome</th>
             <th>Tipo</th>
             <th>Raridade</th>
-            <th>Set</th>
-            <th>Numero</th>
+            <th>Expansão</th>
+            <th>Número</th>
             <th class="lateral_direi"></th>
         </tr>
       </thead>
@@ -151,7 +151,7 @@ function query_colecao(seletor) {
   var caixaGraficos = document.getElementById("caixaGraficos");
   var cartasDoUsuario = 0;
 
-  fetch(`http://localhost:3000/registros`)
+  fetch(`/registros`)
     .then((response) => response.json())
     .then((data) => {
       var tbody = document.getElementById("corpo_tabela");
@@ -243,6 +243,7 @@ function query_colecao(seletor) {
           imagemCell.appendChild(imagem_consulta);
 
           var imagem_tipo = document.createElement("img");
+          imagem_tipo.classList.add('sombra');
           if(registro.tipo === "Fire") {imagem_tipo.src = 'https://archives.bulbagarden.net/media/upload/thumb/a/ad/Fire-attack.png/25px-Fire-attack.png'}
           else if (registro.tipo === "Water") {imagem_tipo.src = 'https://archives.bulbagarden.net/media/upload/thumb/1/11/Water-attack.png/25px-Water-attack.png'}
           else if (registro.tipo === "Grass") {imagem_tipo.src = 'https://archives.bulbagarden.net/media/upload/thumb/2/2e/Grass-attack.png/25px-Grass-attack.png'}
@@ -268,6 +269,13 @@ function query_colecao(seletor) {
             nomePokeDtlh.innerHTML = registro.nome;
             subTipoDtlh.innerHTML += registro.subtipo;
             tipoDtlh.innerHTML = registro.tipo;
+            if(registro.tipo == undefined) {
+              if(registro.suptipo == "Treinador") {
+                tipoDtlh.innerHTML = "Trainer" 
+              } else {
+                tipoDtlh.innerHTML = "Energy"
+              }
+            }
             raridadeDtlh.innerHTML = registro.raridade;
             seriesDtlh.innerHTML = registro.series;
             colecaoDtlh.innerHTML = registro.nomeSet;
@@ -278,7 +286,13 @@ function query_colecao(seletor) {
 
           idCell.innerHTML = registro.idCarta;
           nomeCell.innerHTML = registro.nome;
-          // tipoCell.innerHTML = registro.tipo;
+          if(registro.tipo == undefined) {
+            if(registro.suptipo == "Treinador") {
+              tipoCell.innerHTML = "Treinador" 
+            } else {
+              tipoCell.innerHTML = "Energia"
+            }
+          }
           raridadeCell.innerHTML = registro.raridade;
           setCell.innerHTML = registro.nomeSet;
           numeroCell.innerHTML = registro.numero;
@@ -313,7 +327,7 @@ function query_decks() {
   var contador = 1;
   var painelDeck = document.getElementById("painel_deck");
   painelDeck.innerHTML = "";
-  fetch(`http://localhost:3000/decks`)
+  fetch(`/decks`)
     .then((response) => response.json())
     .then((data) => {
       caixaGraficos.innerHTML = tabela_decks;
@@ -330,12 +344,14 @@ function query_decks() {
         // Colocando imagem no td
         var imagem_consulta = document.createElement("img");
         imagem_consulta.src = registro.imagem;
+        imagem_consulta.classList.add('sombra');
+        imagem_consulta.classList.add('imagem_deck');
         imagemCell.appendChild(imagem_consulta);
-
         idCell.innerHTML = registro.idDeck;
         nomeCell.innerHTML = registro.nomeDeck;
 
         var imagem_tipo = document.createElement("img");
+        imagem_tipo.classList.add('sombra');
           if(registro.tipoPrincipal === "Fire") {imagem_tipo.src = 'https://archives.bulbagarden.net/media/upload/thumb/a/ad/Fire-attack.png/30px-Fire-attack.png'}
           else if (registro.tipoPrincipal === "Water") {imagem_tipo.src = 'https://archives.bulbagarden.net/media/upload/thumb/1/11/Water-attack.png/30px-Water-attack.png'}
           else if (registro.tipoPrincipal === "Grass") {imagem_tipo.src = 'https://archives.bulbagarden.net/media/upload/thumb/2/2e/Grass-attack.png/30px-Grass-attack.png'}
@@ -348,7 +364,7 @@ function query_decks() {
           else if (registro.tipoPrincipal === "Fairy") {imagem_tipo.src = 'https://archives.bulbagarden.net/media/upload/thumb/4/40/Fairy-attack.png/30px-Fairy-attack.png'}
           else if (registro.tipoPrincipal === "Dragon") {imagem_tipo.src = 'https://archives.bulbagarden.net/media/upload/thumb/8/8a/Dragon-attack.png/30px-Dragon-attack.png'}
           tipoCell.appendChild(imagem_tipo)
-        // Adicionado tudo com appendChild (linha[imagem, nome, tipo])
+          
         linha.appendChild(idCell);
         linha.appendChild(imagemCell);
         linha.appendChild(nomeCell);

@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My CardDex | Coleções</title>
+  <title>My CardDex | Coleção</title>
   <link rel="stylesheet" href="css/style_dash_geral.css">
   <link rel="stylesheet" href="css/css_tabelas.css">
   <link rel="icon" type="image/png" href="imagens/pokebola.png"/>
@@ -25,7 +25,7 @@
         <i class="fa-solid fa-xmark fa-xl" id="i_voltar" onclick="voltar(0)"></i>
         <h3>Registrar Cartas</h3>
         <hr>
-        <form method="post" action="http://localhost:3000/search">
+        <form method="post" action="http://localhost:3000/search" id="cartaForm">
           <div class="campo">
             <label for="nomePokemonInput">Nome da carta:</label>
             <input type="text" id="nomePokemonInput" name="nomePokemonInput">
@@ -123,7 +123,7 @@
             </select>
           </div>
           <div class="campo">
-            <label for="selectSet">Set:</label>
+            <label for="selectSet">Expansão:</label>
             <select name="selectSet" id="selectSet" multiple size="5">
               <option value="Ancient Origins">Origens Ancestrais</option>
               <option value="Aquapolis">Aquapolis</option>
@@ -329,4 +329,13 @@
     }
   }
   searchButton.addEventListener('click', voltar);
+  var form_carta= document.getElementById('cartaForm')
+  form_carta.addEventListener('submit', function(event) {
+    event.preventDefault(); // Evita o envio padrão do formulário
+    aguardar()
+    setTimeout(function() {
+      finalizarAguardar();
+      form_carta.submit();
+    }, 2000);
+  });
 </script>

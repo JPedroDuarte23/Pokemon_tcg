@@ -34,13 +34,14 @@ const pegar_idUser = async () => {
   app.post("/iduser", (req,res) => {
     const { sessionID } = req.body;
     id_user = sessionID
+    res.json(id_user)
   });
 }
 
 
 
 // SELECT DAS CARTAS
-const select_cartas = async () => {
+const select_cartas = () => {
 app.get("/registros", (req, res) => {
   // Faz o select na tabela cartas
   connection.connect();
@@ -58,7 +59,7 @@ app.get("/registros", (req, res) => {
 
 // SELECT DO DECKS
 
-const deck_select = async () => {
+const deck_select = () => {
   app.get("/decks", (req, res) => {
     // Faz select na tabela deck
     connection.connect();
@@ -76,10 +77,16 @@ const deck_select = async () => {
 
 // CRIAÇÃO DE DECKS
 
-const decks_insert = async () => {
+const decks_insert = () => {
   // Insere os dados do formulário na tabela deck com o método mostrado no dat-acqu-ino
   app.post("/registro-deck", (req, res) => {
     const { inputImagemDeck, inputDeckNome, selectTipoPrincipal} = req.body;
+    if(inputDeckNome == "" || inputImagemDeck == "" || selectTipoPrincipal == "") {
+      console.log("Nome do deck, imagem do deck ou tipo não foram preenchidos")
+      res
+      .status(500)
+      .send('<script>alert("Preencha corretamente as informações"); history.back();</script>')
+    } else {
     const insert_deck_Query = `INSERT INTO deck (nomeDeck, imagem, fkUsuario, tipoPrincipal, vitorias, derrotas) VALUES (?, ?, ?, ?, 0, 0)`;
     const values_deck = [
       inputDeckNome,
@@ -95,25 +102,34 @@ const decks_insert = async () => {
         res
           .status(500)
           .send(
-            '<script>alert("Houve um erro ao criar o deck"); window.location.href = "/Dash_decks.html";</script>'
+            '<script>alert("Houve um erro ao criar o deck"); history.back();</script>'
           );
       } else {
         console.log("Deck inserido com sucesso!");
         res
           .status(206)
           .send(
-            '<script>alert("Deck criado com sucesso!"); window.location.href = "/Dash_decks.html";</script>'
+            '<script>alert("Deck criado com sucesso!"); history.back();</script>'
           );
       }
     });
-  });
+  }
+});
 };
 
 // COLOCANDO A CARTA NO DECK
 
-const update_carta_deck = async () => {
+const update_carta_deck = () => {
   app.post("/adicionar-carta", (req, res) => {
     const { IDDeckInput, idCartaValue } = req.body;
+    if(IDDeckInput == "" || idCartaValue == ""){
+      console.log("ID do deck ou ID da carta não foram preenchidos")
+      res
+      .status(500)
+      .send(
+        '<script>alert("Insira as informações corretamente para adicionar a carta"); history.back();</script>'
+      );
+    } else {
     console.log(IDDeckInput);
     console.log(idCartaValue);
     const update = `UPDATE cartas SET fkDeck = ? WHERE idCarta = ?`;
@@ -125,25 +141,34 @@ const update_carta_deck = async () => {
         res
           .status(500)
           .send(
-            '<script>alert("Houve um erro ao inserir a carta no deck"); window.location.href = "/Dash_colecoes.html";</script>'
+            '<script>alert("Houve um erro ao inserir a carta no deck"); history.back();</script>'
           );
       } else {
         console.log("Registro inserido com sucesso!");
          res
            .status(202)
            .send(
-             '<script>alert("Cartas inseridas no deck!"); window.location.href = "/Dash_colecoes.html";</script>'
+             '<script>alert("Cartas inseridas no deck!"); history.back();</script>'
           );
       }
     });
-  });
+  }
+});
 };
 
 // REGISTRANDO RESULTADOS DAS PARTIDAS
 
-const update_deck_resultado = (async) => {
+const update_deck_resultado = () => {
   app.post("/resultado", (req, res) => {
     const { inputDeckID, inputResultado} = req.body;
+    if(inputDeckID == "" || inputResultado == "") {
+      console.log("ID do deck ou resultado não foram preenchidos")
+      res
+      .status(500)
+      .send(
+        '<script>alert("Insira as informações corretamente para registrar o resultado"); history.back();</script>'
+      );
+    } else {
     console.log(inputDeckID);
     var update_resultado = "";
     if (inputResultado == "vitoria") {
@@ -159,23 +184,24 @@ const update_deck_resultado = (async) => {
         res
           .status(500)
           .send(
-            '<script>alert("Erro ao registrar resultado"); window.location.href = "/Dash_inicial.html";</script>'
+            '<script>alert("Erro ao registrar resultado"); history.back();</script>'
           );
       } else {
         console.log("Resultado inserido com sucesso!");
         res
           .status(207)
           .send(
-            '<script>alert("Resultado registrado com sucesso!"); window.location.href = "/Dash_inicial.html";</script>'
+            '<script>alert("Resultado registrado com sucesso!"); history.back();</script>'
           );
       }
     });
-  });
+  }
+});
 };
 
 // PROCURADOR DE CARTAS E INSERTS DAS CARTAS NA COLEÇÃO
 
-const card_insert = async () => {
+const card_insert = () => {
   // Pega os dados inseridos pelo usuário no formulário que passam pelo http://localhost:3000/search
   app.post("/search", (req, res) => {
     const {
@@ -238,14 +264,14 @@ const card_insert = async () => {
               res
                 .status(500)
                 .send(
-                  '<script>alert("Ocorreu um erro ao inserir o registro na tabela."); window.location.href = "/Dash_colecoes.html";</script>'
+                  '<script>alert("Ocorreu um erro ao inserir o registro na tabela."); history.back();</script>'
                 );
             } else {
               console.log("Registro inserido com sucesso!");
               res
                 .status(200)
                 .send(
-                  '<script>alert("Carta registrada com sucesso!"); window.location.href = "/Dash_colecoes.html";</script>'
+                  '<script>alert("Carta registrada com sucesso!"); history.back();</script>'
                 );
             }
           });
@@ -255,7 +281,7 @@ const card_insert = async () => {
           res
             .status(500)
             .send(
-              '<script>alert("Ocorreu um erro ao fazer a requisição para a API Pokémon."); window.location.href = "/Dash_colecoes.html";</script>'
+              '<script>alert("Ocorreu um erro ao fazer a requisição para a API Pokémon."); history.back();</script>'
             );
         });
     } else if (selectSupertype == "Treinador") {
@@ -310,14 +336,14 @@ const card_insert = async () => {
               res
                 .status(500)
                 .send(
-                  '<script>alert("Ocorreu um erro ao inserir o registro na tabela."); window.location.href = "/Dash_colecoes.html";</script>'
+                  '<script>alert("Ocorreu um erro ao inserir o registro na tabela."); history.back();</script>'
                 );
             } else {
               console.log("Registro inserido com sucesso!");
               res
                 .status(200)
                 .send(
-                  '<script>alert("Carta registrada com sucesso!"); window.location.href = "/Dash_colecoes.html";</script>'
+                  '<script>alert("Carta registrada com sucesso!"); history.back();</script>'
                 );
             }
           });
@@ -327,7 +353,7 @@ const card_insert = async () => {
           res
             .status(500)
             .send(
-              '<script>alert("Ocorreu um erro ao fazer a requisição para a API Pokémon."); window.location.href = "/Dash_colecoes.html";</script>'
+              '<script>alert("Ocorreu um erro ao fazer a requisição para a API Pokémon."); history.back();</script>'
             );
         });
     } else {
@@ -373,14 +399,14 @@ const card_insert = async () => {
               res
                 .status(500)
                 .send(
-                  '<script>alert("Ocorreu um erro ao inserir o registro na tabela."); window.location.href = "/Dash_colecoes.html";</script>'
+                  '<script>alert("Ocorreu um erro ao inserir o registro na tabela."); history.back();</script>'
                 );
             } else {
               console.log("Registro inserido com sucesso!");
               res
                 .status(200)
                 .send(
-                  '<script>alert("Carta registrada com sucesso!"); window.location.href = "/Dash_colecoes.html";</script>'
+                  '<script>alert("Carta registrada com sucesso!"); history.back();</script>'
                 );
             }
           });
@@ -390,7 +416,7 @@ const card_insert = async () => {
           res
             .status(500)
             .send(
-              '<script>alert("Ocorreu um erro ao fazer a requisição para a API Pokémon."); window.location.href = "/Dash_colecoes.html";</script>'
+              '<script>alert("Ocorreu um erro ao fazer a requisição para a API Pokémon."); history.back();</script>'
             );
         });
     }
@@ -410,7 +436,7 @@ const servidor = () => {
   });
   }
 
-(async () => {
+(async() => {
   await pegar_idUser();
   await select_cartas();
   await card_insert();
