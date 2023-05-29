@@ -179,7 +179,6 @@ function query_colecao(seletor) {
             
               registro.raridade === "Rare Ultra" ||
                 registro.raridade === "Rare Rainbow" ||
-                registro.raridade === "Rare Secret" ||
                 registro.raridade === "Hyper Rare" ||
                 registro.raridade === "Rare Holo V" ||
                 registro.raridade === "Rare BREAK" ||
@@ -187,13 +186,12 @@ function query_colecao(seletor) {
                 registro.raridade === "Rare Holo GX" ||
                 registro.raridade === "Rare Holo LV.X" ||
                 registro.raridade === "Rare Holo Star" ||
-                registro.raridade === "Rare Holo V" ||
                 registro.raridade === "Rare Holo VMAX" ||
-                registro.raridade === "Rare Rainbow" ||
                 registro.raridade === "Rare Secret" ||
                 registro.raridade === "Rare Shining" ||
                 registro.raridade === "Rare Shiny" ||
-                registro.raridade === "Rare Shiny GX"
+                registro.raridade === "Rare Shiny GX" ||
+                registro.raridade === "LEGEND"
           );
         } else if (seletor == 4) {
           cartasDoUsuario = data.filter(
@@ -239,7 +237,7 @@ function query_colecao(seletor) {
 
           imagem_consulta.src = registro.imagemPequena;
           imagemCell.appendChild(imagem_consulta);
-
+          
           var imagem_tipo = document.createElement("img");
           imagem_tipo.classList.add('sombra');
           if(registro.tipo === "Fire") {imagem_tipo.src = 'https://archives.bulbagarden.net/media/upload/thumb/a/ad/Fire-attack.png/25px-Fire-attack.png'}
@@ -254,7 +252,42 @@ function query_colecao(seletor) {
           else if (registro.tipo === "Fairy") {imagem_tipo.src = 'https://archives.bulbagarden.net/media/upload/thumb/4/40/Fairy-attack.png/25px-Fairy-attack.png'}
           else if (registro.tipo === "Dragon") {imagem_tipo.src = 'https://archives.bulbagarden.net/media/upload/thumb/8/8a/Dragon-attack.png/25px-Dragon-attack.png'}
           tipoCell.appendChild(imagem_tipo)
+          var imagem_raridade = document.createElement("img");
+          if(registro.raridade === "Rare" ||
+              registro.raridade === "Classic Collection" ||
+              registro.raridade === "Rare BREAK" ||
+              registro.raridade === "Rare Prism Star" ||
+              registro.raridade === "Rare ACE" ||
+              registro.raridade === "Rare Radiant"
+              ) { imagem_raridade.src = "imagens/raridades/rare.png"}
+          else if (registro.raridade === "Rare Holo" ||
+                registro.raridade === "Rare Rainbow" ||
+                registro.raridade === "Rare Secret" ||
+                registro.raridade === "Rare Holo V" ||
+                registro.raridade === "Rare Holo EX" ||
+                registro.raridade === "Rare Holo GX" ||
+                registro.raridade === "Rare Holo V" ||
+                registro.raridade === "Rare Holo VMAX" ||
+                registro.raridade === "Rare Rainbow" ||
+                registro.raridade === "Rare Shiny" ||
+                registro.raridade === "Rare Shiny GX" ||
+                registro.raridade === "Rare Ultra") {imagem_raridade.src = 'imagens/raridades/silverHoloStar.png'}
+          else if (registro.raridade === "Double Rare") {imagem_raridade.src = 'imagens/raridades/blackDoubleStar.png'}
+          else if (registro.raridade === "Ultra Rare") {imagem_raridade.src = 'imagens/raridades/silverDoubleStar.png'}
+          else if (registro.raridade === "Illustration Rare" ||
+                  registro.raridade === "Trainer Gallery Rare Holo") {imagem_raridade.src = 'imagens/raridades/goldStar.png'}
+          else if (registro.raridade === "LEGEND") {imagem_raridade.src = 'imagens/raridades/goldHoloStar.png'}
+          else if (registro.raridade === "Hyper Rare") {imagem_raridade.src = 'imagens/raridades/hyperRare.png'}
+          else if (registro.raridade === "Common") {imagem_raridade.src = 'imagens/raridades/common.png'}
+          else if (registro.raridade === "Uncommon") {imagem_raridade.src = 'imagens/raridades/uncommon.png'}
+          else if (registro.raridade === "Rare Holo LV.X") {imagem_raridade.src = 'imagens/raridades/silverstar.png'}
+          else if (registro.raridade === "Special Illustration Rare") {imagem_raridade.src = 'imagens/raridades/goldDoubleStar.png'}
+          else if (registro.raridade === "Amazing Rare") {imagem_raridade.src = 'imagens/raridades/amazingRare.png'}
+          else if (registro.raridade === "Promo") {imagem_raridade.src = 'https://archives.bulbagarden.net/media/upload/thumb/5/58/SetSymbolPromo.png/40px-SetSymbolPromo.png'}
+          else if (registro.raridade === "Rare Holo Star") {imagem_raridade.src = 'imagens/raridades/goldHoloStar.png'}
+          imagem_raridade.classList.add('imagem_raridade')
 
+          raridadeCell.appendChild(imagem_raridade)
           var botao_deck = document.createElement("button");
           botao_deck.setAttribute("class", "select_card_btn");
           botao_deck.innerHTML = `<i class="fa-solid fa-caret-right"></i>`;
@@ -287,7 +320,7 @@ function query_colecao(seletor) {
           if(registro.tipo == undefined) {
               imagem_tipo.src = 'imagens/pokeball.png'
           }
-          raridadeCell.innerHTML = registro.raridade;
+          // raridadeCell.innerHTML = registro.raridade;
           setCell.innerHTML = registro.nomeSet;
           numeroCell.innerHTML = registro.numero;
 
@@ -358,7 +391,7 @@ function query_decks() {
           else if (registro.tipoPrincipal === "Fairy") {imagem_tipo.src = 'https://archives.bulbagarden.net/media/upload/thumb/4/40/Fairy-attack.png/30px-Fairy-attack.png'}
           else if (registro.tipoPrincipal === "Dragon") {imagem_tipo.src = 'https://archives.bulbagarden.net/media/upload/thumb/8/8a/Dragon-attack.png/30px-Dragon-attack.png'}
           tipoCell.appendChild(imagem_tipo)
-
+        
         linha.appendChild(idCell);
         linha.appendChild(imagemCell);
         linha.appendChild(nomeCell);

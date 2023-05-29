@@ -99,6 +99,10 @@
     max-width: 100px;
     max-height: 200px;
 }
+.imagem_raridade {
+    max-width: 60px;
+    max-height: 30px;
+}
 ::-webkit-scrollbar {
     width: 5px;
     background-color: #1d1d1d;
