@@ -85,7 +85,7 @@ const decks_insert = () => {
       console.log("Nome do deck, imagem do deck ou tipo não foram preenchidos")
       res
       .status(500)
-      .send('<script>alert("Preencha corretamente as informações"); history.back();</script>')
+      .send('<script>alert("Preencha corretamente as informações"); window.location.href = "/Dash_decks.html"</script>')
     } else {
     const insert_deck_Query = `INSERT INTO deck (nomeDeck, imagem, fkUsuario, tipoPrincipal, vitorias, derrotas) VALUES (?, ?, ?, ?, 0, 0)`;
     const values_deck = [
@@ -102,14 +102,14 @@ const decks_insert = () => {
         res
           .status(500)
           .send(
-            '<script>alert("Houve um erro ao criar o deck"); history.back();</script>'
+            '<script>alert("Houve um erro ao criar o deck"); window.location.href = "/Dash_decks.html"</script>'
           );
       } else {
         console.log("Deck inserido com sucesso!");
         res
           .status(206)
           .send(
-            '<script>alert("Deck criado com sucesso!"); history.back();</script>'
+            '<script>alert("Deck criado com sucesso!"); window.location.href = "/Dash_decks.html"</script>'
           );
       }
     });
@@ -127,7 +127,7 @@ const update_carta_deck = () => {
       res
       .status(500)
       .send(
-        '<script>alert("Insira as informações corretamente para adicionar a carta"); history.back();</script>'
+        '<script>alert("Insira as informações corretamente para adicionar a carta");window.location.href = "/Dash_colecoes.html"</script>'
       );
     } else {
     console.log(IDDeckInput);
@@ -141,14 +141,14 @@ const update_carta_deck = () => {
         res
           .status(500)
           .send(
-            '<script>alert("Houve um erro ao inserir a carta no deck"); history.back();</script>'
+            '<script>alert("Houve um erro ao inserir a carta no deck"); window.location.href = "/Dash_colecoes.html"</script>'
           );
       } else {
         console.log("Registro inserido com sucesso!");
          res
            .status(202)
            .send(
-             '<script>alert("Cartas inseridas no deck!"); history.back();</script>'
+             '<script>alert("Cartas inseridas no deck!"); window.location.href = "/Dash_colecoes.html"</script>'
           );
       }
     });
@@ -166,7 +166,7 @@ const update_deck_resultado = () => {
       res
       .status(500)
       .send(
-        '<script>alert("Insira as informações corretamente para registrar o resultado"); history.back();</script>'
+        '<script>alert("Insira as informações corretamente para registrar o resultado"); window.location.href = "/Dash_inicial.html";</script>'
       );
     } else {
     console.log(inputDeckID);
@@ -184,14 +184,14 @@ const update_deck_resultado = () => {
         res
           .status(500)
           .send(
-            '<script>alert("Erro ao registrar resultado"); history.back();</script>'
+            '<script>alert("Erro ao registrar resultado"); window.location.href = "/Dash_inicial.html"</script>'
           );
       } else {
         console.log("Resultado inserido com sucesso!");
         res
           .status(207)
           .send(
-            '<script>alert("Resultado registrado com sucesso!"); history.back();</script>'
+            '<script>alert("Resultado registrado com sucesso!"); window.location.href = "/Dash_inicial.html";</script>'
           );
       }
     });
@@ -200,9 +200,7 @@ const update_deck_resultado = () => {
 };
 
 // PROCURADOR DE CARTAS E INSERTS DAS CARTAS NA COLEÇÃO
-
 const card_insert = () => {
-  // Pega os dados inseridos pelo usuário no formulário que passam pelo http://localhost:3000/search
   app.post("/search", (req, res) => {
     const {
       nomePokemonInput,
@@ -211,36 +209,54 @@ const card_insert = () => {
       selectTypes,
       selectRarity,
       selectSet,
-      idInput,
+      quantidadeCartaInput,
     } = req.body;
-    // Faz a requisição da API que retorna uma lista de JSON, seleciona os dados do indice[0] que serão armazenados desse JSON
-    console.log("começando a procura na api");
-    console.log(nomePokemonInput);
-    console.log(selectSupertype);
-    console.log(selectSubtype);
-    console.log(selectTypes);
-    console.log(selectRarity);
-    console.log(selectSet);
-    if (selectSupertype == "Pokémon") {
-      // CARTAS TIPO POKÉMON
+
+    if (quantidadeCartaInput < 1 || quantidadeCartaInput > 10) {
+      return res.status(400).send(                
+        '<script>alert("A quantidade de cartas para registrar não pode ser menor que 1 e maior que 10!"); window.location.href = "/Dash_colecoes.html"</script>'
+      )
+    } else {
+      console.log("começando a procura na api");
+      console.log(nomePokemonInput);
+      console.log(selectSupertype);
+      console.log(selectSubtype);
+      console.log(selectTypes);
+      console.log(selectRarity);
+      console.log(selectSet);
+
+      var url = "";
+      if (selectSupertype === "Pokémon") {
+        url = `https://api.pokemontcg.io/v2/cards?q=name:"${nomePokemonInput}" subtypes:"${selectSubtype}" types:"${selectTypes}" rarity:"${selectRarity}" set.name:"${selectSet}"`;
+      } else if (selectSupertype === "Treinador") {
+        url = `https://api.pokemontcg.io/v2/cards?q=name:"${nomePokemonInput}" supertype:"trainer" rarity:"${selectRarity}" set.name:"${selectSet}"`;
+      } else {
+        url = `https://api.pokemontcg.io/v2/cards?q=name:"${nomePokemonInput}" supertype:"energy" rarity:"${selectRarity}" set.name:"${selectSet}"`;
+      }
 
       axios
-        .get(
-          `https://api.pokemontcg.io/v2/cards?q=name:"${nomePokemonInput}" subtypes:"${selectSubtype}" types:"${selectTypes}" rarity:"${selectRarity}" set.name:"${selectSet}"`
-        )
+        .get(url)
         .then((response) => {
           const cardData = response.data.data[0];
           const nome = cardData.name;
           const imagemPequena = cardData.images.small;
           const imagemGrande = cardData.images.large;
-          const tipo = cardData.types[0];
+          let tipo;
+          if (selectSupertype === "Pokémon") {
+            tipo = cardData.types[0];
+          }
           const raridade = cardData.rarity;
-          const subtipo = cardData.subtypes[0];
+          let subtipo;
+          if (selectSupertype === "Pokémon") {
+            subtipo = cardData.subtypes[0];
+          } else if (selectSupertype === "Treinador") {
+            subtipo = "Trainer";
+          } else {
+            subtipo = "Energy";
+          }
           const nomeSet = cardData.set.name;
           const series = cardData.set.series;
           const numero = `${cardData.number} / ${cardData.set.printedTotal}`;
-
-          // Insere no banco de dados as cartas que ele registrou
 
           const insertQuery = `INSERT INTO cartas (nome, suptipo, subtipo, imagemPequena, imagemGrande, tipo, raridade, series, nomeSet, numero, fkUsuario) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
           const values = [
@@ -258,171 +274,46 @@ const card_insert = () => {
           ];
 
           connection.connect();
-          connection.query(insertQuery, values, (error, results) => {
-            if (error) {
-              console.log("Erro ao inserir registro na tabela:", error);
-              res
-                .status(500)
-                .send(
-                  '<script>alert("Ocorreu um erro ao inserir o registro na tabela."); history.back();</script>'
-                );
-            } else {
-              console.log("Registro inserido com sucesso!");
-              res
-                .status(200)
-                .send(
-                  '<script>alert("Carta registrada com sucesso!"); history.back();</script>'
-                );
-            }
-          });
-        })
-        .catch((error) => {
-          console.log("Erro ao fazer a consulta na API Pokemon TCG:", error);
-          res
-            .status(500)
-            .send(
-              '<script>alert("Ocorreu um erro ao fazer a requisição para a API Pokémon."); history.back();</script>'
-            );
-        });
-    } else if (selectSupertype == "Treinador") {
-      // CARTA TIPO TREINADOR
-
-      axios
-        .get(
-          `https://api.pokemontcg.io/v2/cards?q=name:"${nomePokemonInput}" supertype:"trainer" rarity:"${selectRarity}" set.name:"${selectSet}"`
-        )
-        .then((response) => {
-          const cardData = response.data.data[0];
-          const nome = cardData.name;
-          const imagemPequena = cardData.images.small;
-          const imagemGrande = cardData.images.large;
-          const raridade = cardData.rarity;
-          var subtipo = "";
-          if (
-            selectSet == "Base" ||
-            selectSet == "Base Set 2" ||
-            selectSet == "Jungle" ||
-            selectSet == "Legendary Collection" ||
-            selectSet == "Neo Discovery" ||
-            selectSet == "Team Rocket"
-          ) {
-            subtipo = "Treinador";
-          } else {
-            subtipo = cardData.subtypes[0];
+          const insertPromises = [];
+          for (let i = 0; i < quantidadeCartaInput; i++) {
+            const insertPromise = new Promise((resolve, reject) => {
+              connection.query(insertQuery, values, (error, results) => {
+                if (error) {
+                  console.log("Erro ao inserir registro na tabela:", error);
+                  reject(error);
+                } else {
+                  console.log("Registro inserido com sucesso!");
+                  resolve();
+                }
+              });
+            });
+            insertPromises.push(insertPromise);
           }
-          const nomeSet = cardData.set.name;
-          const series = cardData.set.series;
-          const numero = `${cardData.number} / ${cardData.set.printedTotal}`;
-
-          // Insere no banco de dados as cartas que ele registrou
-
-          const insertQuery = `INSERT INTO cartas (nome, suptipo, subtipo, imagemPequena, imagemGrande,  raridade, series, nomeSet, numero, fkUsuario) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
-          const values = [
-            nome,
-            selectSupertype,
-            subtipo,
-            imagemPequena,
-            imagemGrande,
-            raridade,
-            series,
-            nomeSet,
-            numero,
-            id_user,
-          ];
-          connection.connect();
-          connection.query(insertQuery, values, (error, results) => {
-            if (error) {
-              console.log("Erro ao inserir registro na tabela:", error);
-              res
-                .status(500)
-                .send(
-                  '<script>alert("Ocorreu um erro ao inserir o registro na tabela."); history.back();</script>'
-                );
-            } else {
-              console.log("Registro inserido com sucesso!");
-              res
-                .status(200)
-                .send(
-                  '<script>alert("Carta registrada com sucesso!"); history.back();</script>'
-                );
-            }
-          });
+  
+          Promise.all(insertPromises)
+            .then(() => {
+              return res.status(206)
+              .send(
+                '<script>alert("Suas cartas foram inseridas com sucesso!"); window.location.href = "/Dash_colecoes.html"</script>'
+              );
+            })
+            .catch((error) => {
+              console.log("Erro ao inserir registros na tabela:", error);
+              return res.status(500).send(                
+                '<script>alert("Ocorreu um erro inesperado, tente novamente mais tarde"); window.location.href = "/Dash_colecoes.html"</script>'
+              );
+            });
         })
         .catch((error) => {
           console.log("Erro ao fazer a consulta na API Pokemon TCG:", error);
-          res
-            .status(500)
-            .send(
-              '<script>alert("Ocorreu um erro ao fazer a requisição para a API Pokémon."); history.back();</script>'
-            );
-        });
-    } else {
-      // CARTAS TIPO ENERGIA
-
-      axios
-        .get(
-          `https://api.pokemontcg.io/v2/cards?q=name:"${nomePokemonInput}" supertype:"energy" rarity:"${selectRarity}" set.name:"${selectSet}"`
-        )
-        .then((response) => {
-          const cardData = response.data.data[0];
-          const nome = cardData.name;
-          const imagemPequena = cardData.images.small;
-          const imagemGrande = cardData.images.large;
-          const tipo = cardData.types;
-          const subtipo = cardData.subtypes[0];
-          const raridade = cardData.rarity;
-          const nomeSet = cardData.set.name;
-          const series = cardData.set.series;
-          const numero = `${cardData.number} / ${cardData.set.printedTotal}`;
-
-          // Insere no banco de dados as cartas que ele registrou
-
-          const insertQuery = `INSERT INTO cartas (nome, suptipo, subtipo, imagemPequena, imagemGrande, tipo,  raridade, series, nomeSet, numero, fkUsuario) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
-          const values = [
-            nome,
-            selectSupertype,
-            subtipo,
-            imagemPequena,
-            imagemGrande,
-            tipo,
-            raridade,
-            series,
-            nomeSet,
-            numero,
-            id_user,
-          ];
-
-          connection.connect();
-          connection.query(insertQuery, values, (error, results) => {
-            if (error) {
-              console.log("Erro ao inserir registro na tabela:", error);
-              res
-                .status(500)
-                .send(
-                  '<script>alert("Ocorreu um erro ao inserir o registro na tabela."); history.back();</script>'
-                );
-            } else {
-              console.log("Registro inserido com sucesso!");
-              res
-                .status(200)
-                .send(
-                  '<script>alert("Carta registrada com sucesso!"); history.back();</script>'
-                );
-            }
-          });
-        })
-        .catch((error) => {
-          console.log("Erro ao fazer a consulta na API Pokemon TCG:", error);
-          res
-            .status(500)
-            .send(
-              '<script>alert("Ocorreu um erro ao fazer a requisição para a API Pokémon."); history.back();</script>'
-            );
+          return res.status(500).send(                
+            '<script>alert("Ocorreu um erro ao registrar sua carta, verifique se todas as informações estão corretas"); window.location.href = "/Dash_colecoes.html"</script>'
+          );
         });
     }
   });
 };
-
+  
 // CONFIGURANDO HEADERS DO SERVIDOR NODE (dat-acqu-ino)
 
 const servidor = () => {
