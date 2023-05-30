@@ -7,11 +7,14 @@
     justify-content: center;
     position: relative;
 }
+.deposito {
+    overflow-y: auto;
+    overflow-x: hidden;
+}
 .caixa_graficos {
     width: 90%;
-    height: 130vh;   
+    height: 100vh;   
     background-color: #3662AD;
-    /* margin: 0 0 4% 0; */
     border-radius: 10px;
     border: 15px solid #232C5F;
     display: flex;
@@ -100,8 +103,9 @@
     max-height: 200px;
 }
 .imagem_raridade {
-    max-width: 60px;
-    max-height: 30px;
+    max-width: 50px;
+    max-height: 25px;
+    filter: drop-shadow(1px 1px 2px rgba(0, 0, 0, 0.42));
 }
 ::-webkit-scrollbar {
     width: 5px;

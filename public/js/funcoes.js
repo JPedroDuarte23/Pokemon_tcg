@@ -180,8 +180,7 @@ function query_colecao(seletor) {
               registro.raridade === "Rare Ultra" ||
                 registro.raridade === "Rare Rainbow" ||
                 registro.raridade === "Hyper Rare" ||
-                registro.raridade === "Rare Holo V" ||
-                registro.raridade === "Rare BREAK" ||
+                registro.raridade === "Rare Holo V" ||   
                 registro.raridade === "Rare Holo EX" ||
                 registro.raridade === "Rare Holo GX" ||
                 registro.raridade === "Rare Holo LV.X" ||
@@ -189,7 +188,6 @@ function query_colecao(seletor) {
                 registro.raridade === "Rare Holo VMAX" ||
                 registro.raridade === "Rare Secret" ||
                 registro.raridade === "Rare Shining" ||
-                registro.raridade === "Rare Shiny" ||
                 registro.raridade === "Rare Shiny GX" ||
                 registro.raridade === "LEGEND"
           );
@@ -197,8 +195,10 @@ function query_colecao(seletor) {
           cartasDoUsuario = data.filter(
             (registro) =>
                 registro.raridade === "Rare" ||
+                registro.raridade === "Rare Shiny" ||
                 registro.raridade === "Rare Holo" ||
                 registro.raridade === "Rare ACE" ||
+                registro.raridade === "Rare BREAK" ||
                 registro.raridade === "Rare Prism Star" ||
                 registro.raridade === "Rare Prime"
           );
