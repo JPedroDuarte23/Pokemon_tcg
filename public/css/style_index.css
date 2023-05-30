@@ -421,19 +421,6 @@ input {
   display: none;
   transform: translate(0px, -10px);
 }
-
-::-webkit-scrollbar {
-  width: 5px;
-  background-color: #1d1d1d;
-  border-top-right-radius: 5px;
-  border-bottom-right-radius: 5px;
-}
-
-::-webkit-scrollbar-thumb {
-  background-color: #FFCB05;
-  border-radius: 5px;
-}
-
 .item {
   height: 5vh;
   padding: 0px 5px;

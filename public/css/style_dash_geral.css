@@ -153,7 +153,7 @@ header div {
 .lateral_icones .icone {
     width: 20%;
     max-width: 40px;
-    height: 5vh;
+    height: 6vh;
     background-color: #FFCB05;
     border-radius: 10px;
     display: flex;
@@ -198,9 +198,19 @@ header div {
     background: transparent;
     min-height: 110px;
 }
-
+#painel_deck {
+    padding-bottom: 10px;
+}
+#painel_deck::-webkit-scrollbar {
+    height: 5px; 
+    border-radius: 5px;       
+}
+#painel_deck::-webkit-scrollbar-thumb {
+    background-color: #FFCB05;
+}
 .botoes button {
     width: 15%;
+    min-width: 85px;
     padding: 1% 0.6%;
     box-sizing: border-box;
     border-radius: 10px;
@@ -211,18 +221,19 @@ header div {
     background: transparent;
 }
 
-.botoes button:hover {
-    /* background: linear-gradient(180deg,  #FF8C05 0%, #FFCB05 100%); */
-    background: #FFCB05 ;
-    transition: background 0.5s ease;
-    color: black;
-    font-weight: bold   ;
-}
+
 
 button.botao_ativado, button.registrador, #todos_os_decks {
     background: #8B0000;
     background: linear-gradient(180deg, #8B0000 0%, #B22222 100%);
     color: white;
+}
+.botoes button:hover, #todos_os_decks:hover {
+    /* background: linear-gradient(180deg,  #FF8C05 0%, #FFCB05 100%); */
+    background: #FFCB05 ;
+    transition: background 0.5s ease;
+    color: black;
+    font-weight: bold;
 }
 #painel_deck {
     height: 70px;
@@ -284,6 +295,7 @@ button.botao_ativado, button.registrador, #todos_os_decks {
 }
  #i_voltar:hover {
     color: #FF8C05 ;
+    transition: color 0.25s;
 }
 .campo {
     padding: 5% 0%;
@@ -304,7 +316,9 @@ button.botao_ativado, button.registrador, #todos_os_decks {
 .campo input {
     width: 50%;
     margin: 3%;
-    padding: 0.5%;
+    padding: 0.8%;
+    border-radius: 3px;
+    border: none;
 }
 .campo select {
     width: 50%;

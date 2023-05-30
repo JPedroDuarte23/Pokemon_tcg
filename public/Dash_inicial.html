@@ -35,19 +35,22 @@
             <input type="text" id="nomePokemonInput" name="nomePokemonInput">
           </div>
           <div class="campo">
-            <label for="quantidadeCartaInput">Nome da carta:</label>
-            <input type="number" min="1" max="10" id="quantidadeCartaInput" name="quantidadeCartaInput">
+            <label for="quantidadeCartaInput">Número de cartas para registrar: <br>
+              <small style="font-weight: normal; color: #FFCB05">Min: 1 Max: 10</small></label>
+            <input type="number" id="quantidadeCartaInput" name="quantidadeCartaInput">
+            
           </div>
           <div class="campo">
             <label for="selectSupertype">Tipo da carta:</label>
             <select id="selectSupertype" name="selectSupertype" multiple size="3">
-              <option value="pokemon">Pokemon</option>
-              <option value="trainer">Treinador</option>
-              <option value="energy">Energia</option>
+              <option value="Pokémon">Pokemon</option>
+              <option value="Treinador">Treinador</option>
+              <option value="Energia">Energia</option>
             </select>
           </div>
           <div class="campo">
-            <label for="selectSubtype">Estágio do pokemon:</label>
+            <label for="selectSubtype">Estágio do pokemon: <br>
+              <small style="font-weight: normal; color: #FFCB05">Tipo da carta: Pokémon</small></label>
             <select name="selectSubtype" id="selectSubtype" multiple size="5">
               <option value="BREAK">BREAK</option>
               <option value="Baby">Bebê</option>
@@ -63,14 +66,14 @@
               <option value="Pokémon Tool F">Ferramenta pokémon F</option>
               <option value="Rapid Strike">Golpe fluido</option>
               <option value="Restored">Restaurado</option>
-              <option value="Rocket's Secret Machine">Máquina secreta da equipe Rocket</option>
+              <option value="Rocket%27s Secret Machine">Máquina secreta da equipe Rocket</option>
               <option value="Single Strike">Golpe decisivo</option>
               <option value="Special">Especial</option>
               <option value="Stadium">Estadio</option>
               <option value="Stage 1">Estagio 1</option>
               <option value="Stage 2">Estagio 2</option>
               <option value="Supporter">Apoiador</option>
-              <option value="TAG TEAM">Aliados</option>
+              <option value="TAG TEAM">União de aliados</option>
               <option value="Technical Machine">Technical Machine</option>
               <option value="V">V</option>
               <option value="VMAX">VMAX</option>
@@ -78,8 +81,9 @@
             </select>
           </div>
           <div class="campo">
-            <label for="selectTypes">Tipo do pokemon:</label>
-            <select name="selectTypes" id="selectTypes" multiple size="3">
+            <label for="selectTypes">Tipo do pokemon:<br>
+              <small style="font-weight: normal; color: #FFCB05">Tipo da carta: Pokémon</small></label>
+            <select name="selectTypes" id="selectTypes" multiple size="5">
               <option value="fire">Fogo</option>
               <option value="grass">Planta</option>
               <option value="water">Àgua</option>
@@ -460,5 +464,5 @@
       form_carta.submit();
     }, 2000);
   });
-  
+
 </script>

@@ -131,4 +131,15 @@ button {
     background-color: black;
     border-top: 3px solid #339FEE;
   }
+  ::-webkit-scrollbar {
+    width: 5px;
+    background-color: #1d1d1d;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background-color: #FFCB05;
+    border-radius: 5px;
+  }
   
