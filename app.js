@@ -275,9 +275,11 @@ const card_insert = () => {
 
           connection.connect();
           const insertPromises = [];
+
           // Promises são objetos que representam a conclusão (ou falha) eventual de uma operação assíncrona.
           // insertPromises vai armazenar em um array as promises que são geradas num for, caso de errado a promise é regeitada
           // com o erro. Caso contrário, a promise é cumprida
+
           for (let i = 0; i < quantidadeCartaInput; i++) {
             const insertPromise = new Promise((resolve, reject) => {
               connection.query(insertQuery, values, (error, results) => {
@@ -292,9 +294,11 @@ const card_insert = () => {
             });
             insertPromises.push(insertPromise);
           }
+
           // Aguarda a conclusão de todas as promises do for no array
           // Caso algum erro seja encontrado ele cairá no catch. Caso contrário ele continuará pelo then e vai alertar
           // que as cartas foram inseridas com sucesso.
+          
           Promise.all(insertPromises)
             .then(() => {
               return res.status(206)
