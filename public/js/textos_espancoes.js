@@ -248,7 +248,7 @@ function mostrar_expansao_XY(icone) {
   } else if (icone == 15) {
     div_colecao_detalhe.innerHTML = `
         <img src="imagens/icones_xy/40px-SetSymbolEvolutions.png">
-        <h2>Expansão Evoluções - CY15</h2>
+        <h2>Expansão Evoluções - XY15</h2>
         `;
     img_banner_detalhe.setAttribute(
       "src",
