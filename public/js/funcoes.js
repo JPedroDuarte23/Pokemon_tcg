@@ -159,13 +159,15 @@ function query_colecao(seletor) {
                  <div  class="titulo_caixa_graficos"><h2>Cartas Registradas</h2></div>
                 <div id="cartasRegistradas"></div>
                  `;
-        cartasDoUsuario = data.filter((registro) => registro.fkUsuario === id);
         var cartasRegistradas = document.getElementById("cartasRegistradas");
-        cartasDoUsuario.forEach((registro) => {
+        for(var i = data.length - 1; i => 0 ;i-- ) {
           var imagem = document.createElement("img");
-          imagem.src = registro.imagemPequena;
+          imagem.src = data[i].imagemPequena;
           cartasRegistradas.appendChild(imagem);
-        });
+        }
+        // cartasDoUsuario.forEach((registro) => {
+          
+        // });
       } else {
         caixaGraficos.innerHTML = tabela_padrao;
         var tbody = document.getElementById("corpo_tabela");
@@ -200,7 +202,8 @@ function query_colecao(seletor) {
                 registro.raridade === "Rare ACE" ||
                 registro.raridade === "Rare BREAK" ||
                 registro.raridade === "Rare Prism Star" ||
-                registro.raridade === "Rare Prime"
+                registro.raridade === "Amazing Rare" ||
+                registro.raridade === "Rare Prime"    
           );
         } else if (seletor == 5) {
           cartasDoUsuario = data.filter(
@@ -282,7 +285,10 @@ function query_colecao(seletor) {
           else if (registro.raridade === "Uncommon") {imagem_raridade.src = 'imagens/raridades/uncommon.png'}
           else if (registro.raridade === "Rare Holo LV.X") {imagem_raridade.src = 'imagens/raridades/silverstar.png'}
           else if (registro.raridade === "Special Illustration Rare") {imagem_raridade.src = 'imagens/raridades/goldDoubleStar.png'}
-          else if (registro.raridade === "Amazing Rare") {imagem_raridade.src = 'imagens/raridades/amazingRare.png'}
+          else if (registro.raridade === "Amazing Rare") {
+            imagem_raridade.src = 'imagens/raridades/amazingRare.png'
+            imagem_raridade.classList.add('amazing_rare')
+        }
           else if (registro.raridade === "Promo") {imagem_raridade.src = 'https://archives.bulbagarden.net/media/upload/thumb/5/58/SetSymbolPromo.png/40px-SetSymbolPromo.png'}
           else if (registro.raridade === "Rare Holo Star") {imagem_raridade.src = 'imagens/raridades/goldHoloStar.png'}
           imagem_raridade.classList.add('imagem_raridade')
